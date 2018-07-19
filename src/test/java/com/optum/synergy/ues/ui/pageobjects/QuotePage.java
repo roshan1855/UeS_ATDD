@@ -225,7 +225,7 @@ public QuotePage() throws IOException {
 		for(int i=0;i<=count1-7;i++){
 			driver.findElement(By.xpath("//input[@name='censusDetailInformationForm["+i+"].employeeAge']")).sendKeys("23");
 			Thread.sleep(1000);
-/*			driver.findElement(By.xpath("//input[@name='censusDetailInformationForm["+i+"].spouseAge']")).sendKeys("22");
+			driver.findElement(By.xpath("//input[@name='censusDetailInformationForm["+i+"].spouseAge']")).sendKeys("22");
 			Thread.sleep(2000);
 			driver.findElement(By.xpath("//input[@name='censusDetailInformationForm["+i+"].childrenToAdd']")).sendKeys("1");
 			Thread.sleep(2000);
@@ -240,7 +240,7 @@ public QuotePage() throws IOException {
 			
 			driver.findElement(By.xpath("//input[@name='censusDetailInformationForm["+i+"].annualSalary']")).sendKeys("12000");
 			Thread.sleep(2000);
-			j=j+1000;*/
+			j=j+1000;
 		}
 		
 /*		for(int i=0;i<=10;i++){
@@ -1087,7 +1087,7 @@ public QuotePage() throws IOException {
 		executor.executeScript("arguments[0].click();", element);
 		Thread.sleep(2000);
 		
-		element=driver.findElement(linklookupLink);
+/*		element=driver.findElement(linklookupLink);
 		executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", element);
 		Thread.sleep(1000);
@@ -1105,7 +1105,18 @@ public QuotePage() throws IOException {
 		element=driver.findElement(btnSUBMIT);
 		executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", element);
-		Thread.sleep(1000);
+		Thread.sleep(1000);*/
+		
+		driver.findElement(By.xpath("//input[@class='contentText8']")).sendKeys("9111");
+		Thread.sleep(2000);
+		
+		By btnSicInputSubmit=By.xpath("//input[@type='submit']");
+		
+		
+		element=driver.findElement(btnSicInputSubmit);
+		executor = (JavascriptExecutor)driver;
+		executor.executeScript("arguments[0].click();", element);
+		Thread.sleep(3000);
 		
 	
 		
