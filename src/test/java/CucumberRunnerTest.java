@@ -15,7 +15,7 @@ import cucumber.api.junit.Cucumber;
 
 
 
-            tags = { "@July_Products"
+            tags = { "@AddNewQuote_Medical_Vision_with_slary"
 //            		+ ",@Regression"
   //          		+ ",@July_Regression"
             		
