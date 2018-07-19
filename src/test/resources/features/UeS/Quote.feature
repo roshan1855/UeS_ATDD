@@ -89,7 +89,7 @@ Feature: Quotes Module
       | FileName             |  | TestCaseID |
       | Administration_TC_09 |  | TC_303     |
 
-  @Quote @Regression_UeS @AddNewQuote_Medical_Vision_with_slary @July_Regression1
+  @Quote @Regression_UeS @AddNewQuote_Medical_Vision_with_salary @July_Regression1
   Scenario Outline: "<TestCaseID>" Generate proposal_MV with census incluidng EEs with salary info
     When Flow_Fetch fileName "<FileName>" and testCaseID "<TestCaseID>" are captured
     Given Flow_Fetch Data from excel Sheet for "<TestCaseID>"
