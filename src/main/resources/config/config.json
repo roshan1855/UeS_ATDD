@@ -1,0 +1,12 @@
+{
+"browser name":"IE",
+    "cloud connect":{
+    "browser version":"11",
+    "platform name":"Windows 7",
+    "test suite name":"",
+        "url":"",
+        "username":"sm1049",
+        "password":"optum1",
+        "tunnel name":""
+    }
+}

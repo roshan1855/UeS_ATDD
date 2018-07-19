@@ -1,0 +1,12 @@
+{
+"browser name":"IE",
+    "cloud connect":{
+    "browser version":"11",
+    "platform name":"Windows 7",
+    "test suite name":"Windows IE 7 Tests",
+        "url":"http://%s:%s@ondemand.saucelabs.com:80/wd/hub",
+        "username":"<UserName>",
+        "password":"<Password Token from Sauce Labs>",
+        "tunnel name":"<User Defined Tunnel Name>"
+    }
+}
