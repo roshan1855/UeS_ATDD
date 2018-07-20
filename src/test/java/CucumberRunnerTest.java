@@ -15,7 +15,7 @@ import cucumber.api.junit.Cucumber;
 
 
 
-            tags = { "@AddNewQuote_Dnetal_Vision_Life_With_Salary_with_DEP"
+            tags = { "@AddNewQuote_Dnetal_Vision_Life_Without_Salary"
 //            		+ ",@Regression"
   //          		+ ",@July_Regression"
             		
