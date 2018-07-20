@@ -149,7 +149,7 @@ Feature: Quotes Module
 
   #Last Validated on june 19
   @Quote @Regression_UeS @AddNewQuote_Dnetal_Vision_Life_With_Salary_with_DEP @July_Regression1
-  Scenario Outline: "<TestCaseID>" Generate proposal_DVL with census incluidng EEs without salary info
+  Scenario Outline: "<TestCaseID>" Generate proposal_DVL with census incluidng EEs with salary info
     When Flow_Fetch fileName "<FileName>" and testCaseID "<TestCaseID>" are captured
     Given Flow_Fetch Data from excel Sheet for "<TestCaseID>"
     Given UeS_User is on Home Page
