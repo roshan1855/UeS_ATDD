@@ -201,7 +201,7 @@ public QuotePage() throws IOException {
 	
 	public void censusPage(WebDriver driver) throws InterruptedException{
 		QuotePage.verifyUeSLogos(driver);
-		Thread.sleep(5000);
+		Thread.sleep(2000);
 		String cencusPage=".//*[@id='census-form']/table[1]/tbody/tr[2]/td[1]";
 		
 		QuotePage.verifyPageDisplay(driver,cencusPage, "Census");
@@ -1515,7 +1515,7 @@ public QuotePage() throws IOException {
 				driver.findElement(quotepolicyEffDateMonth).sendKeys("07");
 				Thread.sleep(1000);
 				
-				driver.findElement(quotepolicyEffDateDay).sendKeys("01");
+				driver.findElement(quotepolicyEffDateDay).sendKeys("15");
 				Thread.sleep(1000);
 				
 				
