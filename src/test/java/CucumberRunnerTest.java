@@ -15,7 +15,7 @@ import cucumber.api.junit.Cucumber;
 
 
 
-            tags = { "@July_UeS2"
+            tags = { "@AddNewQuote_Medical_Dental_Vision_Life_Coverage"
 //            		+ ",@Regression"
   //          		+ ",@July_Regression"
             		
