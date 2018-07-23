@@ -128,7 +128,7 @@ Feature: Quotes Module
       | Quote_TC_07 |  | TC_07      |
 
   @Quote @Regression_UeS @AddNewQuote_Dnetal_Vision_Life_Without_Salary @July_Regression1
-  Scenario Outline: "<TestCaseID>" Generate proposal_DVL with census incluidng EEs with salary info / with dependents
+  Scenario Outline: "<TestCaseID>" Generate proposal_DVL with census incluidng EEs without salary info / with dependents
     When Flow_Fetch fileName "<FileName>" and testCaseID "<TestCaseID>" are captured
     Given Flow_Fetch Data from excel Sheet for "<TestCaseID>"
     Given UeS_User is on Home Page
@@ -285,7 +285,7 @@ Feature: Quotes Module
 
   # July 2018
   @Quote @Regression_UeS @AddNewQuote_Medical_Vision_Coverage_State_WA @July_Regression123
-  Scenario Outline: "<TestCaseID>" Validate 2 Tier information on coverages_MV using WA state
+  Scenario Outline: "<TestCaseID>" Validate "<Information>" on coverages_MV using "<State>" state
     When Flow_Fetch fileName "<FileName>" and testCaseID "<TestCaseID>" are captured
     Given Flow_Fetch Data from excel Sheet for "<TestCaseID>"
     Given UeS_User is on Home Page
@@ -307,5 +307,5 @@ Feature: Quotes Module
     Examples: 
       | FileName    |  | TestCaseID |  | State |  | Value                    |  | Information        |  | Zip Code |
       | Quote_TC_16 |  | TC_16      |  | WA    |  | 2 Tier Composite for ACR |  | 2 Tier             |  |    98001 |
-     # | Quote_TC_17 |  | TC_17      |  | TX    |  | 4 Tier Composite for ACR |  | 4 Tier             |  |    73301 |
-     # | Quote_TC_18 |  | TC_18      |  | CA    |  | Age Banded for ACR       |  | Age Banded for ACR |  |    90001 |
+      | Quote_TC_17 |  | TC_17      |  | TX    |  | 4 Tier Composite for ACR |  | 4 Tier             |  |    73301 |
+      | Quote_TC_18 |  | TC_18      |  | CA    |  | Age Banded for ACR       |  | Age Banded for ACR |  |    90001 |
