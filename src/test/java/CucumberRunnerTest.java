@@ -15,7 +15,7 @@ import cucumber.api.junit.Cucumber;
 
 
 
-            tags = { "@AddNewQuote_Dnetal_Vision_Life_Without_Salary"
+            tags = { "@AddNewQuote_Medical_Vision_Coverage_State_WA_TX_CA"
 //            		+ ",@Regression"
   //          		+ ",@July_Regression"
             		
