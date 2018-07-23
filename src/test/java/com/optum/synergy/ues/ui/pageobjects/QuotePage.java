@@ -1819,28 +1819,28 @@ public QuotePage() throws IOException {
 					//System.out.println("PDF Value :"+element.getText());
 					
 				if (element.getAttribute("value").trim().contains("PREVIEW PROPOSAL")){
-		        		System.out.println("Proposal Preview page displayed successfully");
+		        		System.out.println("Proposal Preview PDF displayed successfully");
 		        		Thread.sleep(2000);
 		        		//driver.switchTo().window(handle1).close();
 		        	}
 				
-/*				element=driver.findElement(btnPreviewProposal);
+				element=driver.findElement(btnPreviewProposal);
 				executor = (JavascriptExecutor)driver;
 				executor.executeScript("arguments[0].click();", element);
-				Thread.sleep(15000);*/
+				Thread.sleep(15000);
 			 
-				Thread.sleep(2000);		
+/*				Thread.sleep(2000);		
 		 By submitGenerateProposal=By.xpath("//input[@name='submitGenerateProposal']");
 		 driver.findElement(submitGenerateProposal).sendKeys(Keys.CONTROL , Keys.SUBTRACT);
 
 		 element=driver.findElement(submitGenerateProposal);
-		/* executor = (JavascriptExecutor)driver;
-		 executor.executeScript("arguments[0].click();", element); */
+		 executor = (JavascriptExecutor)driver;
+		 executor.executeScript("arguments[0].click();", element); 
 		
 		 element.click();
-		 Thread.sleep(5000);
+		 Thread.sleep(5000);*/
  
-		    // Switching to Alert        
+/*		    // Switching to Alert        
 	        Alert alert = driver.switchTo().alert();	
 	        Thread.sleep(2000);
 	        System.out.println("Inside Alert");		
@@ -1850,7 +1850,7 @@ public QuotePage() throws IOException {
 	        Thread.sleep(2000);
 	        alert.accept();	
 	        System.out.println("After accepting Alert");
-	        Thread.sleep(15000);
+	        Thread.sleep(15000);*/
 	        
 /*		 new WebDriverWait(driver, 10).until(ExpectedConditions.alertIsPresent());
 		 driver.switchTo().alert().accept();*/
@@ -1859,16 +1859,16 @@ public QuotePage() throws IOException {
 		 r.keyPress(KeyEvent.VK_ENTER);
 		 r.keyRelease(KeyEvent.VK_ENTER);*/
 	        
-	        Boolean popupStatus;
+/*	        Boolean popupStatus;
 	    	popupStatus = utility.isAlertPresent(driver);
 	    	System.out.println("ALert...statred popupStatus1 ::" + popupStatus);
 	    	if (popupStatus == true) {
 	    	Alert alert1 = driver.switchTo().alert();
 	    	System.out.println("ALert..." + alert1.getText());
 	    	alert1.dismiss();
-	    	}
+	    	}*/
 				
-			Thread.sleep(2000);
+			/*Thread.sleep(2000);
 					for (String handle1 : driver.getWindowHandles()) {
 		        	//System.out.println("Child window : :" + handle1);
 						Boolean popupStatus1;
@@ -1899,7 +1899,7 @@ public QuotePage() throws IOException {
 		        		driver.switchTo().window(handle1).close();
 		        	}
 		        	//break;
-		        	}
+		        	}*/
 
  }
 		
