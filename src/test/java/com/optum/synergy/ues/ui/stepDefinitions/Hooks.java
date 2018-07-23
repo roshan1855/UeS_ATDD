@@ -129,8 +129,8 @@ public class Hooks {
 			capabilities.setCapability("platform", "Windows 7");
 			capabilities.setCapability("version", "11.0");
 			capabilities.setCapability("parent-tunnel", "sauce_admin");
-			//capabilities.setCapability("tunnelIdentifier", "OptumSharedTunnel-Stg");
-			capabilities.setCapability("tunnelIdentifier", "OptumSharedTunnel-Prd");
+			capabilities.setCapability("tunnelIdentifier", "OptumSharedTunnel-Stg");
+			//capabilities.setCapability("tunnelIdentifier", "OptumSharedTunnel-Prd");
 			capabilities.setCapability("prerun", prerunParams);
 
 			// capabilities.setCapability("name", scenarioName);
