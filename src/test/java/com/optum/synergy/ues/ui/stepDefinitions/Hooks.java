@@ -130,8 +130,8 @@ public class Hooks {
 			capabilities.setCapability("version", "11.0");
 			capabilities.setCapability("parent-tunnel", "sauce_admin");
 			capabilities.setCapability("tunnelIdentifier", "OptumSharedTunnel-Stg");
-			//capabilities.setCapability("tunnelIdentifier", "OptumSharedTunnel-Prd");
-			capabilities.setCapability("prerun", prerunParams);
+			capabilities.setCapability("tunnelIdentifier", "OptumSharedTunnel-Prd");
+			//capabilities.setCapability("prerun", prerunParams);
 
 			// capabilities.setCapability("name", scenarioName);
 			capabilities.setCapability("time-zone", "Pacific");
