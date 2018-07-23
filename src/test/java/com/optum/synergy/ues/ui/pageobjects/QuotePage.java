@@ -976,7 +976,7 @@ public QuotePage() throws IOException {
 		driver.findElement(quotepolicyEffDateMonth).sendKeys("07");
 		Thread.sleep(1000);
 		
-		driver.findElement(quotepolicyEffDateDay).sendKeys("01");
+		driver.findElement(quotepolicyEffDateDay).sendKeys("15");
 		Thread.sleep(1000);
 		
 		
@@ -1161,7 +1161,7 @@ public QuotePage() throws IOException {
 		driver.findElement(quotepolicyEffDateMonth).sendKeys("07");
 		Thread.sleep(1000);
 		
-		driver.findElement(quotepolicyEffDateDay).sendKeys("01");
+		driver.findElement(quotepolicyEffDateDay).sendKeys("15");
 		Thread.sleep(1000);
 		
 		
