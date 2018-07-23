@@ -201,7 +201,7 @@ public QuotePage() throws IOException {
 	
 	public void censusPage(WebDriver driver) throws InterruptedException{
 		QuotePage.verifyUeSLogos(driver);
-		Thread.sleep(2000);
+		Thread.sleep(5000);
 		String cencusPage=".//*[@id='census-form']/table[1]/tbody/tr[2]/td[1]";
 		
 		QuotePage.verifyPageDisplay(driver,cencusPage, "Census");
