@@ -18,7 +18,7 @@ Feature: Products Module
       
   # July2018    
 
-  @Products_1 @Regression_UeS @Validate_Products_Home @July_Products
+  @Products_1 @Regression_UeS @Validate_Products_Home @July_Products @Products
   Scenario Outline: "<TestCaseID>" Display U-Invent New Product Idea Submission/UnitedHealthcare Pharmacy Information/www.goldenrule.com links on Products Home Page
  links on Products tab
     When Flow_Fetch fileName "<FileName>" and testCaseID "<TestCaseID>" are captured
