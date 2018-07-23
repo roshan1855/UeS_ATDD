@@ -284,7 +284,7 @@ Feature: Quotes Module
       | Quote_TC_15 |  | TC_15      |
 
   # July 2018
-  @Quote @Regression_UeS @AddNewQuote_Medical_Vision_Coverage_State_WA @July_Regression123
+  @Quote @Regression_UeS @AddNewQuote_Medical_Vision_Coverage_State_WA_TX_CA @July_Regression123
   Scenario Outline: "<TestCaseID>" Validate "<Information>" on coverages_MV using "<State>" state
     When Flow_Fetch fileName "<FileName>" and testCaseID "<TestCaseID>" are captured
     Given Flow_Fetch Data from excel Sheet for "<TestCaseID>"
