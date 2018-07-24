@@ -127,7 +127,7 @@ Feature: Quotes Module
       | FileName    |  | TestCaseID |
       | Quote_TC_07 |  | TC_07      |
 
-  @Quote @Regression_UeS @AddNewQuote_Dnetal_Vision_Life_Without_Salary @July_UeS3
+  @Quote @Regression_UeS @AddNewQuote_Dental_Vision_Life_Without_Salary @July_UeS3
   Scenario Outline: "<TestCaseID>" Generate proposal_DVL with census incluidng EEs without salary info / with dependents
     When Flow_Fetch fileName "<FileName>" and testCaseID "<TestCaseID>" are captured
     Given Flow_Fetch Data from excel Sheet for "<TestCaseID>"
@@ -148,7 +148,7 @@ Feature: Quotes Module
       | Quote_TC_08 |  | TC_08      |
 
   #Last Validated on june 19
-  @Quote @Regression_UeS @AddNewQuote_Dnetal_Vision_Life_With_Salary_with_DEP @July_UeS4
+  @Quote @Regression_UeS @AddNewQuote_Dental_Vision_Life_With_Salary_with_DEP @July_UeS4
   Scenario Outline: "<TestCaseID>" Generate proposal_DVL with census incluidng EEs with salary info
     When Flow_Fetch fileName "<FileName>" and testCaseID "<TestCaseID>" are captured
     Given Flow_Fetch Data from excel Sheet for "<TestCaseID>"
@@ -169,7 +169,7 @@ Feature: Quotes Module
       | Quote_TC_09 |  | TC_09      |
 
   #Validated on june 19
-  @Quote @Regression_UeS @AddNewQuote_Dnetal_Vision_With_Salary_with_DEP @Suri
+  @Quote @Regression_UeS @AddNewQuote_Dental_Vision_With_Salary_with_DEP
   Scenario Outline: "<TestCaseID>" Generate proposal_DV with census incluidng EEs with salary info  / with dependents
     When Flow_Fetch fileName "<FileName>" and testCaseID "<TestCaseID>" are captured
     Given Flow_Fetch Data from excel Sheet for "<TestCaseID>"
@@ -188,7 +188,7 @@ Feature: Quotes Module
       | FileName    |  | TestCaseID |
       | Quote_TC_10 |  | TC_10      |
 
-  @Quote @Regression_UeS @AddNewQuote_Dnetal_Vision_Without_Salary @Suri
+  @Quote @Regression_UeS @AddNewQuote_Dental_Vision_Without_Salary
   Scenario Outline: "<TestCaseID>" Generate proposal_DV with census incluidng EEs without salary info
     When Flow_Fetch fileName "<FileName>" and testCaseID "<TestCaseID>" are captured
     Given Flow_Fetch Data from excel Sheet for "<TestCaseID>"
