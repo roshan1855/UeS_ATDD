@@ -15,7 +15,7 @@ import cucumber.api.junit.Cucumber;
 
 
 
-            tags = { "@AddNewQuote_Medical_Dental_Vision_Life_Coverage"
+            tags = { "@AddNewQuote_Dental_Vision_With_Salary_with_DEP,@AddNewQuote_Dental_Vision_Without_Salary"
 //            		+ ",@Regression"
   //          		+ ",@July_Regression"
             		
