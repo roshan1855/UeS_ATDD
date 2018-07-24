@@ -15,7 +15,7 @@ import cucumber.api.junit.Cucumber;
 
 
 
-            tags = { "@AddNewQuote_Dental_Vision_With_Salary_with_DEP,@AddNewQuote_Dental_Vision_Without_Salary"
+            tags = { "@July_UeS5,@July_UeS6"
 //            		+ ",@Regression"
   //          		+ ",@July_Regression"
             		
