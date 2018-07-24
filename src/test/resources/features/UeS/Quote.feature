@@ -207,7 +207,7 @@ Feature: Quotes Module
       | FileName    |  | TestCaseID |
       | Quote_TC_11 |  | TC_11      |
 
-  @Quote @Regression_UeS @AddNewQuote_Dnetal_Life_With_Salary_with_DEP @Suri
+  @Quote @Regression_UeS @AddNewQuote_Dental_Life_With_Salary_with_DEP @July_UeS7
   Scenario Outline: "<TestCaseID>" Generate proposal_DL with census incluidng EEs with salary info
     When Flow_Fetch fileName "<FileName>" and testCaseID "<TestCaseID>" are captured
     Given Flow_Fetch Data from excel Sheet for "<TestCaseID>"
@@ -226,7 +226,7 @@ Feature: Quotes Module
       | FileName    |  | TestCaseID |
       | Quote_TC_12 |  | TC_12      |
 
-  @Quote @Regression_UeS @AddNewQuote_Dnetal_Life_Without_Salary @Suri
+  @Quote @Regression_UeS @AddNewQuote_Dental_Life_Without_Salary @July_UeS8
   Scenario Outline: "<TestCaseID>" Generate proposal_DL with census incluidng EEs without salary info  / with dependents
     When Flow_Fetch fileName "<FileName>" and testCaseID "<TestCaseID>" are captured
     Given Flow_Fetch Data from excel Sheet for "<TestCaseID>"
