@@ -15,7 +15,7 @@ import cucumber.api.junit.Cucumber;
 
 
 
-            tags = { "@July_UeS5,@July_UeS6"
+            tags = { "@July_UeS7,@July_UeS8"
 //            		+ ",@Regression"
   //          		+ ",@July_Regression"
             		
