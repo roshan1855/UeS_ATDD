@@ -4,7 +4,9 @@ import java.awt.AWTException;
 import java.awt.Robot;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 import java.util.Random;
@@ -810,35 +812,51 @@ public QuotePage() throws IOException {
 		//System.out.println("Quote Set Up Window text : :" + driver.findElement(By.xpath(quoteSetUpInfoWindow)).getText());
 		QuotePage.verifyPageDisplay(driver,quoteSetUpInfoWindow, "Quote Setup");
 		
-		driver.findElement(quotepolicyEffDateMonth).sendKeys("07");
-		Thread.sleep(2000);
 		
-		driver.findElement(quotepolicyEffDateDay).sendKeys("15");
-		Thread.sleep(2000);
-		
-		
-		driver.findElement(quotepolicyEffDateYear).sendKeys("18");
-		Thread.sleep(2000);
+		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");  
+	    Date date = new Date();  
+	   // System.out.println(formatter.format(date)); 
+	    
+        String str = formatter.format(date);
+        String [] arrOfStr = str.split("/");
+        
+       //int i=Integer.parseInt(arrOfStr[0]);
+       //System.out.println(arrOfStr[0]);
+       
+       driver.findElement(quotepolicyEffDateMonth).sendKeys(arrOfStr[1]);
+		Thread.sleep(1000);
+
+       if(arrOfStr[0].compareTo("16")>0){
+    	    driver.findElement(quotepolicyEffDateDay).sendKeys("15");
+   			Thread.sleep(1000);  
+       }
+       else{
+    	    driver.findElement(quotepolicyEffDateDay).sendKeys("01");
+   			Thread.sleep(1000);  
+       }
+       
+       	driver.findElement(quotepolicyEffDateYear).sendKeys("18");
+		Thread.sleep(1000);
 		
 		Select cominfoState=new Select(driver.findElement(By.name("state")));
 		cominfoState.selectByVisibleText("CA");
-		Thread.sleep(2000);
+		Thread.sleep(1000);
 		
 		driver.findElement(quoteemployeeCount).clear();
 		driver.findElement(quoteemployeeCount).sendKeys("11");
-		Thread.sleep(2000);
+		Thread.sleep(1000);
 		
 		//driver.findElement(By.name("atneCount")).sendKeys("5");
 		//Thread.sleep(2000);
 		
 		driver.findElement(quoteatneCount1).clear();
 		driver.findElement(quoteatneCount1).sendKeys("11");
-		Thread.sleep(2000);
+		Thread.sleep(1000);
 						
 		element=driver.findElement(quoteNextBtn);
 		executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", element);
-		Thread.sleep(2000);
+		Thread.sleep(1000);
 		
 		
 		String quoteSetUpPage=".//*[@id='quoteForm']/table[1]/tbody/tr[2]/td/table/tbody/tr[1]/td[1]";
@@ -855,17 +873,15 @@ public QuotePage() throws IOException {
 		driver.findElement(quoteSetUpquoteCompanyName).sendKeys("Optum");
 		Thread.sleep(2000);
 		
-		Thread.sleep(2000);
-		
 		element=driver.findElement(ckhBoxProductTypeStd);
 		executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", element);
-		Thread.sleep(2000);
+		Thread.sleep(1000);
 		
 		element=driver.findElement(ckhBoxProductTypeLtd);
 		executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", element);
-		Thread.sleep(2000);
+		Thread.sleep(1000);
 		
 		element=driver.findElement(ckhBoxProductTypeEmpSupLife);
 		executor = (JavascriptExecutor)driver;
@@ -878,16 +894,16 @@ public QuotePage() throws IOException {
 		Thread.sleep(1000);
 		
 		driver.findElement(txtBoxstreetAddress).sendKeys("Hyderabad");
-		Thread.sleep(2000);
+		Thread.sleep(1000);
 		
 		driver.findElement(txtBoxcityAddress).sendKeys("Site2");
-		Thread.sleep(2000);
+		Thread.sleep(1000);
 		
 		Select stateSel=new Select(driver.findElement(dropDownState));
 		stateSel.selectByVisibleText("CA");
 		
 		driver.findElement(txtBoxzipCode).sendKeys("90701");
-		Thread.sleep(5000);
+		Thread.sleep(2000);
 		
 		element=driver.findElement(linkAutomatedLookup);
 		executor = (JavascriptExecutor)driver;
@@ -907,13 +923,22 @@ public QuotePage() throws IOException {
 		String sicInputWindow="//td[@class='sectionHeading11']";
 		QuotePage.verifyPageDisplay(driver,sicInputWindow, "SIC Input");
 		
-		Thread.sleep(10000);
+		Thread.sleep(3000);
 		element=driver.findElement(radioBtnSIC);
 		executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", element);
-		Thread.sleep(10000);
+		Thread.sleep(2000);
 		
-		element=driver.findElement(linklookupLink);
+		driver.findElement(By.xpath("//input[@class='contentText8']")).sendKeys("9111");
+		Thread.sleep(2000);
+		
+		By btnSicInputSubmit=By.xpath("//input[@type='submit']");
+		element=driver.findElement(btnSicInputSubmit);
+		executor = (JavascriptExecutor)driver;
+		executor.executeScript("arguments[0].click();", element);
+		Thread.sleep(3000);
+
+		/*element=driver.findElement(linklookupLink);
 		executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", element);
 		Thread.sleep(10000);
@@ -932,7 +957,7 @@ public QuotePage() throws IOException {
 		executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", element);
 		Thread.sleep(10000);
-		
+*/		
 	
 		
 		driver.switchTo().window(pwindow);
@@ -973,12 +998,28 @@ public QuotePage() throws IOException {
 		//System.out.println("Quote Set Up Window text : :" + driver.findElement(By.xpath(quoteSetUpInfoWindow)).getText());
 		QuotePage.verifyPageDisplay(driver,quoteSetUpInfoWindow, "Quote Setup");
 		
-		driver.findElement(quotepolicyEffDateMonth).sendKeys("07");
+
+		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");  
+	    Date date = new Date();  
+	   // System.out.println(formatter.format(date)); 
+	    
+        String str = formatter.format(date);
+        String [] arrOfStr = str.split("/");
+        
+       //int i=Integer.parseInt(arrOfStr[0]);
+      // System.out.println(arrOfStr[0]);
+       
+       driver.findElement(quotepolicyEffDateMonth).sendKeys(arrOfStr[1]);
 		Thread.sleep(1000);
-		
-		driver.findElement(quotepolicyEffDateDay).sendKeys("15");
-		Thread.sleep(1000);
-		
+
+       if(arrOfStr[0].compareTo("16")>0){
+    	    driver.findElement(quotepolicyEffDateDay).sendKeys("15");
+   			Thread.sleep(1000);  
+       }
+       else{
+    	    driver.findElement(quotepolicyEffDateDay).sendKeys("01");
+   			Thread.sleep(1000);  
+       }		
 		
 		driver.findElement(quotepolicyEffDateYear).sendKeys("18");
 		Thread.sleep(1000);
@@ -1111,14 +1152,10 @@ public QuotePage() throws IOException {
 		Thread.sleep(2000);
 		
 		By btnSicInputSubmit=By.xpath("//input[@type='submit']");
-		
-		
 		element=driver.findElement(btnSicInputSubmit);
 		executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", element);
 		Thread.sleep(3000);
-		
-	
 		
 		driver.switchTo().window(pwindow);
 		Thread.sleep(1000);
@@ -1158,13 +1195,28 @@ public QuotePage() throws IOException {
 		//System.out.println("Quote Set Up Window text : :" + driver.findElement(By.xpath(quoteSetUpInfoWindow)).getText());
 		QuotePage.verifyPageDisplay(driver,quoteSetUpInfoWindow, "Quote Setup");
 		
-		driver.findElement(quotepolicyEffDateMonth).sendKeys("07");
+
+		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");  
+	    Date date = new Date();  
+	   // System.out.println(formatter.format(date)); 
+	    
+        String str = formatter.format(date);
+        String [] arrOfStr = str.split("/");
+        
+       //int i=Integer.parseInt(arrOfStr[0]);
+       System.out.println(arrOfStr[0]);
+       
+       driver.findElement(quotepolicyEffDateMonth).sendKeys(arrOfStr[1]);
 		Thread.sleep(1000);
-		
-		driver.findElement(quotepolicyEffDateDay).sendKeys("15");
-		Thread.sleep(1000);
-		
-		
+
+       if(arrOfStr[0].compareTo("16")>0){
+    	    driver.findElement(quotepolicyEffDateDay).sendKeys("15");
+   			Thread.sleep(1000);  
+       }
+       else{
+    	    driver.findElement(quotepolicyEffDateDay).sendKeys("01");
+   			Thread.sleep(1000);  
+       }		
 		driver.findElement(quotepolicyEffDateYear).sendKeys("18");
 		Thread.sleep(1000);
 		
@@ -1288,13 +1340,23 @@ public QuotePage() throws IOException {
 		String sicInputWindow="//td[@class='sectionHeading11']";
 		QuotePage.verifyPageDisplay(driver,sicInputWindow, "SIC Input");
 		
-		Thread.sleep(8000);
+		Thread.sleep(3000);
 		element=driver.findElement(radioBtnSIC);
 		executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", element);
-		Thread.sleep(8000);
+		Thread.sleep(2000);
 		
-		element=driver.findElement(linklookupLink);
+		driver.findElement(By.xpath("//input[@class='contentText8']")).sendKeys("9111");
+		Thread.sleep(2000);
+		
+		By btnSicInputSubmit=By.xpath("//input[@type='submit']");
+		element=driver.findElement(btnSicInputSubmit);
+		executor = (JavascriptExecutor)driver;
+		executor.executeScript("arguments[0].click();", element);
+		Thread.sleep(3000);
+
+		
+		/*element=driver.findElement(linklookupLink);
 		executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", element);
 		Thread.sleep(8000);
@@ -1313,7 +1375,7 @@ public QuotePage() throws IOException {
 		executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", element);
 		Thread.sleep(4000);
-		
+*/		
 	
 		
 		driver.switchTo().window(pwindow);
@@ -1348,7 +1410,7 @@ public QuotePage() throws IOException {
 		Thread.sleep(5000);
 		
 		String dentalPlansPage="//td[contains(text(),'Dental Plans')]";
-		Thread.sleep(4000);
+		Thread.sleep(5000);
 		QuotePage.verifyPageDisplay(driver,dentalPlansPage, "Dental Plans");
 		
 		String dentalPlanInformationTable="//td[contains(text(),'Dental PPO/Indemnity Plan Information')]";
@@ -1512,12 +1574,27 @@ public QuotePage() throws IOException {
 				//System.out.println("Quote Set Up Window text : :" + driver.findElement(By.xpath(quoteSetUpInfoWindow)).getText());
 				QuotePage.verifyPageDisplay(driver,quoteSetUpInfoWindow, "Quote Setup");
 				
-				driver.findElement(quotepolicyEffDateMonth).sendKeys("07");
+				SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");  
+			    Date date = new Date();  
+			   // System.out.println(formatter.format(date)); 
+			    
+		        String str = formatter.format(date);
+		        String [] arrOfStr = str.split("/");
+		        
+		       //int i=Integer.parseInt(arrOfStr[0]);
+		       //System.out.println(arrOfStr[0]);
+		       
+		       driver.findElement(quotepolicyEffDateMonth).sendKeys(arrOfStr[1]);
 				Thread.sleep(1000);
-				
-				driver.findElement(quotepolicyEffDateDay).sendKeys("15");
-				Thread.sleep(1000);
-				
+
+		       if(arrOfStr[0].compareTo("16")>0){
+		    	    driver.findElement(quotepolicyEffDateDay).sendKeys("15");
+		   			Thread.sleep(1000);  
+		       }
+		       else{
+		    	    driver.findElement(quotepolicyEffDateDay).sendKeys("01");
+		   			Thread.sleep(1000);  
+		       }
 				
 				driver.findElement(quotepolicyEffDateYear).sendKeys("18");
 				Thread.sleep(1000);
@@ -1616,7 +1693,7 @@ public QuotePage() throws IOException {
         	//break;
         	}	
 		
-		Thread.sleep(20000);
+		Thread.sleep(15000);
 		String sicInputWindow="//td[@class='sectionHeading11']";
 		QuotePage.verifyPageDisplay(driver,sicInputWindow, "SIC Input");
 		
@@ -1637,8 +1714,6 @@ public QuotePage() throws IOException {
 		Thread.sleep(2000);
 		
 		By btnSicInputSubmit=By.xpath("//input[@type='submit']");
-		
-		
 		element=driver.findElement(btnSicInputSubmit);
 		executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", element);
