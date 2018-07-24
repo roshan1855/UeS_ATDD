@@ -169,7 +169,7 @@ Feature: Quotes Module
       | Quote_TC_09 |  | TC_09      |
 
   #Validated on june 19
-  @Quote @Regression_UeS @AddNewQuote_Dental_Vision_With_Salary_with_DEP
+  @Quote @Regression_UeS @AddNewQuote_Dental_Vision_With_Salary_with_DEP @July_UeS5
   Scenario Outline: "<TestCaseID>" Generate proposal_DV with census incluidng EEs with salary info  / with dependents
     When Flow_Fetch fileName "<FileName>" and testCaseID "<TestCaseID>" are captured
     Given Flow_Fetch Data from excel Sheet for "<TestCaseID>"
@@ -188,7 +188,7 @@ Feature: Quotes Module
       | FileName    |  | TestCaseID |
       | Quote_TC_10 |  | TC_10      |
 
-  @Quote @Regression_UeS @AddNewQuote_Dental_Vision_Without_Salary
+  @Quote @Regression_UeS @AddNewQuote_Dental_Vision_Without_Salary @July_UeS6
   Scenario Outline: "<TestCaseID>" Generate proposal_DV with census incluidng EEs without salary info
     When Flow_Fetch fileName "<FileName>" and testCaseID "<TestCaseID>" are captured
     Given Flow_Fetch Data from excel Sheet for "<TestCaseID>"
