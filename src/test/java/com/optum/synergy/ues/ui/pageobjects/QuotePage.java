@@ -903,7 +903,7 @@ public QuotePage() throws IOException {
         	//break;
         	}	
 		
-		Thread.sleep(10000);
+		Thread.sleep(15000);
 		String sicInputWindow="//td[@class='sectionHeading11']";
 		QuotePage.verifyPageDisplay(driver,sicInputWindow, "SIC Input");
 		
