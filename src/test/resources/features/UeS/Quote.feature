@@ -264,7 +264,7 @@ Feature: Quotes Module
       | FileName    |  | TestCaseID |
       | Quote_TC_14 |  | TC_14      |
 
-  @Quote @Regression_UeS @AddNewQuote_Vision_Life_Without_Salary @July_UeS10
+  @Quote @Regression_UeS1 @AddNewQuote_Vision_Life_Without_Salary @July_UeS10
   Scenario Outline: "<TestCaseID>" Generate proposal_VL with census incluidng EEs without salary info
     When Flow_Fetch fileName "<FileName>" and testCaseID "<TestCaseID>" are captured
     Given Flow_Fetch Data from excel Sheet for "<TestCaseID>"
