@@ -15,7 +15,7 @@ import cucumber.api.junit.Cucumber;
 
 
 
-            tags = { "@July_UeS9,@July_UeS10"
+            tags = { "@Validate_Products_Home_SubLinks"
 //            		+ ",@Regression"
   //          		+ ",@July_Regression"
             		
