@@ -1,6 +1,6 @@
 Feature: Quotes Module
 
-  @Quote @Regression_UeS @AddNewQuote_Medical_Dental_Vision_Life_Coverage @Suri
+  @Quote @Regression_UeS @AddNewQuote_MDVL_Coverage_With_Sal @Suri
   Scenario Outline: "<TestCaseID>" Generate proposal_MDVL with census incluidng EEs with salary info / with dependents
     When Flow_Fetch fileName "<FileName>" and testCaseID "<TestCaseID>" are captured
     Given Flow_Fetch Data from excel Sheet for "<TestCaseID>"
@@ -21,7 +21,7 @@ Feature: Quotes Module
       | FileName    |  | TestCaseID |
       | Quote_TC_01 |  | TC_01      |
 
-  @Quote @Regression_UeS @AddNewQuote_Medical_Dental_Vision_Life_Coverage1 @Suri
+  @Quote @Regression_UeS @AddNewQuote_MDVL_Coverage_Without_Sal @Suri
   Scenario Outline: "<TestCaseID>" Generate proposal_MDVL with census incluidng EEs without salary info
     When UeS_UserFlow_fileName "<FileName>" and testCaseID "<TestCaseID>" are captured
     Given Flow_Fetch Data from excel Sheet for "<TestCaseID>"
@@ -309,3 +309,19 @@ Feature: Quotes Module
       | Quote_TC_16 |  | TC_16      |  | WA    |  | 2 Tier Composite for ACR |  | 2 Tier             |  |    98001 |
       | Quote_TC_17 |  | TC_17      |  | TX    |  | 4 Tier Composite for ACR |  | 4 Tier             |  |    73301 |
       | Quote_TC_18 |  | TC_18      |  | CA    |  | Age Banded for ACR       |  | Age Banded for ACR |  |    90001 |
+
+  @Testing
+  Scenario Outline: "<TestCaseID>" Testing
+    When Flow_Fetch fileName "<FileName>" and testCaseID "<TestCaseID>" are captured
+    Given Flow_Fetch Data from excel Sheet for "<TestCaseID>"
+    Given UeS_User is on Home Page
+    When UeS_User Navigate to LogIn Page
+    And UeS_User enters UserName and Password
+    Then UeS_User displayed Login Successfully
+    When UeS_User is on Home page and click on Quotes and then select New Quote
+    And fill all details
+    Then UeS_User click on GENERATE FINAL PROPOSAL1 button and verify Preview Proposal PDf is displayed successfully
+
+    Examples: 
+      | FileName   |  | TestCaseID |
+      | Test_TC_20 |  | TC_20      |
