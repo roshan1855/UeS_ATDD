@@ -289,5 +289,15 @@ public class QuoteDef{
 	    quotepage.btnSubmitGenerateProposal(driver);
 	    quotepage.tearDown(driver);
 	}
+	
+	@When("^fill all details$")
+	public void fillAllDetails() throws Throwable {
+		quotepage.testingUeS(driver);
+	}
+
+	@Then("^UeS_User click on GENERATE FINAL PROPOSAL(\\d+) button and verify Preview Proposal PDf is displayed successfully$")
+	public void ues_userClickOnGENERATEFINALPROPOSALButtonAndVerifyPreviewProposalPDfIsDisplayedSuccessfully(int arg1) throws Throwable {
+		quotepage.tearDown(driver);
+	}
 }
 
