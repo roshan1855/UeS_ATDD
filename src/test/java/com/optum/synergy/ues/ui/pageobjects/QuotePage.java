@@ -2223,7 +2223,6 @@ public QuotePage() throws IOException {
 	//executor.executeScript("arguments[0].click();", element); 
 
 	element.click();
-
 	//driver.findElement(submitGenerateProposal).sendKeys(Keys.CONTROL,Keys.CONTROL.ADD);
 	Thread.sleep(5000);
 
@@ -2237,6 +2236,7 @@ public QuotePage() throws IOException {
 	Thread.sleep(2000);
 	alert.accept();	
 	System.out.println("After accepting Alert");
+	driver.findElement(submitGenerateProposal).sendKeys(Keys.CONTROL , Keys.ADD);
 	Thread.sleep(15000);
 
 	/*		 new WebDriverWait(driver, 10).until(ExpectedConditions.alertIsPresent());
