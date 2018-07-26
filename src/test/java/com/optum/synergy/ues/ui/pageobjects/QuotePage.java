@@ -939,7 +939,7 @@ public QuotePage() throws IOException {
 		element=driver.findElement(linkAutomatedLookup);
 		executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", element);
-		Thread.sleep(10000);
+		Thread.sleep(20000);
 		
 		
 		for (String handle1 : driver.getWindowHandles()) {
@@ -950,7 +950,7 @@ public QuotePage() throws IOException {
         	//break;
         	}	
 		
-		Thread.sleep(20000);
+		Thread.sleep(15000);
 		String sicInputWindow="//td[@class='sectionHeading11']";
 		QuotePage.verifyPageDisplay(driver,sicInputWindow, "SIC Input");
 		
@@ -1090,9 +1090,6 @@ public QuotePage() throws IOException {
 		driver.findElement(quoteSetUpquoteCompanyName).sendKeys("Optum_M_V");
 		Thread.sleep(1000);
 		
-		
-		Thread.sleep(1000);
-		
 		element=driver.findElement(ckhBoxProductTypeLife);
 		executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", element);
@@ -1106,12 +1103,12 @@ public QuotePage() throws IOException {
 		element=driver.findElement(ckhBoxProductTypeStd);
 		executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", element);
-		Thread.sleep(2000);
+		Thread.sleep(1000);
 		
 		element=driver.findElement(ckhBoxProductTypeLtd);
 		executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", element);
-		Thread.sleep(2000);
+		Thread.sleep(1000);
 		
 		element=driver.findElement(ckhBoxProductTypeEmpSupLife);
 		executor = (JavascriptExecutor)driver;
@@ -1133,12 +1130,12 @@ public QuotePage() throws IOException {
 		stateSel.selectByVisibleText("CA");
 		
 		driver.findElement(txtBoxzipCode).sendKeys("90701");
-		Thread.sleep(2000);
+		Thread.sleep(1000);
 		
 		element=driver.findElement(linkAutomatedLookup);
 		executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", element);
-		Thread.sleep(10000);
+		Thread.sleep(20000);
 		
 		
 		for (String handle1 : driver.getWindowHandles()) {
@@ -1285,10 +1282,6 @@ public QuotePage() throws IOException {
 		
 		driver.findElement(quoteSetUpquoteCompanyName).sendKeys("Optum_" + coverage);
 		Thread.sleep(1000);
-		
-		
-		Thread.sleep(1000);
-		
 	
 		element=driver.findElement(ckhBoxProductTypeMedical);
 		executor = (JavascriptExecutor)driver;
@@ -1356,7 +1349,7 @@ public QuotePage() throws IOException {
 		element=driver.findElement(linkAutomatedLookup);
 		executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", element);
-		Thread.sleep(15000);
+		Thread.sleep(20000);
 		
 		
 		for (String handle1 : driver.getWindowHandles()) {
@@ -1367,7 +1360,7 @@ public QuotePage() throws IOException {
         	//break;
         	}	
 		
-		Thread.sleep(20000);
+		Thread.sleep(15000);
 		String sicInputWindow="//td[@class='sectionHeading11']";
 		QuotePage.verifyPageDisplay(driver,sicInputWindow, "SIC Input");
 		
@@ -1713,7 +1706,7 @@ public QuotePage() throws IOException {
 		element=driver.findElement(linkAutomatedLookup);
 		executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", element);
-		Thread.sleep(15000);
+		Thread.sleep(20000);
 		
 		
 		for (String handle1 : driver.getWindowHandles()) {
@@ -1724,7 +1717,7 @@ public QuotePage() throws IOException {
         	//break;
         	}	
 		
-		Thread.sleep(20000);
+		Thread.sleep(15000);
 		String sicInputWindow="//td[@class='sectionHeading11']";
 		QuotePage.verifyPageDisplay(driver,sicInputWindow, "SIC Input");
 		
@@ -2143,21 +2136,22 @@ public QuotePage() throws IOException {
 		element=driver.findElement(btnquoteSetUpNext);
 		executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", element);
-		Thread.sleep(5000);
+		Thread.sleep(10000);
 		
 		//driver.findElement(By.xpath(".//*[@id='census-form']/table[8]/tbody/tr[2]/td/table/tbody/tr[5]"));
 		List<WebElement>  ele4=driver.findElements(By.xpath(".//*[@id='census-form']/table[8]/tbody/tr[2]/td/table/tbody/tr"));
 		int count1=ele4.size();
 		Thread.sleep(2000);
 		
-		System.out.println("Row Count :: " +count1 + "Row Count  ::" + (count1-7));
+		System.out.println("Row Count :: " +count1 + " Row Count  ::" + (count1-7));
 
 		int j=1000;
 		for(int i=0;i<=count1-7;i++){
+			Thread.sleep(1000);
 			driver.findElement(By.xpath("//input[@name='censusDetailInformationForm["+i+"].employeeAge']")).sendKeys("23");
 			Thread.sleep(1000);
-/*			driver.findElement(By.xpath("//input[@name='censusDetailInformationForm["+i+"].spouseAge']")).sendKeys("22");
-			Thread.sleep(2000);
+			driver.findElement(By.xpath("//input[@name='censusDetailInformationForm["+i+"].spouseAge']")).sendKeys("22");
+			/*			Thread.sleep(2000);
 			driver.findElement(By.xpath("//input[@name='censusDetailInformationForm["+i+"].childrenToAdd']")).sendKeys("1");
 			Thread.sleep(2000);
 			
@@ -2216,13 +2210,14 @@ public QuotePage() throws IOException {
  
 	Thread.sleep(2000);		
 	By submitGenerateProposal=By.xpath("//input[@name='submitGenerateProposal']");
-	driver.findElement(submitGenerateProposal).sendKeys(Keys.CONTROL , Keys.SUBTRACT);
+	//driver.findElement(submitGenerateProposal).sendKeys(Keys.CONTROL , Keys.SUBTRACT);
 
 	element=driver.findElement(submitGenerateProposal);
 	//executor = (JavascriptExecutor)driver;
 	//executor.executeScript("arguments[0].click();", element); 
-
-	element.click();
+	
+	element.submit();
+	//element.click();
 	//driver.findElement(submitGenerateProposal).sendKeys(Keys.CONTROL,Keys.CONTROL.ADD);
 	Thread.sleep(5000);
 
