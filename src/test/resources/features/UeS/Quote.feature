@@ -1,6 +1,6 @@
 Feature: Quotes Module
 
-  @Quote @Regression_UeS @AddNewQuote_MDVL_Coverage_With_Sal @Suri
+  @Regression_UeS @AddNewQuote_MDVL_Coverage_With_Sal
   Scenario Outline: "<TestCaseID>" Generate proposal_MDVL with census incluidng EEs with salary info / with dependents
     When Flow_Fetch fileName "<FileName>" and testCaseID "<TestCaseID>" are captured
     Given Flow_Fetch Data from excel Sheet for "<TestCaseID>"
@@ -21,7 +21,7 @@ Feature: Quotes Module
       | FileName    |  | TestCaseID |
       | Quote_TC_01 |  | TC_01      |
 
-  @Quote @Regression_UeS @AddNewQuote_MDVL_Coverage_Without_Sal @Suri
+  @Regression_UeS @AddNewQuote_MDVL_Coverage_Without_Sal
   Scenario Outline: "<TestCaseID>" Generate proposal_MDVL with census incluidng EEs without salary info
     When UeS_UserFlow_fileName "<FileName>" and testCaseID "<TestCaseID>" are captured
     Given Flow_Fetch Data from excel Sheet for "<TestCaseID>"
@@ -89,7 +89,7 @@ Feature: Quotes Module
       | FileName             |  | TestCaseID |
       | Administration_TC_09 |  | TC_303     |
 
-  @Quote @Regression_UeS @AddNewQuote_Medical_Vision_with_salary @July_UeS1
+  @Regression_UeS @AddNewQuote_Medical_Vision_with_salary
   Scenario Outline: "<TestCaseID>" Generate proposal_MV with census incluidng EEs with salary info
     When Flow_Fetch fileName "<FileName>" and testCaseID "<TestCaseID>" are captured
     Given Flow_Fetch Data from excel Sheet for "<TestCaseID>"
@@ -108,7 +108,7 @@ Feature: Quotes Module
       | FileName    |  | TestCaseID |
       | Quote_TC_06 |  | TC_06      |
 
-  @Quote @Regression_UeS @AddNewQuote_Medical_Vision_Without_Salary @July_UeS2
+  @Regression_UeS @AddNewQuote_Medical_Vision_Without_Salary
   Scenario Outline: "<TestCaseID>" Generate proposal_MV with census incluidng EEs without salary info / with dependents
     When Flow_Fetch fileName "<FileName>" and testCaseID "<TestCaseID>" are captured
     Given Flow_Fetch Data from excel Sheet for "<TestCaseID>"
@@ -127,7 +127,7 @@ Feature: Quotes Module
       | FileName    |  | TestCaseID |
       | Quote_TC_07 |  | TC_07      |
 
-  @Quote @Regression_UeS @AddNewQuote_Dental_Vision_Life_Without_Salary @July_UeS3
+  @Regression_UeS @AddNewQuote_Dental_Vision_Life_Without_Salary
   Scenario Outline: "<TestCaseID>" Generate proposal_DVL with census incluidng EEs without salary info / with dependents
     When Flow_Fetch fileName "<FileName>" and testCaseID "<TestCaseID>" are captured
     Given Flow_Fetch Data from excel Sheet for "<TestCaseID>"
@@ -148,7 +148,7 @@ Feature: Quotes Module
       | Quote_TC_08 |  | TC_08      |
 
   #Last Validated on june 19
-  @Quote @Regression_UeS @AddNewQuote_Dental_Vision_Life_With_Salary_with_DEP @July_UeS4
+  @Regression_UeS @AddNewQuote_Dental_Vision_Life_With_Salary_with_DEP
   Scenario Outline: "<TestCaseID>" Generate proposal_DVL with census incluidng EEs with salary info
     When Flow_Fetch fileName "<FileName>" and testCaseID "<TestCaseID>" are captured
     Given Flow_Fetch Data from excel Sheet for "<TestCaseID>"
@@ -169,7 +169,7 @@ Feature: Quotes Module
       | Quote_TC_09 |  | TC_09      |
 
   #Validated on june 19
-  @Quote @Regression_UeS @AddNewQuote_Dental_Vision_With_Salary_with_DEP @July_UeS5
+  @Regression_UeS @AddNewQuote_Dental_Vision_With_Salary_with_DEP
   Scenario Outline: "<TestCaseID>" Generate proposal_DV with census incluidng EEs with salary info  / with dependents
     When Flow_Fetch fileName "<FileName>" and testCaseID "<TestCaseID>" are captured
     Given Flow_Fetch Data from excel Sheet for "<TestCaseID>"
@@ -188,7 +188,7 @@ Feature: Quotes Module
       | FileName    |  | TestCaseID |
       | Quote_TC_10 |  | TC_10      |
 
-  @Quote @Regression_UeS @AddNewQuote_Dental_Vision_Without_Salary @July_UeS6
+  @Regression_UeS @AddNewQuote_Dental_Vision_Without_Salary
   Scenario Outline: "<TestCaseID>" Generate proposal_DV with census incluidng EEs without salary info
     When Flow_Fetch fileName "<FileName>" and testCaseID "<TestCaseID>" are captured
     Given Flow_Fetch Data from excel Sheet for "<TestCaseID>"
@@ -207,7 +207,7 @@ Feature: Quotes Module
       | FileName    |  | TestCaseID |
       | Quote_TC_11 |  | TC_11      |
 
-  @Quote @Regression_UeS @AddNewQuote_Dental_Life_With_Salary_with_DEP @July_UeS7
+  @Regression_UeS @AddNewQuote_Dental_Life_With_Salary_with_DEP
   Scenario Outline: "<TestCaseID>" Generate proposal_DL with census incluidng EEs with salary info
     When Flow_Fetch fileName "<FileName>" and testCaseID "<TestCaseID>" are captured
     Given Flow_Fetch Data from excel Sheet for "<TestCaseID>"
@@ -226,7 +226,7 @@ Feature: Quotes Module
       | FileName    |  | TestCaseID |
       | Quote_TC_12 |  | TC_12      |
 
-  @Quote @Regression_UeS @AddNewQuote_Dental_Life_Without_Salary @July_UeS8
+  @Regression_UeS @AddNewQuote_Dental_Life_Without_Salary
   Scenario Outline: "<TestCaseID>" Generate proposal_DL with census incluidng EEs without salary info  / with dependents
     When Flow_Fetch fileName "<FileName>" and testCaseID "<TestCaseID>" are captured
     Given Flow_Fetch Data from excel Sheet for "<TestCaseID>"
@@ -245,7 +245,7 @@ Feature: Quotes Module
       | FileName    |  | TestCaseID |
       | Quote_TC_13 |  | TC_13      |
 
-  @Quote @Regression_UeS @AddNewQuote_Vision_Life_With_Salary @July_UeS9
+  @Regression_UeS1 @AddNewQuote_Vision_Life_With_Salary
   Scenario Outline: "<TestCaseID>" Generate proposal_VL with census incluidng EEs with salary info  / with dependents
     When Flow_Fetch fileName "<FileName>" and testCaseID "<TestCaseID>" are captured
     Given Flow_Fetch Data from excel Sheet for "<TestCaseID>"
@@ -264,7 +264,7 @@ Feature: Quotes Module
       | FileName    |  | TestCaseID |
       | Quote_TC_14 |  | TC_14      |
 
-  @Quote @Regression_UeS1 @AddNewQuote_Vision_Life_Without_Salary @July_UeS10
+  @Regression_UeS1 @AddNewQuote_Vision_Life_Without_Salary
   Scenario Outline: "<TestCaseID>" Generate proposal_VL with census incluidng EEs without salary info
     When Flow_Fetch fileName "<FileName>" and testCaseID "<TestCaseID>" are captured
     Given Flow_Fetch Data from excel Sheet for "<TestCaseID>"
@@ -284,7 +284,7 @@ Feature: Quotes Module
       | Quote_TC_15 |  | TC_15      |
 
   # July 2018
-  @Quote @Regression_UeS @AddNewQuote_Medical_Vision_Coverage_State_WA_TX_CA @July_Regression123
+  @Regression_UeS @AddNewQuote_Medical_Vision_Coverage_State_WA_TX_CA
   Scenario Outline: "<TestCaseID>" Validate "<Information>" on coverages_MV using "<State>" state
     When Flow_Fetch fileName "<FileName>" and testCaseID "<TestCaseID>" are captured
     Given Flow_Fetch Data from excel Sheet for "<TestCaseID>"
