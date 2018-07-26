@@ -950,7 +950,7 @@ public QuotePage() throws IOException {
         	//break;
         	}	
 		
-		Thread.sleep(15000);
+		Thread.sleep(20000);
 		String sicInputWindow="//td[@class='sectionHeading11']";
 		QuotePage.verifyPageDisplay(driver,sicInputWindow, "SIC Input");
 		
@@ -1149,7 +1149,7 @@ public QuotePage() throws IOException {
         	//break;
         	}	
 		
-		Thread.sleep(15000);
+		Thread.sleep(20000);
 		String sicInputWindow="//td[@class='sectionHeading11']";
 		QuotePage.verifyPageDisplay(driver,sicInputWindow, "SIC Input");
 		
@@ -1367,7 +1367,7 @@ public QuotePage() throws IOException {
         	//break;
         	}	
 		
-		Thread.sleep(15000);
+		Thread.sleep(20000);
 		String sicInputWindow="//td[@class='sectionHeading11']";
 		QuotePage.verifyPageDisplay(driver,sicInputWindow, "SIC Input");
 		
@@ -1724,7 +1724,7 @@ public QuotePage() throws IOException {
         	//break;
         	}	
 		
-		Thread.sleep(18000);
+		Thread.sleep(20000);
 		String sicInputWindow="//td[@class='sectionHeading11']";
 		QuotePage.verifyPageDisplay(driver,sicInputWindow, "SIC Input");
 		
@@ -1791,7 +1791,7 @@ public QuotePage() throws IOException {
 		Thread.sleep(10000);
 		String medicalPage=".//*[@id='divContent']/form/table/tbody/tr[1]/td/table/tbody/tr/td[1]";
 		QuotePage.verifyPageDisplay(driver,medicalPage, "Medical Plans");
-		Thread.sleep(10000);
+		Thread.sleep(12000);
 		
 		String medicalInfoTable="//td[contains(text(),'Medical Plan Information')]";
 		//String medicalInformationTable=".//*[@id='divContent']/form/table/tbody/tr[12]/td/table/tbody/tr/td";
