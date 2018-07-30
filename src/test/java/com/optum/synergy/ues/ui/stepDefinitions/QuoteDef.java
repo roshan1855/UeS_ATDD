@@ -298,7 +298,7 @@ public class QuoteDef{
 	@Then("^UeS_User click on GENERATE FINAL PROPOSAL(\\d+) button and verify Preview Proposal PDf is displayed successfully$")
 	public void ues_userClickOnGENERATEFINALPROPOSALButtonAndVerifyPreviewProposalPDfIsDisplayedSuccessfully(int arg1) throws Throwable {
 		System.out.println("Final Page");
-		//quotepage.tearDown(driver);
+		quotepage.tearDown(driver);
 	}
 }
 
