@@ -1,6 +1,6 @@
 Feature: Products Module
 
-  @Products @Regression_UeS @Validate_Products_Home @Suri
+  @Products @Regression_UeS @Validate_Products_Home
   Scenario Outline: "<TestCaseID>" Display of links-Benefit Summaries/Product Grids/Benefit FAQs/other links on Products tab
     When Flow_Fetch fileName "<FileName>" and testCaseID "<TestCaseID>" are captured
     Given Flow_Fetch Data from excel Sheet for "<TestCaseID>"
@@ -18,7 +18,7 @@ Feature: Products Module
       
   # July2018    
 
-  @Products_1 @Regression_UeS1 @Validate_Products_Home_SubLinks @July_Products @Products
+  @Products @Regression_UeS @Validate_Products_Home_SubLinks
   Scenario Outline: "<TestCaseID>" Display U-Invent New Product Idea Submission/UnitedHealthcare Pharmacy Information/www.goldenrule.com links on Products Home Page
  links on Products tab
     When Flow_Fetch fileName "<FileName>" and testCaseID "<TestCaseID>" are captured
