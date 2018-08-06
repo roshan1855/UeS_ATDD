@@ -310,10 +310,9 @@ Feature: Quotes Module
       | Quote_TC_17 |  | TC_17      |  | TX    |  | 4 Tier Composite for ACR |  | 4 Tier             |  |    73301 |
       | Quote_TC_18 |  | TC_18      |  | CA    |  | Age Banded for ACR       |  | Age Banded for ACR |  |    90001 |
 
-
   # Aug 2018
   @Aug
-  Scenario Outline: "<TestCaseID>" Validate "<Information>" on coverages_MV using "<State>" state
+  Scenario Outline: "<TestCaseID>" Validate "<Value>" on coverage_D using "<State>" state
     When Flow_Fetch fileName "<FileName>" and testCaseID "<TestCaseID>" are captured
     Given Flow_Fetch Data from excel Sheet for "<TestCaseID>"
     Given UeS_User is on Home Page
@@ -322,19 +321,17 @@ Feature: Quotes Module
     Then UeS_User displayed Login Successfully
     When UeS_User is on Home page and click on Quotes and then select New Quote
     And UeS_User is select the state as "<State>" and Fill all the details of the Quote Setup window and click on next
-    And UeS_User is Fill all the details of the Quote Setup Page by using "<Zip Code>" and click on next button
-    And UeS_User is Fill all the details of the Census page and click on next
-    Then UeS_User verify Rating Method as "<Value>"
-    And UeS_User is Select the Plans from Medical Plans Page and click on Compare Rates For Selected Plans button
-    Then UeS_User is verify EMPLOYEE CLASS in Medical Rate Comparison page by using "<Information>"
-    And UeS_User is navigate back to Medical Plans Page and click on next
-    And UeS_User is Select the Plans from Optional Medical Riders Page and click on next
-    And UeS_User is Select the Plans from Vision Plans Page and click on next
-    Then UeS_User click on GENERATE FINAL PROPOSAL button and verify Preview Proposal PDf is displayed successfully
+    And UeS_User is Fill all the details of the Quote Setup Page by using "<Zip Code>" and click on NEXT button
+    And UeS_User is Fill all the details without salary info of the Census page and click on next
+    #And UeS_User is Fill all the details of the Census page and click on next
+    Then UeS_User verify the Display Plan as "<Value>" and select Display Plan as "<Value>" and click on APPLY CHANGES button
+    And UeS_User is Select the ADD TO PROPOSAL checkboxes and click on COMPARE SELECTED PLANS button
+    Then UeS_User is verify ANNUAL PREMIUM and BENEFIT in Dental Plan Comparison page
 
     Examples: 
-      | FileName    |  | TestCaseID |  | State |  | Value                    |  | Information        |  | Zip Code |
-      | Quote_TC_21 |  | TC_21      |  | CA    |  | 2 Tier Composite for ACR |  | 2 Tier             |  |    90001 |
+      | FileName    |  | TestCaseID |  | State |  | Value              |  | Information        |  | Zip Code |
+     # | Quote_TC_21 |  | TC_21      |  | CA    |  | Most Popular Plans |  | Most Popular Plans |  |    90001 |
+      | Quote_TC_21 |  | TC_21     |  | CA    |  | Show All Plans     |  | Show All Plans     |  |    90001 |
 
   @Testing
   Scenario Outline: "<TestCaseID>" Testing
