@@ -35,6 +35,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
@@ -415,12 +416,39 @@ public class Utilities  {
 	public void teardown() {
 		driver.quit();
 	}*/
-	public void waitForVisibilityOfWebElement(String locator, WebDriver driver){
+/*	public void waitForVisibilityOfWebElement(String locator, WebDriver driver){
 		
 		WebElement webElement=driver.findElement(By.xpath(locator));
 		wait=new WebDriverWait(driver, 20);
 		wait.until(ExpectedConditions.visibilityOf(webElement));
 
+	}*/
+	
+	public void waitForVisibilityOfWebElement(final By locator, WebDriver driver){
+		
+		WebElement webElement=driver.findElement(locator);
+		wait=new WebDriverWait(driver, 80);
+		wait.until(ExpectedConditions.visibilityOf(webElement));	
+
 	}
+	
+	public void waitforSwitchtoFrame(final By locator, WebDriver driver){
+	//WebDriverWait wait = new WebDriverWait(driver,60);
+	WebElement webElement=driver.findElement(locator);
+	wait=new WebDriverWait(driver, 60);
+	 wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(webElement));
+	}
+	
+	public void waitForNumberOfWindowsToEqual(final int numberOfWindows){
+
+		driver= Hooks.driver;
+		new WebDriverWait(driver,300){
+		}.until(new ExpectedCondition<Boolean>(){
+		@Override
+		public Boolean apply(WebDriver driver){
+		return(driver.getWindowHandles().size() >= numberOfWindows);
+		}
+	});
+}
 
 }
