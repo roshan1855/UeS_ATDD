@@ -300,5 +300,27 @@ public class QuoteDef{
 		System.out.println("Final Page");
 		quotepage.tearDown(driver);
 	}
+	
+	//August18
+	
+	@When("^UeS_User is Fill all the details of the Quote Setup Page by using \"([^\"]*)\" and click on NEXT button$")
+	public void ues_userIsFillAllTheDetailsOfTheQuoteSetupPageByUsingAndClickOnNEXTButton(String arg1) throws Throwable {
+		quotepage.dentalQuoteSetUpPage(driver,arg1);
+	}
+	
+	@Then("^UeS_User verify the Display Plan as \"([^\"]*)\" and select Display Plan as \"([^\"]*)\" and click on APPLY CHANGES button$")
+	public void ues_userVerifyTheDisplayPlanAsAndSelectDisplayPlanAsAndClickOnAPPLYCHANGESButton(String arg1, String arg2) throws Throwable {
+	    quotepage.verifyDisplayPlans(driver, arg1);
+	}
+
+	@Then("^UeS_User is Select the ADD TO PROPOSAL checkboxes and click on COMPARE SELECTED PLANS button$")
+	public void ues_userIsSelectTheADDTOPROPOSALCheckboxesAndClickOnCOMPARESELECTEDPLANSButton() throws Throwable {
+		quotepage.checkCheckBoxes_clickBtn(driver);
+	}
+
+	@Then("^UeS_User is verify ANNUAL PREMIUM and BENEFIT in Dental Plan Comparison page$")
+	public void ues_userIsVerifyANNUALPREMIUMAndBENEFITInDentalPlanComparisonPage() throws Throwable {
+		System.out.println("789");
+	}
 }
 
