@@ -10,6 +10,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 import org.apache.xpath.operations.Quo;
 import org.openqa.selenium.Alert;
@@ -30,7 +31,7 @@ import com.optum.synergy.ues.ui.utilities.Utilities;
 
 
 public class QuotePage {
-	Utilities utility;
+	Utilities utility = new Utilities();
 	public static Properties autoProperties;
 	public static WebDriver driver;
 	public static WebDriverWait driverVar;
@@ -134,16 +135,18 @@ public QuotePage() throws IOException {
 		Thread.sleep(3000);
 	}
 	public void loginUeSApp(WebDriver driver) throws InterruptedException{
-		Thread.sleep(5000);
+		utility.waitForVisibilityOfWebElement(uesUserName, driver);
 		driver.findElement(uesUserName).sendKeys("roshanadmin05");
-		Thread.sleep(1000);
+		
+		utility.waitForVisibilityOfWebElement(uesPwd, driver);
 		driver.findElement(uesPwd).sendKeys("Computer$4");
-		Thread.sleep(1000);
+		
+		utility.waitForVisibilityOfWebElement(uesLoginBtn, driver);
 		element = driver.findElement(uesLoginBtn);
 		executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", element);
 		System.out.println("User clicked Login Button.....");
-		Thread.sleep(6000);
+		//Thread.sleep(6000);
 	}
 	public void username_pwd() throws InterruptedException{
 		Thread.sleep(5000);
@@ -156,14 +159,15 @@ public QuotePage() throws IOException {
 		executor.executeScript("arguments[0].click();", element);
 	}
 	
-	public void clickQuote_NewQuote(WebDriver driver) throws InterruptedException{
-		Thread.sleep(5000);
+	public void clickQuote_NewQuote(WebDriver driver) throws InterruptedException, IOException{
+		//Thread.sleep(5000);
 		//System.out.println("Page Title ::"+driver.getTitle());
 		driver.switchTo().defaultContent();
-		Thread.sleep(4000);
+		//Thread.sleep(4000);
+		utility.waitforSwitchtoFrame(By.name("navbar"), driver);
 		driver.switchTo().frame("navbar");
 		//System.out.println("Frame Title : :"+ driver.switchTo().frame("navbar").getTitle());
-		Thread.sleep(2000);
+		//Thread.sleep(2000);
 		
 		String unitedHealthcareLogo="//img[@title='UnitedHealthcare Logo']";
 		//String unitedLogo=".//*[@id='table11']/tbody/tr/td[1]/p/a/img";
@@ -190,6 +194,7 @@ public QuotePage() throws IOException {
 	}
 	
 	public void verifyLoginPage(WebDriver driver){
+		//utility.waitForVisibilityOfWebElement(By.xpath(".//*[@id='login']"), driver);
 		element=driver.findElement(By.xpath(".//*[@id='login']"));
 		if(element.getText().contains("Log In")){
 			System.out.println("User Is on UeS login page");
@@ -201,7 +206,7 @@ public QuotePage() throws IOException {
 	
 	
 	
-	public void censusPage(WebDriver driver) throws InterruptedException{
+	public void censusPage(WebDriver driver) throws InterruptedException, IOException{
 		QuotePage.verifyUeSLogos(driver);
 		Thread.sleep(2000);
 		String cencusPage=".//*[@id='census-form']/table[1]/tbody/tr[2]/td[1]";
@@ -280,7 +285,7 @@ public QuotePage() throws IOException {
 		Thread.sleep(10000);
 	}
 	
-	public void censusPage_OnlyEE_Salary(WebDriver driver) throws InterruptedException{
+	public void censusPage_OnlyEE_Salary(WebDriver driver) throws InterruptedException, IOException{
 		QuotePage.verifyUeSLogos(driver);
 		Thread.sleep(2000);
 		String cencusPage=".//*[@id='census-form']/table[1]/tbody/tr[2]/td[1]";
@@ -336,9 +341,10 @@ public QuotePage() throws IOException {
 	}
 	
 	
-	public void censusPageWithOutSal(WebDriver driver) throws InterruptedException{
+	public void censusPageWithOutSal(WebDriver driver) throws InterruptedException, IOException{
 		QuotePage.verifyUeSLogos(driver);
-		Thread.sleep(2000);
+		
+		utility.waitForVisibilityOfWebElement(By.xpath(".//*[@id='census-form']/table[1]/tbody/tr[2]/td[1]"), driver);
 		String cencusPage=".//*[@id='census-form']/table[1]/tbody/tr[2]/td[1]";
 		
 		QuotePage.verifyPageDisplay(driver,cencusPage, "Census");
@@ -354,16 +360,20 @@ public QuotePage() throws IOException {
 		
 		System.out.println("Row Count :: " +count1 + "Row Count  ::" + (count1-7));
 		
-		Random rand = new Random();
+		/*Random rand = new Random();
 		int Low = 25;
 		int High = 40;
 		int Result = rand.nextInt(High-Low) + Low;
-		System.out.println("Result ::" + Result);
-
+		System.out.println("Result ::" + Integer.toString(Result));
+*/
 		int j=1000;
 		for(int i=0;i<=count1-7;i++){
-			driver.findElement(By.xpath("//input[@name='censusDetailInformationForm["+i+"].employeeAge']")).sendKeys("25");
-			Thread.sleep(3000);
+			Random rand = new Random();
+			int Low = 25;
+			int High = 40;
+			int Result = rand.nextInt(High-Low) + Low;
+			driver.findElement(By.xpath("//input[@name='censusDetailInformationForm["+i+"].employeeAge']")).sendKeys(Integer.toString(Result));
+			Thread.sleep(1000);
 			//driver.findElement(By.xpath("//input[@name='censusDetailInformationForm["+i+"].spouseAge']")).sendKeys("22");
 			//Thread.sleep(1000);
 			//driver.findElement(By.xpath("//input[@name='censusDetailInformationForm["+i+"].childrenToAdd']")).sendKeys("1");
@@ -388,7 +398,7 @@ public QuotePage() throws IOException {
 		Thread.sleep(10000);
 	}
 	
-	public void censusPage_Dep_EE_WithoutSalary(WebDriver driver) throws InterruptedException{
+	public void censusPage_Dep_EE_WithoutSalary(WebDriver driver) throws InterruptedException, IOException{
 		QuotePage.verifyUeSLogos(driver);
 		Thread.sleep(2000);
 		String cencusPage=".//*[@id='census-form']/table[1]/tbody/tr[2]/td[1]";
@@ -446,7 +456,7 @@ public QuotePage() throws IOException {
 	}
 	
 	
-	public void censusPage_clickNext(WebDriver driver) throws InterruptedException{
+	public void censusPage_clickNext(WebDriver driver) throws InterruptedException, IOException{
 		QuotePage.verifyUeSLogos(driver);
 		Thread.sleep(2000);
 		String censusPage=".//*[@id='census-form']/table[1]/tbody/tr[2]/td[1]";
@@ -470,7 +480,7 @@ public QuotePage() throws IOException {
 	}
 	
 	
-	public void medicalPlanPage(WebDriver driver) throws InterruptedException{
+	public void medicalPlanPage(WebDriver driver) throws InterruptedException, IOException{
 		QuotePage.verifyUeSLogos(driver);
 		Thread.sleep(10000);
 		String medicalPage=".//*[@id='divContent']/form/table/tbody/tr[1]/td/table/tbody/tr/td[1]";
@@ -511,7 +521,7 @@ public QuotePage() throws IOException {
 	}
 	
 	
-	public void visionPlanPage(WebDriver driver) throws InterruptedException{
+	public void visionPlanPage(WebDriver driver) throws InterruptedException, IOException{
 		QuotePage.verifyUeSLogos(driver);
 		//Vision Plans
 		String visionPlansPage="//td[contains(text(),'Vision Plans')]";
@@ -528,7 +538,7 @@ public QuotePage() throws IOException {
 		Thread.sleep(5000);
 	}
 	
-	public void proposalInformationPage(WebDriver driver) throws InterruptedException{
+	public void proposalInformationPage(WebDriver driver) throws InterruptedException, IOException{
 		QuotePage.verifyUeSLogos(driver);
 		//Proposal Information
 		
@@ -731,7 +741,7 @@ public QuotePage() throws IOException {
 		QuotePage.verifyFooterLinks(driver);
 	}
 	
-	public void clickLink_Administration_ModifyLoggingLevels(WebDriver driver) throws InterruptedException{
+	public void clickLink_Administration_ModifyLoggingLevels(WebDriver driver) throws InterruptedException, IOException{
 		Thread.sleep(6000);
 		//System.out.println("Page Title ::"+driver.getTitle());
 		driver.switchTo().defaultContent();
@@ -769,7 +779,7 @@ public QuotePage() throws IOException {
 		Thread.sleep(3000);
 	}
 	
-	public void selectDropdown_Application_LoggingLevel(WebDriver driver) throws InterruptedException{
+	public void selectDropdown_Application_LoggingLevel(WebDriver driver) throws InterruptedException, IOException{
 		QuotePage.verifyUeSLogos(driver);
 		
 		String modifyLoggingLevelsPage="//td[contains(text(),'Modify Logging Levels')]";
@@ -795,7 +805,7 @@ public QuotePage() throws IOException {
 		executor.executeScript("arguments[0].click();", element);
 	}
 	
-	public void verifyMessage(WebDriver driver) throws InterruptedException{
+	public void verifyMessage(WebDriver driver) throws InterruptedException, IOException{
 		Thread.sleep(3000);
 		
 		QuotePage.verifyUeSLogos(driver);
@@ -874,14 +884,14 @@ public QuotePage() throws IOException {
 		Thread.sleep(1000);
 		
 		driver.findElement(quoteemployeeCount).clear();
-		driver.findElement(quoteemployeeCount).sendKeys("08");
+		driver.findElement(quoteemployeeCount).sendKeys("8");
 		Thread.sleep(1000);
 		
 		//driver.findElement(By.name("atneCount")).sendKeys("5");
 		//Thread.sleep(2000);
 		
 		driver.findElement(quoteatneCount1).clear();
-		driver.findElement(quoteatneCount1).sendKeys("08");
+		driver.findElement(quoteatneCount1).sendKeys("8");
 		Thread.sleep(1000);
 						
 		element=driver.findElement(quoteNextBtn);
@@ -1003,10 +1013,10 @@ public QuotePage() throws IOException {
 		Thread.sleep(3000);
 		
 		driver.findElement(totNumActiveEmployeesApplying).clear();
-		driver.findElement(totNumActiveEmployeesApplying).sendKeys("08");
+		driver.findElement(totNumActiveEmployeesApplying).sendKeys("8");
 		Thread.sleep(1000);
 		
-		driver.findElement(txtBoxquoteTotalNumEmployees).sendKeys("08");
+		driver.findElement(txtBoxquoteTotalNumEmployees).sendKeys("8");
 		Thread.sleep(1000);
 		
 		element=driver.findElement(radioBtnMedicarePriPayer);
@@ -1065,14 +1075,14 @@ public QuotePage() throws IOException {
 		Thread.sleep(1000);
 		
 		driver.findElement(quoteemployeeCount).clear();
-		driver.findElement(quoteemployeeCount).sendKeys("08");
+		driver.findElement(quoteemployeeCount).sendKeys("8");
 		Thread.sleep(1000);
 		
 		//driver.findElement(By.name("atneCount")).sendKeys("5");
 		//Thread.sleep(2000);
 		
 		driver.findElement(quoteatneCount1).clear();
-		driver.findElement(quoteatneCount1).sendKeys("08");
+		driver.findElement(quoteatneCount1).sendKeys("8");
 		Thread.sleep(1000);
 						
 		element=driver.findElement(quoteNextBtn);
@@ -1182,10 +1192,10 @@ public QuotePage() throws IOException {
 		Thread.sleep(1000);
 		
 		driver.findElement(totNumActiveEmployeesApplying).clear();
-		driver.findElement(totNumActiveEmployeesApplying).sendKeys("08");
+		driver.findElement(totNumActiveEmployeesApplying).sendKeys("8");
 		Thread.sleep(1000);
 		
-		driver.findElement(txtBoxquoteTotalNumEmployees).sendKeys("08");
+		driver.findElement(txtBoxquoteTotalNumEmployees).sendKeys("8");
 		Thread.sleep(1000);
 		
 		element=driver.findElement(radioBtnMedicarePriPayer);
@@ -1243,14 +1253,14 @@ public QuotePage() throws IOException {
 		Thread.sleep(1000);
 		
 		driver.findElement(quoteemployeeCount).clear();
-		driver.findElement(quoteemployeeCount).sendKeys("08");
+		driver.findElement(quoteemployeeCount).sendKeys("8");
 		Thread.sleep(1000);
 		
 		//driver.findElement(By.name("atneCount")).sendKeys("5");
 		//Thread.sleep(2000);
 		
 		driver.findElement(quoteatneCount1).clear();
-		driver.findElement(quoteatneCount1).sendKeys("08");
+		driver.findElement(quoteatneCount1).sendKeys("8");
 		Thread.sleep(1000);
 						
 		element=driver.findElement(quoteNextBtn);
@@ -1404,10 +1414,10 @@ public QuotePage() throws IOException {
 		Thread.sleep(2000);
 		
 		driver.findElement(totNumActiveEmployeesApplying).clear();
-		driver.findElement(totNumActiveEmployeesApplying).sendKeys("08");
+		driver.findElement(totNumActiveEmployeesApplying).sendKeys("8");
 		Thread.sleep(2000);
 		
-		driver.findElement(txtBoxquoteTotalNumEmployees).sendKeys("08");
+		driver.findElement(txtBoxquoteTotalNumEmployees).sendKeys("8");
 		Thread.sleep(1000);
 		
 		element=driver.findElement(radioBtnMedicarePriPayer);
@@ -1423,7 +1433,7 @@ public QuotePage() throws IOException {
 
 	
 	
-	public void dentalPlanPage(WebDriver driver) throws InterruptedException{
+	public void dentalPlanPage(WebDriver driver) throws InterruptedException, IOException{
 		Thread.sleep(5000);
 		QuotePage.verifyUeSLogos(driver);
 		Thread.sleep(5000);
@@ -1449,7 +1459,7 @@ public QuotePage() throws IOException {
 		Thread.sleep(3000);
 	}
 	
-	public void lifePlanPage(WebDriver driver) throws InterruptedException{
+	public void lifePlanPage(WebDriver driver) throws InterruptedException, IOException{
 		QuotePage.verifyUeSLogos(driver);
 		Thread.sleep(2000);
 		String lifePlansPage="//td[contains(text(),'Life Plans')]";
@@ -1460,21 +1470,23 @@ public QuotePage() throws IOException {
 		
 		QuotePage.verifyFooterLinks(driver);
 		
+		//utility.waitForVisibilityOfWebElement(By.xpath(".//input[@name='calculatePercent']"), driver);
 		 element=driver.findElement(chkBoxlifePlanBasicInformationForm);
 		 executor = (JavascriptExecutor)driver;
 		 executor.executeScript("arguments[0].click();", element);
-		 Thread.sleep(2000);
+		 driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 			
 		 element=driver.findElement(btnsubmitNextlifePLan);
 		 executor = (JavascriptExecutor)driver;
 		 executor.executeScript("arguments[0].click();", element);
-		 Thread.sleep(3000);
+		 driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 	
 	public static void verifyPageDisplay(WebDriver driver,String path,String pageName) throws InterruptedException{
 		//driver.findElement(By.xpath(path)).getText().trim().contains(pageName);
 		//Thread.sleep(5000);
 		//element=driver.findElement(By.xpath(path));
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		if(driver.findElement(By.xpath(path)).getText().trim().contains(pageName)){
 			System.out.println(pageName + " Page displayed successfully");
 		}
@@ -1486,7 +1498,7 @@ public QuotePage() throws IOException {
 	
 	public static void verifyPageInfoTable(WebDriver driver,String path,String pageInfoTable) throws InterruptedException{
 		//driver.findElement(By.xpath(path)).getText().trim().contains(pageName);
-		Thread.sleep(1000);
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		//element=driver.findElement(By.xpath(path));
 		if(driver.findElement(By.xpath(path)).getText().trim().contains(pageInfoTable)){
 			System.out.println(pageInfoTable + " table displayed successfully");
@@ -1497,9 +1509,10 @@ public QuotePage() throws IOException {
 			
 	}
 	
-	public static void verifyPageDisplay_logo(WebDriver driver,String path,String pageName) throws InterruptedException{
-		Thread.sleep(1000);
+	public static void verifyPageDisplay_logo(WebDriver driver,String path,String pageName) throws InterruptedException, IOException{
+		Utilities utility = new Utilities();
 		//element=driver.findElement(By.xpath(path));
+		utility.waitForVisibilityOfWebElement(By.xpath(path), driver);
 		if(driver.findElement(By.xpath(path)).getAttribute("title").trim().contains(pageName)){
 			System.out.println(pageName + " displayed successfully");
 		}
@@ -1509,14 +1522,17 @@ public QuotePage() throws IOException {
 			
 	}
 	
-	public static void verifyUeSLogos(WebDriver driver) throws InterruptedException{
-		//System.out.println("out side Tilte : :"+driver.getTitle());
-		Thread.sleep(1000);
+	public static void verifyUeSLogos(WebDriver driver) throws InterruptedException, IOException{
+		Utilities utility = new Utilities();
 		driver.switchTo().defaultContent();
-		Thread.sleep(1000);
-		driver.switchTo().frame("navbar");
+		//utility.waitforSwitchtoFrame(By.xpath(".//input[@name='calculatePercent']"), driver);
+		//driver.switchTo().frame("navbar");
 		//System.out.println("Frame Title : :"+ driver.switchTo().frame("navbar").getTitle());
-		Thread.sleep(1000);
+		//Thread.sleep(1000);
+		
+		utility.waitforSwitchtoFrame(By.name("navbar"), driver);
+		WebElement iframeSwitch  = driver.findElement(By.name("navbar"));	
+		driver.switchTo().frame(iframeSwitch);
 		
 		String unitedHealthcareLogo="//img[@title='UnitedHealthcare Logo']";
 		//String unitedLogo=".//*[@id='table11']/tbody/tr/td[1]/p/a/img";
@@ -1537,14 +1553,14 @@ public QuotePage() throws IOException {
 		Thread.sleep(2000);
 	}
 	
-	public void verifyUeSLogos_Home(WebDriver driver) throws InterruptedException{
+	public void verifyUeSLogos_Home(WebDriver driver) throws InterruptedException, IOException{
 		//System.out.println("out side Tilte : :"+driver.getTitle());
 		Thread.sleep(1000);
 		driver.switchTo().defaultContent();
-		Thread.sleep(2000);
+		Thread.sleep(1000);
 		driver.switchTo().frame("navbar");
 		//System.out.println("Frame Title : :"+ driver.switchTo().frame("navbar").getTitle());
-		Thread.sleep(3000);
+		Thread.sleep(2000);
 		
 		String unitedHealthcareLogo="//img[@title='UnitedHealthcare Logo']";
 		//String unitedLogo=".//*[@id='table11']/tbody/tr/td[1]/p/a/img";
@@ -1582,13 +1598,15 @@ public QuotePage() throws IOException {
 	public void quoteSetUpWindow(WebDriver driver,String state) throws InterruptedException{
 		//System.out.println("out side Tilte : :"+driver.getTitle());
 				String pwindow=driver.getWindowHandle();
-				Thread.sleep(2000);
+				//Thread.sleep(2000);
 				driver.switchTo().defaultContent();
-				Thread.sleep(1000);
+				//Thread.sleep(1000);
+				utility.waitforSwitchtoFrame(By.xpath("content"), driver);
 				driver.switchTo().frame("content");
 				//System.out.println("Frame Title : :"+ driver.switchTo().frame("content").getTitle());
-				Thread.sleep(2000);
+				//Thread.sleep(2000);
 				
+				utility.waitForVisibilityOfWebElement(By.xpath(".//*[@id='ui-dialog-title-dialogQuote']"), driver);
 				String quoteSetUpInfoWindow=".//*[@id='ui-dialog-title-dialogQuote']";
 				//System.out.println("Quote Set Up Window text : :" + driver.findElement(By.xpath(quoteSetUpInfoWindow)).getText());
 				QuotePage.verifyPageDisplay(driver,quoteSetUpInfoWindow, "Quote Setup");
@@ -1607,128 +1625,151 @@ public QuotePage() throws IOException {
 				Thread.sleep(1000);
 
 		       if(arrOfStr[0].compareTo("16")>0){
+		    	   utility.waitForVisibilityOfWebElement(quotepolicyEffDateDay, driver);
 		    	    driver.findElement(quotepolicyEffDateDay).sendKeys("15");
-		   			Thread.sleep(1000);  
+		   			//Thread.sleep(1000);  
 		       }
 		       else{
+		    	   utility.waitForVisibilityOfWebElement(quotepolicyEffDateDay, driver);
 		    	    driver.findElement(quotepolicyEffDateDay).sendKeys("01");
-		   			Thread.sleep(1000);  
+		   			//Thread.sleep(1000);  
 		       }
-				
+		       utility.waitForVisibilityOfWebElement(quotepolicyEffDateYear, driver);
 				driver.findElement(quotepolicyEffDateYear).sendKeys("18");
-				Thread.sleep(1000);
+				//Thread.sleep(1000);
 				
+				utility.waitForVisibilityOfWebElement(By.name("state"), driver);
 				Select cominfoState=new Select(driver.findElement(By.name("state")));
 				cominfoState.selectByVisibleText(state);
-				Thread.sleep(1000);
+				//Thread.sleep(1000);
 				
+				utility.waitForVisibilityOfWebElement(quoteemployeeCount, driver);
 				driver.findElement(quoteemployeeCount).clear();
-				driver.findElement(quoteemployeeCount).sendKeys("08");
-				Thread.sleep(1000);
+				driver.findElement(quoteemployeeCount).sendKeys("8");
+				//Thread.sleep(1000);
 				
 				//driver.findElement(By.name("atneCount")).sendKeys("5");
 				//Thread.sleep(2000);
 				
+				utility.waitForVisibilityOfWebElement(quoteatneCount1, driver);
 				driver.findElement(quoteatneCount1).clear();
-				driver.findElement(quoteatneCount1).sendKeys("08");
-				Thread.sleep(1000);
-								
+				driver.findElement(quoteatneCount1).sendKeys("8");
+				//Thread.sleep(1000);
+				
+				utility.waitForVisibilityOfWebElement(quoteNextBtn, driver);
 				element=driver.findElement(quoteNextBtn);
 				executor = (JavascriptExecutor)driver;
 				executor.executeScript("arguments[0].click();", element);
-				Thread.sleep(3000);
+				//Thread.sleep(3000);
 	}
 	
 	public void QuoteSetUpPage(WebDriver driver,String zip) throws InterruptedException{
-		Thread.sleep(3000);
+		//Thread.sleep(3000);
+		utility.waitForVisibilityOfWebElement(By.xpath(".//*[@id='quoteForm']/table[1]/tbody/tr[2]/td/table/tbody/tr[1]/td[1]"), driver);
 		String quoteSetUpPage=".//*[@id='quoteForm']/table[1]/tbody/tr[2]/td/table/tbody/tr[1]/td[1]";
 		QuotePage.verifyPageDisplay(driver,quoteSetUpPage, "Quote Setup");
 		
+		utility.waitForVisibilityOfWebElement(By.xpath(".//*[@id='quoteForm']/table[3]/tbody/tr/td"), driver);
 		String quoteSetUpInfoTable=".//*[@id='quoteForm']/table[3]/tbody/tr/td";
 		QuotePage.verifyPageInfoTable(driver, quoteSetUpInfoTable, "Quote Information");
 		
 		QuotePage.verifyFooterLinks(driver);
 		
 		String pwindow=driver.getWindowHandle();
+		utility.waitForVisibilityOfWebElement(quoteSetUpquoteType, driver);
 		Select quoteType=new Select(driver.findElement(quoteSetUpquoteType));
 		quoteType.selectByVisibleText("New Business");
 		
+		utility.waitForVisibilityOfWebElement(quoteSetUpquoteCompanyName, driver);
 		driver.findElement(quoteSetUpquoteCompanyName).sendKeys("Optum");
-		Thread.sleep(1000);
+		//Thread.sleep(1000);
 		
+		utility.waitForVisibilityOfWebElement(ckhBoxProductTypeDental, driver);
 		element=driver.findElement(ckhBoxProductTypeDental);
 		executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", element);
-		Thread.sleep(1000);
+		//Thread.sleep(1000);
 		
+		utility.waitForVisibilityOfWebElement(ckhBoxProductTypeLife, driver);
 		element=driver.findElement(ckhBoxProductTypeLife);
 		executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", element);
-		Thread.sleep(1000);
+		//Thread.sleep(1000);
 		
+		utility.waitForVisibilityOfWebElement(ckhBoxProductTypeStd, driver);
 		element=driver.findElement(ckhBoxProductTypeStd);
 		executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", element);
-		Thread.sleep(1000);
+		//Thread.sleep(1000);
 		
+		utility.waitForVisibilityOfWebElement(ckhBoxProductTypeLtd, driver);
 		element=driver.findElement(ckhBoxProductTypeLtd);
 		executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", element);
-		Thread.sleep(1000);
+		//Thread.sleep(1000);
 		
+		utility.waitForVisibilityOfWebElement(ckhBoxProductTypeEmpSupLife, driver);
 		element=driver.findElement(ckhBoxProductTypeEmpSupLife);
 		executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", element);
-		Thread.sleep(1000);
+		//Thread.sleep(1000);
 		
+		utility.waitForVisibilityOfWebElement(ckhBoxProductTypeDepSupLife, driver);
 		element=driver.findElement(ckhBoxProductTypeDepSupLife);
 		executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", element);
-		Thread.sleep(1000);
+		//Thread.sleep(1000);
 		
+		utility.waitForVisibilityOfWebElement(txtBoxstreetAddress, driver);
 		driver.findElement(txtBoxstreetAddress).sendKeys("Hyderabad");
-		Thread.sleep(1000);
+		//Thread.sleep(1000);
 		
+		utility.waitForVisibilityOfWebElement(txtBoxcityAddress, driver);
 		driver.findElement(txtBoxcityAddress).sendKeys("Site1");
-		Thread.sleep(1000);
+		//Thread.sleep(1000);
 		
 		//Select stateSel=new Select(driver.findElement(dropDownState));
 		//stateSel.selectByVisibleText("CA");
 		
+		utility.waitForVisibilityOfWebElement(txtBoxzipCode, driver);
 		driver.findElement(txtBoxzipCode).sendKeys(zip);
-		Thread.sleep(5000);
+		//Thread.sleep(5000);
 		
+		utility.waitForVisibilityOfWebElement(linkAutomatedLookup, driver);
 		element=driver.findElement(linkAutomatedLookup);
 		executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", element);
-		Thread.sleep(20000);
+		//Thread.sleep(20000);
 		
+		utility.waitForNumberOfWindowsToEqual(2);
+		for (String winHandle : driver.getWindowHandles()) {
+			driver.switchTo().window(winHandle);
 		
-		for (String handle1 : driver.getWindowHandles()) {
-        	//System.out.println("Child window : :" + handle1);
-
-        	driver.switchTo().window(handle1);
-        	System.out.println("Before page URL :: " +driver.switchTo().window(handle1).getCurrentUrl());
-        	if(driver.switchTo().window(handle1).getCurrentUrl().contains("sicInputSetup")){
+		   	System.out.println("Before page URL :: " +driver.switchTo().window(winHandle).getCurrentUrl());
+        	if(driver.switchTo().window(winHandle).getCurrentUrl().contains("sicInputSetup")){
         		//Thread.sleep(18000);
-        		System.out.println("sicInputSetup page URL :: " +driver.switchTo().window(handle1).getCurrentUrl());
+        		System.out.println("sicInputSetup page URL :: " +driver.switchTo().window(winHandle).getCurrentUrl());
+        		utility.waitForVisibilityOfWebElement(By.xpath("//td[@class='sectionHeading11']"), driver);
         		String sicInputWindow="//td[@class='sectionHeading11']";
         		QuotePage.verifyPageDisplay(driver,sicInputWindow, "SIC Input");
         		
-        		Thread.sleep(1000);
+        		//Thread.sleep(1000);
+        		utility.waitForVisibilityOfWebElement(radioBtnSIC, driver);
         		element=driver.findElement(radioBtnSIC);
         		executor = (JavascriptExecutor)driver;
         		executor.executeScript("arguments[0].click();", element);
-        		Thread.sleep(1000);	
+        		//Thread.sleep(1000);
         		
+        		utility.waitForVisibilityOfWebElement(By.xpath("//input[@class='contentText8']"), driver);
         		driver.findElement(By.xpath("//input[@class='contentText8']")).sendKeys("9111");
-        		Thread.sleep(1000);
+        		//Thread.sleep(1000);
         		
+        		utility.waitForVisibilityOfWebElement(By.xpath("//input[@type='submit']"), driver);
         		By btnSicInputSubmit=By.xpath("//input[@type='submit']");
         		element=driver.findElement(btnSicInputSubmit);
         		executor = (JavascriptExecutor)driver;
         		executor.executeScript("arguments[0].click();", element);
-        		Thread.sleep(1000);
+        		//Thread.sleep(1000);
         		//driver.switchTo().window(handle1).close();
         		//driver.close();
         	}
@@ -1749,41 +1790,49 @@ public QuotePage() throws IOException {
 	
 		//driver.switchTo().defaultContent();
 		driver.switchTo().window(pwindow);
-		Thread.sleep(5000);
+		//Thread.sleep(5000);
+		utility.waitforSwitchtoFrame(By.name("content"), driver);
 		driver.switchTo().frame("content");
 		//System.out.println("Frame Title : :"+ driver.switchTo().frame("content").getTitle());
-		Thread.sleep(3000);
+		//Thread.sleep(3000);
 		
+		utility.waitForVisibilityOfWebElement(totNumActiveEmployeesApplying, driver);
 		driver.findElement(totNumActiveEmployeesApplying).clear();
-		driver.findElement(totNumActiveEmployeesApplying).sendKeys("08");
-		Thread.sleep(1000);
+		driver.findElement(totNumActiveEmployeesApplying).sendKeys("8");
+		//Thread.sleep(1000);
 		
-		driver.findElement(txtBoxquoteTotalNumEmployees).sendKeys("08");
-		Thread.sleep(1000);
+		utility.waitForVisibilityOfWebElement(txtBoxquoteTotalNumEmployees, driver);
+		driver.findElement(txtBoxquoteTotalNumEmployees).sendKeys("8");
+		//Thread.sleep(1000);
 		
+		utility.waitForVisibilityOfWebElement(radioBtnMedicarePriPayer, driver);
 		element=driver.findElement(radioBtnMedicarePriPayer);
 		executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", element);
-		Thread.sleep(2000);
+		//Thread.sleep(2000);
 		
+		utility.waitForVisibilityOfWebElement(btnquoteSetUpNext, driver);
 		element=driver.findElement(btnquoteSetUpNext);
 		executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", element);
-		Thread.sleep(5000);
+		//Thread.sleep(5000);
 	}
 	
-	public void verifyRatingMethodValue(WebDriver driver,String ratingmethodval) throws InterruptedException{
+	public void verifyRatingMethodValue(WebDriver driver,String ratingmethodval) throws InterruptedException, IOException{
 		QuotePage.verifyUeSLogos(driver);
-		Thread.sleep(10000);
+		//Thread.sleep(10000);
+		utility.waitForVisibilityOfWebElement(By.xpath(".//*[@id='divContent']/form/table/tbody/tr[1]/td/table/tbody/tr/td[1]"), driver);
 		String medicalPage=".//*[@id='divContent']/form/table/tbody/tr[1]/td/table/tbody/tr/td[1]";
 		QuotePage.verifyPageDisplay(driver,medicalPage, "Medical Plans");
-		Thread.sleep(10000);
+		//Thread.sleep(10000);
 		
+		utility.waitForVisibilityOfWebElement(By.xpath("//td[contains(text(),'Medical Plan Information')]"), driver);
 		String medicalInfoTable="//td[contains(text(),'Medical Plan Information')]";
 		//String medicalInformationTable=".//*[@id='divContent']/form/table/tbody/tr[12]/td/table/tbody/tr/td";
 		QuotePage.verifyPageInfoTable(driver,medicalInfoTable, "Medical Plan Information");
-		Thread.sleep(4000);
+		//Thread.sleep(4000);
 		
+		utility.waitForVisibilityOfWebElement(By.name("ratingMethodSelection"), driver);
 		Select medicalRatingMethodVal=new Select(driver.findElement(By.name("ratingMethodSelection")));
 		//Get all options
 	    List<WebElement> dd = medicalRatingMethodVal.getOptions();
@@ -1892,16 +1941,17 @@ public QuotePage() throws IOException {
 		 }
 		 driver.switchTo().window(pwindow);
 	 }
-	 public void btnSubmitGenerateProposal(WebDriver driver) throws InterruptedException, AWTException{
+	 public void btnSubmitGenerateProposal(WebDriver driver) throws InterruptedException, AWTException, IOException{
 		 QuotePage.verifyUeSLogos(driver);
 			//Proposal Information
 			
-			Thread.sleep(8000);
-			
+			//Thread.sleep(8000);
+			utility.waitForVisibilityOfWebElement(By.xpath("//td[contains(text(),'Proposal Information')]"), driver);
 			String proposalInformationPage= "//td[contains(text(),'Proposal Information')]";
 			QuotePage.verifyPageDisplay(driver,proposalInformationPage, "Proposal Information");
-			Thread.sleep(1000);	
+			//Thread.sleep(1000);	
 			
+			utility.waitForVisibilityOfWebElement(By.xpath("//td[contains(text(),'Proposal Setup')]"), driver);
 			String proposalSetupTable="//td[contains(text(),'Proposal Setup')]";
 			QuotePage.verifyPageInfoTable(driver,proposalSetupTable, "Proposal Setup");
 			
@@ -2254,6 +2304,280 @@ public QuotePage() throws IOException {
     	}
 		}	
 	}
+	
+	public void clickCheckBoxes(WebDriver driver){
+		element=driver.findElement(ckhBoxProductTypeMedical);
+		executor = (JavascriptExecutor)driver;
+		executor.executeScript("arguments[0].click();", element);
+		
+		element=driver.findElement(ckhBoxProductTypeLife);
+		executor = (JavascriptExecutor)driver;
+		executor.executeScript("arguments[0].click();", element);
+		
+		
+		element=driver.findElement(ckhBoxProductTypeVision);
+		executor = (JavascriptExecutor)driver;
+		executor.executeScript("arguments[0].click();", element);
+		
+		
+		element=driver.findElement(ckhBoxProductTypeStd);
+		executor = (JavascriptExecutor)driver;
+		executor.executeScript("arguments[0].click();", element);
+		
+		
+		element=driver.findElement(ckhBoxProductTypeStd);
+		executor = (JavascriptExecutor)driver;
+		executor.executeScript("arguments[0].click();", element);
+		
+		
+		element=driver.findElement(ckhBoxProductTypeLtd);
+		executor = (JavascriptExecutor)driver;
+		executor.executeScript("arguments[0].click();", element);
+		
+		
+		element=driver.findElement(ckhBoxProductTypeEmpSupLife);
+		executor = (JavascriptExecutor)driver;
+		executor.executeScript("arguments[0].click();", element);
+		
+		
+		element=driver.findElement(ckhBoxProductTypeDepSupLife);
+		executor = (JavascriptExecutor)driver;
+		executor.executeScript("arguments[0].click();", element);
+		
+	}
+	
+	public void dentalQuoteSetUpPage(WebDriver driver,String zip) throws InterruptedException{
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		String quoteSetUpPage=".//*[@id='quoteForm']/table[1]/tbody/tr[2]/td/table/tbody/tr[1]/td[1]";
+		QuotePage.verifyPageDisplay(driver,quoteSetUpPage, "Quote Setup");
+		
+		String quoteSetUpInfoTable=".//*[@id='quoteForm']/table[3]/tbody/tr/td";
+		QuotePage.verifyPageInfoTable(driver, quoteSetUpInfoTable, "Quote Information");
+		
+		QuotePage.verifyFooterLinks(driver);
+		
+		String pwindow=driver.getWindowHandle();
+		Select quoteType=new Select(driver.findElement(quoteSetUpquoteType));
+		quoteType.selectByVisibleText("New Business");
+		
+		driver.findElement(quoteSetUpquoteCompanyName).sendKeys("Optum");
+		
+		element=driver.findElement(ckhBoxProductTypeMedical);
+		executor = (JavascriptExecutor)driver;
+		executor.executeScript("arguments[0].click();", element);
+		
+		element=driver.findElement(ckhBoxProductTypeLife);
+		executor = (JavascriptExecutor)driver;
+		executor.executeScript("arguments[0].click();", element);
+		
+		
+		element=driver.findElement(ckhBoxProductTypeVision);
+		executor = (JavascriptExecutor)driver;
+		executor.executeScript("arguments[0].click();", element);
+		
+		
+		element=driver.findElement(ckhBoxProductTypeStd);
+		executor = (JavascriptExecutor)driver;
+		executor.executeScript("arguments[0].click();", element);
+		
+		element=driver.findElement(ckhBoxProductTypeLtd);
+		executor = (JavascriptExecutor)driver;
+		executor.executeScript("arguments[0].click();", element);
+		
+		
+		element=driver.findElement(ckhBoxProductTypeEmpSupLife);
+		executor = (JavascriptExecutor)driver;
+		executor.executeScript("arguments[0].click();", element);
+		
+		
+		element=driver.findElement(ckhBoxProductTypeDepSupLife);
+		executor = (JavascriptExecutor)driver;
+		executor.executeScript("arguments[0].click();", element);
+		
+		driver.findElement(txtBoxstreetAddress).sendKeys("Hyderabad");
+		driver.findElement(txtBoxcityAddress).sendKeys("Site1");
+
+		//Select stateSel=new Select(driver.findElement(dropDownState));
+		//stateSel.selectByVisibleText("CA");
+		
+		driver.findElement(txtBoxzipCode).sendKeys(zip);
+		Thread.sleep(1000);
+		
+		element=driver.findElement(linkAutomatedLookup);
+		executor = (JavascriptExecutor)driver;
+		executor.executeScript("arguments[0].click();", element);
+		Thread.sleep(15000);
+		
+		
+		for (String handle1 : driver.getWindowHandles()) {
+        	//System.out.println("Child window : :" + handle1);
+
+        	driver.switchTo().window(handle1);
+        	System.out.println("Before page URL :: " +driver.switchTo().window(handle1).getCurrentUrl());
+        	if(driver.switchTo().window(handle1).getCurrentUrl().contains("sicInputSetup")){
+        		//Thread.sleep(18000);
+        		System.out.println("sicInputSetup page URL :: " +driver.switchTo().window(handle1).getCurrentUrl());
+        		String sicInputWindow="//td[@class='sectionHeading11']";
+        		QuotePage.verifyPageDisplay(driver,sicInputWindow, "SIC Input");
+        		
+        		Thread.sleep(1000);
+        		element=driver.findElement(radioBtnSIC);
+        		executor = (JavascriptExecutor)driver;
+        		executor.executeScript("arguments[0].click();", element);
+        		Thread.sleep(1000);	
+        		
+        		driver.findElement(By.xpath("//input[@class='contentText8']")).sendKeys("9111");
+        		Thread.sleep(1000);
+        		
+        		By btnSicInputSubmit=By.xpath("//input[@type='submit']");
+        		element=driver.findElement(btnSicInputSubmit);
+        		executor = (JavascriptExecutor)driver;
+        		executor.executeScript("arguments[0].click();", element);
+        		Thread.sleep(1000);
+        		//driver.switchTo().window(handle1).close();
+        		//driver.close();
+        	}
+        	}
+		
+		//driver.switchTo().defaultContent();
+		driver.switchTo().window(pwindow);
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		driver.switchTo().frame("content");
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		
+		driver.findElement(totNumActiveEmployeesApplying).clear();
+		driver.findElement(totNumActiveEmployeesApplying).sendKeys("8");
+		driver.findElement(txtBoxquoteTotalNumEmployees).sendKeys("8");
+		Thread.sleep(1000);
+		
+		element=driver.findElement(radioBtnMedicarePriPayer);
+		executor = (JavascriptExecutor)driver;
+		executor.executeScript("arguments[0].click();", element);
+		driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
+		
+		element=driver.findElement(btnquoteSetUpNext);
+		executor = (JavascriptExecutor)driver;
+		executor.executeScript("arguments[0].click();", element);
+		Thread.sleep(8000);
+	}
+	
+	public void verifyDisplayPlans(WebDriver driver,String displayPlan) throws InterruptedException{
+		utility.waitForVisibilityOfWebElement(By.xpath("//input[@name='submitApplyOptions']"), driver);
+		Select medicalRatingMethodVal=new Select(driver.findElement(By.name("planDisplaySelection")));
+		//Get all options
+	    List<WebElement> dd = medicalRatingMethodVal.getOptions();
+
+	    System.out.println(dd.size());
+	    
+
+	    for (int j = 0; j < dd.size(); j++) {
+	        System.out.println(dd.get(j).getText());
+	        //Show All Plans
+	        //Show My Selected Plans
+	        if(dd.get(j).getText().contains(displayPlan)){
+	        	System.out.println(displayPlan + " present in Display Plans drop down");
+	        	medicalRatingMethodVal.selectByVisibleText(displayPlan);
+	        	     	
+	        	utility.waitForVisibilityOfWebElement(By.xpath("//input[@name='submitApplyOptions']"), driver);
+	        	element=driver.findElement(By.xpath("//input[@name='submitApplyOptions']"));
+	    		executor = (JavascriptExecutor)driver;
+	    		executor.executeScript("arguments[0].click();", element);
+	        	break;
+	        }
+	    }
+	    
+	    
+	}
+	
+	public void checkCheckBoxes_clickBtn(WebDriver driver) throws InterruptedException{
+		utility.waitForVisibilityOfWebElement(By.xpath("//input[@name='dentalPlanInformationForm[0].selectInd']"), driver);
+		element=driver.findElement(By.xpath("//input[@name='dentalPlanInformationForm[0].selectInd']"));
+		executor = (JavascriptExecutor)driver;
+		executor.executeScript("arguments[0].click();", element);
+		
+		utility.waitForVisibilityOfWebElement(By.xpath("//input[@name='dentalPlanInformationForm[1].selectInd']"), driver);
+		element=driver.findElement(By.xpath("//input[@name='dentalPlanInformationForm[1].selectInd']"));
+		executor = (JavascriptExecutor)driver;
+		executor.executeScript("arguments[0].click();", element);
+		
+		String winHandleBefore = driver.getWindowHandle();
+		utility.waitForVisibilityOfWebElement(By.xpath("//input[@name='submitPlanCompare']"), driver);
+		element=driver.findElement(By.xpath("//input[@name='submitPlanCompare']"));
+		executor = (JavascriptExecutor)driver;
+		executor.executeScript("arguments[0].click();", element);
+		
+		utility.waitForNumberOfWindowsToEqual(2);
+		for (String winHandle : driver.getWindowHandles()) {
+			driver.switchTo().window(winHandle);
+			if (driver.switchTo().window(winHandle).getCurrentUrl().contains("SBQuoteWeb")) {
+				
+				List<WebElement>  ele4=driver.findElements(By.xpath(".//*[@name='DentalPlanComparisonForm']/table/tbody/tr[8]/td/table/tbody/tr/td[1]/table/tbody/tr"));
+				int count1=ele4.size();
+								
+				System.out.println("Row Count :: " +count1);
+				for(int i=1;i<=count1;i++){
+					element=driver.findElement(By.xpath(".//*[@name='DentalPlanComparisonForm']/table/tbody/tr[8]/td/table/tbody/tr/td[1]/table/tbody/tr["+i+"]"));
+					//System.out.println("Text"+i + "::" +element.getText());
+					if(element.getText().trim().contains("ANNUAL PREMIUM")){
+						System.out.println("ANNUAL PREMIUM present in Dental PPO/Indemnity Plan Details table");
+						element=driver.findElement(By.xpath(".//*[@name='DentalPlanComparisonForm']/table/tbody/tr[8]/td/table/tbody/tr/td[2]/table/tbody/tr[36]/td"));
+						System.out.println("ANNUAL PREMIUM Amount ::"+element.getText());
+						
+						String AnnualPremium1 = element.getText().substring(1, 8);
+					    String[] AnnulPremium_1=AnnualPremium1.split(",");
+						
+						WebElement element1=driver.findElement(By.xpath(".//*[@name='DentalPlanComparisonForm']/table/tbody/tr[8]/td/table/tbody/tr/td[3]/table/tbody/tr[36]/td"));
+						System.out.println("ANNUAL PREMIUM Amount ::"+element1.getText());
+												
+						String AnnualPremium2 = element1.getText().substring(1, 8);
+					    String[] AnnulPremium_2=AnnualPremium2.split(","); 
+																 	
+					 	if((Integer.parseInt(AnnulPremium_1[0]) != 0) && (Integer.parseInt(AnnulPremium_2[0]) != 0)){
+					 		System.out.println("ANNUAL PREMIUM Amounts ::" +element.getText() + " and " + element1.getText() +" displayed successfully" );
+					 		//driver.switchTo().window(winHandle).close();
+					 	}
+					 	else{
+					 		System.out.println("ANNUAL PREMIUM Amount ::" +element.getText() +" and " + element1.getText() + "not displayed" );
+					 	}
+					 	}
+					 	
+				}
+				
+				List<WebElement>  ele5=driver.findElements(By.xpath(".//*[@name='DentalPlanComparisonForm']/table/tbody/tr[8]/td/table/tbody/tr/td[1]/table/tbody/tr"));
+				int count2=ele5.size();
+								
+				System.out.println("Row Count :: " +count2);
+				for(int j=1;j<=count2;j++){
+					element=driver.findElement(By.xpath(".//*[@name='DentalPlanComparisonForm']/table/tbody/tr[8]/td/table/tbody/tr/td[1]/table/tbody/tr["+j+"]"));
+					//System.out.println("Text"+i + "::" +element.getText());
+					if(element.getText().trim().contains("BENEFIT")){
+						System.out.println("BENEFIT present in Dental PPO/Indemnity Plan Details table");
+						
+						element=driver.findElement(By.xpath(".//*[@name='DentalPlanComparisonForm']/table/tbody/tr[8]/td/table/tbody/tr/td[2]/table/tbody/tr[26]/td"));
+						System.out.println("BENEFIT code1 ::"+element.getText());
+						
+						WebElement element1=driver.findElement(By.xpath(".//*[@name='DentalPlanComparisonForm']/table/tbody/tr[8]/td/table/tbody/tr/td[3]/table/tbody/tr[26]/td"));
+						System.out.println("BENEFIT code2 ::"+element1.getText());
+												
+						if((element.getText().contains("A7984")) && (element1.getText().contains("P0206"))){
+					 		System.out.println("BENEFIT codes ::" +element.getText() + " and " + element1.getText() +" displayed successfully" );
+					 		break;
+					 		//driver.switchTo().window(winHandle).close();
+					 	}
+					 	else{
+					 		System.out.println("BENEFIT codes ::" +element.getText() +" and " + element1.getText() + "not displayed" );
+					 	}
+					 	}
+					 	
+
+			}
+			}
+		
+		}
+}	
+
+	
+	
 		
 	public void tearDown(WebDriver driver) throws InterruptedException{
 		Thread.sleep(5000);
