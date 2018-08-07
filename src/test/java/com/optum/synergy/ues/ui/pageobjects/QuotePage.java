@@ -1474,12 +1474,14 @@ public QuotePage() throws IOException {
 		 element=driver.findElement(chkBoxlifePlanBasicInformationForm);
 		 executor = (JavascriptExecutor)driver;
 		 executor.executeScript("arguments[0].click();", element);
-		 driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		 Thread.sleep(2000);
+		 //driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 			
 		 element=driver.findElement(btnsubmitNextlifePLan);
 		 executor = (JavascriptExecutor)driver;
 		 executor.executeScript("arguments[0].click();", element);
-		 driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		 Thread.sleep(5000);
+		 //driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 	
 	public static void verifyPageDisplay(WebDriver driver,String path,String pageName) throws InterruptedException{
