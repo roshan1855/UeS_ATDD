@@ -160,11 +160,11 @@ public QuotePage() throws IOException {
 	}
 	
 	public void clickQuote_NewQuote(WebDriver driver) throws InterruptedException, IOException{
-		//Thread.sleep(5000);
+		Thread.sleep(5000);
 		//System.out.println("Page Title ::"+driver.getTitle());
 		driver.switchTo().defaultContent();
-		//Thread.sleep(4000);
-		utility.waitforSwitchtoFrame(By.name("navbar"), driver);
+		Thread.sleep(3000);
+		//utility.waitforSwitchtoFrame(By.name("navbar"), driver);
 		driver.switchTo().frame("navbar");
 		//System.out.println("Frame Title : :"+ driver.switchTo().frame("navbar").getTitle());
 		//Thread.sleep(2000);
@@ -1514,7 +1514,8 @@ public QuotePage() throws IOException {
 	public static void verifyPageDisplay_logo(WebDriver driver,String path,String pageName) throws InterruptedException, IOException{
 		Utilities utility = new Utilities();
 		//element=driver.findElement(By.xpath(path));
-		utility.waitForVisibilityOfWebElement(By.xpath(path), driver);
+		//utility.waitForVisibilityOfWebElement(By.xpath(path), driver);
+		
 		if(driver.findElement(By.xpath(path)).getAttribute("title").trim().contains(pageName)){
 			System.out.println(pageName + " displayed successfully");
 		}
@@ -1530,9 +1531,9 @@ public QuotePage() throws IOException {
 		//utility.waitforSwitchtoFrame(By.xpath(".//input[@name='calculatePercent']"), driver);
 		//driver.switchTo().frame("navbar");
 		//System.out.println("Frame Title : :"+ driver.switchTo().frame("navbar").getTitle());
-		//Thread.sleep(1000);
+		Thread.sleep(3000);
 		
-		utility.waitforSwitchtoFrame(By.name("navbar"), driver);
+		//utility.waitforSwitchtoFrame(By.name("navbar"), driver);
 		WebElement iframeSwitch  = driver.findElement(By.name("navbar"));	
 		driver.switchTo().frame(iframeSwitch);
 		
@@ -1559,16 +1560,18 @@ public QuotePage() throws IOException {
 		//System.out.println("out side Tilte : :"+driver.getTitle());
 		Thread.sleep(1000);
 		driver.switchTo().defaultContent();
-		Thread.sleep(1000);
+		Thread.sleep(5000);
 		driver.switchTo().frame("navbar");
 		//System.out.println("Frame Title : :"+ driver.switchTo().frame("navbar").getTitle());
 		Thread.sleep(2000);
 		
+		utility.waitForVisibilityOfWebElement(By.xpath("//img[@title='UnitedHealthcare Logo']"), driver);
 		String unitedHealthcareLogo="//img[@title='UnitedHealthcare Logo']";
 		//String unitedLogo=".//*[@id='table11']/tbody/tr/td[1]/p/a/img";
 		//System.out.println("UnitedHealthcare Logo title Text : :" + driver.findElement(By.xpath(unitedHealthcareLogo)).getAttribute("title"));
 		QuotePage.verifyPageDisplay_logo(driver, unitedHealthcareLogo, "UnitedHealthcare Logo");
 		
+		utility.waitForVisibilityOfWebElement(By.xpath("//img[@title='United eServices Logo']"), driver);
 		String unitedeServicesLogo="//img[@title='United eServices Logo']";
 		//String unitedLogo=".//*[@id='table11']/tbody/tr/td[2]/p/a/img";
 		//System.out.println("United Logo title Text : :" + driver.findElement(By.xpath(unitedeServicesLogo)).getAttribute("title"));
@@ -1600,13 +1603,13 @@ public QuotePage() throws IOException {
 	public void quoteSetUpWindow(WebDriver driver,String state) throws InterruptedException{
 		//System.out.println("out side Tilte : :"+driver.getTitle());
 				String pwindow=driver.getWindowHandle();
-				//Thread.sleep(2000);
+				Thread.sleep(2000);
 				driver.switchTo().defaultContent();
-				//Thread.sleep(1000);
-				utility.waitforSwitchtoFrame(By.xpath("content"), driver);
+				Thread.sleep(1000);
+				//utility.waitforSwitchtoFrame(By.xpath("content"), driver);
 				driver.switchTo().frame("content");
 				//System.out.println("Frame Title : :"+ driver.switchTo().frame("content").getTitle());
-				//Thread.sleep(2000);
+				Thread.sleep(2000);
 				
 				utility.waitForVisibilityOfWebElement(By.xpath(".//*[@id='ui-dialog-title-dialogQuote']"), driver);
 				String quoteSetUpInfoWindow=".//*[@id='ui-dialog-title-dialogQuote']";
@@ -1792,11 +1795,11 @@ public QuotePage() throws IOException {
 	
 		//driver.switchTo().defaultContent();
 		driver.switchTo().window(pwindow);
-		//Thread.sleep(5000);
-		utility.waitforSwitchtoFrame(By.name("content"), driver);
+		Thread.sleep(5000);
+		//utility.waitforSwitchtoFrame(By.name("content"), driver);
 		driver.switchTo().frame("content");
 		//System.out.println("Frame Title : :"+ driver.switchTo().frame("content").getTitle());
-		//Thread.sleep(3000);
+		Thread.sleep(3000);
 		
 		utility.waitForVisibilityOfWebElement(totNumActiveEmployeesApplying, driver);
 		driver.findElement(totNumActiveEmployeesApplying).clear();
@@ -2183,6 +2186,7 @@ public QuotePage() throws IOException {
 		executor.executeScript("arguments[0].click();", element);
 		Thread.sleep(2000);
 		
+		utility.waitForVisibilityOfWebElement(btnquoteSetUpNext, driver);
 		element=driver.findElement(btnquoteSetUpNext);
 		executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", element);
@@ -2218,31 +2222,36 @@ public QuotePage() throws IOException {
 			j=j+1000;*/
 		}
 		
+		utility.waitForVisibilityOfWebElement(censussubmitNext, driver);
 		element=driver.findElement(censussubmitNext);
 		executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", element);
-		Thread.sleep(8000);
+		//Thread.sleep(8000);
 		
+		utility.waitForVisibilityOfWebElement(chkBoxmedicalInPackageForm, driver);
 		element=driver.findElement(chkBoxmedicalInPackageForm);
 		executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", element);
 		
-		Thread.sleep(2000);
+		utility.waitForVisibilityOfWebElement(btnMedicalPlansubmitNext, driver);
 		element=driver.findElement(btnMedicalPlansubmitNext);
 		executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", element);
-		Thread.sleep(8000);
+		//Thread.sleep(8000);
 		
+		utility.waitForVisibilityOfWebElement(btnOptionalMedicalPlansubmitNext, driver);
 		element=driver.findElement(btnOptionalMedicalPlansubmitNext);
 		executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", element);
-		Thread.sleep(5000);
+		//Thread.sleep(5000);
 		
+		utility.waitForVisibilityOfWebElement(btnVisionPlansubmitNext, driver);
 		element=driver.findElement(btnVisionPlansubmitNext);
 		executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", element);
-		Thread.sleep(5000);
+		//Thread.sleep(5000);
 		
+		utility.waitForVisibilityOfWebElement(btnPreviewProposal, driver);
 		element=driver.findElement(btnPreviewProposal);
 		System.out.println("PDF Value :"+element.getAttribute("value"));
 		//System.out.println("PDF Value :"+element.getText());
@@ -2260,7 +2269,10 @@ public QuotePage() throws IOException {
  
 	Thread.sleep(2000);		
 	By submitGenerateProposal=By.xpath("//input[@name='submitGenerateProposal']");
-	driver.findElement(submitGenerateProposal).sendKeys(Keys.CONTROL , Keys.SUBTRACT);
+	driver.findElement(submitGenerateProposal).sendKeys(Keys.ENTER);
+	Thread.sleep(2000);
+	
+/*	driver.findElement(submitGenerateProposal).sendKeys(Keys.CONTROL , Keys.SUBTRACT);
 
 	element=driver.findElement(submitGenerateProposal);
 	//executor = (JavascriptExecutor)driver;
@@ -2269,20 +2281,15 @@ public QuotePage() throws IOException {
 	//element.submit();
 	element.click();
 	//driver.findElement(submitGenerateProposal).sendKeys(Keys.CONTROL,Keys.CONTROL.ADD);
-	Thread.sleep(5000);
+	Thread.sleep(5000);*/
 
-	// Switching to Alert        
-	Alert alert = driver.switchTo().alert();	
-	Thread.sleep(2000);
-	System.out.println("Inside Alert");		
-	// Capturing alert message.    
-	String alertMessage= driver.switchTo().alert().getText();		
-	System.out.println(alertMessage);	
-	Thread.sleep(2000);
-	alert.accept();	
-	System.out.println("After accepting Alert");
-	driver.findElement(submitGenerateProposal).sendKeys(Keys.CONTROL , Keys.ADD);
-	Thread.sleep(15000);
+	Boolean popupStatus = utility.isAlertPresent(driver);
+	if (popupStatus == true) {
+		Alert alert = driver.switchTo().alert();
+		System.out.println("ALert..." + alert.getText());
+		System.out.println("Goes to Accept");
+		alert.accept();
+	}	Thread.sleep(15000);
 
 	/*		 new WebDriverWait(driver, 10).until(ExpectedConditions.alertIsPresent());
 	driver.switchTo().alert().accept();
