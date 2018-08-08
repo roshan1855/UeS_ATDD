@@ -15,7 +15,7 @@ import cucumber.api.junit.Cucumber;
 
 
 
-            tags = { "@AddNewQuote_VL_Without_Salary"
+            tags = { "@Quote"
 //            		+ ",@Regression"
   //          		+ ",@July_Regression"
             		
