@@ -1,6 +1,6 @@
 Feature: Compensation Module
 
-  @Regression_UeS_Problem @Validate_Compensation_Home
+  @Regression @Validate_Compensation_Home
   Scenario Outline: "<TestCaseID>" Display Links on Compensation Home Page
     When Flow_Fetch fileName "<FileName>" and testCaseID "<TestCaseID>" are captured
     Given Flow_Fetch Data from excel Sheet for "<TestCaseID>"
