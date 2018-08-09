@@ -1609,7 +1609,7 @@ public QuotePage() throws IOException {
 				//utility.waitforSwitchtoFrame(By.xpath("content"), driver);
 				driver.switchTo().frame("content");
 				//System.out.println("Frame Title : :"+ driver.switchTo().frame("content").getTitle());
-				Thread.sleep(2000);
+				Thread.sleep(5000);
 				
 				utility.waitForVisibilityOfWebElement(By.xpath(".//*[@id='ui-dialog-title-dialogQuote']"), driver);
 				String quoteSetUpInfoWindow=".//*[@id='ui-dialog-title-dialogQuote']";
