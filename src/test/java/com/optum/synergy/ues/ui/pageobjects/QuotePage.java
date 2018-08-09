@@ -2470,15 +2470,13 @@ public QuotePage() throws IOException {
 		Thread.sleep(8000);
 	}
 	
-	public void verifyDisplayPlans(WebDriver driver,String displayPlan) throws InterruptedException{
+	public void verifyDisplayPlans_SelectPlanCode(WebDriver driver,String displayPlan) throws InterruptedException{
 		utility.waitForVisibilityOfWebElement(By.xpath("//input[@name='submitApplyOptions']"), driver);
 		Select medicalRatingMethodVal=new Select(driver.findElement(By.name("planDisplaySelection")));
 		//Get all options
 	    List<WebElement> dd = medicalRatingMethodVal.getOptions();
-
 	    System.out.println(dd.size());
 	    
-
 	    for (int j = 0; j < dd.size(); j++) {
 	        System.out.println(dd.get(j).getText());
 	        //Show All Plans
@@ -2533,13 +2531,15 @@ public QuotePage() throws IOException {
 	    
 	}
 	
-	public void checkCheckBoxes_clickBtn(WebDriver driver) throws InterruptedException{
+	public void verifyANNUALPREMIUM_BENEFIT(WebDriver driver) throws InterruptedException{
 				
-		element=driver.findElement(By.xpath("//form[@name='DentalPlanSelectionForm']/table/tbody/tr[15]/td/table/tbody/tr[6]/td[2]"));
-		String code1=element.getText();
-		
 		element=driver.findElement(By.xpath("//form[@name='DentalPlanSelectionForm']/table/tbody/tr[15]/td/table/tbody/tr[5]/td[2]"));
+		String code1=element.getText();
+		System.out.println("BENEFIT Before Code1::" +code1);
+		
+		element=driver.findElement(By.xpath("//form[@name='DentalPlanSelectionForm']/table/tbody/tr[15]/td/table/tbody/tr[6]/td[2]"));
 		String code2=element.getText();
+		System.out.println("BENEFIT Before Code2::" +code2);
 		Thread.sleep(5000);
 		String winHandleBefore = driver.getWindowHandle();
 		utility.waitForVisibilityOfWebElement(By.xpath("//input[@name='submitPlanCompare']"), driver);
@@ -2601,13 +2601,13 @@ public QuotePage() throws IOException {
 						System.out.println("BENEFIT code2 ::"+element1.getText());
 												
 						if((element.getText().contains(code1)) && (element1.getText().contains(code2))){
-					 		System.out.println("BENEFIT codes ::" +element.getText() + " and " + element1.getText() +" displayed successfully" );
+					 		System.out.println("PLAN CODES ::" +element.getText() + " and " + element1.getText() +" displayed successfully" );
 					 		Thread.sleep(3000);
 					 		driver.switchTo().window(winHandle).close();
 					 		break;
 					 	}
 					 	else{
-					 		System.out.println("BENEFIT codes ::" +element.getText() +" and " + element1.getText() + " not displayed" );
+					 		System.out.println("PLAN CODES ::" +element.getText() +" and " + element1.getText() + " not displayed" );
 					 	}
 					 	}
 					 	
