@@ -93,6 +93,21 @@ package com.optum.synergy.ues.ui.stepDefinitions;
 			quotepage.tearDown(driver);
 		}
 		
+		@When("^Test_User Navigate to LogIn Page$")
+		public void test_userNavigateToLogInPage() throws Throwable {
+			compensationpage.page_URL(driver);
+		}
+
+		@When("^Test_User enters UserName and Password then click on login button$")
+		public void test_userEntersUserNameAndPasswordThenClickOnLoginButton() throws Throwable {
+			compensationpage.login_Test(driver);
+		}
+
+		@Then("^_User displayed Login Successfully$")
+		public void _userDisplayedLoginSuccessfully() throws Throwable {
+		    System.out.println("Login sucessfully");
+		}
+		
 		/*@When("^UeS_UserFlow_fileName \"([^\"]*)\" and testCaseID \"([^\"]*)\" are captured$")
 		public void ues_userflow_filename_and_testCaseID_are_captured(String arg1, String arg2) throws Throwable {
 			reportName = arg1;

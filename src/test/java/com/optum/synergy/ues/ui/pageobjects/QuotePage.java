@@ -1563,7 +1563,7 @@ public QuotePage() throws IOException {
 		Thread.sleep(5000);
 		driver.switchTo().frame("navbar");
 		//System.out.println("Frame Title : :"+ driver.switchTo().frame("navbar").getTitle());
-		Thread.sleep(2000);
+		Thread.sleep(6000);
 		
 		utility.waitForVisibilityOfWebElement(By.xpath("//img[@title='UnitedHealthcare Logo']"), driver);
 		String unitedHealthcareLogo="//img[@title='UnitedHealthcare Logo']";
@@ -2067,7 +2067,7 @@ public QuotePage() throws IOException {
 		
 		driver.findElement(quoteatneCount1).clear();
 		driver.findElement(quoteatneCount1).sendKeys("8");
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 						
 		element=driver.findElement(quoteNextBtn);
 		executor = (JavascriptExecutor)driver;
@@ -2486,12 +2486,47 @@ public QuotePage() throws IOException {
 	        if(dd.get(j).getText().contains(displayPlan)){
 	        	System.out.println(displayPlan + " present in Display Plans drop down");
 	        	medicalRatingMethodVal.selectByVisibleText(displayPlan);
-	        	     	
-	        	utility.waitForVisibilityOfWebElement(By.xpath("//input[@name='submitApplyOptions']"), driver);
-	        	element=driver.findElement(By.xpath("//input[@name='submitApplyOptions']"));
-	    		executor = (JavascriptExecutor)driver;
-	    		executor.executeScript("arguments[0].click();", element);
-	        	break;
+	        	if(displayPlan.contains("Most Popular Plans") || displayPlan.contains("Show All Plans")) {
+	        		utility.waitForVisibilityOfWebElement(By.xpath("//input[@name='submitApplyOptions']"), driver);
+		        	element=driver.findElement(By.xpath("//input[@name='submitApplyOptions']"));
+		    		executor = (JavascriptExecutor)driver;
+		    		executor.executeScript("arguments[0].click();", element);
+		    		Thread.sleep(1000);
+		    		
+		    		utility.waitForVisibilityOfWebElement(By.xpath("//input[@name='dentalPlanInformationForm[0].selectInd']"), driver);
+		    		element=driver.findElement(By.xpath("//input[@name='dentalPlanInformationForm[0].selectInd']"));
+		    		executor = (JavascriptExecutor)driver;
+		    		executor.executeScript("arguments[0].click();", element);
+		    		
+		    		utility.waitForVisibilityOfWebElement(By.xpath("//input[@name='dentalPlanInformationForm[1].selectInd']"), driver);
+		    		element=driver.findElement(By.xpath("//input[@name='dentalPlanInformationForm[1].selectInd']"));
+		    		executor = (JavascriptExecutor)driver;
+		    		executor.executeScript("arguments[0].click();", element);
+		    		Thread.sleep(5000);
+		        	break;	
+	        	}
+	        	
+	        	if(displayPlan.contains("Show My Selected Plans")) {
+	        		
+	        		utility.waitForVisibilityOfWebElement(By.xpath("//input[@name='dentalPlanInformationForm[0].selectInd']"), driver);
+		    		element=driver.findElement(By.xpath("//input[@name='dentalPlanInformationForm[0].selectInd']"));
+		    		executor = (JavascriptExecutor)driver;
+		    		executor.executeScript("arguments[0].click();", element);
+		    		
+		    		utility.waitForVisibilityOfWebElement(By.xpath("//input[@name='dentalPlanInformationForm[1].selectInd']"), driver);
+		    		element=driver.findElement(By.xpath("//input[@name='dentalPlanInformationForm[1].selectInd']"));
+		    		executor = (JavascriptExecutor)driver;
+		    		executor.executeScript("arguments[0].click();", element);
+		    		Thread.sleep(5000);
+		    		
+	        		utility.waitForVisibilityOfWebElement(By.xpath("//input[@name='submitApplyOptions']"), driver);
+		        	element=driver.findElement(By.xpath("//input[@name='submitApplyOptions']"));
+		    		executor = (JavascriptExecutor)driver;
+		    		executor.executeScript("arguments[0].click();", element);
+		    		Thread.sleep(5000);
+		        	break;	
+	        	}
+	        	
 	        }
 	    }
 	    
@@ -2499,16 +2534,13 @@ public QuotePage() throws IOException {
 	}
 	
 	public void checkCheckBoxes_clickBtn(WebDriver driver) throws InterruptedException{
-		utility.waitForVisibilityOfWebElement(By.xpath("//input[@name='dentalPlanInformationForm[0].selectInd']"), driver);
-		element=driver.findElement(By.xpath("//input[@name='dentalPlanInformationForm[0].selectInd']"));
-		executor = (JavascriptExecutor)driver;
-		executor.executeScript("arguments[0].click();", element);
+				
+		element=driver.findElement(By.xpath("//form[@name='DentalPlanSelectionForm']/table/tbody/tr[15]/td/table/tbody/tr[6]/td[2]"));
+		String code1=element.getText();
 		
-		utility.waitForVisibilityOfWebElement(By.xpath("//input[@name='dentalPlanInformationForm[1].selectInd']"), driver);
-		element=driver.findElement(By.xpath("//input[@name='dentalPlanInformationForm[1].selectInd']"));
-		executor = (JavascriptExecutor)driver;
-		executor.executeScript("arguments[0].click();", element);
-		
+		element=driver.findElement(By.xpath("//form[@name='DentalPlanSelectionForm']/table/tbody/tr[15]/td/table/tbody/tr[5]/td[2]"));
+		String code2=element.getText();
+		Thread.sleep(5000);
 		String winHandleBefore = driver.getWindowHandle();
 		utility.waitForVisibilityOfWebElement(By.xpath("//input[@name='submitPlanCompare']"), driver);
 		element=driver.findElement(By.xpath("//input[@name='submitPlanCompare']"));
@@ -2568,13 +2600,14 @@ public QuotePage() throws IOException {
 						WebElement element1=driver.findElement(By.xpath(".//*[@name='DentalPlanComparisonForm']/table/tbody/tr[8]/td/table/tbody/tr/td[3]/table/tbody/tr[26]/td"));
 						System.out.println("BENEFIT code2 ::"+element1.getText());
 												
-						if((element.getText().contains("A7984")) && (element1.getText().contains("P0206"))){
+						if((element.getText().contains(code1)) && (element1.getText().contains(code2))){
 					 		System.out.println("BENEFIT codes ::" +element.getText() + " and " + element1.getText() +" displayed successfully" );
+					 		Thread.sleep(3000);
+					 		driver.switchTo().window(winHandle).close();
 					 		break;
-					 		//driver.switchTo().window(winHandle).close();
 					 	}
 					 	else{
-					 		System.out.println("BENEFIT codes ::" +element.getText() +" and " + element1.getText() + "not displayed" );
+					 		System.out.println("BENEFIT codes ::" +element.getText() +" and " + element1.getText() + " not displayed" );
 					 	}
 					 	}
 					 	

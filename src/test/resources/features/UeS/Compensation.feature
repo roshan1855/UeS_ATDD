@@ -1,6 +1,6 @@
 Feature: Compensation Module
 
-  @Regression @Validate_Compensation_Home
+  @Regression_UeS @Validate_Compensation_Home @Suri1265
   Scenario Outline: "<TestCaseID>" Display Links on Compensation Home Page
     When Flow_Fetch fileName "<FileName>" and testCaseID "<TestCaseID>" are captured
     Given Flow_Fetch Data from excel Sheet for "<TestCaseID>"
@@ -16,13 +16,3 @@ Feature: Compensation Module
     Examples: 
       | FileName           |  | TestCaseID |
       | Compensation_TC_05 |  | TC_05      |
-      
-      
-      
-  @Chandu
-  Scenario: Test Login
-    When Test_User Navigate to LogIn Page
-    And Test_User enters UserName and Password then click on login button
-    Then _User displayed Login Successfully
- 
-      

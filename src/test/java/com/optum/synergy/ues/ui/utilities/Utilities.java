@@ -320,7 +320,11 @@ public class Utilities  {
 
 	public boolean isAlertPresent(WebDriver driver) {
 		try {
-			driver.switchTo().alert();
+			wait=new WebDriverWait(driver, 60);
+			 wait.until(ExpectedConditions.alertIsPresent());
+//			driver.switchTo().alert();
+			String alrt = driver.switchTo().alert().getText();
+			  System.out.print(alrt);
 			return true;
 		} catch (Exception Ex) {
 			return false;

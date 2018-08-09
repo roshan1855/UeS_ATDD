@@ -1,13 +1,19 @@
 package com.optum.synergy.ues.ui.pageobjects;
 
+import java.io.IOException;
 import java.util.Properties;
 
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import com.optum.synergy.ues.ui.stepDefinitions.Hooks;
+import com.optum.synergy.ues.ui.utilities.Utilities;
 
 
 public class CompensationPage {
@@ -39,15 +45,33 @@ public class CompensationPage {
 	By linkCommissionStatementsPage=By.xpath(".//*[@id='UescontentTitle']");
 	By linkUnitedHealthcareRepresentativePage=By.xpath(".//*[@id='divContent']/table/tbody/tr[1]/td/span");
 	
-	public void loginUeS_Dev(WebDriver driver) throws InterruptedException{
-		Thread.sleep(5000);
+	public void loginUeS_Dev(WebDriver driver) throws InterruptedException, IOException{
+		Utilities utility = new Utilities();
+		//Thread.sleep(5000);
+		utility.waitForVisibilityOfWebElement(uesUserName, driver);
 		driver.findElement(uesUserName).sendKeys("testbrokerplm");
-		Thread.sleep(1000);
-		driver.findElement(uesPwd).sendKeys("Firefly!3");
-		Thread.sleep(1000);
+		//Thread.sleep(1000);
+		utility.waitForVisibilityOfWebElement(uesPwd, driver);
+		driver.findElement(uesPwd).sendKeys("Firefly!4");
+		//Thread.sleep(1000);
+		utility.waitForVisibilityOfWebElement(uesLoginBtn, driver);
+		//driver.findElement(By.linkText("Log In")).sendKeys(Keys.ENTER);
+		
 		element = driver.findElement(uesLoginBtn);
 		executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", element);
+		Thread.sleep(8000);
+		Boolean popupStatus;
+		popupStatus = utility.isAlertPresent(driver);
+
+		if (popupStatus == true) {
+			Alert alert = driver.switchTo().alert();
+			System.out.println("ALert..." + alert.getText());
+			System.out.println("Goes to Accept");
+			alert.accept();
+			Thread.sleep(5000);
+		}
+			
 		System.out.println("User clicked Login Button/.....");
 		Thread.sleep(6000);
 	}
@@ -184,6 +208,23 @@ public class CompensationPage {
 
 	}
 	
+	public void page_URL(WebDriver driver) throws InterruptedException{
+		driver.get("Application URL");
+	}
+	
+	public void login_Test(WebDriver driver) throws InterruptedException{
+		Thread.sleep(5000);
+		driver.findElement(By.xpath("")).sendKeys("testbrokerplm");
+		Thread.sleep(1000);
+		driver.findElement(By.xpath("")).sendKeys("Firefly!3");
+		Thread.sleep(1000);
+		element = driver.findElement(By.xpath(""));
+		executor = (JavascriptExecutor)driver;
+		executor.executeScript("arguments[0].click();", element);
+		System.out.println("User clicked Login Button/.....");
+		Thread.sleep(6000);
+	}
+	
 	public static void compSubLinkPages1(WebDriver driver,By comSubLink,By verifycompSubLinkPagePath,By compTab,String verifycompSubLinkPage) throws InterruptedException{
 		String pwindow;
 		pwindow=driver.getWindowHandle();
@@ -270,3 +311,5 @@ public class CompensationPage {
 	}
 	
 }
+
+

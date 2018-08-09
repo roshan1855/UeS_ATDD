@@ -320,7 +320,7 @@ public class QuoteDef{
 
 	@Then("^UeS_User is verify ANNUAL PREMIUM and BENEFIT in Dental Plan Comparison page$")
 	public void ues_userIsVerifyANNUALPREMIUMAndBENEFITInDentalPlanComparisonPage() throws Throwable {
-		System.out.println("789");
+		quotepage.tearDown(driver);
 	}
 }
 
