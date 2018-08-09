@@ -311,8 +311,8 @@ Feature: Quotes Module
       | Quote_TC_18 |  | TC_18      |  | CA    |  | Age Banded for ACR       |  | Age Banded for ACR |  |    90001 |
 
   # Aug 2018
-  @Aug
-  Scenario Outline: "<TestCaseID>" Validate "<Value>" on coverage_D using "<State>" state
+  @Aug @Validate_DentalPlanPage_Coverage_D
+  Scenario Outline: "<TestCaseID>" Validate Dental plans page by "<Value>" with COMPARE SELECTED PLANS
     When Flow_Fetch fileName "<FileName>" and testCaseID "<TestCaseID>" are captured
     Given Flow_Fetch Data from excel Sheet for "<TestCaseID>"
     Given UeS_User is on Home Page
@@ -325,14 +325,14 @@ Feature: Quotes Module
     And UeS_User is Fill all the details without salary info of the Census page and click on next
     #And UeS_User is Fill all the details of the Census page and click on next
     Then UeS_User verify the Display Plan as "<Value>" and select Display Plan as "<Value>" and click on APPLY CHANGES button
-    And UeS_User is Select the ADD TO PROPOSAL checkboxes and click on COMPARE SELECTED PLANS button
+    #And UeS_User is Select the ADD TO PROPOSAL checkboxes and click on COMPARE SELECTED PLANS button
     Then UeS_User is verify ANNUAL PREMIUM and BENEFIT in Dental Plan Comparison page
 
     Examples: 
       | FileName    |  | TestCaseID |  | State |  | Value                  |  | Information            |  | Zip Code |
-      # | Quote_TC_21 |  | TC_21      |  | CA    |  | Most Popular Plans |  | Most Popular Plans |  |    90001 |
-      # | Quote_TC_21 |  | TC_21     |  | CA    |  | Show All Plans     |  | Show All Plans     |  |    90001 |
-      | Quote_TC_21 |  | TC_21      |  | CA    |  | Show My Selected Plans |  | Show My Selected Plans |  |    90001 |
+      | Quote_TC_20 |  | TC_20      |  | CA    |  | Most Popular Plans     |  | Most Popular Plans     |  |    90001 |
+      | Quote_TC_21 |  | TC_21      |  | CA    |  | Show All Plans         |  | Show All Plans         |  |    90001 |
+      #| Quote_TC_22 |  | TC_22      |  | CA    |  | Show My Selected Plans |  | Show My Selected Plans |  |    90001 |
 
   @Testing
   Scenario Outline: "<TestCaseID>" Testing
