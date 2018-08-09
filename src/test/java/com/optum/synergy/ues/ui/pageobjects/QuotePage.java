@@ -2484,12 +2484,14 @@ public QuotePage() throws IOException {
 	        if(dd.get(j).getText().contains(displayPlan)){
 	        	System.out.println(displayPlan + " present in Display Plans drop down");
 	        	medicalRatingMethodVal.selectByVisibleText(displayPlan);
-	        	if(displayPlan.contains("Most Popular Plans") || displayPlan.contains("Show All Plans")) {
+	        	if((displayPlan.contains("Most Popular Plans") || (displayPlan.contains("Show All Plans")))) {
+	        		System.out.println("inside if ::" + displayPlan);
+	        		Thread.sleep(2000);
 	        		utility.waitForVisibilityOfWebElement(By.xpath("//input[@name='submitApplyOptions']"), driver);
 		        	element=driver.findElement(By.xpath("//input[@name='submitApplyOptions']"));
 		    		executor = (JavascriptExecutor)driver;
 		    		executor.executeScript("arguments[0].click();", element);
-		    		Thread.sleep(1000);
+		    		Thread.sleep(12000);
 		    		
 		    		utility.waitForVisibilityOfWebElement(By.xpath("//input[@name='dentalPlanInformationForm[0].selectInd']"), driver);
 		    		element=driver.findElement(By.xpath("//input[@name='dentalPlanInformationForm[0].selectInd']"));
@@ -2540,7 +2542,7 @@ public QuotePage() throws IOException {
 		element=driver.findElement(By.xpath("//form[@name='DentalPlanSelectionForm']/table/tbody/tr[15]/td/table/tbody/tr[6]/td[2]"));
 		String code2=element.getText();
 		System.out.println("BENEFIT Before Code2::" +code2);
-		Thread.sleep(5000);
+		Thread.sleep(8000);
 		String winHandleBefore = driver.getWindowHandle();
 		utility.waitForVisibilityOfWebElement(By.xpath("//input[@name='submitPlanCompare']"), driver);
 		element=driver.findElement(By.xpath("//input[@name='submitPlanCompare']"));
