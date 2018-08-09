@@ -331,8 +331,8 @@ Feature: Quotes Module
     Examples: 
       | FileName    |  | TestCaseID |  | State |  | Value                  |  | Information            |  | Zip Code |
       #| Quote_TC_20 |  | TC_20      |  | CA    |  | Most Popular Plans     |  | Most Popular Plans     |  |    90001 |
-      | Quote_TC_21 |  | TC_21      |  | CA    |  | Show All Plans         |  | Show All Plans         |  |    90001 |
-      #| Quote_TC_22 |  | TC_22      |  | CA    |  | Show My Selected Plans |  | Show My Selected Plans |  |    90001 |
+      #| Quote_TC_21 |  | TC_21      |  | CA    |  | Show All Plans         |  | Show All Plans         |  |    90001 |
+      | Quote_TC_22 |  | TC_22      |  | CA    |  | Show My Selected Plans |  | Show My Selected Plans |  |    90001 |
 
   @Testing
   Scenario Outline: "<TestCaseID>" Testing
