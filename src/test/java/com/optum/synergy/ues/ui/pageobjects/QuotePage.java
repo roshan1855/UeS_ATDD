@@ -2356,6 +2356,7 @@ public QuotePage() throws IOException {
 	}
 	
 	public void dentalQuoteSetUpPage(WebDriver driver,String zip) throws InterruptedException{
+		Thread.sleep(5000);
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		String quoteSetUpPage=".//*[@id='quoteForm']/table[1]/tbody/tr[2]/td/table/tbody/tr[1]/td[1]";
 		QuotePage.verifyPageDisplay(driver,quoteSetUpPage, "Quote Setup");
