@@ -310,16 +310,17 @@ public class QuoteDef{
 	
 	@Then("^UeS_User verify the Display Plan as \"([^\"]*)\" and select Display Plan as \"([^\"]*)\" and click on APPLY CHANGES button$")
 	public void ues_userVerifyTheDisplayPlanAsAndSelectDisplayPlanAsAndClickOnAPPLYCHANGESButton(String arg1, String arg2) throws Throwable {
-	    quotepage.verifyDisplayPlans(driver, arg1);
+	    quotepage.verifyDisplayPlans_SelectPlanCode(driver, arg1);
 	}
 
 	@Then("^UeS_User is Select the ADD TO PROPOSAL checkboxes and click on COMPARE SELECTED PLANS button$")
 	public void ues_userIsSelectTheADDTOPROPOSALCheckboxesAndClickOnCOMPARESELECTEDPLANSButton() throws Throwable {
-		quotepage.checkCheckBoxes_clickBtn(driver);
+		quotepage.verifyANNUALPREMIUM_BENEFIT(driver);
 	}
 
 	@Then("^UeS_User is verify ANNUAL PREMIUM and BENEFIT in Dental Plan Comparison page$")
 	public void ues_userIsVerifyANNUALPREMIUMAndBENEFITInDentalPlanComparisonPage() throws Throwable {
+		quotepage.verifyANNUALPREMIUM_BENEFIT(driver);
 		quotepage.tearDown(driver);
 	}
 }
