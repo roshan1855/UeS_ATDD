@@ -1669,7 +1669,7 @@ public QuotePage() throws IOException {
 	}
 	
 	public void QuoteSetUpPage(WebDriver driver,String zip) throws InterruptedException{
-		//Thread.sleep(3000);
+		Thread.sleep(3000);
 		utility.waitForVisibilityOfWebElement(By.xpath(".//*[@id='quoteForm']/table[1]/tbody/tr[2]/td/table/tbody/tr[1]/td[1]"), driver);
 		String quoteSetUpPage=".//*[@id='quoteForm']/table[1]/tbody/tr[2]/td/table/tbody/tr[1]/td[1]";
 		QuotePage.verifyPageDisplay(driver,quoteSetUpPage, "Quote Setup");
@@ -1820,7 +1820,7 @@ public QuotePage() throws IOException {
 		element=driver.findElement(btnquoteSetUpNext);
 		executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", element);
-		//Thread.sleep(5000);
+		Thread.sleep(3000);
 	}
 	
 	public void verifyRatingMethodValue(WebDriver driver,String ratingmethodval) throws InterruptedException, IOException{
