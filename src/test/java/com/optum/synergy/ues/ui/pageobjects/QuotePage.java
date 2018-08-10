@@ -1856,7 +1856,6 @@ public QuotePage() throws IOException {
 	public void medicalPlan_btnComparePlan(WebDriver driver) throws InterruptedException{
 
 			//QuotePage.verifyFooterLinks(driver);
-			
 			element=driver.findElement(chkBoxmedicalInPackageForm);
 			executor = (JavascriptExecutor)driver;
 			executor.executeScript("arguments[0].click();", element);
@@ -1866,8 +1865,6 @@ public QuotePage() throws IOException {
 			element=driver.findElement(btnSubmitRateCompare);
 			executor = (JavascriptExecutor)driver;
 			executor.executeScript("arguments[0].click();", element);
-			
-			
 			Thread.sleep(4000);
 			
 			//QuotePage.verifyFooterLinks(driver);
