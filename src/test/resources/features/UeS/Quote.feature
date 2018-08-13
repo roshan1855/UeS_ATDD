@@ -330,9 +330,50 @@ Feature: Quotes Module
 
     Examples: 
       | FileName    |  | TestCaseID |  | State |  | Value                  |  | Information            |  | Zip Code |
-      #| Quote_TC_20 |  | TC_20      |  | CA    |  | Most Popular Plans     |  | Most Popular Plans     |  |    90001 |
-      #| Quote_TC_21 |  | TC_21      |  | CA    |  | Show All Plans         |  | Show All Plans         |  |    90001 |
+      | Quote_TC_20 |  | TC_20      |  | CA    |  | Most Popular Plans     |  | Most Popular Plans     |  |    90001 |
+      | Quote_TC_21 |  | TC_21      |  | CA    |  | Show All Plans         |  | Show All Plans         |  |    90001 |
       | Quote_TC_22 |  | TC_22      |  | CA    |  | Show My Selected Plans |  | Show My Selected Plans |  |    90001 |
+
+  @Aug @Validate_DentalPlanPage_Coverage_D_1
+  Scenario Outline: "<TestCaseID>" Validate Dental plans page by "<Value>" with COMPARE SELECTED PLANS
+    When Flow_Fetch fileName "<FileName>" and testCaseID "<TestCaseID>" are captured
+    Given Flow_Fetch Data from excel Sheet for "<TestCaseID>"
+    Given UeS_User is on Home Page
+    When UeS_User Navigate to LogIn Page
+    And UeS_User enters UserName and Password
+    Then UeS_User displayed Login Successfully
+    When UeS_User is on Home page and click on Quotes and then select New Quote
+    And UeS_User is select the state as "<State>" and Fill all the details of the Quote Setup window and click on next
+    And UeS_User is Fill all the details of the Quote Setup Page by using "<Zip Code>" and click on NEXT button
+    And UeS_User is Fill all the details without salary info of the Census page and click on next
+    Then UeS_User verify the Display Plan as "<Value>" and select Display Plan as "<Value>" and selct plans then click on COMPARE RATES FOR SELECTED PLANS button
+    Then UeS_User is verify Employer Contribution Premium and Total Annual Premium and EMPLOYEE CLASS in Dental Rate Comparison page
+
+    Examples: 
+      | FileName    |  | TestCaseID |  | State |  | Value              |  | Zip Code |
+      | Quote_TC_23 |  | TC_23      |  | CA    |  | Most Popular Plans |  |    90001 |
+
+  @Aug @Validate_VisionPlanPage_Coverage_V
+  Scenario Outline: "<TestCaseID>" Validate Dental plans page by "<Value>" with COMPARE SELECTED PLANS
+    When Flow_Fetch fileName "<FileName>" and testCaseID "<TestCaseID>" are captured
+    Given Flow_Fetch Data from excel Sheet for "<TestCaseID>"
+    Given UeS_User is on Home Page
+    When UeS_User Navigate to LogIn Page
+    And UeS_User enters UserName and Password
+    Then UeS_User displayed Login Successfully
+    When UeS_User is on Home page and click on Quotes and then select New Quote
+    And UeS_User is select the state as "<State>" and Fill all the details of the Quote Setup window and click on next
+    And UeS_User is select the coverage as "<Coverage>" and Fill all the details of the Quote Setup Page by using "<Zip Code>" and click on NEXT button
+    And UeS_User is Fill all the details without salary info of the Census page and click on next
+    Then UeS_User verify the Display Plan as "<Value>" and select Display Plan as "<Value>" and click on APPLY CHANGES button in "<Coverage>" page
+    And UeS_User select plans based on "<Value>" and click on COMPARE SELECTED PLANS button in Vision Plan Information table
+    Then UeS_User is verify ANNUL PREMIUM and BENEFIT in  Vision Plan Comparison  page
+
+    Examples: 
+      | FileName    |  | TestCaseID |  | State |  | Value                  |  | Zip Code |  | Coverage |
+      #| Quote_TC_24 |  | TC_24      |  | CA    |  | Most Popular Plans |  |    90001 |  | Vision   |
+      | Quote_TC_25 |  | TC_25      |  | TX    |  | Show All Plans         |  |    73301 |  | Vision   |
+      | Quote_TC_26 |  | TC_26      |  | WA    |  | Show My Selected Plans |  |    98001 |  | Vision   |
 
   @Testing
   Scenario Outline: "<TestCaseID>" Testing
@@ -348,4 +389,4 @@ Feature: Quotes Module
 
     Examples: 
       | FileName   |  | TestCaseID |
-      | Test_TC_20 |  | TC_20      |
+      | Test_TC_62 |  | TC_62      |
