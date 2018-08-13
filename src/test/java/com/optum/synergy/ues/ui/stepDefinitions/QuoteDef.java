@@ -49,6 +49,16 @@ public class QuoteDef{
 	DesiredCapabilities ieCapabilities;
 	public static QuotePage quotepage;
 	
+	By ckhBoxProductTypeMedical=By.xpath("//input[@name='selectProductTypeMedical']");
+	By ckhBoxProductTypeDental=By.xpath("//input[@name='selectProductTypeDental']");
+	By ckhBoxProductTypeLife=By.xpath("//input[@name='selectProductTypeLife']");
+	By ckhBoxProductTypeVision=By.xpath("//input[@name='selectProductTypeVision']");
+	By ckhBoxProductTypeStd=By.xpath("//input[@name='selectProductTypeStd']");
+	By ckhBoxProductTypeLtd=By.xpath("//input[@name='selectProductTypeLtd']");
+	By ckhBoxProductTypeEmpSupLife=By.xpath("//input[@name='selectProductTypeEmpSupLife']");
+	By ckhBoxProductTypeDepSupLife=By.xpath("//input[@name='selectProductTypeDepSupLife']");
+
+	
 	public static CompensationPage compensationpage;
 	
 	public QuoteDef() throws IOException {
@@ -323,5 +333,38 @@ public class QuoteDef{
 		quotepage.verifyANNUALPREMIUM_BENEFIT(driver);
 		quotepage.tearDown(driver);
 	}
+	@Then("^UeS_User verify the Display Plan as \"([^\"]*)\" and select Display Plan as \"([^\"]*)\" and selct plans then click on COMPARE RATES FOR SELECTED PLANS button$")
+	public void ues_userVerifyTheDisplayPlanAsAndSelectDisplayPlanAsAndSelctPlansThenClickOnCOMPARERATESFORSELECTEDPLANSButton(String arg1, String arg2) throws Throwable {
+		quotepage.verifyDisplayPlans_SelectPlanCode_CompareRates(driver,arg1); 
+	}
+	
+	@When("^UeS_User is select the coverage as \"([^\"]*)\" and Fill all the details of the Quote Setup Page by using \"([^\"]*)\" and click on NEXT button$")
+	public void ues_userIsSelectTheCoverageAsAndFillAllTheDetailsOfTheQuoteSetupPageByUsingAndClickOnNEXTButton(String arg1, String arg2) throws Throwable {
+	    quotepage.quoteSetUpPageNew(driver, arg1, arg2);
+	}
+
+	@Then("^UeS_User verify the Display Plan as \"([^\"]*)\" and select Display Plan as \"([^\"]*)\" and click on APPLY CHANGES button in \"([^\"]*)\" page$")
+	public void ues_userVerifyTheDisplayPlanAsAndSelectDisplayPlanAsAndClickOnAPPLYCHANGESButtonInPage(String arg1, String arg2, String arg3) throws Throwable {
+	    quotepage.verifyDisplayPlans_clickBtnCOMPSELPLAN(driver, arg1);
+	}
+
+	@Then("^UeS_User select plans based on \"([^\"]*)\" and click on COMPARE SELECTED PLANS button in Vision Plan Information table$")
+	public void ues_userSelectPlansBasedOnAndClickOnCOMPARESELECTEDPLANSButtonInVisionPlanInformationTable(String arg1) throws Throwable {
+	    System.out.println("User selected plan and click on COMPARE SELECTED RATES");
+	}
+
+	@Then("^UeS_User is verify ANNUL PREMIUM and BENEFIT in  Vision Plan Comparison  page$")
+	public void ues_userIsVerifyANNULPREMIUMAndBENEFITInVisionPlanComparisonPage() throws Throwable {
+		quotepage.verifyANNUALPREMIUM_BENEFIT_Vision(driver);
+		quotepage.tearDown(driver);
+	}
+	
+
+	@Then("^UeS_User is verify Employer Contribution Premium and Total Annual Premium and EMPLOYEE CLASS in Dental Rate Comparison page$")
+	public void ues_userIsVerifyEmployerContributionPremiumAndTotalAnnualPremiumAndEMPLOYEECLASSInDentalRateComparisonPage() throws Throwable {
+		quotepage.verifyTotalAnnualPremium_ContributionPremium_EMPLOYEECLASS(driver);
+		quotepage.tearDown(driver);
+	}
+
 }
 
