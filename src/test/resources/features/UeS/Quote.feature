@@ -335,7 +335,7 @@ Feature: Quotes Module
       | Quote_TC_22 |  | TC_22      |  | CA    |  | Show My Selected Plans |  | Show My Selected Plans |  |    90001 |
 
   @Aug @Validate_DentalPlanPage_Coverage_D_1
-  Scenario Outline: "<TestCaseID>" Validate Dental plans page by "<Value>" with COMPARE SELECTED PLANS
+  Scenario Outline: "<TestCaseID>" Validate Dental plans page by "<Value>" with COMPARE RATES FOR SELECTED PLANS
     When Flow_Fetch fileName "<FileName>" and testCaseID "<TestCaseID>" are captured
     Given Flow_Fetch Data from excel Sheet for "<TestCaseID>"
     Given UeS_User is on Home Page
@@ -371,9 +371,9 @@ Feature: Quotes Module
 
     Examples: 
       | FileName    |  | TestCaseID |  | State |  | Value                  |  | Zip Code |  | Coverage |
-      #| Quote_TC_24 |  | TC_24      |  | CA    |  | Most Popular Plans |  |    90001 |  | Vision   |
-      | Quote_TC_25 |  | TC_25      |  | TX    |  | Show All Plans         |  |    73301 |  | Vision   |
-      | Quote_TC_26 |  | TC_26      |  | WA    |  | Show My Selected Plans |  |    98001 |  | Vision   |
+      | Quote_TC_24 |  | TC_24      |  | CA    |  | Most Popular Plans |  |    90001 |  | Vision   |
+      #| Quote_TC_25 |  | TC_25      |  | TX    |  | Show All Plans         |  |    73301 |  | Vision   |
+      #| Quote_TC_26 |  | TC_26      |  | WA    |  | Show My Selected Plans |  |    98001 |  | Vision   |
 
   @Testing
   Scenario Outline: "<TestCaseID>" Testing
