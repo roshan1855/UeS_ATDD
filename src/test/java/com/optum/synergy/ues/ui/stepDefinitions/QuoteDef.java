@@ -89,6 +89,7 @@ public class QuoteDef{
 	public void ues_user_is_on_Home_Page() throws Throwable {
 		// driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 				driver.get(autoProperties.getProperty("BFX_URL"));
+				//driver.get(autoProperties.getProperty("STAGE_URL"));
 				utility.takeScreenShot(driver, "Homepage" + testCaseID);
 				utility.GenerateReport("Quote", "", "info", "Execution Started.User is on the login Page",
 						"Homepage" + testCaseID); 
@@ -363,6 +364,17 @@ public class QuoteDef{
 	@Then("^UeS_User is verify Employer Contribution Premium and Total Annual Premium and EMPLOYEE CLASS in Dental Rate Comparison page$")
 	public void ues_userIsVerifyEmployerContributionPremiumAndTotalAnnualPremiumAndEMPLOYEECLASSInDentalRateComparisonPage() throws Throwable {
 		quotepage.verifyTotalAnnualPremium_ContributionPremium_EMPLOYEECLASS(driver);
+		quotepage.tearDown(driver);
+	}
+	
+	@Then("^UeS_User select plans based on \"([^\"]*)\" and click on COMPARE RATES FOR SELECTED PLANS button in Vision Plan Information table$")
+	public void ues_userSelectPlansBasedOnAndClickOnCOMPARERATESFORSELECTEDPLANSButtonInVisionPlanInformationTable(String arg1) throws Throwable {
+		System.out.println("User selected plan and click on COMPARE RATES FOR SELECTED PLANS button");
+	}
+
+	@Then("^UeS_User is verify Monthly Premium and Annual Premium and EMPLOYEE CLASS in Vision Plan Comparison page$")
+	public void ues_userIsVerifyMonthlyPremiumAndAnnualPremiumAndEMPLOYEECLASSInVisionPlanComparisonPage() throws Throwable {
+		quotepage.verifyMonthlyPremium_AnnualPremium_EMPLOYEECLASS(driver);
 		quotepage.tearDown(driver);
 	}
 
