@@ -301,8 +301,8 @@ Feature: Quotes Module
     Then UeS_User is verify EMPLOYEE CLASS in Medical Rate Comparison page by using "<Information>"
     And UeS_User is navigate back to Medical Plans Page and click on next
     And UeS_User is Select the Plans from Optional Medical Riders Page and click on next
-   	And UeS_User is Select the Plans from Vision Plans Page and click on next
-   	Then UeS_User click on GENERATE FINAL PROPOSAL button and verify Preview Proposal PDf is displayed successfully
+    And UeS_User is Select the Plans from Vision Plans Page and click on next
+    Then UeS_User click on GENERATE FINAL PROPOSAL button and verify Preview Proposal PDf is displayed successfully
 
     Examples: 
       | FileName    |  | TestCaseID |  | State |  | Value                    |  | Information        |  | Zip Code |
@@ -311,7 +311,7 @@ Feature: Quotes Module
       | Quote_TC_18 |  | TC_18      |  | CA    |  | Age Banded for ACR       |  | Age Banded for ACR |  |    90001 |
 
   # Aug 2018
-  @Aug @Validate_DentalPlanPage_Coverage_D
+  @Regression_UeS @Validate_DentalPlanPage_Coverage_D
   Scenario Outline: "<TestCaseID>" Validate Dental plans page by "<Value>" with COMPARE SELECTED PLANS
     When Flow_Fetch fileName "<FileName>" and testCaseID "<TestCaseID>" are captured
     Given Flow_Fetch Data from excel Sheet for "<TestCaseID>"
@@ -334,7 +334,7 @@ Feature: Quotes Module
       | Quote_TC_21 |  | TC_21      |  | CA    |  | Show All Plans         |  | Show All Plans         |  |    90001 |
       | Quote_TC_22 |  | TC_22      |  | CA    |  | Show My Selected Plans |  | Show My Selected Plans |  |    90001 |
 
-  @Aug @Validate_DentalPlanPage_Coverage_D_1
+  @Regression_UeS @Validate_DentalPlanPage_Coverage_D_1
   Scenario Outline: "<TestCaseID>" Validate Dental plans page by "<Value>" with COMPARE RATES FOR SELECTED PLANS
     When Flow_Fetch fileName "<FileName>" and testCaseID "<TestCaseID>" are captured
     Given Flow_Fetch Data from excel Sheet for "<TestCaseID>"
@@ -353,7 +353,7 @@ Feature: Quotes Module
       | FileName    |  | TestCaseID |  | State |  | Value              |  | Zip Code |
       | Quote_TC_23 |  | TC_23      |  | CA    |  | Most Popular Plans |  |    90001 |
 
-  @Aug @Validate_VisionPlanPage_Coverage_V
+  @Regression_UeS @Validate_VisionPlanPage_Coverage_V
   Scenario Outline: "<TestCaseID>" Validate Vision plans page by "<Value>" with COMPARE SELECTED PLANS
     When Flow_Fetch fileName "<FileName>" and testCaseID "<TestCaseID>" are captured
     Given Flow_Fetch Data from excel Sheet for "<TestCaseID>"
@@ -371,11 +371,11 @@ Feature: Quotes Module
 
     Examples: 
       | FileName    |  | TestCaseID |  | State |  | Value                  |  | Zip Code |  | Coverage |
-      #| Quote_TC_24 |  | TC_24      |  | CA    |  | Most Popular Plans |  |    90001 |  | Vision   |
-      #| Quote_TC_25 |  | TC_25      |  | TX    |  | Show All Plans         |  |    73301 |  | Vision   |
+      | Quote_TC_24 |  | TC_24      |  | CA    |  | Most Popular Plans     |  |    90001 |  | Vision   |
+      | Quote_TC_25 |  | TC_25      |  | TX    |  | Show All Plans         |  |    73301 |  | Vision   |
       | Quote_TC_26 |  | TC_26      |  | WA    |  | Show My Selected Plans |  |    98001 |  | Vision   |
 
-  @Aug @Validate_VisionPlanPage_Coverage_V_1
+  @Regression_UeS123 @Validate_VisionPlanPage_Coverage_V_1
   Scenario Outline: "<TestCaseID>" Validate Vision plans page by "<Value>" with COMPARE RATES FOR SELECTED PLANS
     When Flow_Fetch fileName "<FileName>" and testCaseID "<TestCaseID>" are captured
     Given Flow_Fetch Data from excel Sheet for "<TestCaseID>"
@@ -393,8 +393,8 @@ Feature: Quotes Module
 
     Examples: 
       | FileName    |  | TestCaseID |  | State |  | Value                  |  | Zip Code |  | Coverage |
-      #| Quote_TC_27 |  | TC_27      |  | CA    |  | Most Popular Plans     |  |    90001 |  | Vision   |
-      #| Quote_TC_28 |  | TC_28      |  | TX    |  | Show All Plans         |  |    73301 |  | Vision   |
+      | Quote_TC_27 |  | TC_27      |  | CA    |  | Most Popular Plans     |  |    90001 |  | Vision   |
+      | Quote_TC_28 |  | TC_28      |  | TX    |  | Show All Plans         |  |    73301 |  | Vision   |
       | Quote_TC_29 |  | TC_29      |  | WA    |  | Show My Selected Plans |  |    98001 |  | Vision   |
 
   @Testing
