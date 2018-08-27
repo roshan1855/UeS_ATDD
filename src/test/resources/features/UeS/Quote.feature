@@ -394,8 +394,8 @@ Feature: Quotes Module
     Examples: 
       | FileName    |  | TestCaseID |  | State |  | Value                  |  | Zip Code |  | Coverage |
       #| Quote_TC_27 |  | TC_27      |  | CA    |  | Most Popular Plans     |  |    90001 |  | Vision   |
-      | Quote_TC_28 |  | TC_28      |  | TX    |  | Show All Plans         |  |    73301 |  | Vision   |
-      #| Quote_TC_29 |  | TC_29      |  | WA    |  | Show My Selected Plans |  |    98001 |  | Vision   |
+      #| Quote_TC_28 |  | TC_28      |  | TX    |  | Show All Plans         |  |    73301 |  | Vision   |
+      | Quote_TC_29 |  | TC_29      |  | WA    |  | Show My Selected Plans |  |    98001 |  | Vision   |
 
   @Testing
   Scenario Outline: "<TestCaseID>" Testing
