@@ -1661,7 +1661,7 @@ public QuotePage() throws IOException {
 				element=driver.findElement(quoteNextBtn);
 				executor = (JavascriptExecutor)driver;
 				executor.executeScript("arguments[0].click();", element);
-				//Thread.sleep(3000);
+				Thread.sleep(3000);
 	}
 	
 	public void quoteSetUpPageNew(WebDriver driver,String coverage,String zip) throws InterruptedException{
