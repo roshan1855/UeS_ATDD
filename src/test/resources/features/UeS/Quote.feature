@@ -375,7 +375,7 @@ Feature: Quotes Module
       | Quote_TC_25 |  | TC_25      |  | TX    |  | Show All Plans         |  |    73301 |  | Vision   |
       | Quote_TC_26 |  | TC_26      |  | WA    |  | Show My Selected Plans |  |    98001 |  | Vision   |
 
-  @Regression_UeS123 @Validate_VisionPlanPage_Coverage_V_1
+  @Regression_UeS @Validate_VisionPlanPage_Coverage_V_1
   Scenario Outline: "<TestCaseID>" Validate Vision plans page by "<Value>" with COMPARE RATES FOR SELECTED PLANS
     When Flow_Fetch fileName "<FileName>" and testCaseID "<TestCaseID>" are captured
     Given Flow_Fetch Data from excel Sheet for "<TestCaseID>"
