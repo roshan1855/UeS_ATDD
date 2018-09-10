@@ -54,9 +54,9 @@ public class HomePage {
 		//System.out.println("Heading Name :: " + nameHeading);
 
 		if (nameHeading.contains(name)) {
-			System.out.println(nameHeading + " :: " + " Heading Present on Home Page");
+			System.out.println(nameHeading + " :: " + " Heading present on Home Page");
 		} else {
-			System.out.println(nameHeading + "  ::" + " Heading not Present on Home Page");
+			System.out.println(nameHeading + "  ::" + " Heading not present on Home Page");
 			//Assert.assertEquals(nameHeading, name);
 		}
 	}
