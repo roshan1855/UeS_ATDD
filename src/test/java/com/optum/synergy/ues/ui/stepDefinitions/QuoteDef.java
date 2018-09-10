@@ -377,6 +377,20 @@ public class QuoteDef{
 		quotepage.verifyMonthlyPremium_AnnualPremium_EMPLOYEECLASS(driver);
 		quotepage.tearDown(driver);
 	}
+	
+	@Then("^UeS_User verify the Display Plan as \"([^\"]*)\" and select Display Plan as \"([^\"]*)\" then click on APPLY CHANGES button$")
+	public void ues_userVerifyTheDisplayPlanAsAndSelectDisplayPlanAsThenClickOnAPPLYCHANGESButton(String arg1, String arg2) throws Throwable {
+		quotepage.verifyDisplayPlan_SelectPlanCode(driver, arg1);
+	}
 
+	@Then("^UeS_User verify HMO tab in Dental Plans page and then click on HMO tab$")
+	public void ues_userVerifyHMOTabInDentalPlansPageAndThenClickOnHMOTab() throws Throwable {
+		quotepage.verifyHMO_clikHMOTab(driver);
+	}
+
+	@Then("^UeS_User is verify DHMO data displayed on Dental HMO Plan Information table based on \"([^\"]*)\"$")
+	public void ues_userIsVerifyDHMODataDisplayedOnDentalHMOPlanInformationTableBasedOn(String arg1) throws Throwable {
+		quotepage.verifyDisplayPlans_SelectPlanCode_HMO(driver, arg1);
+	}
 }
 
