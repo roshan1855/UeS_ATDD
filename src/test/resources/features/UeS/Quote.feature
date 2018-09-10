@@ -352,9 +352,8 @@ Feature: Quotes Module
     Examples: 
       | FileName    |  | TestCaseID |  | State |  | Value          |  | Zip Code |
       #| Quote_TC_23 |  | TC_23      |  | CA    |  | Most Popular Plans |  |    90001 |
-      | Quote_TC_30 |  | TC_30      |  | CA    |  | Show All Plans |  |    90001 |
-
-  #| Quote_TC_31 |  | TC_31      |  | CA    |  | Show My Selected Plans |  |    90001 |
+      #| Quote_TC_30 |  | TC_30      |  | CA    |  | Show All Plans |  |    90001 |
+  		| Quote_TC_31 |  | TC_31      |  | CA    |  | Show My Selected Plans |  |    90001 |
   @Regression_UeS1 @Validate_DentalPlanPage_Coverage_D_HMO
   Scenario Outline: "<TestCaseID>" Validate Dental plans page by "<Value>" with COMPARE RATES FOR SELECTED PLANS
     When Flow_Fetch fileName "<FileName>" and testCaseID "<TestCaseID>" are captured
