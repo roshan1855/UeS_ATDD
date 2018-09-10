@@ -56,7 +56,6 @@ public class HomePageDef {
 		driver = Hooks.driver;
 		utility = new Utilities();
 		autoProperties = Hooks.autoProperties;
-		
 		common = new CommonLibrary();
 		quotepage=new QuotePage();
 		compensationpage=new CompensationPage();
