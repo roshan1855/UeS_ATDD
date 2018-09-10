@@ -350,9 +350,33 @@ Feature: Quotes Module
     Then UeS_User is verify Employer Contribution Premium and Total Annual Premium and EMPLOYEE CLASS in Dental Rate Comparison page
 
     Examples: 
-      | FileName    |  | TestCaseID |  | State |  | Value              |  | Zip Code |
+      | FileName    |  | TestCaseID |  | State |  | Value                  |  | Zip Code |
       | Quote_TC_23 |  | TC_23      |  | CA    |  | Most Popular Plans |  |    90001 |
+      #| Quote_TC_30 |  | TC_30      |  | CA    |  | Show All Plans |  |    90001 |
+      #| Quote_TC_31 |  | TC_31      |  | CA    |  | Show My Selected Plans |  |    90001 |
 
+  @Regression_UeS1 @Validate_DentalPlanPage_Coverage_D_HMO
+  Scenario Outline: "<TestCaseID>" Validate Dental plans page by "<Value>" with COMPARE RATES FOR SELECTED PLANS
+    When Flow_Fetch fileName "<FileName>" and testCaseID "<TestCaseID>" are captured
+    Given Flow_Fetch Data from excel Sheet for "<TestCaseID>"
+    Given UeS_User is on Home Page
+    When UeS_User Navigate to LogIn Page
+    And UeS_User enters UserName and Password
+    Then UeS_User displayed Login Successfully
+    When UeS_User is on Home page and click on Quotes and then select New Quote
+    And UeS_User is select the state as "<State>" and Fill all the details of the Quote Setup window and click on next
+    And UeS_User is Fill all the details of the Quote Setup Page by using "<Zip Code>" and click on NEXT button
+    And UeS_User is Fill all the details without salary info of the Census page and click on next
+    Then UeS_User verify the Display Plan as "<Value>" and select Display Plan as "<Value>" then click on APPLY CHANGES button
+    And UeS_User verify HMO tab in Dental Plans page and then click on HMO tab
+    Then UeS_User is verify DHMO data displayed on Dental HMO Plan Information table based on "<Value>"
+
+    Examples: 
+      | FileName    |  | TestCaseID |  | State |  | Value              |  | Zip Code |
+      | Quote_TC_32 |  | TC_32      |  | CA    |  | Most Popular Plans |  |    90001 |
+
+  #| Quote_TC_33 |  | TC_33      |  | CA    |  | Show All Plans |  |    90001 |
+  
   @Regression_UeS @Validate_VisionPlanPage_Coverage_V
   Scenario Outline: "<TestCaseID>" Validate Vision plans page by "<Value>" with COMPARE SELECTED PLANS
     When Flow_Fetch fileName "<FileName>" and testCaseID "<TestCaseID>" are captured
