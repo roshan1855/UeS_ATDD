@@ -46,34 +46,46 @@ public class HomePageDef {
 	public static String startDateHS;
 	public static String cridHomeScreen;
 	public static String customerId;
-	public static String parentWindow; 
+	public static String parentWindow;
 	DesiredCapabilities ieCapabilities;
 	public static QuotePage quotepage;
 	public static CompensationPage compensationpage;
 	public static HomePage homepage;
-	
+
 	public HomePageDef() throws IOException {
 		driver = Hooks.driver;
 		utility = new Utilities();
 		autoProperties = Hooks.autoProperties;
 		common = new CommonLibrary();
-		quotepage=new QuotePage();
-		compensationpage=new CompensationPage();
-		homepage=new HomePage();
+		quotepage = new QuotePage();
+		compensationpage = new CompensationPage();
+		homepage = new HomePage();
 
 	}
 
-	
 	@Then("^UeS_User verify User Name,Hearder and Footer on Home Page$")
 	public void ues_userVerifyUserNameHearderAndFooterOnHomePage() throws Throwable {
 		homepage.verifyUserName_Header_Footer(driver);
 		quotepage.tearDown(driver);
 	}
-	
+
 	@Then("^UeS_User verify News & Information/News & Rate Alerts/Whats New\\?/ Quick Links section on Home Page$")
 	public void ues_userVerifyNewsInformationNewsRateAlertsWhatsNewQuickLinksSectionOnHomePage() throws Throwable {
 		homepage.verifyUserName_Header_Footer(driver);
 		homepage.verifyHomePageHeadings(driver);
+		quotepage.tearDown(driver);
+	}
+
+	@Then("^UeS_User verify Forms, Help & Training ,Benefits Administration and Recognition tabs on Home Page then click on each tab$")
+	public void ues_userVerifyFormsHelpTrainingBenefitsAdministrationAndRecognitionTabsOnHomePageThenClickOnEachTab()
+			throws Throwable {
+		homepage.verifyTabs(driver);
+	}
+
+	@Then("^UeS_User verify content on each page based on User selected tab on Home Page$")
+	public void ues_userVerifyContentOnEachPageBasedOnUserSelectedTabOnHomePage() throws Throwable {
+		homepage.verifyContentOnEachTab(driver);
+		homepage.clickTab_verifyHelpTraining(driver);
 		quotepage.tearDown(driver);
 	}
 
