@@ -50,9 +50,11 @@ public class Hooks {
 	public static ClassLoader loader;
 
 	//public static final String SAUCE_USERNAME = "a4mesdet";
-	public static final String SAUCE_USERNAME = "hkaur115";
+	//public static final String SAUCE_USERNAME = "hkaur115";
+	public static final String SAUCE_USERNAME = "dsuribab";
 	//public static final String SAUCE_ACCESS_KEY = "d0c27b03-24cc-4c20-8228-fc9a196e33a6"; 
-	public static final String SAUCE_ACCESS_KEY ="b16e4496-8ff4-473c-bdae-21929162d1a9"; 
+	//public static final String SAUCE_ACCESS_KEY ="b16e4496-8ff4-473c-bdae-21929162d1a9"; 
+	public static final String SAUCE_ACCESS_KEY ="7d62f10a-a371-43a9-9af7-57232d981792";
 	//public static final String SAUCE_ACCESS_KEY ="09e9ec1f-f289-419b-918c-8543952db633";
 	public static final String SAUCE_URL = "http://" + SAUCE_USERNAME + ":" + SAUCE_ACCESS_KEY
 			+ "@ondemand.saucelabs.com:80/wd/hub";
