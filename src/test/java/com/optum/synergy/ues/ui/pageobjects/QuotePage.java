@@ -2774,11 +2774,10 @@ public class QuotePage {
 					.getText();
 
 			if (textHMO.contains("DHMO")) {
-				System.out.println("DHMO is present in Dental HMO Plan Information table of selected row");
+				System.out.println("DHMO is present in Dental HMO Plan Information table for selected " + displayPlan);
 			} else {
-				System.out.println("DHMO not present in Dental HMO Plan Information table of selected row");
+				System.out.println("DHMO not present in Dental HMO Plan Information table for selected " + displayPlan);
 			}
-
 		}
 		if ((displayPlan.contains("Show All Plans"))) {
 			System.out.println("inside if ::" + displayPlan);
@@ -2791,7 +2790,7 @@ public class QuotePage {
 
 			utility.waitForVisibilityOfWebElement(
 					By.xpath("//input[@name='dentalPlanHMOInformationForm[1].dhmoSelectInd']"), driver);
-			element = driver.findElement(By.xpath("//input[@name='dentalPlanHMOInformationForm[0].dhmoSelectInd']"));
+			element = driver.findElement(By.xpath("//input[@name='dentalPlanHMOInformationForm[1].dhmoSelectInd']"));
 			executor = (JavascriptExecutor) driver;
 			executor.executeScript("arguments[0].click();", element);
 
@@ -2805,35 +2804,30 @@ public class QuotePage {
 					.getText();
 
 			if ((textHMO1.contains("DHMO") && (textHMO2.contains("DHMO")))) {
-				System.out.println("DHMO content is present in Dental HMO Plan Information table of selected rows");
+				System.out.println(
+						"DHMO content is present in Dental HMO Plan Information table for selected " + displayPlan);
 			} else {
-				System.out.println("DHMO content not present in Dental HMO Plan Information table of selected rows");
+				System.out.println(
+						"DHMO content not present in Dental HMO Plan Information table of selected " + displayPlan);
 			}
-
-			// Thread.sleep(5000);
-
 		}
 	}
 
 	public void verifyHMO_clikHMOTab(WebDriver driver) throws InterruptedException {
-		Thread.sleep(10000);
-		driver.switchTo().defaultContent();
-		Thread.sleep(3000);
-		driver.switchTo().frame("content");
-		System.out.println("Frame name ::" + driver.switchTo().frame("content").getTitle());
-		System.out.println(" Before HMO ");
-		String nameHMOTab = driver.findElement(By.xpath("//input[@name='hmo plans' and @value='HMO']"))
+		utility.waitForVisibilityOfWebElement(By.xpath("//input[@name='submitHMOPlans' and @value='HMO']"), driver);
+		String nameHMOTab = driver.findElement(By.xpath("//input[@name='submitHMOPlans' and @value='HMO']"))
 				.getAttribute("name");
+		System.out.println("HMO tab Name :: " + nameHMOTab);
 
-		if (nameHMOTab.contains("hmo")) {
-			System.out.println("HMO tab present in Dental Plans page");
-			utility.waitForVisibilityOfWebElement(By.xpath("//input[@name='hmo plans']"), driver);
-			element = driver.findElement(By.xpath("//input[@name='hmo plans']"));
+		if (nameHMOTab.contains("HMO")) {
+			System.out.println("HMO tab present on Dental Plans page");
+			utility.waitForVisibilityOfWebElement(By.xpath("//input[@name='submitHMOPlans' and @value='HMO']"), driver);
+			element = driver.findElement(By.xpath("//input[@name='submitHMOPlans' and @value='HMO']"));
 			executor = (JavascriptExecutor) driver;
 			executor.executeScript("arguments[0].click();", element);
 			Thread.sleep(3000);
 		} else {
-			System.out.println("HMO tab not present in Dental Plans page");
+			System.out.println("HMO tab not present on Dental Plans page");
 		}
 
 	}
@@ -3453,7 +3447,6 @@ public class QuotePage {
 					}
 				}
 			}
-
 		}
 	}
 
