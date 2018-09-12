@@ -47,7 +47,7 @@ package com.optum.synergy.ues.ui.stepDefinitions;
 		public static QuotePage quotepage;
 		
 		public CompensationDef() throws IOException {
-			System.out.println("**** Begin Compensation Flow Execution() ***** ");
+			//System.out.println("**** Begin Compensation Flow Execution() ***** ");
 			driver = Hooks.driver;
 			utility = new Utilities();
 			autoProperties = Hooks.autoProperties;
