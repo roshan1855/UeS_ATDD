@@ -391,6 +391,7 @@ public class QuoteDef{
 	@Then("^UeS_User is verify DHMO data displayed on Dental HMO Plan Information table based on \"([^\"]*)\"$")
 	public void ues_userIsVerifyDHMODataDisplayedOnDentalHMOPlanInformationTableBasedOn(String arg1) throws Throwable {
 		quotepage.verifyDisplayPlans_SelectPlanCode_HMO(driver, arg1);
+		quotepage.tearDown(driver);
 	}
 }
 
