@@ -50,7 +50,7 @@ public class NetworkDef {
 	public static QuotePage quotepage;
 	
 	public NetworkDef() throws IOException {
-		System.out.println("**** Begin Network Module Execution() ***** ");
+		//System.out.println("**** Begin Network Module Execution() ***** ");
 		driver = Hooks.driver;
 		utility = new Utilities();
 		autoProperties = Hooks.autoProperties;
