@@ -129,6 +129,46 @@ public class HomePage {
 
 	}
 
+	public void verifySAMLink(WebDriver driver) throws InterruptedException {
+		element = driver.findElement(By.xpath(
+				"//img[@src='/mc/Broker/UHG/en-US/AllContent/Unassigned Content/Static Files/Images/SAM SSO Image.jpg']"));
+		//System.out.println("SAM text ::" + element.getAttribute("src"));
+		if (element.getAttribute("src").contains("SAM")) {
+			System.out.println("SAM link present on Home Page");
+
+			executor = (JavascriptExecutor) driver;
+			executor.executeScript("arguments[0].click();", element);
+
+			Thread.sleep(20000);
+		} else {
+			System.out.println("SAM link not present on Home Page");
+		}
+		// img[@src='/mc/Broker/UHG/en-US/AllContent/Unassigned Content/Static
+		// Files/Images/SAM.png'] BFX
+		// img[@src='/mc/Broker/UHG/en-US/AllContent/Unassigned Content/Static
+		// Files/Images/SAM SSO Image.jpg'] STG
+	}
+
+	public void verifySAMPage(WebDriver driver) {
+		// utility.waitForNumberOfWindowsToEqual(2);
+		for (String winHandle : driver.getWindowHandles()) {
+			driver.switchTo().window(winHandle);
+			if (driver.switchTo().window(winHandle).getCurrentUrl().contains("healthinsurance")) {
+				System.out.println("SAM page URL :: " + driver.switchTo().window(winHandle).getCurrentUrl()
+						+ " displayed successfully");
+
+				element = driver.findElement(By.id("samlogo"));
+				if (element.getAttribute("src").contains("sam-logo")) {
+					System.out.println("SAM page displayed successfully");
+					driver.switchTo().window(winHandle).close();
+					break;
+				}
+			}
+		}
+	}
+
+	
+
 	public static void clickTab_verifyContentOnEachTab(WebDriver driver, By tabPath, By contentPath, String content)
 			throws InterruptedException {
 
