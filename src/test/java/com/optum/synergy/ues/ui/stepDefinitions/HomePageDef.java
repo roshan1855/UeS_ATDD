@@ -89,4 +89,15 @@ public class HomePageDef {
 		quotepage.tearDown(driver);
 	}
 
+	@Then("^UeS_User verify Sales Automation Management Link on Home Page and then click on SAM link$")
+	public void ues_userVerifySalesAutomationManagementSAMLinkOnHomePageAndThenClickOnSAMLink() throws Throwable {
+		homepage.verifyUserName_Header_Footer(driver);
+		homepage.verifySAMLink(driver);
+	}
+
+	@Then("^UeS_User verify Sales Automation Management page displayed successfully$")
+	public void ues_userVerifySalesAutomationManagementSAMPageDisplayedSuccessfully() throws Throwable {
+		homepage.verifySAMPage(driver);
+		quotepage.tearDown(driver);
+	}
 }
