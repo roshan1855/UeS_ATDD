@@ -28,7 +28,7 @@ Feature: Home Page
       | FileName    |  | TestCaseID |
       | Quote_TC_35 |  | TC_35      |
 
-  @Regression_UeS123 @Display_SAM_Link_On_HomePage
+  @Regression_UeS123 @Display_SAM_Link_On_HomePage @SAM
   Scenario Outline: "<TestCaseID>" Display SAM: Sales Automation Management(SAM) link on Home Page
     When Flow_Fetch fileName "<FileName>" and testCaseID "<TestCaseID>" are captured
     Given Flow_Fetch Data from excel Sheet for "<TestCaseID>"
@@ -36,8 +36,8 @@ Feature: Home Page
     When UeS_User Navigate to LogIn Page
     And UeS_User enters UserName and Password
     Then UeS_User displayed Login Successfully
-    And UeS_User verify Sales Automation Management(SAM) Link on Home Page and then click on SAM link
-    Then UeS_User verify Sales Automation Management(SAM) page displayed successfully
+    And UeS_User verify Sales Automation Management Link on Home Page and then click on SAM link
+    Then UeS_User verify Sales Automation Management page displayed successfully
 
     Examples: 
       | FileName    |  | TestCaseID |
