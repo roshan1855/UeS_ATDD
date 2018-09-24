@@ -132,7 +132,7 @@ public class HomePage {
 	public void verifySAMLink(WebDriver driver) throws InterruptedException {
 		element = driver.findElement(By.xpath(
 				"//img[@src='/mc/Broker/UHG/en-US/AllContent/Unassigned Content/Static Files/Images/SAM SSO Image.jpg']"));
-		//System.out.println("SAM text ::" + element.getAttribute("src"));
+		// System.out.println("SAM text ::" + element.getAttribute("src"));
 		if (element.getAttribute("src").contains("SAM")) {
 			System.out.println("SAM link present on Home Page");
 
@@ -166,8 +166,6 @@ public class HomePage {
 			}
 		}
 	}
-
-	
 
 	public static void clickTab_verifyContentOnEachTab(WebDriver driver, By tabPath, By contentPath, String content)
 			throws InterruptedException {
