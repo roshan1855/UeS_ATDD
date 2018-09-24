@@ -1,4 +1,4 @@
-Feature: Home Page
+Feature: MyAccount Page
 
   @Regression_UeS123 @MyAccount_Admin
   Scenario Outline: "<TestCaseID>" Display all links(all page) on My Account page when user logging as Administrator
