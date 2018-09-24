@@ -11,8 +11,8 @@ Feature: Home Page
     Then UeS_User verify User Name,Hearder and Footer on Home Page
 
     Examples: 
-      | FileName    |  | TestCaseID |
-      | Quote_TC_34 |  | TC_34      |
+      | FileName       |  | TestCaseID |
+      | HomePage_TC_34 |  | TC_34      |
 
   @Regression_UeS123 @Validate_Headings_On_HomePage
   Scenario Outline: "<TestCaseID>" Validate News & Information/News & Rate Alerts/Whats New?/ Quick Links section on Home Page
@@ -25,8 +25,8 @@ Feature: Home Page
     Then UeS_User verify News & Information/News & Rate Alerts/Whats New?/ Quick Links section on Home Page
 
     Examples: 
-      | FileName    |  | TestCaseID |
-      | Quote_TC_35 |  | TC_35      |
+      | FileName       |  | TestCaseID |
+      | HomePage_TC_35 |  | TC_35      |
 
   @Regression_UeS123 @Display_SAM_Link_On_HomePage @SAM
   Scenario Outline: "<TestCaseID>" Display SAM: Sales Automation Management(SAM) link on Home Page
@@ -40,8 +40,8 @@ Feature: Home Page
     Then UeS_User verify Sales Automation Management page displayed successfully
 
     Examples: 
-      | FileName    |  | TestCaseID |
-      | Quote_TC_36 |  | TC_36      |
+      | FileName       |  | TestCaseID |
+      | HomePage_TC_36 |  | TC_36      |
 
   @Regression_UeS123 @Display_Forms_Help&Training_BenefitsAdministration_Recognition_Tabs_On_HomePage @Home
   Scenario Outline: "<TestCaseID>" Display of tabs within homepage including Forms / Help & Training / Benefits Administration / Recognition
@@ -52,8 +52,8 @@ Feature: Home Page
     And UeS_User enters UserName and Password
     Then UeS_User displayed Login Successfully
     And UeS_User verify Forms, Help & Training ,Benefits Administration and Recognition tabs on Home Page then click on each tab
-    Then UeS_User verify content on each page based on User selected tab on Home Page 
+    Then UeS_User verify content on each page based on User selected tab on Home Page
 
     Examples: 
-      | FileName    |  | TestCaseID |
-      | Quote_TC_37 |  | TC_37      |
+      | FileName       |  | TestCaseID |
+      | HomePAge_TC_37 |  | TC_37      |
