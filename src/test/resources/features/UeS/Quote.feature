@@ -373,7 +373,7 @@ Feature: Quotes Module
 
     Examples: 
       | FileName    |  | TestCaseID |  | State |  | Value              |  | Zip Code |
-      #| Quote_TC_32 |  | TC_32      |  | CA    |  | Most Popular Plans |  |    90001 |
+      | Quote_TC_32 |  | TC_32      |  | CA    |  | Most Popular Plans |  |    90001 |
       | Quote_TC_33 |  | TC_33      |  | CA    |  | Show All Plans     |  |    90001 |
 
   @Regression_UeS @Validate_VisionPlanPage_Coverage_V
