@@ -14,5 +14,5 @@ Feature: MyAccount Page
     Then UeS_User click on each link on My Account page and verify page displayed successfully based on User clicked on link
 
     Examples: 
-      | FileName    |  | TestCaseID |
-      | Quote_TC_39 |  | TC_39      |
+      | FileName        |  | TestCaseID |
+      | MyAccount_TC_39 |  | TC_39      |
