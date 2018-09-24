@@ -1,7 +1,7 @@
 Feature: Home Page
 
   @Regression_UeS123 @MyAccount_Admin
-  Scenario Outline: "<TestCaseID>" Validate UserName_ Hearder_ Footer on home page
+  Scenario Outline: "<TestCaseID>" Display all links(all page) on My Account page when user logging as Administrator
     When Flow_Fetch fileName "<FileName>" and testCaseID "<TestCaseID>" are captured
     Given Flow_Fetch Data from excel Sheet for "<TestCaseID>"
     Given UeS_User is on Home Page
