@@ -151,7 +151,7 @@ public class MyAccountPage {
 			Thread.sleep(3000);
 		}
 	}
-	
+
 	public static void verifyLinkPage_1(WebDriver driver, By linkPath, String name, By linkPagePath)
 			throws InterruptedException {
 		Thread.sleep(1000);
@@ -193,33 +193,43 @@ public class MyAccountPage {
 		}
 	}
 
-
-	public void verifyLinkPages(WebDriver driver) throws InterruptedException {
+	public void verifyLinkPages_Admin_Set1(WebDriver driver) throws InterruptedException {
 		MyAccountPage.verifyLinkPage(driver, linkChangePassword, "Change Password", pageChangePassword);
 		MyAccountPage.verifyLinkPage(driver, linkChangeSecretQuestions, "Secret Question and Answer",
 				pageChangeSecretQuestions);
 		MyAccountPage.verifyLinkPage(driver, linkUpdateUnitedAdvantageComInformation,
 				"United Advantage Logon Information", pageUpdateUnitedAdvantageComInformation);
+	}
+
+	public void verifyLinkPages_Admin_Set2(WebDriver driver) throws InterruptedException {
 		MyAccountPage.verifyLinkPage(driver, linkViewEditContactInformation, "View/Edit Contact Information",
 				pageViewEditContactInformation);
-
 		MyAccountPage.verifyLinkPage(driver, linkQuoteSetup, "Quote Setup Information", pageQuoteSetup);
 		MyAccountPage.verifyLinkPage(driver, linkQuoteGenerationOptions, "Quote Generation Options",
 				pageQuoteGenerationOptions);
+	}
+
+	public void verifyLinkPages_Admin_Set3(WebDriver driver) throws InterruptedException {
 		MyAccountPage.verifyLinkPage(driver, linkCustomLogoSelection, "Custom Logo Selection", pageCustomLogoSelection);
 		MyAccountPage.verifyLinkPage(driver, linkDefineSalesMaterialandBenefitSearches, "Sales Material Search Options",
 				pageDefineSalesMaterialandBenefitSearches);
 	}
 
-	public void verifyMyAccountPage_Links_Admin(WebDriver driver) throws InterruptedException {
+	public void verifyMyAccountPage_Links_Admin_Set1(WebDriver driver) throws InterruptedException {
 		MyAccountPage.verifyLink_MyAccountPage(driver, linkChangePassword, "Change Password", "link");
 		MyAccountPage.verifyLink_MyAccountPage(driver, linkChangeSecretQuestions, "Change Secret Questions", "link");
 		MyAccountPage.verifyLink_MyAccountPage(driver, linkUpdateUnitedAdvantageComInformation,
 				"Update UnitedAdvantage.com Information", "link");
+	}
+
+	public void verifyMyAccountPage_Links_Admin_Set2(WebDriver driver) throws InterruptedException {
 		MyAccountPage.verifyLink_MyAccountPage(driver, linkViewEditContactInformation, "View/Edit Contact Information",
 				"link");
 		MyAccountPage.verifyLink_MyAccountPage(driver, linkQuoteSetup, "Quote Setup", "link");
 		MyAccountPage.verifyLink_MyAccountPage(driver, linkQuoteGenerationOptions, "Quote Generation Options", "link");
+	}
+
+	public void verifyMyAccountPage_Links_Admin_Set3(WebDriver driver) throws InterruptedException {
 		MyAccountPage.verifyLink_MyAccountPage(driver, linkCustomLogoSelection, "Custom Logo Selection", "link");
 		MyAccountPage.verifyLink_MyAccountPage(driver, linkDefineSalesMaterialandBenefitSearches,
 				"Define Sales Material and Benefit Searches", "link");
