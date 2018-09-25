@@ -31,6 +31,8 @@ public class HomePage {
 	By contentHelpTraining = By.xpath(".//*[contains(text(),'United eServices Help & Training')]");
 	// By contentHelpTraining=By.xpath("//h1[contains(.,'United eServices Help
 	// & Training')]");
+	static By unitedHealthcareLogo=By.xpath("//img[@title='UnitedHealthcare Logo']");
+	static By unitedeServicesLogo=By.xpath("//img[@title='United eServices Logo']");
 
 	public HomePage() throws IOException {
 
@@ -49,10 +51,10 @@ public class HomePage {
 		// driver.switchTo().frame("navbar").getTitle());
 		// Thread.sleep(2000);
 
-		String unitedHealthcareLogo = "//img[@title='UnitedHealthcare Logo']";
+		//String unitedHealthcareLogo = "//img[@title='UnitedHealthcare Logo']";
 		QuotePage.verifyPageDisplay_logo(driver, unitedHealthcareLogo, "UnitedHealthcare Logo");
 
-		String unitedeServicesLogo = "//img[@title='United eServices Logo']";
+		//String unitedeServicesLogo = "//img[@title='United eServices Logo']";
 		QuotePage.verifyPageDisplay_logo(driver, unitedeServicesLogo, "United eServices Logo");
 
 		Thread.sleep(2000);
