@@ -18,7 +18,7 @@ import com.optum.synergy.ues.ui.pageobjects.MyAccountPage;
 import com.optum.synergy.ues.ui.pageobjects.QuotePage;
 import com.optum.synergy.ues.ui.utilities.Utilities;
 
-import cucumber.api.java.en.Then;
+import cucumber.api.java.en.*;
 
 public class MyAccountDef {
 	static WebDriver driver;
@@ -79,6 +79,77 @@ public class MyAccountDef {
 	public void ues_userClickOnEachLinkOnMyAccountPageAndVerifyPageDisplayedSuccessfullyBasedOnUserClickedOnLink()
 			throws Throwable {
 		myaccountpage.verifyLinkPages(driver);
+		quotepage.tearDown(driver);
+	}
+
+	@When("^UeS_User enters UserName as \"([^\"]*)\" and Password as \"([^\"]*)\" for Broker login$")
+	public void ues_userEntersUserNameAsAndPasswordAsForBrokerLogin(String arg1, String arg2) throws Throwable {
+		quotepage.loginUeS_Broker(driver, arg1, arg2);
+	}
+
+	@Then("^UeS_User verify Broker User Name,Hearder and Footer on Home Page$")
+	public void ues_userVerifyBrokerUserNameHearderAndFooterOnHomePage() throws Throwable {
+		homepage.verifyUserName_Header_Footer(driver);
+	}
+
+	@Then("^UeS_User verify followed links on MyAccount page View/Edit Renewal Package Mailing Preference,Change Password and Change Secret Questions$")
+	public void ues_userVerifyFollowedLinksOnMyAccountPageViewEditRenewalPackageMailingPreferenceChangePasswordAndChangeSecretQuestions()
+			throws Throwable {
+		myaccountpage.verifyMyAccountPage_Links_Broker_Set1(driver);
+	}
+
+	@Then("^UeS_User click on above links and verify pages View/Edit Renewal Package Mailing Preference,Change Password and Change Secret Questions$")
+	public void ues_userClickOnAboveLinksAndVerifyPagesViewEditRenewalPackageMailingPreferenceChangePasswordAndChangeSecretQuestions()
+			throws Throwable {
+		myaccountpage.verifyLinkPages_Broker_Set1(driver);
+	}
+
+	@Then("^UeS_User verify followed links on MyAccount page Update Employer eServices Information,Update UnitedAdvantage\\.com Information and View/Edit Contact Information$")
+	public void ues_userVerifyFollowedLinksOnMyAccountPageUpdateEmployerEServicesInformationUpdateUnitedAdvantageComInformationAndViewEditContactInformation()
+			throws Throwable {
+		myaccountpage.verifyMyAccountPage_Links_Broker_Set2(driver);
+	}
+
+	@Then("^UeS_User click on above links and verify pages Update Employer eServices Information,Update UnitedAdvantage\\.com Information and View/Edit Contact Information$")
+	public void ues_userClickOnAboveLinksAndVerifyPagesUpdateEmployerEServicesInformationUpdateUnitedAdvantageComInformationAndViewEditContactInformation()
+			throws Throwable {
+		myaccountpage.verifyLinkPages_Broker_Set2(driver);
+	}
+
+	@Then("^UeS_User verify followed links on MyAccount page Manage My Delegates,View License & Appointments and Change Renewal Alerts Status$")
+	public void ues_userVerifyFollowedLinksOnMyAccountPageManageMyDelegatesViewLicenseAppointmentsAndChangeRenewalAlertsStatus()
+			throws Throwable {
+		myaccountpage.verifyMyAccountPage_Links_Broker_Set3(driver);
+	}
+
+	@Then("^UeS_User click on above links and verify pages Manage My Delegates,View License & Appointments and Change Renewal Alerts Status$")
+	public void ues_userClickOnAboveLinksAndVerifyPagesManageMyDelegatesViewLicenseAppointmentsAndChangeRenewalAlertsStatus()
+			throws Throwable {
+		myaccountpage.verifyLinkPages_Broker_Set3(driver);
+	}
+
+	@Then("^UeS_User verify followed links on MyAccount page Change Commission Alerts Status,Change Late Premium and Cancel Case Alerts Status and Quote Setup$")
+	public void ues_userVerifyFollowedLinksOnMyAccountPageChangeCommissionAlertsStatusChangeLatePremiumAndCancelCaseAlertsStatusAndQuoteSetup()
+			throws Throwable {
+		myaccountpage.verifyMyAccountPage_Links_Broker_Set4(driver);
+	}
+
+	@Then("^UeS_User click on above links and verify pages Change Commission Alerts Status,Change Late Premium and Cancel Case Alerts Status and Quote Setup$")
+	public void ues_userClickOnAboveLinksAndVerifyPagesChangeCommissionAlertsStatusChangeLatePremiumAndCancelCaseAlertsStatusAndQuoteSetup()
+			throws Throwable {
+		myaccountpage.verifyLinkPages_Broker_Set4(driver);
+	}
+
+	@Then("^UeS_User verify followed links on MyAccount page Quote Generation Options,Custom Logo Selection and Define Sales Material & Benefit Searches$")
+	public void ues_userVerifyFollowedLinksOnMyAccountPageQuoteGenerationOptionsCustomLogoSelectionAndDefineSalesMaterialBenefitSearches()
+			throws Throwable {
+		myaccountpage.verifyMyAccountPage_Links_Broker_Set5(driver);
+	}
+
+	@Then("^UeS_User click on above links and verify pages Quote Generation Options,Custom Logo Selection and Define Sales Material & Benefit Searches$")
+	public void ues_userClickOnAboveLinksAndVerifyPagesQuoteGenerationOptionsCustomLogoSelectionAndDefineSalesMaterialBenefitSearches()
+			throws Throwable {
+		myaccountpage.verifyLinkPages_Broker_Set5(driver);
 		quotepage.tearDown(driver);
 	}
 
