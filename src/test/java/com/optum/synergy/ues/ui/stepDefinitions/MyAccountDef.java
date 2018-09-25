@@ -72,13 +72,13 @@ public class MyAccountDef {
 
 	@Then("^UeS_User verify links on My Account page when user logging as Administrator$")
 	public void ues_userVerifyLinksOnMyAccountPageWhenUserLoggingAsAdministrator() throws Throwable {
-		myaccountpage.verifyMyAccountPage_Links_Admin(driver);
+		//myaccountpage.verifyMyAccountPage_Links_Admin(driver);
 	}
 
 	@Then("^UeS_User click on each link on My Account page and verify page displayed successfully based on User clicked on link$")
 	public void ues_userClickOnEachLinkOnMyAccountPageAndVerifyPageDisplayedSuccessfullyBasedOnUserClickedOnLink()
 			throws Throwable {
-		myaccountpage.verifyLinkPages(driver);
+		//myaccountpage.verifyLinkPages(driver);
 		quotepage.tearDown(driver);
 	}
 
@@ -151,6 +151,38 @@ public class MyAccountDef {
 			throws Throwable {
 		myaccountpage.verifyLinkPages_Broker_Set5(driver);
 		quotepage.tearDown(driver);
+	}
+	
+	@Then("^UeS_User verify followed links on MyAccount page Change Password,Change Secret Questions and Update UnitedAdvantage\\.com Information$")
+	public void ues_userVerifyFollowedLinksOnMyAccountPageChangePasswordChangeSecretQuestionsAndUpdateUnitedAdvantageComInformation() throws Throwable {
+	  myaccountpage.verifyMyAccountPage_Links_Admin_Set1(driver);  
+	}
+
+	@Then("^UeS_User click on above links and verify pages Change Password,Change Secret Questions and Update UnitedAdvantage\\.com Information$")
+	public void ues_userClickOnAboveLinksAndVerifyPagesChangePasswordChangeSecretQuestionsAndUpdateUnitedAdvantageComInformation() throws Throwable {
+	   myaccountpage.verifyLinkPages_Admin_Set1(driver);
+	}
+
+	@Then("^UeS_User verify followed links on MyAccount page View/Edit Contact Information,Quote Setup and Quote Generation Options$")
+	public void ues_userVerifyFollowedLinksOnMyAccountPageViewEditContactInformationQuoteSetupAndQuoteGenerationOptions() throws Throwable {
+		myaccountpage.verifyMyAccountPage_Links_Admin_Set2(driver);
+	}
+
+	@Then("^UeS_User click on above links and verify pages View/Edit Contact Information,Quote Setup and Quote Generation Options$")
+	public void ues_userClickOnAboveLinksAndVerifyPagesViewEditContactInformationQuoteSetupAndQuoteGenerationOptions() throws Throwable {
+		myaccountpage.verifyLinkPages_Admin_Set2(driver);
+	}
+
+	@Then("^UeS_User verify followed links on MyAccount page Custom Logo Selection and Define Sales Material & Benefit Searches$")
+	public void ues_userVerifyFollowedLinksOnMyAccountPageCustomLogoSelectionAndDefineSalesMaterialBenefitSearches() throws Throwable {
+		myaccountpage.verifyMyAccountPage_Links_Admin_Set3(driver);
+	}
+
+	@Then("^UeS_User click on above links and verify pages Custom Logo Selection and Define Sales Material & Benefit Searches$")
+	public void ues_userClickOnAboveLinksAndVerifyPagesCustomLogoSelectionAndDefineSalesMaterialBenefitSearches() throws Throwable {
+		myaccountpage.verifyLinkPages_Admin_Set3(driver);
+		quotepage.tearDown(driver);
+		
 	}
 
 }
