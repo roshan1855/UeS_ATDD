@@ -116,11 +116,11 @@ public class QuotePage {
 	By compCommissionSchedule = By.xpath("//span[contains(text(), 'Commission Schedule')]");
 	By compCommissionStatements = By.xpath("//a[contains(text(),'Commission Statements')]");
 	By compRequestDirectDepositAuthorization = By.xpath("//a[contains(text(),'Request Direct Deposit Authorization')]");
+	
+	By txtBoxSICCODE=By.xpath("//input[@name='quoteLocationForm[0].sicCode']");
 
 	public QuotePage() throws IOException {
-
 		utility = new Utilities();
-
 	}
 
 	public void pageUeSLogin() throws InterruptedException {
@@ -138,8 +138,8 @@ public class QuotePage {
 
 	public void loginUeSApp(WebDriver driver) throws InterruptedException {
 		utility.waitForVisibilityOfWebElement(uesUserName, driver);
-		driver.findElement(uesUserName).sendKeys("roshanadmin05");
-		//driver.findElement(uesUserName).sendKeys("roshankumar");
+		//driver.findElement(uesUserName).sendKeys("roshanadmin05");
+		driver.findElement(uesUserName).sendKeys("roshankumar");
 
 		utility.waitForVisibilityOfWebElement(uesPwd, driver);
 		//driver.findElement(uesPwd).sendKeys("Computer$4");
@@ -152,6 +152,24 @@ public class QuotePage {
 		System.out.println("User clicked Login Button.....");
 		// Thread.sleep(6000);
 	}
+	
+	public void loginUeS_Broker(WebDriver driver,String userName,String pwd) throws InterruptedException {
+		utility.waitForVisibilityOfWebElement(uesUserName, driver);
+		driver.findElement(uesUserName).sendKeys(userName);
+		//driver.findElement(uesUserName).sendKeys("roshankumar");
+
+		utility.waitForVisibilityOfWebElement(uesPwd, driver);
+		//driver.findElement(uesPwd).sendKeys("Computer$4");
+		driver.findElement(uesPwd).sendKeys(pwd);
+
+		utility.waitForVisibilityOfWebElement(uesLoginBtn, driver);
+		element = driver.findElement(uesLoginBtn);
+		executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", element);
+		System.out.println("User clicked Login Button.....");
+		Thread.sleep(6000);
+	}
+
 
 	public void username_pwd() throws InterruptedException {
 		Thread.sleep(5000);
@@ -865,14 +883,11 @@ public class QuotePage {
 	}
 
 	public void quoteSetupPage(WebDriver driver) throws InterruptedException {
-		// System.out.println("out side Tilte : :"+driver.getTitle());
 		String pwindow = driver.getWindowHandle();
 		Thread.sleep(2000);
 		driver.switchTo().defaultContent();
 		Thread.sleep(200);
 		driver.switchTo().frame("content");
-		// System.out.println("Frame Title : :"+
-		// driver.switchTo().frame("content").getTitle());
 		Thread.sleep(2000);
 
 		String quoteSetUpInfoWindow = ".//*[@id='ui-dialog-title-dialogQuote']";
@@ -968,9 +983,12 @@ public class QuotePage {
 		stateSel.selectByVisibleText("CA");
 
 		driver.findElement(txtBoxzipCode).sendKeys("90701");
-		Thread.sleep(2000);
+		Thread.sleep(1000);
+				
+		driver.findElement(txtBoxSICCODE).sendKeys("9111");
+		Thread.sleep(1000);
 
-		element = driver.findElement(linkAutomatedLookup);
+		/*element = driver.findElement(linkAutomatedLookup);
 		executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].click();", element);
 		Thread.sleep(20000);
@@ -1006,7 +1024,7 @@ public class QuotePage {
 			// System.out.println("Inside Window");
 			// break;
 		}
-
+*/
 		/*
 		 * element=driver.findElement(linklookupLink); executor =
 		 * (JavascriptExecutor)driver;
@@ -1027,14 +1045,14 @@ public class QuotePage {
 		 * (JavascriptExecutor)driver;
 		 * executor.executeScript("arguments[0].click();", element);
 		 * Thread.sleep(10000);
-		 */
+		 
 
 		driver.switchTo().window(pwindow);
 		Thread.sleep(5000);
 		driver.switchTo().frame("content");
 		// System.out.println("Frame Title : :"+
 		// driver.switchTo().frame("content").getTitle());
-		Thread.sleep(3000);
+		Thread.sleep(3000); */
 
 		driver.findElement(totNumActiveEmployeesApplying).clear();
 		driver.findElement(totNumActiveEmployeesApplying).sendKeys("8");
@@ -1169,8 +1187,11 @@ public class QuotePage {
 
 		driver.findElement(txtBoxzipCode).sendKeys("90701");
 		Thread.sleep(1000);
+		
+		driver.findElement(txtBoxSICCODE).sendKeys("9111");
+		Thread.sleep(1000);
 
-		element = driver.findElement(linkAutomatedLookup);
+		/*element = driver.findElement(linkAutomatedLookup);
 		executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].click();", element);
 		Thread.sleep(20000);
@@ -1206,13 +1227,12 @@ public class QuotePage {
 			// System.out.println("Inside Window");
 			// break;
 		}
-
 		driver.switchTo().window(pwindow);
 		Thread.sleep(5000);
 		driver.switchTo().frame("content");
 		// System.out.println("Frame Title : :"+
 		// driver.switchTo().frame("content").getTitle());
-		Thread.sleep(1000);
+		Thread.sleep(1000); */
 
 		driver.findElement(totNumActiveEmployeesApplying).clear();
 		driver.findElement(totNumActiveEmployeesApplying).sendKeys("8");
@@ -1363,9 +1383,12 @@ public class QuotePage {
 		stateSel.selectByVisibleText("CA");
 
 		driver.findElement(txtBoxzipCode).sendKeys("90701");
-		Thread.sleep(2000);
+		Thread.sleep(1000);
+		
+		driver.findElement(txtBoxSICCODE).sendKeys("9111");
+		Thread.sleep(1000);
 
-		element = driver.findElement(linkAutomatedLookup);
+		/*element = driver.findElement(linkAutomatedLookup);
 		executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].click();", element);
 		Thread.sleep(20000);
@@ -1401,7 +1424,7 @@ public class QuotePage {
 			// System.out.println("Inside Window");
 			// break;
 		}
-
+*/
 		/*
 		 * element=driver.findElement(linklookupLink); executor =
 		 * (JavascriptExecutor)driver;
@@ -1422,14 +1445,14 @@ public class QuotePage {
 		 * (JavascriptExecutor)driver;
 		 * executor.executeScript("arguments[0].click();", element);
 		 * Thread.sleep(4000);
-		 */
+		 
 
 		driver.switchTo().window(pwindow);
 		Thread.sleep(5000);
 		driver.switchTo().frame("content");
 		// System.out.println("Frame Title : :"+
 		// driver.switchTo().frame("content").getTitle());
-		Thread.sleep(2000);
+		Thread.sleep(2000); */
 
 		driver.findElement(totNumActiveEmployeesApplying).clear();
 		driver.findElement(totNumActiveEmployeesApplying).sendKeys("8");
@@ -1531,7 +1554,7 @@ public class QuotePage {
 		Utilities utility = new Utilities();
 		// element=driver.findElement(By.xpath(path));
 		// utility.waitForVisibilityOfWebElement(By.xpath(path), driver);
-		Thread.sleep(2000);
+		Thread.sleep(3000);
 		if (driver.findElement(By.xpath(path)).getAttribute("title").trim().contains(pageName)) {
 			System.out.println(pageName + " displayed successfully");
 		} else {
@@ -1585,7 +1608,7 @@ public class QuotePage {
 		driver.switchTo().frame("navbar");
 		// System.out.println("Frame Title : :"+
 		// driver.switchTo().frame("navbar").getTitle());
-		Thread.sleep(8000);
+		Thread.sleep(9000);
 
 		// utility.waitForVisibilityOfWebElement(By.xpath("//img[@title='UnitedHealthcare
 		// Logo']"), driver);
@@ -1773,8 +1796,11 @@ public class QuotePage {
 
 		driver.findElement(txtBoxzipCode).sendKeys(zip);
 		Thread.sleep(1000);
+		
+		driver.findElement(txtBoxSICCODE).sendKeys("9111");
+		Thread.sleep(1000);
 
-		element = driver.findElement(linkAutomatedLookup);
+		/*element = driver.findElement(linkAutomatedLookup);
 		executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].click();", element);
 
@@ -1810,9 +1836,10 @@ public class QuotePage {
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		driver.switchTo().frame("content");
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-
+*/
 		driver.findElement(totNumActiveEmployeesApplying).clear();
 		driver.findElement(totNumActiveEmployeesApplying).sendKeys("8");
+		Thread.sleep(1000);
 		driver.findElement(txtBoxquoteTotalNumEmployees).sendKeys("8");
 		Thread.sleep(1000);
 
@@ -1899,8 +1926,11 @@ public class QuotePage {
 		utility.waitForVisibilityOfWebElement(txtBoxzipCode, driver);
 		driver.findElement(txtBoxzipCode).sendKeys(zip);
 		// Thread.sleep(5000);
+		
+		driver.findElement(txtBoxSICCODE).sendKeys("9111");
+		Thread.sleep(1000);
 
-		utility.waitForVisibilityOfWebElement(linkAutomatedLookup, driver);
+		/*utility.waitForVisibilityOfWebElement(linkAutomatedLookup, driver);
 		element = driver.findElement(linkAutomatedLookup);
 		executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].click();", element);
@@ -1941,7 +1971,7 @@ public class QuotePage {
 			// System.out.println("Inside Window");
 			// break;
 		}
-
+*/
 		/*
 		 * element=driver.findElement(btnsubmitNext); executor =
 		 * (JavascriptExecutor)driver;
@@ -1952,7 +1982,7 @@ public class QuotePage {
 		 * (JavascriptExecutor)driver;
 		 * executor.executeScript("arguments[0].click();", element);
 		 * Thread.sleep(5000);
-		 */
+		 
 
 		// driver.switchTo().defaultContent();
 		driver.switchTo().window(pwindow);
@@ -1961,7 +1991,7 @@ public class QuotePage {
 		driver.switchTo().frame("content");
 		// System.out.println("Frame Title : :"+
 		// driver.switchTo().frame("content").getTitle());
-		Thread.sleep(3000);
+		Thread.sleep(3000); */
 
 		utility.waitForVisibilityOfWebElement(totNumActiveEmployeesApplying, driver);
 		driver.findElement(totNumActiveEmployeesApplying).clear();
@@ -2302,9 +2332,12 @@ public class QuotePage {
 		// stateSel.selectByVisibleText("CA");
 
 		driver.findElement(txtBoxzipCode).sendKeys("98001");
-		Thread.sleep(5000);
+		Thread.sleep(1000);
+		
+		driver.findElement(txtBoxSICCODE).sendKeys("9111");
+		Thread.sleep(1000);
 
-		element = driver.findElement(linkAutomatedLookup);
+		/*element = driver.findElement(linkAutomatedLookup);
 		executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].click();", element);
 		Thread.sleep(20000);
@@ -2340,19 +2373,19 @@ public class QuotePage {
 			// break;
 		}
 
-		/*
+		
 		 * element=driver.findElement(linklookupLink); executor =
 		 * (JavascriptExecutor)driver;
 		 * executor.executeScript("arguments[0].click();", element);
 		 * Thread.sleep(5000);
-		 */
+		 
 
 		// driver.switchTo().defaultContent();
 		driver.switchTo().window(pwindow);
 		Thread.sleep(5000);
 		driver.switchTo().frame("content");
 		Thread.sleep(3000);
-
+*/
 		driver.findElement(totNumActiveEmployeesApplying).clear();
 		driver.findElement(totNumActiveEmployeesApplying).sendKeys("8");
 		Thread.sleep(1000);
@@ -2594,8 +2627,11 @@ public class QuotePage {
 
 		driver.findElement(txtBoxzipCode).sendKeys(zip);
 		Thread.sleep(1000);
+		
+		driver.findElement(txtBoxSICCODE).sendKeys("9111");
+		Thread.sleep(1000);
 
-		element = driver.findElement(linkAutomatedLookup);
+		/*element = driver.findElement(linkAutomatedLookup);
 		executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].click();", element);
 		Thread.sleep(15000);
@@ -2635,7 +2671,7 @@ public class QuotePage {
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		driver.switchTo().frame("content");
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-
+*/
 		driver.findElement(totNumActiveEmployeesApplying).clear();
 		driver.findElement(totNumActiveEmployeesApplying).sendKeys("8");
 		driver.findElement(txtBoxquoteTotalNumEmployees).sendKeys("8");
