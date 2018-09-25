@@ -42,6 +42,31 @@ public class MyAccountPage {
 	By pageCustomLogoSelection = By.xpath("//td[contains(text(),'Custom Logo Selection')]");
 	By pageDefineSalesMaterialandBenefitSearches = By.xpath("//td[contains(text(),'Sales Material Search Options')]");
 
+	By pageViewEditRenewalPackageMailingPreference = By
+			.xpath("//span[contains(text(),'View / Edit Renewal Package Mailing Preference')]");
+	By linkViewEditRenewalPackageMailingPreference = By.linkText("View/Edit Renewal Package Mailing Preference");
+
+	By pageUpdateEmployereServicesInformation = By
+			.xpath("//td[contains(text(),'Employer eServices Logon Information')]");
+	By linkUpdateEmployereServicesInformation = By.linkText("Update Employer eServices Information");
+
+	By pageManageMyDelegates = By.xpath("//td[contains(text(),'My Delegates')]");
+	By linkManageMyDelegates = By.linkText("Manage My Delegates"); // navigating
+																	// SiteAdministration
+	By pageViewLicenseAppointments = By.xpath("//td[contains(text(),'Company Appointments')]");
+	By linkViewLicenseAppointments = By.linkText("View License & Appointments");
+
+	By pageChangeRenewalAlertsStatus = By.xpath("//td[contains(text(),'Change Renewal Alerts Status')]");
+	By linkChangeRenewalAlertsStatus = By.linkText("Change Renewal Alerts Status");
+
+	By pageChangeCommissionAlertsStatus = By.xpath("//td[contains(text(),'Change Commission Alerts Status')]");
+	By linkChangeCommissionAlertsStatus = By.linkText("Change Commission Alerts Status");
+
+	By pageChangeLatePremiumandCancelCaseAlertsStatus = By
+			.xpath("//td[contains(text(),'Change Late Premium and Cancel Case Alerts Status')]");
+	By linkChangeLatePremiumandCancelCaseAlertsStatus = By
+			.linkText("Change Late Premium and Cancel Case Alerts Status");
+
 	public MyAccountPage() throws IOException {
 		utility = new Utilities();
 	}
@@ -76,7 +101,7 @@ public class MyAccountPage {
 		driver.switchTo().defaultContent();
 		Thread.sleep(1000);
 		driver.switchTo().frame("content");
-		Thread.sleep(1000);
+		Thread.sleep(3000);
 
 		String nameLink = driver.findElement(path).getText();
 		// System.out.println("Heading Name :: " + nameHeading);
@@ -100,32 +125,74 @@ public class MyAccountPage {
 		element = driver.findElement(linkPath);
 		executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].click();", element);
-		
+
 		Thread.sleep(4000);
-		//utility.waitForVisibilityOfWebElement(linkPagePath, driver);
+		// utility.waitForVisibilityOfWebElement(linkPagePath, driver);
 		String nameLinkPage = driver.findElement(linkPagePath).getText();
-		//System.out.println("Link Page Text :: " + nameLinkPage);
+		// System.out.println("Link Page Text :: " + nameLinkPage);
 
 		if (nameLinkPage.trim().contains(name)) {
 			System.out.println(nameLinkPage + " :: " + " Page displayed successfully");
 
-			By submitBack=By.xpath("//input[@name='submitBack']");
+			By submitBack = By.xpath("//input[@name='submitBack' or @value='< BACK']");
 			utility.waitForVisibilityOfWebElement(submitBack, driver);
 			element = driver.findElement(submitBack);
 			executor = (JavascriptExecutor) driver;
-			executor.executeScript("arguments[0].click();",element);
+			executor.executeScript("arguments[0].click();", element);
 			Thread.sleep(2000);
 		} else {
 			System.out.println(nameLinkPage + "  ::" + " Page not displayed");
 			// Assert.assertEquals(nameHeading, name);
-			By submitBack=By.xpath("//input[@name='submitBack']");
+			By submitBack = By.xpath("//input[@name='submitBack']");
 			utility.waitForVisibilityOfWebElement(submitBack, driver);
 			element = driver.findElement(submitBack);
 			executor = (JavascriptExecutor) driver;
-			executor.executeScript("arguments[0].click();",element);
+			executor.executeScript("arguments[0].click();", element);
 			Thread.sleep(3000);
 		}
 	}
+	
+	public static void verifyLinkPage_1(WebDriver driver, By linkPath, String name, By linkPagePath)
+			throws InterruptedException {
+		Thread.sleep(1000);
+		driver.switchTo().defaultContent();
+		Thread.sleep(1000);
+		driver.switchTo().frame("content");
+		Thread.sleep(1000);
+
+		element = driver.findElement(linkPath);
+		executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", element);
+
+		Thread.sleep(4000);
+		// utility.waitForVisibilityOfWebElement(linkPagePath, driver);
+		String nameLinkPage = driver.findElement(linkPagePath).getText();
+		// System.out.println("Link Page Text :: " + nameLinkPage);
+
+		if (nameLinkPage.trim().contains(name)) {
+			System.out.println(nameLinkPage + " :: " + " Page displayed successfully");
+			Thread.sleep(2000);
+			driver.switchTo().defaultContent();
+			Thread.sleep(1000);
+			driver.switchTo().frame("navbar");
+			Thread.sleep(1000);
+			executor = (JavascriptExecutor) driver;
+			executor.executeScript("arguments[0].click();", driver.findElement(By.linkText("My Account")));
+			Thread.sleep(2000);
+		} else {
+			System.out.println(nameLinkPage + "  ::" + " Page not displayed");
+			// Assert.assertEquals(nameHeading, name);
+			Thread.sleep(2000);
+			driver.switchTo().defaultContent();
+			Thread.sleep(1000);
+			driver.switchTo().frame("navbar");
+			Thread.sleep(1000);
+			executor = (JavascriptExecutor) driver;
+			executor.executeScript("arguments[0].click();", driver.findElement(By.linkText("My Account")));
+			Thread.sleep(2000);
+		}
+	}
+
 
 	public void verifyLinkPages(WebDriver driver) throws InterruptedException {
 		MyAccountPage.verifyLinkPage(driver, linkChangePassword, "Change Password", pageChangePassword);
@@ -151,7 +218,6 @@ public class MyAccountPage {
 				"Update UnitedAdvantage.com Information", "link");
 		MyAccountPage.verifyLink_MyAccountPage(driver, linkViewEditContactInformation, "View/Edit Contact Information",
 				"link");
-
 		MyAccountPage.verifyLink_MyAccountPage(driver, linkQuoteSetup, "Quote Setup", "link");
 		MyAccountPage.verifyLink_MyAccountPage(driver, linkQuoteGenerationOptions, "Quote Generation Options", "link");
 		MyAccountPage.verifyLink_MyAccountPage(driver, linkCustomLogoSelection, "Custom Logo Selection", "link");
@@ -159,32 +225,88 @@ public class MyAccountPage {
 				"Define Sales Material and Benefit Searches", "link");
 	}
 
+	public void verifyMyAccountPage_Links_Broker_Set1(WebDriver driver) throws InterruptedException {
+		MyAccountPage.verifyLink_MyAccountPage(driver, linkViewEditRenewalPackageMailingPreference,
+				"View/Edit Renewal Package Mailing Preference", "link");
+		MyAccountPage.verifyLink_MyAccountPage(driver, linkChangePassword, "Change Password", "link");
+		MyAccountPage.verifyLink_MyAccountPage(driver, linkChangeSecretQuestions, "Change Secret Questions", "link");
+	}
+
+	public void verifyMyAccountPage_Links_Broker_Set2(WebDriver driver) throws InterruptedException {
+		MyAccountPage.verifyLink_MyAccountPage(driver, linkUpdateEmployereServicesInformation,
+				"Update Employer eServices Information", "link");
+		MyAccountPage.verifyLink_MyAccountPage(driver, linkUpdateUnitedAdvantageComInformation,
+				"Update UnitedAdvantage.com Information", "link");
+		MyAccountPage.verifyLink_MyAccountPage(driver, linkViewEditContactInformation, "View/Edit Contact Information",
+				"link");
+	}
+
+	public void verifyMyAccountPage_Links_Broker_Set3(WebDriver driver) throws InterruptedException {
+		MyAccountPage.verifyLink_MyAccountPage(driver, linkManageMyDelegates, "Manage My Delegates", "link");
+		MyAccountPage.verifyLink_MyAccountPage(driver, linkViewLicenseAppointments, "View License & Appointments",
+				"link");
+		MyAccountPage.verifyLink_MyAccountPage(driver, linkChangeRenewalAlertsStatus, "Change Renewal Alerts Status",
+				"link");
+	}
+
+	public void verifyMyAccountPage_Links_Broker_Set4(WebDriver driver) throws InterruptedException {
+		MyAccountPage.verifyLink_MyAccountPage(driver, linkChangeCommissionAlertsStatus,
+				"Change Commission Alerts Status", "link");
+		MyAccountPage.verifyLink_MyAccountPage(driver, linkChangeLatePremiumandCancelCaseAlertsStatus,
+				"Change Late Premium and Cancel Case Alerts Status", "link");
+		MyAccountPage.verifyLink_MyAccountPage(driver, linkQuoteSetup, "Quote Setup", "link");
+	}
+
+	public void verifyMyAccountPage_Links_Broker_Set5(WebDriver driver) throws InterruptedException {
+		MyAccountPage.verifyLink_MyAccountPage(driver, linkQuoteGenerationOptions, "Quote Generation Options", "link");
+		MyAccountPage.verifyLink_MyAccountPage(driver, linkCustomLogoSelection, "Custom Logo Selection", "link");
+		MyAccountPage.verifyLink_MyAccountPage(driver, linkDefineSalesMaterialandBenefitSearches,
+				"Define Sales Material and Benefit Searches", "link");
+	}
+
+	public void verifyLinkPages_Broker_Set1(WebDriver driver) throws InterruptedException {
+		MyAccountPage.verifyLinkPage(driver, linkViewEditRenewalPackageMailingPreference,
+				"View / Edit Renewal Package Mailing Preference", pageViewEditRenewalPackageMailingPreference);
+		MyAccountPage.verifyLinkPage(driver, linkChangePassword, "Change Password", pageChangePassword);
+		MyAccountPage.verifyLinkPage(driver, linkChangeSecretQuestions, "Secret Question and Answer",
+				pageChangeSecretQuestions);
+	}
+
+	public void verifyLinkPages_Broker_Set2(WebDriver driver) throws InterruptedException {
+		MyAccountPage.verifyLinkPage(driver, linkUpdateEmployereServicesInformation,
+				"Employer eServices Logon Information", pageUpdateEmployereServicesInformation);
+		MyAccountPage.verifyLinkPage(driver, linkUpdateUnitedAdvantageComInformation,
+				"United Advantage Logon Information", pageUpdateUnitedAdvantageComInformation);
+		MyAccountPage.verifyLinkPage(driver, linkViewEditContactInformation, "View/Edit Contact Information",
+				pageViewEditContactInformation);
+	}
+
+	public void verifyLinkPages_Broker_Set3(WebDriver driver) throws InterruptedException {
+		MyAccountPage.verifyLinkPage_1(driver, linkManageMyDelegates, "My Delegates", pageManageMyDelegates);
+		MyAccountPage.verifyLinkPage(driver, linkViewLicenseAppointments, "Company Appointments",
+				pageViewLicenseAppointments);
+		MyAccountPage.verifyLinkPage_1(driver, linkChangeRenewalAlertsStatus, "Change Renewal Alerts Status",
+				pageChangeRenewalAlertsStatus);
+	}
+
+	public void verifyLinkPages_Broker_Set4(WebDriver driver) throws InterruptedException {
+		MyAccountPage.verifyLinkPage_1(driver, linkChangeCommissionAlertsStatus, "Change Commission Alerts Status",
+				pageChangeCommissionAlertsStatus);
+		MyAccountPage.verifyLinkPage_1(driver, linkChangeLatePremiumandCancelCaseAlertsStatus,
+				"Change Late Premium and Cancel Case Alerts Status", pageChangeLatePremiumandCancelCaseAlertsStatus);
+		MyAccountPage.verifyLinkPage(driver, linkQuoteSetup, "Quote Setup Information", pageQuoteSetup);
+	}
+
+	public void verifyLinkPages_Broker_Set5(WebDriver driver) throws InterruptedException {
+		MyAccountPage.verifyLinkPage(driver, linkQuoteGenerationOptions, "Quote Generation Options",
+				pageQuoteGenerationOptions);
+		MyAccountPage.verifyLinkPage(driver, linkCustomLogoSelection, "Custom Logo Selection", pageCustomLogoSelection);
+		MyAccountPage.verifyLinkPage(driver, linkDefineSalesMaterialandBenefitSearches, "Sales Material Search Options",
+				pageDefineSalesMaterialandBenefitSearches);
+	}
+
 	public void verifyLinkPages_Broker(WebDriver driver) throws InterruptedException {
 
-		By pageViewEditRenewalPackageMailingPreference = By
-				.xpath("//span[contains(text(),'View / Edit Renewal Package Mailing Preference')]");
-		By linkViewEditRenewalPackageMailingPreference = By.linkText("View / Edit Renewal Package Mailing Preference");
-
-		By pageUpdateEmployereServicesInformation = By
-				.xpath("//span[contains(text(),'Update Employer eServices Information')]");
-		By linkUpdateEmployereServicesInformation = By.linkText("Update Employer eServices Information");
-
-		By pageManageMyDelegates = By.xpath("//td[contains(text(),'My Delegates')]");
-		By linkManageMyDelegates = By.linkText("Manage My Delegates"); // navigating
-																		// SiteAdministration
-		By pageViewLicenseAppointments = By.xpath("//td[contains(text(),'Company Appointments')]");
-		By linkViewLicenseAppointments = By.linkText("View License & Appointments");
-		
-		By pageChangeRenewalAlertsStatus = By.xpath("//td[contains(text(),'Change Renewal Alerts Status')]");
-		By linkChangeRenewalAlertsStatus = By.linkText("Change Renewal Alerts Status");
-		
-		By pageChangeCommissionAlertsStatus = By.xpath("//td[contains(text(),'Change Commission Alerts Status')]");
-		By linkChangeCommissionAlertsStatus = By.linkText("Change Commission Alerts Status");
-		
-		By pageChangeLatePremiumandCancelCaseAlertsStatus = By.xpath("//td[contains(text(),'Change Late Premium and Cancel Case Alerts Status')]");
-		By linkChangeLatePremiumandCancelCaseAlertsStatus = By.linkText("Change Late Premium and Cancel Case Alerts Status");
-		
-		
 		MyAccountPage.verifyLinkPage(driver, linkViewEditRenewalPackageMailingPreference,
 				"View / Edit Renewal Package Mailing Preference", pageViewEditRenewalPackageMailingPreference);
 
@@ -195,15 +317,15 @@ public class MyAccountPage {
 
 		MyAccountPage.verifyLinkPage(driver, linkViewLicenseAppointments, "Company Appointments",
 				pageViewLicenseAppointments);
-		
+
 		MyAccountPage.verifyLinkPage(driver, linkChangeRenewalAlertsStatus, "Change Renewal Alerts Status",
 				pageChangeRenewalAlertsStatus);
-		
+
 		MyAccountPage.verifyLinkPage(driver, linkChangeCommissionAlertsStatus, "Change Commission Alerts Status",
 				pageChangeCommissionAlertsStatus);
-		
-		MyAccountPage.verifyLinkPage(driver, linkChangeLatePremiumandCancelCaseAlertsStatus, "Change Late Premium and Cancel Case Alerts Status",
-				pageChangeLatePremiumandCancelCaseAlertsStatus);
+
+		MyAccountPage.verifyLinkPage(driver, linkChangeLatePremiumandCancelCaseAlertsStatus,
+				"Change Late Premium and Cancel Case Alerts Status", pageChangeLatePremiumandCancelCaseAlertsStatus);
 	}
 
 }
