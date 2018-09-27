@@ -350,12 +350,12 @@ Feature: Quotes Module
     Then UeS_User is verify Employer Contribution Premium and Total Annual Premium and EMPLOYEE CLASS in Dental Rate Comparison page
 
     Examples: 
-      | FileName    |  | TestCaseID |  | State |  | Value              |  | Zip Code |
-      | Quote_TC_23 |  | TC_23      |  | CA    |  | Most Popular Plans |  |    90001 |
+      | FileName    |  | TestCaseID |  | State |  | Value                  |  | Zip Code |
+      | Quote_TC_23 |  | TC_23      |  | CA    |  | Most Popular Plans     |  |    90001 |
+      | Quote_TC_30 |  | TC_30      |  | CA    |  | Show All Plans         |  |    90001 |
+      | Quote_TC_31 |  | TC_31      |  | CA    |  | Show My Selected Plans |  |    90001 |
 
-  #| Quote_TC_30 |  | TC_30      |  | CA    |  | Show All Plans |  |    90001 |
-  #| Quote_TC_31 |  | TC_31      |  | CA    |  | Show My Selected Plans |  |    90001 |
-  @Regression_UeS1 @Validate_DentalPlanPage_Coverage_D_HMO @HMO
+  @Regression_UeS @Validate_DentalPlanPage_Coverage_D_HMO @HMO
   Scenario Outline: "<TestCaseID>" Verify Rates should be appear for HMO tab of plan "<Value>"
     When Flow_Fetch fileName "<FileName>" and testCaseID "<TestCaseID>" are captured
     Given Flow_Fetch Data from excel Sheet for "<TestCaseID>"
