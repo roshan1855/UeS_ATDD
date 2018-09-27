@@ -1,6 +1,6 @@
-Feature: MyAccount Page
+Feature: MyAccount Module
 
-  @Regression_UeS123 @MyAccount_Broker
+  @Regression_UeS @MyAccount_Broker
   Scenario Outline: "<TestCaseID>" Display all links(all page) on My Account page when user logging as Broker
     When Flow_Fetch fileName "<FileName>" and testCaseID "<TestCaseID>" are captured
     Given Flow_Fetch Data from excel Sheet for "<TestCaseID>"
@@ -25,7 +25,7 @@ Feature: MyAccount Page
       | FileName        |  | TestCaseID |  | UserName |  | PWD         |
       | MyAccount_TC_38 |  | TC_38      |  | CommTest |  | TestComm@99 |
 
-  @Regression_UeS123 @MyAccount_Admin
+  @Regression_UeS @MyAccount_Admin
   Scenario Outline: "<TestCaseID>" Display all links(all page) on My Account page when user logging as Administrator
     When Flow_Fetch fileName "<FileName>" and testCaseID "<TestCaseID>" are captured
     Given Flow_Fetch Data from excel Sheet for "<TestCaseID>"
