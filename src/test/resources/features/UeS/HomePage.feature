@@ -1,4 +1,4 @@
-Feature: Home Page
+Feature: Home Page Module
 
   @Regression_UeS123 @Validate_UserName_Header_Footer_On_HomePage
   Scenario Outline: "<TestCaseID>" Validate UserName_ Hearder_ Footer on home page
