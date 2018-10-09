@@ -421,7 +421,7 @@ Feature: Quotes Module
       | Quote_TC_29 |  | TC_29      |  | WA    |  | Show My Selected Plans |  |    98001 |  | Vision   |
 
   #Oct18 Iteration
-  @Regression_UeS123 @Validate_LifePlanPage_Coverage_L_EmpSalWithOutDependent @Oct
+  @Regression_UeS123 @Validate_LifePlanPage_Coverage_L_EmpSalWithOutDependent
   Scenario Outline: "<TestCaseID>" Validate Life Plans Page with only employee and no dependent(with salary)
     When Flow_Fetch fileName "<FileName>" and testCaseID "<TestCaseID>" are captured
     Given Flow_Fetch Data from excel Sheet for "<TestCaseID>"
@@ -439,7 +439,7 @@ Feature: Quotes Module
       | FileName    |  | TestCaseID |  | State |  | Zip Code |  | Coverage |
       | Quote_TC_41 |  | TC_41      |  | TX    |  |    73301 |  | Life     |
 
-  @Regression_UeS123 @Validate_LifePlanPage_Coverage_L_EmpDepndtSal
+  @Regression_UeS123 @Validate_LifePlanPage_Coverage_L_EmpDepndtSal @Oct
   Scenario Outline: "<TestCaseID>" Validate Life Plans Page with employee and dependent(with salary)
     When Flow_Fetch fileName "<FileName>" and testCaseID "<TestCaseID>" are captured
     Given Flow_Fetch Data from excel Sheet for "<TestCaseID>"
