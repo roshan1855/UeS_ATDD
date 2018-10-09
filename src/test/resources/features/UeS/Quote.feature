@@ -421,7 +421,7 @@ Feature: Quotes Module
       | Quote_TC_29 |  | TC_29      |  | WA    |  | Show My Selected Plans |  |    98001 |  | Vision   |
 
   #Oct18 Iteration
-  @Regression_UeS123 @Validate_LifePlanPage_Coverage_L_EmpSalWithOutDependent
+  @Regression_UeS123 @Validate_LifePlanPage_Coverage_L_EmpSalWithOutDependent @Oct
   Scenario Outline: "<TestCaseID>" Validate Life Plans Page with only employee and no dependent(with salary)
     When Flow_Fetch fileName "<FileName>" and testCaseID "<TestCaseID>" are captured
     Given Flow_Fetch Data from excel Sheet for "<TestCaseID>"
