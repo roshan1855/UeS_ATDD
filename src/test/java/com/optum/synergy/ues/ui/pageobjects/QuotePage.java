@@ -151,12 +151,12 @@ public class QuotePage {
 		executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].click();", element);
 		System.out.println("User clicked Login Button.....");
-		Thread.sleep(5000);
+		Thread.sleep(2000);
 
 		Alert Windowalert = driver.switchTo().alert();
 		Windowalert.authenticateUsing((Credentials) new UserAndPassword("roshanAdmin05", "Computer$5"));
 		// Windowalert.accept();
-
+		Thread.sleep(7000);
 	}
 
 	public void loginUeS_Broker(WebDriver driver, String userName, String pwd) throws InterruptedException {
@@ -1279,15 +1279,16 @@ public class QuotePage {
 	}
 
 	public void verifyUeSLogos_Home(WebDriver driver) throws InterruptedException, IOException {
-		Thread.sleep(2000);
+		Thread.sleep(1000);
 		driver.switchTo().defaultContent();
-		Thread.sleep(5000);
+		Thread.sleep(1000);
 		driver.switchTo().frame("navbar");
-		Thread.sleep(9000);
+		Thread.sleep(10000);
 
-		utility.waitForVisibilityOfWebElement(unitedHealthcareLogo, driver);
+		// utility.waitForVisibilityOfWebElement(unitedHealthcareLogo, driver);
 		QuotePage.verifyPageDisplay_logo(driver, unitedHealthcareLogo, "UnitedHealthcare Logo");
 
+		// utility.waitForVisibilityOfWebElement(unitedeServicesLogo, driver);
 		QuotePage.verifyPageDisplay_logo(driver, unitedeServicesLogo, "United eServices Logo");
 	}
 
@@ -3062,7 +3063,7 @@ public class QuotePage {
 					+ " displayed successfully");
 		} else {
 			System.out.println("Dependent PREMIUM MONTH Amounts ::" + element.getText() + " and " + element2.getText()
-					+ " displayed successfully");
+					+ " not displayed ");
 		}
 	}
 
@@ -3104,7 +3105,7 @@ public class QuotePage {
 			// driver.switchTo().window(winHandle).close();
 		} else {
 			System.out.println("Employee PREMIUM MONTH Amounts ::" + element.getText() + " and " + element1.getText()
-					+ "not displayed");
+					+ " not displayed");
 		}
 
 		element = driver.findElement(By.xpath("//input[@name='lifePlanDepInformationForm[0].selectDependentInd']"));
@@ -3128,8 +3129,265 @@ public class QuotePage {
 					+ " displayed successfully");
 		} else {
 			System.out.println("Dependent PREMIUM MONTH Amounts ::" + element.getText() + " and " + element2.getText()
-					+ " displayed successfully");
+					+ " not displayed successfully");
 		}
+	}
+
+	public void censusPage_EmpWithDepndntWithoutSal(WebDriver driver) throws InterruptedException, IOException {
+		QuotePage.verifyUeSLogos(driver);
+		Thread.sleep(1000);
+		String cencusPage = ".//*[@id='census-form']/table[1]/tbody/tr[2]/td[1]";
+
+		QuotePage.verifyPageDisplay(driver, cencusPage, "Census");
+		Thread.sleep(1000);
+
+		String cencusInfoTable = "//td[contains(text(),'Census Information')]";
+		QuotePage.verifyPageInfoTable(driver, cencusInfoTable, "Census Information");
+		Thread.sleep(1000);
+
+		QuotePage.verifyFooterLinks(driver);
+		Thread.sleep(1000);
+
+		// driver.findElement(By.xpath(".//*[@id='census-form']/table[8]/tbody/tr[2]/td/table/tbody/tr[5]"));
+		List<WebElement> ele4 = driver
+				.findElements(By.xpath(".//*[@id='census-form']/table[8]/tbody/tr[2]/td/table/tbody/tr"));
+		int count1 = ele4.size();
+		Thread.sleep(1000);
+
+		System.out.println("Row Count :: " + count1 + "Row Count  ::" + (count1 - 7));
+
+		int j = 1000;
+		for (int i = 0; i <= count1 - 7; i++) {
+
+			Random rand = new Random();
+			int Low = 25;
+			int High = 40;
+			int Result = rand.nextInt(High - Low) + Low;
+
+			int WifeAgeLow = 15;
+			int WifeAgeHigh = 30;
+			int WifeAgeResult = rand.nextInt(WifeAgeHigh - WifeAgeLow) + WifeAgeLow;
+
+			int AgeLow = 12;
+			int AgeHigh = 14;
+			int ChildAge = rand.nextInt(AgeHigh - AgeLow) + AgeLow;
+
+			driver.findElement(By.xpath("//input[@name='censusDetailInformationForm[" + i + "].employeeAge']"))
+					.sendKeys(Integer.toString(Result));
+			Thread.sleep(500);
+			driver.findElement(By.xpath("//input[@name='censusDetailInformationForm[" + i + "].spouseAge']"))
+					.sendKeys(Integer.toString(WifeAgeResult));
+			Thread.sleep(500);
+			driver.findElement(By.xpath("//input[@name='censusDetailInformationForm[" + i + "].childrenToAdd']"))
+					.sendKeys("1");
+			Thread.sleep(1000);
+
+			element = driver.findElement(By.xpath("//input[@id='add" + j + "']"));
+			executor = (JavascriptExecutor) driver;
+			executor.executeScript("arguments[0].click();", element);
+
+			Thread.sleep(1000);
+			driver.findElement(
+					By.xpath("//input[@name='censusDetailInformationForm[" + i + "].dependentChildren[0].age']"))
+					.sendKeys(Integer.toString(ChildAge));
+			Thread.sleep(500);
+
+			j = j + 1000;
+		}
+
+		element = driver.findElement(censussubmitNext);
+		executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", element);
+		Thread.sleep(7000);
+	}
+
+	public void verifyLifePlansPage_PREMIUM_EmpWithDepandSal(WebDriver driver)
+			throws InterruptedException, IOException {
+		QuotePage.verifyUeSLogos(driver);
+		Thread.sleep(1000);
+		String lifePlansPage = "//td[contains(text(),'Life Plans')]";
+		QuotePage.verifyPageDisplay(driver, lifePlansPage, "Life Plans");
+
+		String lifeBasicLifePlanInfoTable = "//td[contains(text(),'Basic Life Plan Information')]";
+		QuotePage.verifyPageInfoTable(driver, lifeBasicLifePlanInfoTable, "Basic Life Plan Information");
+
+		QuotePage.verifyFooterLinks(driver);
+
+		element = driver.findElement(By.xpath("//input[@name='lifePlanBasicInformationForm[0].selectBasicInd']"));
+		executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", element);
+
+		element = driver.findElement(By.xpath("//input[@name='lifePlanBasicInformationForm[1].selectBasicInd']"));
+		executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", element);
+
+		element = driver.findElement(By.xpath(
+				"//form[@name='LifePlanSelectionForm']/table/tbody/tr[13]/td/table/tbody/tr/td[1]/table/tbody/tr[3]/td[3]"));
+
+		String Premium1 = element.getText().substring(1, 3);
+		String[] PremiumMonth_1 = Premium1.split("\\.");
+
+		WebElement element1 = driver.findElement(By.xpath(
+				"//form[@name='LifePlanSelectionForm']/table/tbody/tr[13]/td/table/tbody/tr/td[1]/table/tbody/tr[4]/td[3]"));
+		// System.out.println("ANNUAL PREMIUM Amount ::" + element1.getText());
+
+		String Premium2 = element1.getText().substring(1, 3);
+		String[] PremiumMonth_2 = Premium2.split("\\.");
+
+		if ((Integer.parseInt(PremiumMonth_1[0]) != 0) && (Integer.parseInt(PremiumMonth_2[0]) != 0)) {
+			System.out.println("Employee PREMIUM MONTH Amounts ::" + element.getText() + " and " + element1.getText()
+					+ " displayed successfully");
+			// driver.switchTo().window(winHandle).close();
+		} else {
+			System.out.println("Employee PREMIUM MONTH Amounts ::" + element.getText() + " and " + element1.getText()
+					+ " not displayed");
+		}
+
+		element = driver.findElement(By.xpath("//input[@name='lifePlanDepInformationForm[0].selectDependentInd']"));
+		executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", element);
+
+		element = driver.findElement(By.xpath("//input[@name='lifePlanDepInformationForm[1].selectDependentInd']"));
+		executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", element);
+
+		element = driver.findElement(By.xpath(
+				"//form[@name='LifePlanSelectionForm']/table/tbody/tr[13]/td/table/tbody/tr/td[3]/table/tbody/tr[3]/td[4]"));
+		String DependentPremium1 = element.getText().substring(1, 3);
+		String[] DependentPremium_1 = DependentPremium1.split("\\.");
+
+		WebElement element2 = driver.findElement(By.xpath(
+				"//form[@name='LifePlanSelectionForm']/table/tbody/tr[13]/td/table/tbody/tr/td[3]/table/tbody/tr[4]/td[4]"));
+		String DependentPremium2 = element2.getText().substring(1, 3);
+		String[] DependentPremium_2 = DependentPremium2.split("\\.");
+
+		if ((Integer.parseInt(DependentPremium_1[0]) != 0) && (Integer.parseInt(DependentPremium_2[0]) != 0)) {
+			System.out.println("Dependent PREMIUM MONTH Amounts ::" + element.getText() + " and " + element2.getText()
+					+ " displayed successfully");
+		} else {
+			System.out.println("Dependent PREMIUM MONTH Amounts ::" + element.getText() + " and " + element2.getText()
+					+ " not displayed successfully");
+		}
+
+		driver.findElement(By.xpath("//input[@name='benefitAmount']")).sendKeys("10000");
+		Thread.sleep(1000);
+
+		By buttonGO = By.xpath("//input[@name='submitAddBenefit' or @value='GO']");
+
+		element = driver.findElement(buttonGO);
+		executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", element);
+		Thread.sleep(5000);
+
+		element = driver.findElement(By.name("lifePlanBasicInformationForm[0].selectBasicInd"));
+		executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", element);
+		Thread.sleep(1000);
+
+		element = driver.findElement(By.xpath(
+				"//form[@name='LifePlanSelectionForm']/table/tbody/tr[13]/td/table/tbody/tr/td[1]/table/tbody/tr[3]/td[2]"));
+		System.out.println("Value :: " + element.getText());
+		if (element.getText().contains("FLAT $10,000")) {
+			System.out.println("FLAT $10,000 value present in Basic Life Plan Information table");
+		} else {
+			System.out.println("FLAT $10,000 value not present in Basic Life Plan Information table");
+		}
+	}
+
+	public void verifyLifePlansPage_PREMIUM_EMPWithDepWithoutSal(WebDriver driver)
+			throws InterruptedException, IOException {
+		QuotePage.verifyUeSLogos(driver);
+		Thread.sleep(1000);
+		String lifePlansPage = "//td[contains(text(),'Life Plans')]";
+		QuotePage.verifyPageDisplay(driver, lifePlansPage, "Life Plans");
+
+		String lifeBasicLifePlanInfoTable = "//td[contains(text(),'Basic Life Plan Information')]";
+		QuotePage.verifyPageInfoTable(driver, lifeBasicLifePlanInfoTable, "Basic Life Plan Information");
+
+		QuotePage.verifyFooterLinks(driver);
+
+		element = driver.findElement(By.xpath(
+				"//form[@name='LifePlanSelectionForm']/table/tbody/tr[13]/td/table/tbody/tr/td[1]/table/tbody/tr[3]/td[2]"));
+
+		String LifeBenifit1 = element.getText();
+
+		WebElement element1 = driver.findElement(By.xpath(
+				"//form[@name='LifePlanSelectionForm']/table/tbody/tr[13]/td/table/tbody/tr/td[1]/table/tbody/tr[4]/td[2]"));
+		// System.out.println("ANNUAL PREMIUM Amount ::" + element1.getText());
+
+		String LifeBenifit2 = element1.getText();
+
+		if ((LifeBenifit1.contains("Multiple")) && (LifeBenifit2.contains("Multiple"))) {
+			System.out.println(
+					"LIFE BENEFITS ::" + element.getText() + " and " + element1.getText() + " displayed successfully");
+		} else {
+			System.out
+					.println("LIFE BENEFITS ::" + element.getText() + " and " + element1.getText() + " not displayed");
+		}
+
+		element = driver.findElement(By.xpath(
+				"//form[@name='LifePlanSelectionForm']/table/tbody/tr[13]/td/table/tbody/tr/td[1]/table/tbody/tr[3]/td[3]"));
+		WebElement element2 = driver.findElement(By.xpath(
+				"//form[@name='LifePlanSelectionForm']/table/tbody/tr[13]/td/table/tbody/tr/td[1]/table/tbody/tr[4]/td[3]"));
+
+		if ((element.getText().trim().contains("N/A")) && (element2.getText().trim().contains("N/A"))) {
+			System.out.println("PREMIUM MONTH Amounts ::" + element.getText() + " and " + element2.getText()
+					+ " displayed successfully");
+		} else {
+			System.out.println(
+					"PREMIUM MONTH Amounts ::" + element.getText() + " and " + element2.getText() + " not displayed");
+		}
+
+		element = driver.findElement(By.xpath("//input[@name='lifePlanDepInformationForm[0].selectDependentInd']"));
+		executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", element);
+
+		element = driver.findElement(By.xpath("//input[@name='lifePlanDepInformationForm[1].selectDependentInd']"));
+		executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", element);
+
+		element = driver.findElement(By.xpath(
+				"//form[@name='LifePlanSelectionForm']/table/tbody/tr[13]/td/table/tbody/tr/td[3]/table/tbody/tr[3]/td[4]"));
+		String DependentPremium1 = element.getText().substring(1, 3);
+		String[] DependentPremium_1 = DependentPremium1.split("\\.");
+
+		WebElement element3 = driver.findElement(By.xpath(
+				"//form[@name='LifePlanSelectionForm']/table/tbody/tr[13]/td/table/tbody/tr/td[3]/table/tbody/tr[4]/td[4]"));
+		String DependentPremium2 = element3.getText().substring(1, 3);
+		String[] DependentPremium_2 = DependentPremium2.split("\\.");
+
+		if ((Integer.parseInt(DependentPremium_1[0]) != 0) && (Integer.parseInt(DependentPremium_2[0]) != 0)) {
+			System.out.println("Dependent PREMIUM MONTH Amounts ::" + element.getText() + " and " + element3.getText()
+					+ " displayed successfully");
+		} else {
+			System.out.println("Dependent PREMIUM MONTH Amounts ::" + element.getText() + " and " + element3.getText()
+					+ " not displayed successfully");
+		}
+
+		driver.findElement(By.xpath("//input[@name='benefitAmount']")).sendKeys("10000");
+		Thread.sleep(1000);
+
+		By buttonGO = By.xpath("//input[@name='submitAddBenefit' or @value='GO']");
+
+		element = driver.findElement(buttonGO);
+		executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", element);
+		Thread.sleep(6000);
+
+		element = driver.findElement(By.name("lifePlanBasicInformationForm[4].selectBasicInd"));
+		executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", element);
+		Thread.sleep(1000);
+
+		element = driver.findElement(By.xpath(
+				"//form[@name='LifePlanSelectionForm']/table/tbody/tr[13]/td/table/tbody/tr/td[1]/table/tbody/tr[7]/td[2]"));
+		System.out.println("Value :: " + element.getText());
+		if (element.getText().contains("FLAT $10,000")) {
+			System.out.println("FLAT $10,000 value present in Basic Life Plan Information table");
+		} else {
+			System.out.println("FLAT $10,000 value not present in Basic Life Plan Information table");
+		}
+
 	}
 
 }
