@@ -421,7 +421,7 @@ Feature: Quotes Module
       | Quote_TC_29 |  | TC_29      |  | WA    |  | Show My Selected Plans |  |    98001 |  | Vision   |
 
   #Oct18 Iteration
-  @Regression_UeS123 @Validate_LifePlanPage_Coverage_L_EmpSalWithOutDependent
+  @Regression_UeS123 @Validate_LifePlanPage_Coverage_L_EmpSalWithOutDependent @Oct_1
   Scenario Outline: "<TestCaseID>" Validate Life Plans Page with only employee and no dependent(with salary)
     When Flow_Fetch fileName "<FileName>" and testCaseID "<TestCaseID>" are captured
     Given Flow_Fetch Data from excel Sheet for "<TestCaseID>"
@@ -439,7 +439,7 @@ Feature: Quotes Module
       | FileName    |  | TestCaseID |  | State |  | Zip Code |  | Coverage |
       | Quote_TC_41 |  | TC_41      |  | TX    |  |    73301 |  | Life     |
 
-  @Regression_UeS123 @Validate_LifePlanPage_Coverage_L_EmpDepndtSal @Oct
+  @Regression_UeS123 @Validate_LifePlanPage_Coverage_L_EmpDepndtSal @Oct_2
   Scenario Outline: "<TestCaseID>" Validate Life Plans Page with employee and dependent(with salary)
     When Flow_Fetch fileName "<FileName>" and testCaseID "<TestCaseID>" are captured
     Given Flow_Fetch Data from excel Sheet for "<TestCaseID>"
@@ -451,13 +451,13 @@ Feature: Quotes Module
     And UeS_User is select the state as "<State>" and Fill all the details of the Quote Setup window and click on next
     And UeS_User is select the coverage as "<Coverage>" and Fill all the details of the Quote Setup Page by using "<Zip Code>" and click on NEXT button
     And UeS_User is enter Employee Age and Salary with Dependents in Census page and click on next
-    Then UeS_User verify PREMIUM for both EMPLOYEE and DEPENDENT in Life Plans page
+    Then UeS_User verify PREMIUM for EMPLOYEE and DEPENDENT in Life Plans page
 
     Examples: 
       | FileName    |  | TestCaseID |  | State |  | Zip Code |  | Coverage |
       | Quote_TC_42 |  | TC_42      |  | TX    |  |    73301 |  | Life     |
 
-  @Regression_UeS123 @Validate_LifePlanPage_Coverage_L_EmpWithoutDepndtandSal
+  @Regression_UeS123 @Validate_LifePlanPage_Coverage_L_EmpWithoutDepndtandSal @Oct_3
   Scenario Outline: "<TestCaseID>" Validate Life Plans Page with only employee no dependent(without salary)
     When Flow_Fetch fileName "<FileName>" and testCaseID "<TestCaseID>" are captured
     Given Flow_Fetch Data from excel Sheet for "<TestCaseID>"
@@ -475,6 +475,24 @@ Feature: Quotes Module
       | FileName    |  | TestCaseID |  | State |  | Zip Code |  | Coverage |
       | Quote_TC_43 |  | TC_43      |  | TX    |  |    73301 |  | Life     |
 
+  @Regression_UeS123 @Validate_LifePlanPage_Coverage_L_EmpWithDepndtWithoutSal @Oct_4
+  Scenario Outline: "<TestCaseID>" Validate Life Plans Page with employee and dependent(without salary)
+    When Flow_Fetch fileName "<FileName>" and testCaseID "<TestCaseID>" are captured
+    Given Flow_Fetch Data from excel Sheet for "<TestCaseID>"
+    Given UeS_User is on Home Page
+    When UeS_User Navigate to LogIn Page
+    And UeS_User enters UserName and Password
+    Then UeS_User displayed Login Successfully
+    When UeS_User is on Home page and click on Quotes and then select New Quote
+    And UeS_User is select the state as "<State>" and Fill all the details of the Quote Setup window and click on next
+    And UeS_User is select the coverage as "<Coverage>" and Fill all the details of the Quote Setup Page by using "<Zip Code>" and click on NEXT button
+    And UeS_User is enter only Employee Age with Dependents and without Salary in Census page and click on next
+    Then UeS_User verify LIFEBENEFIT,PREMIUM for EMPLOYEE and PREMIUM for DEPENDENT in Life Plans page
+
+    Examples: 
+      | FileName    |  | TestCaseID |  | State |  | Zip Code |  | Coverage |
+      | Quote_TC_44 |  | TC_44      |  | TX    |  |    73301 |  | Life     |
+      
   @Testing
   Scenario Outline: "<TestCaseID>" Testing
     When Flow_Fetch fileName "<FileName>" and testCaseID "<TestCaseID>" are captured
