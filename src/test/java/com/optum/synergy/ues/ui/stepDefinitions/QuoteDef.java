@@ -433,6 +433,12 @@ public class QuoteDef {
 		quotepage.verifyLifePlansPage_PREMIUM(driver);
 		quotepage.tearDown(driver);
 	}
+	
+	@Then("^UeS_User verify PREMIUM for EMPLOYEE and DEPENDENT in Life Plans page$")
+	public void ues_userVerifyPREMIUMForEMPLOYEEAndDEPENDENTInLifePlansPage() throws Throwable {
+		quotepage.verifyLifePlansPage_PREMIUM_EmpWithDepandSal(driver);
+		quotepage.tearDown(driver);
+	}
 
 	@When("^UeS_User is enter Employee Age and Salary with Dependents in Census page and click on next$")
 	public void ues_userIsEnterEmployeeAgeAndSalaryWithDependentsInCensusPageAndClickOnNext() throws Throwable {
@@ -445,6 +451,16 @@ public class QuoteDef {
 	@Then("^UeS_User verify LIFEBENEFIT,PREMIUM for both EMPLOYEE and DEPENDENT in Life Plans page$")
 	public void ues_userVerifyLIFEBENEFITPREMIUMForBothEMPLOYEEAndDEPENDENTInLifePlansPage() throws Throwable {
 		quotepage.verifyLifePlansPage_PREMIUM_EMPWithoutDepSal(driver);
+		quotepage.tearDown(driver);
+	}
+	@When("^UeS_User is enter only Employee Age with Dependents and without Salary in Census page and click on next$")
+	public void ues_userIsEnterOnlyEmployeeAgeWithDependentsAndWithoutSalaryInCensusPageAndClickOnNext() throws Throwable {
+		quotepage.censusPage_EmpWithDepndntWithoutSal(driver);
+	}
+
+	@Then("^UeS_User verify LIFEBENEFIT,PREMIUM for EMPLOYEE and PREMIUM for DEPENDENT in Life Plans page$")
+	public void ues_userVerifyLIFEBENEFITPREMIUMForEMPLOYEEAndPREMIUMForDEPENDENTInLifePlansPage() throws Throwable {
+		quotepage.verifyLifePlansPage_PREMIUM_EMPWithDepWithoutSal(driver);
 		quotepage.tearDown(driver);
 	}
 }
