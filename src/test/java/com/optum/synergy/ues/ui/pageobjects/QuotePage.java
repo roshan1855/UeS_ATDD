@@ -1,8 +1,6 @@
 package com.optum.synergy.ues.ui.pageobjects;
 
 import java.awt.AWTException;
-import java.awt.Robot;
-import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -12,7 +10,6 @@ import java.util.Properties;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
-import org.apache.xpath.operations.Quo;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -20,12 +17,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.ie.InternetExplorerDriver;
-import org.openqa.selenium.interactions.HasInputDevices;
-import org.openqa.selenium.interactions.Keyboard;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.security.Credentials;
-import org.openqa.selenium.security.UserAndPassword;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -151,12 +143,14 @@ public class QuotePage {
 		executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].click();", element);
 		System.out.println("User clicked Login Button.....");
-		Thread.sleep(2000);
+		// Thread.sleep(2000);
 
-		Alert Windowalert = driver.switchTo().alert();
-		Windowalert.authenticateUsing((Credentials) new UserAndPassword("roshanAdmin05", "Computer$5"));
-		// Windowalert.accept();
-		Thread.sleep(7000);
+		/*
+		 * Alert Windowalert = driver.switchTo().alert();
+		 * Windowalert.authenticateUsing((Credentials) new
+		 * UserAndPassword("roshanAdmin05", "Computer$5")); //
+		 * Windowalert.accept();
+		 */ Thread.sleep(6000);
 	}
 
 	public void loginUeS_Broker(WebDriver driver, String userName, String pwd) throws InterruptedException {
@@ -365,7 +359,6 @@ public class QuotePage {
 
 		System.out.println("Row Count :: " + count1 + "Row Count  ::" + (count1 - 7));
 
-		int j = 1000;
 		for (int i = 0; i <= count1 - 7; i++) {
 			Random rand = new Random();
 			int Low = 25;
@@ -759,7 +752,6 @@ public class QuotePage {
 	}
 
 	public void quoteSetupPage(WebDriver driver) throws InterruptedException {
-		String pwindow = driver.getWindowHandle();
 		Thread.sleep(2000);
 		driver.switchTo().defaultContent();
 		Thread.sleep(200);
@@ -883,7 +875,7 @@ public class QuotePage {
 	}
 
 	public void M_V_quoteSetupPage(WebDriver driver) throws InterruptedException {
-		String pwindow = driver.getWindowHandle();
+		// String pwindow = driver.getWindowHandle();
 		Thread.sleep(2000);
 		driver.switchTo().defaultContent();
 		Thread.sleep(1000);
@@ -1018,7 +1010,7 @@ public class QuotePage {
 
 	public void D_V_L_quoteSetupPage(WebDriver driver, String coverage) throws InterruptedException {
 
-		String pwindow = driver.getWindowHandle();
+		// String pwindow = driver.getWindowHandle();
 		Thread.sleep(2000);
 		driver.switchTo().defaultContent();
 		Thread.sleep(1000);
@@ -1247,7 +1239,6 @@ public class QuotePage {
 
 	public static void verifyPageDisplay_logo(WebDriver driver, By path, String pageName)
 			throws InterruptedException, IOException {
-		Utilities utility = new Utilities();
 		// element=driver.findElement(By.xpath(path));
 		// utility.waitForVisibilityOfWebElement(By.xpath(path), driver);
 		Thread.sleep(3000);
@@ -1260,7 +1251,6 @@ public class QuotePage {
 	}
 
 	public static void verifyUeSLogos(WebDriver driver) throws InterruptedException, IOException {
-		Utilities utility = new Utilities();
 		driver.switchTo().defaultContent();
 		Thread.sleep(3000);
 
@@ -1349,7 +1339,7 @@ public class QuotePage {
 	}
 
 	public void quoteSetUpWindow(WebDriver driver, String state) throws InterruptedException {
-		String pwindow = driver.getWindowHandle();
+		//String pwindow = driver.getWindowHandle();
 		Thread.sleep(2000);
 		driver.switchTo().defaultContent();
 		Thread.sleep(2000);
@@ -1419,7 +1409,7 @@ public class QuotePage {
 
 		QuotePage.verifyFooterLinks(driver);
 
-		String pwindow = driver.getWindowHandle();
+		//String pwindow = driver.getWindowHandle();
 		Select quoteType = new Select(driver.findElement(quoteSetUpquoteType));
 		quoteType.selectByVisibleText("New Business");
 
@@ -1487,7 +1477,7 @@ public class QuotePage {
 
 		QuotePage.verifyFooterLinks(driver);
 
-		String pwindow = driver.getWindowHandle();
+		//String pwindow = driver.getWindowHandle();
 		utility.waitForVisibilityOfWebElement(quoteSetUpquoteType, driver);
 		Select quoteType = new Select(driver.findElement(quoteSetUpquoteType));
 		quoteType.selectByVisibleText("New Business");
@@ -1787,7 +1777,7 @@ public class QuotePage {
 		Thread.sleep(3000);
 
 		// Quote SetUp page
-		String pwindow = driver.getWindowHandle();
+		//String pwindow = driver.getWindowHandle();
 		Select quoteType = new Select(driver.findElement(quoteSetUpquoteType));
 		quoteType.selectByVisibleText("New Business");
 
@@ -1909,32 +1899,10 @@ public class QuotePage {
 
 		System.out.println("Row Count :: " + count1 + " Row Count  ::" + (count1 - 7));
 
-		int j = 1000;
 		for (int i = 0; i <= count1 - 7; i++) {
-			// Thread.sleep(1000);
 			driver.findElement(By.xpath("//input[@name='censusDetailInformationForm[" + i + "].employeeAge']"))
 					.sendKeys("23");
 			Thread.sleep(500);
-			// driver.findElement(By.xpath("//input[@name='censusDetailInformationForm["+i+"].spouseAge']")).sendKeys("22");
-			/*
-			 * Thread.sleep(2000); driver.findElement(By.xpath(
-			 * "//input[@name='censusDetailInformationForm["+i+
-			 * "].childrenToAdd']")).sendKeys("1"); Thread.sleep(2000);
-			 * 
-			 * element=driver.findElement(By.xpath("//input[@id='add"+j+"']"));
-			 * executor = (JavascriptExecutor)driver;
-			 * executor.executeScript("arguments[0].click();", element);
-			 * 
-			 * Thread.sleep(2000); driver.findElement(By.xpath(
-			 * "//input[@name='censusDetailInformationForm["+i+
-			 * "].dependentChildren[0].age']")).sendKeys("14");
-			 * Thread.sleep(2000);
-			 * 
-			 * driver.findElement(By.xpath(
-			 * "//input[@name='censusDetailInformationForm["+i+
-			 * "].annualSalary']")).sendKeys("12000"); Thread.sleep(2000);
-			 * j=j+1000;
-			 */
 		}
 
 		utility.waitForVisibilityOfWebElement(censussubmitNext, driver);
@@ -2082,7 +2050,7 @@ public class QuotePage {
 
 		QuotePage.verifyFooterLinks(driver);
 
-		String pwindow = driver.getWindowHandle();
+		// String pwindow = driver.getWindowHandle();
 		Select quoteType = new Select(driver.findElement(quoteSetUpquoteType));
 		quoteType.selectByVisibleText("New Business");
 
@@ -2454,7 +2422,7 @@ public class QuotePage {
 		String code2 = element.getText();
 		System.out.println("BENEFIT Before Code2::" + code2);
 		Thread.sleep(8000);
-		String winHandleBefore = driver.getWindowHandle();
+		// String winHandleBefore = driver.getWindowHandle();
 
 		// input[@name='submitRateCompare']
 		utility.waitForVisibilityOfWebElement(By.xpath("//input[@name='submitPlanCompare']"), driver);
@@ -2555,7 +2523,7 @@ public class QuotePage {
 		String code2 = element.getText();
 		System.out.println("BENEFIT Before Code2::" + code2);
 		Thread.sleep(8000);
-		String winHandleBefore = driver.getWindowHandle();
+		// String winHandleBefore = driver.getWindowHandle();
 
 		// input[@name='submitRateCompare']
 		utility.waitForVisibilityOfWebElement(By.xpath("//input[@name='submitPlanCompare']"), driver);
@@ -2657,7 +2625,7 @@ public class QuotePage {
 		String code2 = element.getText();
 		System.out.println("Employee Class Before Code2::" + code2);
 		Thread.sleep(8000);
-		String winHandleBefore = driver.getWindowHandle();
+		// String winHandleBefore = driver.getWindowHandle();
 
 		utility.waitForVisibilityOfWebElement(By.xpath("//input[@name='submitRateCompare']"), driver);
 		element = driver.findElement(By.xpath("//input[@name='submitRateCompare']"));
@@ -2816,7 +2784,7 @@ public class QuotePage {
 		String code2 = element.getText();
 		System.out.println("Employee Class Before Code2::" + code2);
 		Thread.sleep(8000);
-		String winHandleBefore = driver.getWindowHandle();
+		// String winHandleBefore = driver.getWindowHandle();
 
 		utility.waitForVisibilityOfWebElement(By.xpath("//input[@name='submitRateCompare']"), driver);
 		element = driver.findElement(By.xpath("//input[@name='submitRateCompare']"));
@@ -2978,8 +2946,6 @@ public class QuotePage {
 		Thread.sleep(1000);
 
 		System.out.println("Row Count :: " + count1 + "Row Count  ::" + (count1 - 7));
-
-		int j = 1000;
 		for (int i = 0; i <= count1 - 7; i++) {
 
 			Random rand = new Random();
@@ -3130,6 +3096,30 @@ public class QuotePage {
 		} else {
 			System.out.println("Dependent PREMIUM MONTH Amounts ::" + element.getText() + " and " + element2.getText()
 					+ " not displayed successfully");
+		}
+
+		driver.findElement(By.xpath("//input[@name='benefitAmount']")).sendKeys("10000");
+		Thread.sleep(1000);
+
+		By buttonGO = By.xpath("//input[@name='submitAddBenefit' or @value='GO']");
+
+		element = driver.findElement(buttonGO);
+		executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", element);
+		Thread.sleep(5000);
+
+		element = driver.findElement(By.name("lifePlanBasicInformationForm[0].selectBasicInd"));
+		executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", element);
+		Thread.sleep(1000);
+
+		element = driver.findElement(By.xpath(
+				"//form[@name='LifePlanSelectionForm']/table/tbody/tr[13]/td/table/tbody/tr/td[1]/table/tbody/tr[3]/td[2]"));
+		System.out.println("Value :: " + element.getText());
+		if (element.getText().contains("FLAT $10,000")) {
+			System.out.println(element.getText() + " value present in Basic Life Plan Information table");
+		} else {
+			System.out.println(element.getText() + " value not present in Basic Life Plan Information table");
 		}
 	}
 
@@ -3288,9 +3278,9 @@ public class QuotePage {
 				"//form[@name='LifePlanSelectionForm']/table/tbody/tr[13]/td/table/tbody/tr/td[1]/table/tbody/tr[3]/td[2]"));
 		System.out.println("Value :: " + element.getText());
 		if (element.getText().contains("FLAT $10,000")) {
-			System.out.println("FLAT $10,000 value present in Basic Life Plan Information table");
+			System.out.println(element.getText() + " value present in Basic Life Plan Information table");
 		} else {
-			System.out.println("FLAT $10,000 value not present in Basic Life Plan Information table");
+			System.out.println(element.getText() + " value not present in Basic Life Plan Information table");
 		}
 	}
 
