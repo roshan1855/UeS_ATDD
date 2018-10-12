@@ -3009,11 +3009,11 @@ public class QuotePage {
 				"//form[@name='LifePlanSelectionForm']/table/tbody/tr[13]/td/table/tbody/tr/td[1]/table/tbody/tr[4]/td[3]"));
 
 		if ((element.getText().trim().contains("N/A")) && (element2.getText().trim().contains("N/A"))) {
-			System.out.println("PREMIUM MONTH Amounts ::" + element.getText() + " and " + element2.getText()
+			System.out.println("Employee PREMIUM MONTH Amounts ::" + element.getText() + " and " + element2.getText()
 					+ " displayed successfully");
 		} else {
 			System.out.println(
-					"PREMIUM MONTH Amounts ::" + element.getText() + " and " + element2.getText() + " not displayed");
+					"Employee PREMIUM MONTH Amounts ::" + element.getText() + " and " + element2.getText() + " not displayed");
 		}
 
 		element = driver.findElement(By.xpath(
@@ -3031,6 +3031,32 @@ public class QuotePage {
 			System.out.println("Dependent PREMIUM MONTH Amounts ::" + element.getText() + " and " + element2.getText()
 					+ " not displayed ");
 		}
+		
+		driver.findElement(By.xpath("//input[@name='benefitAmount']")).sendKeys("10000");
+		Thread.sleep(1000);
+
+		By buttonGO = By.xpath("//input[@name='submitAddBenefit' or @value='GO']");
+
+		element = driver.findElement(buttonGO);
+		executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", element);
+		Thread.sleep(6000);
+
+		element = driver.findElement(By.name("lifePlanBasicInformationForm[4].selectBasicInd"));
+		executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", element);
+		Thread.sleep(1000);
+
+		element = driver.findElement(By.xpath(
+				"//form[@name='LifePlanSelectionForm']/table/tbody/tr[13]/td/table/tbody/tr/td[1]/table/tbody/tr[7]/td[2]"));
+		System.out.println("Value :: " + element.getText());
+		if (element.getText().contains("FLAT $10,000")) {
+			System.out.println("FLAT $10,000 value present in Basic Life Plan Information table");
+		} else {
+			System.out.println("FLAT $10,000 value not present in Basic Life Plan Information table");
+		}
+
+
 	}
 
 	public void verifyLifePlansPage_PREMIUM(WebDriver driver) throws InterruptedException, IOException {
@@ -3321,11 +3347,11 @@ public class QuotePage {
 				"//form[@name='LifePlanSelectionForm']/table/tbody/tr[13]/td/table/tbody/tr/td[1]/table/tbody/tr[4]/td[3]"));
 
 		if ((element.getText().trim().contains("N/A")) && (element2.getText().trim().contains("N/A"))) {
-			System.out.println("PREMIUM MONTH Amounts ::" + element.getText() + " and " + element2.getText()
+			System.out.println("Employee PREMIUM MONTH Amounts ::" + element.getText() + " and " + element2.getText()
 					+ " displayed successfully");
 		} else {
 			System.out.println(
-					"PREMIUM MONTH Amounts ::" + element.getText() + " and " + element2.getText() + " not displayed");
+					"Employee PREMIUM MONTH Amounts ::" + element.getText() + " and " + element2.getText() + " not displayed");
 		}
 
 		element = driver.findElement(By.xpath("//input[@name='lifePlanDepInformationForm[0].selectDependentInd']"));
