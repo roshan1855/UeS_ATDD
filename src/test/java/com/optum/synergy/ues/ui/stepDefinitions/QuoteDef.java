@@ -87,8 +87,8 @@ public class QuoteDef {
 	@Given("^UeS_User is on Home Page$")
 	public void ues_user_is_on_Home_Page() throws Throwable {
 		// driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-		driver.get(autoProperties.getProperty("BFX_URL"));
-		// driver.get(autoProperties.getProperty("STAGE_URL"));
+		// driver.get(autoProperties.getProperty("BFX_URL"));
+		driver.get(autoProperties.getProperty("STAGE_URL"));
 		utility.takeScreenShot(driver, "Homepage" + testCaseID);
 		utility.GenerateReport("Quote", "", "info", "Execution Started.User is on the login Page",
 				"Homepage" + testCaseID);
@@ -433,7 +433,7 @@ public class QuoteDef {
 		quotepage.verifyLifePlansPage_PREMIUM(driver);
 		quotepage.tearDown(driver);
 	}
-	
+
 	@Then("^UeS_User verify PREMIUM for EMPLOYEE and DEPENDENT in Life Plans page$")
 	public void ues_userVerifyPREMIUMForEMPLOYEEAndDEPENDENTInLifePlansPage() throws Throwable {
 		quotepage.verifyLifePlansPage_PREMIUM_EmpWithDepandSal(driver);
@@ -444,17 +444,21 @@ public class QuoteDef {
 	public void ues_userIsEnterEmployeeAgeAndSalaryWithDependentsInCensusPageAndClickOnNext() throws Throwable {
 		quotepage.censusPage(driver);
 	}
+
 	@When("^UeS_User is enter only Employee Age without Dependents and Salary in Census page and click on next$")
 	public void ues_userIsEnterOnlyEmployeeAgeWithoutDependentsAndSalaryInCensusPageAndClickOnNext() throws Throwable {
 		quotepage.censusPageWithOutSal(driver);
 	}
+
 	@Then("^UeS_User verify LIFEBENEFIT,PREMIUM for both EMPLOYEE and DEPENDENT in Life Plans page$")
 	public void ues_userVerifyLIFEBENEFITPREMIUMForBothEMPLOYEEAndDEPENDENTInLifePlansPage() throws Throwable {
 		quotepage.verifyLifePlansPage_PREMIUM_EMPWithoutDepSal(driver);
 		quotepage.tearDown(driver);
 	}
+
 	@When("^UeS_User is enter only Employee Age with Dependents and without Salary in Census page and click on next$")
-	public void ues_userIsEnterOnlyEmployeeAgeWithDependentsAndWithoutSalaryInCensusPageAndClickOnNext() throws Throwable {
+	public void ues_userIsEnterOnlyEmployeeAgeWithDependentsAndWithoutSalaryInCensusPageAndClickOnNext()
+			throws Throwable {
 		quotepage.censusPage_EmpWithDepndntWithoutSal(driver);
 	}
 
@@ -463,4 +467,60 @@ public class QuoteDef {
 		quotepage.verifyLifePlansPage_PREMIUM_EMPWithDepWithoutSal(driver);
 		quotepage.tearDown(driver);
 	}
+
+	@When("^UeS_User is select all coverages and select the state as \"([^\"]*)\" then Fill all the details on Quote Setup page and click on next$")
+	public void ues_userIsSelectAllCoveragesAndSelectTheStateAsThenFillAllTheDetailsOnQuoteSetupPageAndClickOnNext(
+			String arg1) throws Throwable {
+		quotepage.quoteSetUpPage_SelectAllCoverages(driver, arg1);
+	}
+
+	@Then("^UeS_User select plan on Dental PPO/Indemnity Plan Information table then click on NEXT button$")
+	public void ues_userSelectPlanOnDentalPPOIndemnityPlanInformationTableThenClickOnNEXTButton() throws Throwable {
+
+	}
+
+	@Then("^UeS_User is Select the Plans Supplemental Employee Life/AD&D Plans Page and click on NEXT button$")
+	public void ues_userIsSelectThePlansSupplementalEmployeeLifeADDPlansPageAndClickOnNEXTButton() throws Throwable {
+		quotepage.page_SupplementalEmployeeLife(driver);
+	}
+
+	@Then("^UeS_User is Select the Plans Supplemental Dependent Life/AD&D Plans Page and click on NEXT button$")
+	public void ues_userIsSelectThePlansSupplementalDependentLifeADDPlansPageAndClickOnNEXTButton() throws Throwable {
+		quotepage.page_SupplementalDependentLife(driver);
+	}
+
+	@Then("^UeS_User verify the Display Plan as \"([^\"]*)\" on Short Term Disability Plans page$")
+	public void ues_userVerifyTheDisplayPlanAsOnShortTermDisabilityPlansPage(String arg1) throws Throwable {
+		quotepage.page_ShortTermDisabilityPlans(driver, arg1);
+	}
+
+	@Then("^UeS_User select plans from Disability Plan Information table on Short Term Disability Plans page$")
+	public void ues_userSelectPlansFromDisabilityPlanInformationTableOnShortTermDisabilityPlansPage() throws Throwable {
+		quotepage.selectPlanCode_ShortTermDisabilityPlans(driver);
+	}
+
+	@Then("^UeS_User select PLAN CODES and click on COMPARE SELECTED PLANS button in Disability Plan Information table$")
+	public void ues_userSelectPLANCODESAndClickOnCOMPARESELECTEDPLANSButtonInDisabilityPlanInformationTable()
+			throws Throwable {
+		System.out.println("User selected plans from Disability Plan Information table");
+	}
+
+	@Then("^UeS_User is verify BENEFIT,MONYHLY PREMIUM and ANNUAL PREMIUM inShort Term Disability Plan Details on STD Plan Comparison page$")
+	public void ues_userIsVerifyBENEFITMONYHLYPREMIUMAndANNUALPREMIUMInShortTermDisabilityPlanDetailsOnSTDPlanComparisonPage()
+			throws Throwable {
+		quotepage.verify_BENEFITCODE_MONTHLYPREMIUM_ANNUALPREMIUM(driver);
+		quotepage.tearDown(driver);
+	}
+
+	@When("^UeS_User is Select the Plans from Medical Plans Page and click on next button$")
+	public void ues_user_is_Select_the_Plans_from_Medical_Plans_Page_and_click_on_next_button() throws Throwable {
+		quotepage.medicalPlanPage_1(driver);
+	}
+
+	@Then("^UeS_User verify the Display Plan as \"([^\"]*)\" and select Display Plan as \"([^\"]*)\" and click on APPLY CHANGES$")
+	public void ues_userVerifyTheDisplayPlanAsAndSelectDisplayPlanAsAndClickOnAPPLYCHANGES(String arg1, String arg2)
+			throws Throwable {
+		quotepage.verifyDisplayPlans_clickBtnApplyChanges(driver, arg1);
+	}
+
 }
