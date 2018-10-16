@@ -132,8 +132,8 @@ public class QuotePage {
 
 	public void loginUeSApp(WebDriver driver) throws InterruptedException {
 		utility.waitForVisibilityOfWebElement(uesUserName, driver);
-		// driver.findElement(uesUserName).sendKeys("roshanadmin05");
-		driver.findElement(uesUserName).sendKeys("roshankumar");
+		driver.findElement(uesUserName).sendKeys("roshanadmin05");
+		//driver.findElement(uesUserName).sendKeys("roshankumar");
 
 		utility.waitForVisibilityOfWebElement(uesPwd, driver);
 		// driver.findElement(uesPwd).sendKeys("Computer$4");
@@ -3421,7 +3421,7 @@ public class QuotePage {
 
 		QuotePage.verifyFooterLinks(driver);
 
-		String pwindow = driver.getWindowHandle();
+		/*String pwindow = driver.getWindowHandle();
 
 		// New Functionality 26/09/2018
 		utility.waitForVisibilityOfWebElement(By.xpath("//a[@href='javascript:openAccountExecSearch();']/img"), driver);
@@ -3461,7 +3461,7 @@ public class QuotePage {
 		Thread.sleep(1000);
 		driver.switchTo().frame("content");
 		Thread.sleep(2000);
-
+*/
 		// String pwindow = driver.getWindowHandle();
 		Select quoteType = new Select(driver.findElement(quoteSetUpquoteType));
 		quoteType.selectByVisibleText("New Business");
