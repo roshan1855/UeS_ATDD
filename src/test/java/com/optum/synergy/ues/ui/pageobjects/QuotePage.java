@@ -135,15 +135,15 @@ public class QuotePage {
 	public void loginUeSApp(WebDriver driver) throws InterruptedException {
 		utility.waitForVisibilityOfWebElement(uesUserName, driver);
 		// driver.findElement(uesUserName).sendKeys("roshanadmin05");
-		//driver.findElement(uesUserName).sendKeys(autoProperties.getProperty("loginUserName_BFX"));
+		driver.findElement(uesUserName).sendKeys(autoProperties.getProperty("loginUserName_BFX"));
 		// driver.findElement(uesUserName).sendKeys("roshankumar");
-		driver.findElement(uesUserName).sendKeys(autoProperties.getProperty("loginUserName_STG"));
+		//driver.findElement(uesUserName).sendKeys(autoProperties.getProperty("loginUserName_STG"));
 
 		utility.waitForVisibilityOfWebElement(uesPwd, driver);
 		// driver.findElement(uesPwd).sendKeys("Computer$4");
 		// driver.findElement(uesPwd).sendKeys("Computer$5");
-		//driver.findElement(uesPwd).sendKeys(autoProperties.getProperty("loginPassword_BFX"));
-		driver.findElement(uesPwd).sendKeys(autoProperties.getProperty("loginPassword_STG"));
+		driver.findElement(uesPwd).sendKeys(autoProperties.getProperty("loginPassword_BFX"));
+		//driver.findElement(uesPwd).sendKeys(autoProperties.getProperty("loginPassword_STG"));
 
 		utility.waitForVisibilityOfWebElement(uesLoginBtn, driver);
 		element = driver.findElement(uesLoginBtn);
