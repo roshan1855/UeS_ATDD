@@ -504,7 +504,7 @@ Feature: Quotes Module
     And UeS_User enters UserName and Password
     Then UeS_User displayed Login Successfully
     When UeS_User is on Home page and click on Quotes and then select New Quote
-    And UeS_User is select the state as "<State>" and Fill all the details of the Quote Setup window and click on next
+    And UeS_User is select the state as "<State>" and Fill all the details of the Quote Setup window and click on NEXT
     And UeS_User is select all coverages and select the state as "<State>" then Fill all the details on Quote Setup page and click on next
     And UeS_User is enter Employee Age and Salary with Dependents in Census page and click on next
     And UeS_User is Select the Plans from Medical Plans Page and click on next button
@@ -519,11 +519,11 @@ Feature: Quotes Module
     Then UeS_User verify the Display Plan as "<Value>" on Short Term Disability Plans page
     And UeS_User select plans from Disability Plan Information table on Short Term Disability Plans page
     And UeS_User select PLAN CODES and click on COMPARE SELECTED PLANS button in Disability Plan Information table
-    Then UeS_User is verify BENEFIT,MONYHLY PREMIUM and ANNUAL PREMIUM inShort Term Disability Plan Details on STD Plan Comparison page
+    Then UeS_User is verify BENEFIT,MONYHLY PREMIUM as "<Monthly Premium>" and ANNUAL PREMIUM as "<Annual Premium>" in Short Term Disability Plan Details table on STD Plan Comparison page
 
     Examples: 
-      | FileName    |  | TestCaseID |  | State |  | Value              |  | Zip Code |  | Coverage |
-      | Quote_TC_45 |  | TC_45      |  | TX    |  | Most Popular Plans |  |    73301 |  | Dental   |
+      | FileName    |  | TestCaseID |  | State |  | Value              |  | Zip Code |  | Monthly Premium |  | Annual Premium |
+      | Quote_TC_45 |  | TC_45      |  | TX    |  | Most Popular Plans |  |    73301 |  | Not Null        |  | Not Null       |
 
   @Testing
   Scenario Outline: "<TestCaseID>" Testing
