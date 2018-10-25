@@ -21,6 +21,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.optum.synergy.ues.ui.stepDefinitions.Hooks;
 import com.optum.synergy.ues.ui.utilities.Utilities;
 
 public class QuotePage {
@@ -115,6 +116,7 @@ public class QuotePage {
 
 	public QuotePage() throws IOException {
 		utility = new Utilities();
+		autoProperties = Hooks.autoProperties;
 	}
 
 	public void pageUeSLogin() throws InterruptedException {
@@ -132,12 +134,14 @@ public class QuotePage {
 
 	public void loginUeSApp(WebDriver driver) throws InterruptedException {
 		utility.waitForVisibilityOfWebElement(uesUserName, driver);
-		driver.findElement(uesUserName).sendKeys("roshanadmin05");
-		//driver.findElement(uesUserName).sendKeys("roshankumar");
+		// driver.findElement(uesUserName).sendKeys("roshanadmin05");
+		driver.findElement(uesUserName).sendKeys(autoProperties.getProperty("loginUserName_BFX"));
+		// driver.findElement(uesUserName).sendKeys("roshankumar");
 
 		utility.waitForVisibilityOfWebElement(uesPwd, driver);
 		// driver.findElement(uesPwd).sendKeys("Computer$4");
-		driver.findElement(uesPwd).sendKeys("Computer$5");
+		// driver.findElement(uesPwd).sendKeys("Computer$5");
+		driver.findElement(uesPwd).sendKeys(autoProperties.getProperty("loginPassword_BFX"));
 
 		utility.waitForVisibilityOfWebElement(uesLoginBtn, driver);
 		element = driver.findElement(uesLoginBtn);
@@ -1390,11 +1394,11 @@ public class QuotePage {
 
 		utility.waitForVisibilityOfWebElement(quoteemployeeCount, driver);
 		driver.findElement(quoteemployeeCount).clear();
-		driver.findElement(quoteemployeeCount).sendKeys("10");
+		driver.findElement(quoteemployeeCount).sendKeys("8");
 
 		utility.waitForVisibilityOfWebElement(quoteatneCount1, driver);
 		driver.findElement(quoteatneCount1).clear();
-		driver.findElement(quoteatneCount1).sendKeys("10");
+		driver.findElement(quoteatneCount1).sendKeys("8");
 		// Thread.sleep(1000);
 
 		utility.waitForVisibilityOfWebElement(quoteNextBtn, driver);
@@ -2978,7 +2982,7 @@ public class QuotePage {
 		Thread.sleep(8000);
 	}
 
-	public void verifyLifePlansPage_PREMIUM_EMPWithoutDepSal(WebDriver driver)
+	public void verifyLifePlansPage_PREMIUM_EMPWithoutDepSal(WebDriver driver, String BenfitCode, String Premium)
 			throws InterruptedException, IOException {
 		QuotePage.verifyUeSLogos(driver);
 		Thread.sleep(1000);
@@ -3001,7 +3005,7 @@ public class QuotePage {
 
 		String LifeBenifit2 = element1.getText();
 
-		if ((LifeBenifit1.contains("Multiple")) && (LifeBenifit2.contains("Multiple"))) {
+		if ((LifeBenifit1.trim().contains(BenfitCode)) && (LifeBenifit2.trim().contains(BenfitCode))) {
 			System.out.println(
 					"LIFE BENEFITS ::" + element.getText() + " and " + element1.getText() + " displayed successfully");
 		} else {
@@ -3014,7 +3018,7 @@ public class QuotePage {
 		WebElement element2 = driver.findElement(By.xpath(
 				"//form[@name='LifePlanSelectionForm']/table/tbody/tr[13]/td/table/tbody/tr/td[1]/table/tbody/tr[4]/td[3]"));
 
-		if ((element.getText().trim().contains("N/A")) && (element2.getText().trim().contains("N/A"))) {
+		if ((element.getText().trim().contains(Premium)) && (element2.getText().trim().contains(Premium))) {
 			System.out.println("Employee PREMIUM MONTH Amounts ::" + element.getText() + " and " + element2.getText()
 					+ " displayed successfully");
 		} else {
@@ -3030,15 +3034,18 @@ public class QuotePage {
 				"//form[@name='LifePlanSelectionForm']/table/tbody/tr[13]/td/table/tbody/tr/td[3]/table/tbody/tr[4]/td[4]"));
 		String DependentPremium2 = element3.getText();
 
-		if ((DependentPremium1.trim().contains("N/A")) && (DependentPremium2.trim().contains("N/A"))) {
+		if ((DependentPremium1.trim().contains(Premium)) && (DependentPremium2.trim().contains(Premium))) {
 			System.out.println("Dependent PREMIUM MONTH Amounts ::" + element.getText() + " and " + element3.getText()
 					+ " displayed successfully");
 		} else {
 			System.out.println("Dependent PREMIUM MONTH Amounts ::" + element.getText() + " and " + element2.getText()
 					+ " not displayed ");
 		}
+	}
 
-		driver.findElement(By.xpath("//input[@name='benefitAmount']")).sendKeys("10000");
+	public void enterLifeBenefitAmount(WebDriver driver,String amountLifeBenefit) throws InterruptedException {
+
+		driver.findElement(By.xpath("//input[@name='benefitAmount']")).sendKeys(amountLifeBenefit);
 		Thread.sleep(1000);
 
 		By buttonGO = By.xpath("//input[@name='submitAddBenefit' or @value='GO']");
@@ -3046,22 +3053,35 @@ public class QuotePage {
 		element = driver.findElement(buttonGO);
 		executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].click();", element);
-		Thread.sleep(6000);
+		Thread.sleep(5000);
+	}
 
-		element = driver.findElement(By.name("lifePlanBasicInformationForm[4].selectBasicInd"));
-		executor = (JavascriptExecutor) driver;
-		executor.executeScript("arguments[0].click();", element);
-		Thread.sleep(1000);
+	public void verifyLifeBenefitAmount(WebDriver driver, String amountLifeBenefit) throws InterruptedException {
 
-		element = driver.findElement(By.xpath(
-				"//form[@name='LifePlanSelectionForm']/table/tbody/tr[13]/td/table/tbody/tr/td[1]/table/tbody/tr[7]/td[2]"));
-		System.out.println("Value :: " + element.getText());
-		if (element.getText().contains("FLAT $10,000")) {
-			System.out.println("FLAT $10,000 value present in Basic Life Plan Information table");
-		} else {
-			System.out.println("FLAT $10,000 value not present in Basic Life Plan Information table");
+		/*
+		 * element = driver.findElement(By.name(
+		 * "lifePlanBasicInformationForm[4].selectBasicInd")); executor =
+		 * (JavascriptExecutor) driver;
+		 * executor.executeScript("arguments[0].click();", element);
+		 * Thread.sleep(1000);
+		 */
+
+		List<WebElement> amountlifeBenefit = driver.findElements(By.xpath(
+				"//form[@name='LifePlanSelectionForm']/table/tbody/tr[13]/td/table/tbody/tr/td[1]/table/tbody/tr/td[2]"));
+		System.out.println("Life Benefit Amount Table size ::" + amountlifeBenefit.size());
+		for (int i = 3; i <= amountlifeBenefit.size(); i++) {
+			element = driver.findElement(By.xpath(
+					"//form[@name='LifePlanSelectionForm']/table/tbody/tr[13]/td/table/tbody/tr/td[1]/table/tbody/tr[" + i + "]/td[2]"));
+			//System.out.println("amountLifeBenefit Value :: " + element.getText());
+			if (element.getText().trim().contains(amountLifeBenefit)) {
+				System.out.println(element.getText() + " value present in Basic Life Plan Information table");
+				break;
+			} /*
+				 * else { System.out.
+				 * println("FLAT $10,000 value not present in Basic Life Plan Information table"
+				 * ); }
+				 */
 		}
-
 	}
 
 	public void verifyLifePlansPage_PREMIUM(WebDriver driver) throws InterruptedException, IOException {
@@ -3421,47 +3441,46 @@ public class QuotePage {
 
 		QuotePage.verifyFooterLinks(driver);
 
-		/*String pwindow = driver.getWindowHandle();
-
-		// New Functionality 26/09/2018
-		utility.waitForVisibilityOfWebElement(By.xpath("//a[@href='javascript:openAccountExecSearch();']/img"), driver);
-
-		element = driver.findElement(By.xpath("//a[@href='javascript:openAccountExecSearch();']/img"));
-		executor = (JavascriptExecutor) driver;
-		executor.executeScript("arguments[0].click();", element);
-
-		utility.waitForNumberOfWindowsToEqual(2);
-		for (String winHandle : driver.getWindowHandles()) {
-			driver.switchTo().window(winHandle);
-			if (driver.switchTo().window(winHandle).getCurrentUrl().contains("accountExecutiveSearch")) {
-				System.out.println("Account Executive Search web page displayed successfully");
-				System.out.println(
-						"Account Executive Search page URL :: " + driver.switchTo().window(winHandle).getCurrentUrl());
-
-				driver.findElement(By.xpath("//input[@name='lastName']")).sendKeys("Smith");
-				Thread.sleep(1000);
-
-				By btnSicInputSubmit = By.xpath("//input[@name='submitSearch' or @value='SEARCH']");
-				element = driver.findElement(btnSicInputSubmit);
-				executor = (JavascriptExecutor) driver;
-				executor.executeScript("arguments[0].click();", element);
-				Thread.sleep(1000);
-
-				element = driver.findElement(By.linkText("Select"));
-				executor = (JavascriptExecutor) driver;
-				executor.executeScript("arguments[0].click();", element);
-				Thread.sleep(2000);
-				// driver.switchTo().window(handle1).close();
-				// driver.close();
-			}
-		}
-
-		// Thread.sleep(1000);
-		driver.switchTo().window(pwindow);
-		Thread.sleep(1000);
-		driver.switchTo().frame("content");
-		Thread.sleep(2000);
-*/
+		/*
+		 * String pwindow = driver.getWindowHandle();
+		 * 
+		 * // New Functionality 26/09/2018
+		 * utility.waitForVisibilityOfWebElement(By.xpath(
+		 * "//a[@href='javascript:openAccountExecSearch();']/img"), driver);
+		 * 
+		 * element = driver.findElement(By.xpath(
+		 * "//a[@href='javascript:openAccountExecSearch();']/img")); executor =
+		 * (JavascriptExecutor) driver;
+		 * executor.executeScript("arguments[0].click();", element);
+		 * 
+		 * utility.waitForNumberOfWindowsToEqual(2); for (String winHandle :
+		 * driver.getWindowHandles()) { driver.switchTo().window(winHandle); if
+		 * (driver.switchTo().window(winHandle).getCurrentUrl().contains(
+		 * "accountExecutiveSearch")) { System.out.
+		 * println("Account Executive Search web page displayed successfully");
+		 * System.out.println( "Account Executive Search page URL :: " +
+		 * driver.switchTo().window(winHandle).getCurrentUrl());
+		 * 
+		 * driver.findElement(By.xpath("//input[@name='lastName']")).sendKeys(
+		 * "Smith"); Thread.sleep(1000);
+		 * 
+		 * By btnSicInputSubmit =
+		 * By.xpath("//input[@name='submitSearch' or @value='SEARCH']"); element
+		 * = driver.findElement(btnSicInputSubmit); executor =
+		 * (JavascriptExecutor) driver;
+		 * executor.executeScript("arguments[0].click();", element);
+		 * Thread.sleep(1000);
+		 * 
+		 * element = driver.findElement(By.linkText("Select")); executor =
+		 * (JavascriptExecutor) driver;
+		 * executor.executeScript("arguments[0].click();", element);
+		 * Thread.sleep(2000); // driver.switchTo().window(handle1).close(); //
+		 * driver.close(); } }
+		 * 
+		 * // Thread.sleep(1000); driver.switchTo().window(pwindow);
+		 * Thread.sleep(1000); driver.switchTo().frame("content");
+		 * Thread.sleep(2000);
+		 */
 		// String pwindow = driver.getWindowHandle();
 		Select quoteType = new Select(driver.findElement(quoteSetUpquoteType));
 		quoteType.selectByVisibleText("New Business");
