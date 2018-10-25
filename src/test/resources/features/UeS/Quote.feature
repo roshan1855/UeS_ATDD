@@ -475,7 +475,7 @@ Feature: Quotes Module
 
     Examples: 
       | FileName    |  | TestCaseID |  | State |  | Zip Code |  | Coverage |  | Life Benefit |  | Premium |  | Life Benefit Amount |
-      | Quote_TC_43 |  | TC_43      |  | TX    |  |    73301 |  | Life     |  | Multiple     |  | N/A     |  |       10,000 |
+      | Quote_TC_43 |  | TC_43      |  | TX    |  |    73301 |  | Life     |  | Multiple     |  | N/A     |  |              10,000 |
 
   @Regression_UeS123 @Validate_LifePlanPage_Coverage_L_EmpWithDepndtWithoutSal @Oct_4
   Scenario Outline: "<TestCaseID>" Validate Life Plans Page with employee and dependent(without salary)
