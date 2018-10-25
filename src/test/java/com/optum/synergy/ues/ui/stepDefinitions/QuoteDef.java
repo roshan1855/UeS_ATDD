@@ -87,8 +87,8 @@ public class QuoteDef {
 	@Given("^UeS_User is on Home Page$")
 	public void ues_user_is_on_Home_Page() throws Throwable {
 		// driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-		driver.get(autoProperties.getProperty("BFX_URL"));
-		// driver.get(autoProperties.getProperty("STAGE_URL"));
+		//driver.get(autoProperties.getProperty("BFX_URL"));
+		 driver.get(autoProperties.getProperty("STAGE_URL"));
 		utility.takeScreenShot(driver, "Homepage" + testCaseID);
 		utility.GenerateReport("Quote", "", "info", "Execution Started.User is on the login Page",
 				"Homepage" + testCaseID);
@@ -277,6 +277,13 @@ public class QuoteDef {
 			throws Throwable {
 		quotepage.quoteSetUpWindow(driver, arg1);
 	}
+	
+	@When("^UeS_User is select the state as \"([^\"]*)\" and Fill all the details of the Quote Setup window and click on NEXT$")
+	public void ues_userIsSelectTheStateAsAndFillAllTheDetailsOfTheQuoteSetupWindowAndClickOnNEXT(String arg1)
+			throws Throwable {
+		quotepage.quoteSetUpWindow_Coverage_All(driver, arg1);
+	}
+	
 
 	@When("^UeS_User is Fill all the details of the Quote Setup Page by using \"([^\"]*)\" and click on next button$")
 	public void ues_userIsFillAllTheDetailsOfTheQuoteSetupPageByUsingAndClickOnNextButton(String arg1)
@@ -538,6 +545,12 @@ public class QuoteDef {
 	@Then("^UeS_User verify Life Benefit amount as \"([^\"]*)\" on Basic Life Plan Information table$")
 	public void ues_userVerifyLifeBenefitAmountAsOnBasicLifePlanInformationTable(String arg1) throws Throwable {
 		quotepage.verifyLifeBenefitAmount(driver, arg1);
+		quotepage.tearDown(driver);
+	}
+	
+	@Then("^UeS_User is verify BENEFIT,MONYHLY PREMIUM as \"([^\"]*)\" and ANNUAL PREMIUM as \"([^\"]*)\" in Short Term Disability Plan Details table on STD Plan Comparison page$")
+	public void ues_userIsVerifyBENEFITMONYHLYPREMIUMAsAndANNUALPREMIUMAsInShortTermDisabilityPlanDetailsTableOnSTDPlanComparisonPage(String arg1, String arg2) throws Throwable {
+		quotepage.verify_BENEFITCODE_MONTHLYPREMIUM_ANNUALPREMIUM(driver);
 		quotepage.tearDown(driver);
 	}
 
