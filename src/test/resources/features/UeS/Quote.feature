@@ -469,11 +469,13 @@ Feature: Quotes Module
     And UeS_User is select the state as "<State>" and Fill all the details of the Quote Setup window and click on next
     And UeS_User is select the coverage as "<Coverage>" and Fill all the details of the Quote Setup Page by using "<Zip Code>" and click on NEXT button
     And UeS_User is enter only Employee Age without Dependents and Salary in Census page and click on next
-    Then UeS_User verify LIFEBENEFIT,PREMIUM for both EMPLOYEE and DEPENDENT in Life Plans page
+    Then UeS_User verify LIFEBENEFIT as "<Life Benefit>",PREMIUM as "<Premium>" for both EMPLOYEE and DEPENDENT in Life Plans page
+    And UeS_User enter Life Benefit amount in Flat Life Benefit Amount text field as "<Life Benefit Amount>" and click on Go button
+    Then UeS_User verify Life Benefit amount as "<Life Benefit Amount>" on Basic Life Plan Information table
 
     Examples: 
-      | FileName    |  | TestCaseID |  | State |  | Zip Code |  | Coverage |
-      | Quote_TC_43 |  | TC_43      |  | TX    |  |    73301 |  | Life     |
+      | FileName    |  | TestCaseID |  | State |  | Zip Code |  | Coverage |  | Life Benefit |  | Premium |  | Life Benefit Amount |
+      | Quote_TC_43 |  | TC_43      |  | TX    |  |    73301 |  | Life     |  | Multiple     |  | N/A     |  |       10,000 |
 
   @Regression_UeS123 @Validate_LifePlanPage_Coverage_L_EmpWithDepndtWithoutSal @Oct_4
   Scenario Outline: "<TestCaseID>" Validate Life Plans Page with employee and dependent(without salary)
@@ -531,10 +533,10 @@ Feature: Quotes Module
     When UeS_User Navigate to LogIn Page
     And UeS_User enters UserName and Password
     Then UeS_User displayed Login Successfully
-    When UeS_User is on Home page and click on Quotes and then select New Quote
-    And fill all details
-    Then UeS_User click on GENERATE FINAL PROPOSAL1 button and verify Preview Proposal PDf is displayed successfully
 
+    # When UeS_User is on Home page and click on Quotes and then select New Quote
+    #And fill all details
+    #Then UeS_User click on GENERATE FINAL PROPOSAL1 button and verify Preview Proposal PDf is displayed successfully
     Examples: 
       | FileName   |  | TestCaseID |
       | Test_TC_62 |  | TC_62      |
