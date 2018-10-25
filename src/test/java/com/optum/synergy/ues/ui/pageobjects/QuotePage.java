@@ -65,8 +65,8 @@ public class QuotePage {
 	By quoteNextBtn = By.xpath("//input[@name='submitATNE']");
 	By quotepolicyEffDateDay = By.name("policyEffDateDay");
 	By quotepolicyEffDateYear = By.name("policyEffDateYear");
-	By quoteatneCount1 = By
-			.xpath(".//*[@id='popupForm']/table/tbody/tr[3]/td/table/tbody/tr/td/table/tbody/tr[10]/td[2]/input");
+	By quoteatneCount1 = By.xpath(".//*[@id='popupForm']/table/tbody/tr[3]/td/table/tbody/tr/td/table/tbody/tr[10]/td[2]/input");
+	By quoteatneCount2=By.xpath("//form[@name='QuoteInformationForm']/table/tbody/tr[3]/td/table/tbody/tr/td/table/tbody/tr[11]/td[2]/input");
 	// Quote SetUp
 	By quoteSetUpquoteType = By.xpath("//select[@name='quoteType']");
 	By quoteSetUpquoteCompanyName = By.xpath("//input[@name='quoteCompanyName']");
@@ -135,13 +135,15 @@ public class QuotePage {
 	public void loginUeSApp(WebDriver driver) throws InterruptedException {
 		utility.waitForVisibilityOfWebElement(uesUserName, driver);
 		// driver.findElement(uesUserName).sendKeys("roshanadmin05");
-		driver.findElement(uesUserName).sendKeys(autoProperties.getProperty("loginUserName_BFX"));
+		//driver.findElement(uesUserName).sendKeys(autoProperties.getProperty("loginUserName_BFX"));
 		// driver.findElement(uesUserName).sendKeys("roshankumar");
+		driver.findElement(uesUserName).sendKeys(autoProperties.getProperty("loginUserName_STG"));
 
 		utility.waitForVisibilityOfWebElement(uesPwd, driver);
 		// driver.findElement(uesPwd).sendKeys("Computer$4");
 		// driver.findElement(uesPwd).sendKeys("Computer$5");
-		driver.findElement(uesPwd).sendKeys(autoProperties.getProperty("loginPassword_BFX"));
+		//driver.findElement(uesPwd).sendKeys(autoProperties.getProperty("loginPassword_BFX"));
+		driver.findElement(uesPwd).sendKeys(autoProperties.getProperty("loginPassword_STG"));
 
 		utility.waitForVisibilityOfWebElement(uesLoginBtn, driver);
 		element = driver.findElement(uesLoginBtn);
@@ -1399,6 +1401,67 @@ public class QuotePage {
 		utility.waitForVisibilityOfWebElement(quoteatneCount1, driver);
 		driver.findElement(quoteatneCount1).clear();
 		driver.findElement(quoteatneCount1).sendKeys("8");
+		// Thread.sleep(1000);
+
+		utility.waitForVisibilityOfWebElement(quoteNextBtn, driver);
+		element = driver.findElement(quoteNextBtn);
+		executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", element);
+		Thread.sleep(3000);
+	}
+	
+	public void quoteSetUpWindow_Coverage_All(WebDriver driver, String state) throws InterruptedException {
+		// String pwindow = driver.getWindowHandle();
+		Thread.sleep(2000);
+		driver.switchTo().defaultContent();
+		Thread.sleep(2000);
+		// utility.waitforSwitchtoFrame(By.xpath("content"), driver);
+		driver.switchTo().frame("content");
+		Thread.sleep(6000);
+
+		utility.waitForVisibilityOfWebElement(By.xpath(".//*[@id='ui-dialog-title-dialogQuote']"), driver);
+		String quoteSetUpInfoWindow = ".//*[@id='ui-dialog-title-dialogQuote']";
+		QuotePage.verifyPageDisplay(driver, quoteSetUpInfoWindow, "Quote Setup");
+
+		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+		Date date = new Date();
+		// System.out.println(formatter.format(date));
+
+		String str = formatter.format(date);
+		String[] arrOfStr = str.split("/");
+
+		// int i=Integer.parseInt(arrOfStr[0]);
+		// System.out.println(arrOfStr[0]);
+
+		driver.findElement(quotepolicyEffDateMonth).sendKeys(arrOfStr[1]);
+		Thread.sleep(1000);
+
+		if (arrOfStr[0].compareTo("16") > 0) {
+			utility.waitForVisibilityOfWebElement(quotepolicyEffDateDay, driver);
+			driver.findElement(quotepolicyEffDateDay).sendKeys("15");
+			// Thread.sleep(1000);
+		} else {
+			utility.waitForVisibilityOfWebElement(quotepolicyEffDateDay, driver);
+			driver.findElement(quotepolicyEffDateDay).sendKeys("01");
+			// Thread.sleep(1000);
+		}
+		utility.waitForVisibilityOfWebElement(quotepolicyEffDateYear, driver);
+		driver.findElement(quotepolicyEffDateYear).sendKeys("18");
+		// Thread.sleep(1000);
+
+		utility.waitForVisibilityOfWebElement(By.name("state"), driver);
+		Select cominfoState = new Select(driver.findElement(By.name("state")));
+		cominfoState.selectByVisibleText(state);
+		// Thread.sleep(1000);
+
+		utility.waitForVisibilityOfWebElement(quoteemployeeCount, driver);
+		driver.findElement(quoteemployeeCount).clear();
+		driver.findElement(quoteemployeeCount).sendKeys("10");
+
+		//Thread.sleep(2000);
+		utility.waitForVisibilityOfWebElement(quoteatneCount2, driver);
+		driver.findElement(quoteatneCount2).clear();
+		driver.findElement(quoteatneCount2).sendKeys("10");
 		// Thread.sleep(1000);
 
 		utility.waitForVisibilityOfWebElement(quoteNextBtn, driver);
@@ -3440,48 +3503,47 @@ public class QuotePage {
 		QuotePage.verifyPageInfoTable(driver, quoteSetUpInfoTable, "Quote Information");
 
 		QuotePage.verifyFooterLinks(driver);
+		
+		String pwindow = driver.getWindowHandle();
 
-		/*
-		 * String pwindow = driver.getWindowHandle();
-		 * 
-		 * // New Functionality 26/09/2018
-		 * utility.waitForVisibilityOfWebElement(By.xpath(
-		 * "//a[@href='javascript:openAccountExecSearch();']/img"), driver);
-		 * 
-		 * element = driver.findElement(By.xpath(
-		 * "//a[@href='javascript:openAccountExecSearch();']/img")); executor =
-		 * (JavascriptExecutor) driver;
-		 * executor.executeScript("arguments[0].click();", element);
-		 * 
-		 * utility.waitForNumberOfWindowsToEqual(2); for (String winHandle :
-		 * driver.getWindowHandles()) { driver.switchTo().window(winHandle); if
-		 * (driver.switchTo().window(winHandle).getCurrentUrl().contains(
-		 * "accountExecutiveSearch")) { System.out.
-		 * println("Account Executive Search web page displayed successfully");
-		 * System.out.println( "Account Executive Search page URL :: " +
-		 * driver.switchTo().window(winHandle).getCurrentUrl());
-		 * 
-		 * driver.findElement(By.xpath("//input[@name='lastName']")).sendKeys(
-		 * "Smith"); Thread.sleep(1000);
-		 * 
-		 * By btnSicInputSubmit =
-		 * By.xpath("//input[@name='submitSearch' or @value='SEARCH']"); element
-		 * = driver.findElement(btnSicInputSubmit); executor =
-		 * (JavascriptExecutor) driver;
-		 * executor.executeScript("arguments[0].click();", element);
-		 * Thread.sleep(1000);
-		 * 
-		 * element = driver.findElement(By.linkText("Select")); executor =
-		 * (JavascriptExecutor) driver;
-		 * executor.executeScript("arguments[0].click();", element);
-		 * Thread.sleep(2000); // driver.switchTo().window(handle1).close(); //
-		 * driver.close(); } }
-		 * 
-		 * // Thread.sleep(1000); driver.switchTo().window(pwindow);
-		 * Thread.sleep(1000); driver.switchTo().frame("content");
-		 * Thread.sleep(2000);
-		 */
-		// String pwindow = driver.getWindowHandle();
+		utility.waitForVisibilityOfWebElement(By.xpath("//a[@href='javascript:openAccountExecSearch();']/img"), driver);
+
+		element = driver.findElement(By.xpath("//a[@href='javascript:openAccountExecSearch();']/img"));
+		executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", element);
+
+		utility.waitForNumberOfWindowsToEqual(2);
+		for (String winHandle : driver.getWindowHandles()) {
+			driver.switchTo().window(winHandle);
+			if (driver.switchTo().window(winHandle).getCurrentUrl().contains("accountExecutiveSearch")) {
+				System.out.println("Account Executive Search web page displayed successfully");
+				System.out.println(
+						"Account Executive Search page URL :: " + driver.switchTo().window(winHandle).getCurrentUrl());
+
+				driver.findElement(By.xpath("//input[@name='lastName']")).sendKeys("Smith");
+				Thread.sleep(1000);
+
+				By btnSicInputSubmit = By.xpath("//input[@name='submitSearch' or @value='SEARCH']");
+				element = driver.findElement(btnSicInputSubmit);
+				executor = (JavascriptExecutor) driver;
+				executor.executeScript("arguments[0].click();", element);
+				Thread.sleep(1000);
+
+				element = driver.findElement(By.linkText("Select"));
+				executor = (JavascriptExecutor) driver;
+				executor.executeScript("arguments[0].click();", element);
+				Thread.sleep(2000);
+				// driver.switchTo().window(handle1).close();
+				// driver.close();
+			}
+		}
+
+		driver.switchTo().window(pwindow);
+		Thread.sleep(1000);
+		driver.switchTo().frame("content");
+		Thread.sleep(1000);
+
+
 		Select quoteType = new Select(driver.findElement(quoteSetUpquoteType));
 		quoteType.selectByVisibleText("New Business");
 
