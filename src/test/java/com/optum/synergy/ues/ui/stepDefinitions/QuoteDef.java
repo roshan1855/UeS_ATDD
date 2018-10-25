@@ -88,7 +88,7 @@ public class QuoteDef {
 	public void ues_user_is_on_Home_Page() throws Throwable {
 		// driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		driver.get(autoProperties.getProperty("BFX_URL"));
-		//driver.get(autoProperties.getProperty("STAGE_URL"));
+		// driver.get(autoProperties.getProperty("STAGE_URL"));
 		utility.takeScreenShot(driver, "Homepage" + testCaseID);
 		utility.GenerateReport("Quote", "", "info", "Execution Started.User is on the login Page",
 				"Homepage" + testCaseID);
@@ -452,8 +452,8 @@ public class QuoteDef {
 
 	@Then("^UeS_User verify LIFEBENEFIT,PREMIUM for both EMPLOYEE and DEPENDENT in Life Plans page$")
 	public void ues_userVerifyLIFEBENEFITPREMIUMForBothEMPLOYEEAndDEPENDENTInLifePlansPage() throws Throwable {
-		quotepage.verifyLifePlansPage_PREMIUM_EMPWithoutDepSal(driver);
-		quotepage.tearDown(driver);
+		// quotepage.verifyLifePlansPage_PREMIUM_EMPWithoutDepSal(driver);
+		// quotepage.tearDown(driver);
 	}
 
 	@When("^UeS_User is enter only Employee Age with Dependents and without Salary in Census page and click on next$")
@@ -521,6 +521,24 @@ public class QuoteDef {
 	public void ues_userVerifyTheDisplayPlanAsAndSelectDisplayPlanAsAndClickOnAPPLYCHANGES(String arg1, String arg2)
 			throws Throwable {
 		quotepage.verifyDisplayPlans_clickBtnApplyChanges(driver, arg1);
+	}
+
+	@Then("^UeS_User verify LIFEBENEFIT as \"([^\"]*)\",PREMIUM as \"([^\"]*)\" for both EMPLOYEE and DEPENDENT in Life Plans page$")
+	public void ues_userVerifyLIFEBENEFITAsPREMIUMAsForBothEMPLOYEEAndDEPENDENTInLifePlansPage(String arg1, String arg2)
+			throws Throwable {
+		quotepage.verifyLifePlansPage_PREMIUM_EMPWithoutDepSal(driver, arg1, arg2);
+	}
+
+	@Then("^UeS_User enter Life Benefit amount in Flat Life Benefit Amount text field as \"([^\"]*)\" and click on Go button$")
+	public void ues_userEnterLifeBenefitAmountInFlatLifeBenefitAmountTextFieldAsAndClickOnGoButton(String arg1)
+			throws Throwable {
+		quotepage.enterLifeBenefitAmount(driver, arg1);
+	}
+
+	@Then("^UeS_User verify Life Benefit amount as \"([^\"]*)\" on Basic Life Plan Information table$")
+	public void ues_userVerifyLifeBenefitAmountAsOnBasicLifePlanInformationTable(String arg1) throws Throwable {
+		quotepage.verifyLifeBenefitAmount(driver, arg1);
+		quotepage.tearDown(driver);
 	}
 
 }
