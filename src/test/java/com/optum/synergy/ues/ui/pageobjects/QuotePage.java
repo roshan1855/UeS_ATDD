@@ -2985,7 +2985,7 @@ public class QuotePage {
 	public void verifyLifePlansPage_PREMIUM_EMPWithoutDepSal(WebDriver driver, String BenfitCode, String Premium)
 			throws InterruptedException, IOException {
 		QuotePage.verifyUeSLogos(driver);
-		Thread.sleep(1000);
+		Thread.sleep(3000);
 		String lifePlansPage = "//td[contains(text(),'Life Plans')]";
 		QuotePage.verifyPageDisplay(driver, lifePlansPage, "Life Plans");
 
