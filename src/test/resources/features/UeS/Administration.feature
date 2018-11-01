@@ -1,6 +1,6 @@
 Feature: Administration Module
 
-  @Administration_New
+  @Regression_UeS @Administration_New
   Scenario Outline: "<TestCaseID>" Display All Links in Adminsitration Page
     When Flow_Fetch fileName "<FileName>" and testCaseID "<TestCaseID>" are captured
     Given Flow_Fetch Data from excel Sheet for "<TestCaseID>"
