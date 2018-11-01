@@ -421,7 +421,7 @@ Feature: Quotes Module
       | Quote_TC_29 |  | TC_29      |  | WA    |  | Show My Selected Plans |  |    98001 |  | Vision   |
 
   #Oct18 Iteration
-  @Regression_UeS123 @Validate_LifePlanPage_Coverage_L_EmpSalWithOutDependent @Oct_1
+  @Regression_UeS @Validate_LifePlanPage_Coverage_L_EmpSalWithOutDependent @Oct_1
   Scenario Outline: "<TestCaseID>" Validate Life Plans Page with only employee and no dependent(with salary)
     When Flow_Fetch fileName "<FileName>" and testCaseID "<TestCaseID>" are captured
     Given Flow_Fetch Data from excel Sheet for "<TestCaseID>"
@@ -439,7 +439,7 @@ Feature: Quotes Module
       | FileName    |  | TestCaseID |  | State |  | Zip Code |  | Coverage |
       | Quote_TC_41 |  | TC_41      |  | TX    |  |    73301 |  | Life     |
 
-  @Regression_UeS123 @Validate_LifePlanPage_Coverage_L_EmpDepndtSal @Oct_2
+  @Regression_UeS @Validate_LifePlanPage_Coverage_L_EmpDepndtSal @Oct_2
   Scenario Outline: "<TestCaseID>" Validate Life Plans Page with employee and dependent(with salary)
     When Flow_Fetch fileName "<FileName>" and testCaseID "<TestCaseID>" are captured
     Given Flow_Fetch Data from excel Sheet for "<TestCaseID>"
@@ -457,7 +457,7 @@ Feature: Quotes Module
       | FileName    |  | TestCaseID |  | State |  | Zip Code |  | Coverage |
       | Quote_TC_42 |  | TC_42      |  | TX    |  |    73301 |  | Life     |
 
-  @Regression_UeS123 @Validate_LifePlanPage_Coverage_L_EmpWithoutDepndtandSal @Oct_3
+  @Regression_UeS @Validate_LifePlanPage_Coverage_L_EmpWithoutDepndtandSal @Oct_3
   Scenario Outline: "<TestCaseID>" Validate Life Plans Page with only employee no dependent(without salary)
     When Flow_Fetch fileName "<FileName>" and testCaseID "<TestCaseID>" are captured
     Given Flow_Fetch Data from excel Sheet for "<TestCaseID>"
@@ -477,7 +477,7 @@ Feature: Quotes Module
       | FileName    |  | TestCaseID |  | State |  | Zip Code |  | Coverage |  | Life Benefit |  | Premium |  | Life Benefit Amount |
       | Quote_TC_43 |  | TC_43      |  | TX    |  |    73301 |  | Life     |  | Multiple     |  | N/A     |  |              10,000 |
 
-  @Regression_UeS123 @Validate_LifePlanPage_Coverage_L_EmpWithDepndtWithoutSal @Oct_4
+  @Regression_UeS @Validate_LifePlanPage_Coverage_L_EmpWithDepndtWithoutSal @Oct_4
   Scenario Outline: "<TestCaseID>" Validate Life Plans Page with employee and dependent(without salary)
     When Flow_Fetch fileName "<FileName>" and testCaseID "<TestCaseID>" are captured
     Given Flow_Fetch Data from excel Sheet for "<TestCaseID>"
@@ -495,7 +495,7 @@ Feature: Quotes Module
       | FileName    |  | TestCaseID |  | State |  | Zip Code |  | Coverage |
       | Quote_TC_44 |  | TC_44      |  | TX    |  |    73301 |  | Life     |
 
-  @Regression_UeS123 @Display_STDRates_MostPopularPlan_Coverage_All_On_ShortTermPlanComWindow @Oct_5
+  @Regression_UeS @Display_STDRates_MostPopularPlan_Coverage_All_On_ShortTermPlanComWindow @Oct_5
   Scenario Outline: "<TestCaseID>" Display STD Rates for Most popular plans on Short Term Plan Comparison window
     When Flow_Fetch fileName "<FileName>" and testCaseID "<TestCaseID>" are captured
     Given Flow_Fetch Data from excel Sheet for "<TestCaseID>"
