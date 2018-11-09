@@ -495,8 +495,8 @@ Feature: Quotes Module
       | FileName    |  | TestCaseID |  | State |  | Zip Code |  | Coverage |
       | Quote_TC_44 |  | TC_44      |  | TX    |  |    73301 |  | Life     |
 
-  @Regression_UeS @Display_STDRates_On_ShortTermPlanComWindow
-  Scenario Outline: "<TestCaseID>" Display STD Rates for Most popular plans on Short Term Plan Comparison window
+  @Regression_UeS123 @Display_STDRates_On_ShortTermPlanComWindow
+  Scenario Outline: "<TestCaseID>" Display STD Rates for "<Vaue>" on Short Term Plan Comparison window
     When Flow_Fetch fileName "<FileName>" and testCaseID "<TestCaseID>" are captured
     Given Flow_Fetch Data from excel Sheet for "<TestCaseID>"
     Given UeS_User is on Home Page
@@ -522,9 +522,39 @@ Feature: Quotes Module
     Then UeS_User is verify BENEFIT,MONYHLY PREMIUM as "<Monthly Premium>" and ANNUAL PREMIUM as "<Annual Premium>" in Short Term Disability Plan Details table on STD Plan Comparison page
 
     Examples: 
-      | FileName    |  | TestCaseID |  | State |  | Value              |  | Zip Code |  | Monthly Premium |  | Annual Premium |
+      | FileName    |  | TestCaseID |  | State |  | Value          |  | Zip Code |  | Monthly Premium |  | Annual Premium |
       #| Quote_TC_45 |  | TC_45      |  | TX    |  | Most Popular Plans |  |    73301 |  | Not Null        |  | Not Null       |
-      | Quote_TC_46 |  | TC_46      |  | TX    |  | Show All Plans     |  |    73301 |  | Not Null        |  | Not Null       |
+      | Quote_TC_46 |  | TC_46      |  | TX    |  | Show All Plans |  |    73301 |  | Not Null        |  | Not Null       |
+
+  @Regression_UeS123 @Display_STDRates_On_STDRateComparisonWindow 
+  Scenario Outline: "<TestCaseID>" "<TestCaseID>" Display STD Rates for "<Vaue>" on Short Term Rate Comparison window
+    When Flow_Fetch fileName "<FileName>" and testCaseID "<TestCaseID>" are captured
+    Given Flow_Fetch Data from excel Sheet for "<TestCaseID>"
+    Given UeS_User is on Home Page
+    When UeS_User Navigate to LogIn Page
+    And UeS_User enters UserName and Password
+    Then UeS_User displayed Login Successfully
+    When UeS_User is on Home page and click on Quotes and then select New Quote
+    And UeS_User is select the state as "<State>" and Fill all the details of the Quote Setup window and click on NEXT
+    And UeS_User is select all coverages and select the state as "<State>" then Fill all the details on Quote Setup page and click on next
+    And UeS_User is enter Employee Age and Salary with Dependents in Census page and click on next
+    And UeS_User is Select the Plans from Medical Plans Page and click on next button
+    And UeS_User is Select the Plans from Optional Medical Riders Page and click on next
+    Then UeS_User verify the Display Plan as "<Value>" and select Display Plan as "<Value>" and click on APPLY CHANGES
+    And UeS_User is Select the Plans from Dental Plans Page and click on next
+    And UeS_User is Select the Plans from Vision Plans Page and click on next
+    And UeS_User is Select the Plans from Life Plans Page and click on next
+    And UeS_User is Select the Plans Supplemental Employee Life/AD&D Plans Page and click on NEXT button
+    And UeS_User is Select the Plans Supplemental Dependent Life/AD&D Plans Page and click on NEXT button
+    Then UeS_User verify the Display Plan as "<Value>" on Short Term Disability Plans page
+    And UeS_User select plans from Disability Plan Information table on Short Term Disability Plans page
+    And UeS_User select PLAN CODES and click on COMPARE RATES FOR SELECTED PLANS button in Disability Plan Information table
+    Then UeS_User is verify PLAN CODE,MONYHLY PREMIUM as "<Monthly Premium>" and ANNUAL PREMIUM as "<Annual Premium>" in STD Premiums table on STD Rate Comparison  page
+
+    Examples: 
+      | FileName    |  | TestCaseID |  | State |  | Value          |  | Zip Code |  | Monthly Premium |  | Annual Premium |
+      | Quote_TC_47 |  | TC_47      |  | TX    |  | Most Popular Plans |  |    73301 |  | Not Null        |  | Not Null       |
+      #| Quote_TC_46 |  | TC_46      |  | TX    |  | Show All Plans |  |    73301 |  | Not Null        |  | Not Null       |
 
   @Testing
   Scenario Outline: "<TestCaseID>" Testing
