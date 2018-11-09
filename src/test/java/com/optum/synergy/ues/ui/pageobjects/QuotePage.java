@@ -65,8 +65,10 @@ public class QuotePage {
 	By quoteNextBtn = By.xpath("//input[@name='submitATNE']");
 	By quotepolicyEffDateDay = By.name("policyEffDateDay");
 	By quotepolicyEffDateYear = By.name("policyEffDateYear");
-	By quoteatneCount1 = By.xpath(".//*[@id='popupForm']/table/tbody/tr[3]/td/table/tbody/tr/td/table/tbody/tr[10]/td[2]/input");
-	By quoteatneCount2=By.xpath("//form[@name='QuoteInformationForm']/table/tbody/tr[3]/td/table/tbody/tr/td/table/tbody/tr[11]/td[2]/input");
+	By quoteatneCount1 = By
+			.xpath(".//*[@id='popupForm']/table/tbody/tr[3]/td/table/tbody/tr/td/table/tbody/tr[10]/td[2]/input");
+	By quoteatneCount2 = By.xpath(
+			"//form[@name='QuoteInformationForm']/table/tbody/tr[3]/td/table/tbody/tr/td/table/tbody/tr[11]/td[2]/input");
 	// Quote SetUp
 	By quoteSetUpquoteType = By.xpath("//select[@name='quoteType']");
 	By quoteSetUpquoteCompanyName = By.xpath("//input[@name='quoteCompanyName']");
@@ -135,15 +137,15 @@ public class QuotePage {
 	public void loginUeSApp(WebDriver driver) throws InterruptedException {
 		utility.waitForVisibilityOfWebElement(uesUserName, driver);
 		// driver.findElement(uesUserName).sendKeys("roshanadmin05");
-		driver.findElement(uesUserName).sendKeys(autoProperties.getProperty("loginUserName_BFX"));
+		//driver.findElement(uesUserName).sendKeys(autoProperties.getProperty("loginUserName_BFX"));
 		// driver.findElement(uesUserName).sendKeys("roshankumar");
-		//driver.findElement(uesUserName).sendKeys(autoProperties.getProperty("loginUserName_STG"));
+		driver.findElement(uesUserName).sendKeys(autoProperties.getProperty("loginUserName_STG"));
 
 		utility.waitForVisibilityOfWebElement(uesPwd, driver);
 		// driver.findElement(uesPwd).sendKeys("Computer$4");
 		// driver.findElement(uesPwd).sendKeys("Computer$5");
-		driver.findElement(uesPwd).sendKeys(autoProperties.getProperty("loginPassword_BFX"));
-		//driver.findElement(uesPwd).sendKeys(autoProperties.getProperty("loginPassword_STG"));
+		//driver.findElement(uesPwd).sendKeys(autoProperties.getProperty("loginPassword_BFX"));
+		driver.findElement(uesPwd).sendKeys(autoProperties.getProperty("loginPassword_STG"));
 
 		utility.waitForVisibilityOfWebElement(uesLoginBtn, driver);
 		element = driver.findElement(uesLoginBtn);
@@ -1409,7 +1411,7 @@ public class QuotePage {
 		executor.executeScript("arguments[0].click();", element);
 		Thread.sleep(3000);
 	}
-	
+
 	public void quoteSetUpWindow_Coverage_All(WebDriver driver, String state) throws InterruptedException {
 		// String pwindow = driver.getWindowHandle();
 		Thread.sleep(2000);
@@ -1458,7 +1460,7 @@ public class QuotePage {
 		driver.findElement(quoteemployeeCount).clear();
 		driver.findElement(quoteemployeeCount).sendKeys("10");
 
-		//Thread.sleep(2000);
+		// Thread.sleep(2000);
 		utility.waitForVisibilityOfWebElement(quoteatneCount2, driver);
 		driver.findElement(quoteatneCount2).clear();
 		driver.findElement(quoteatneCount2).sendKeys("10");
@@ -3106,7 +3108,7 @@ public class QuotePage {
 		}
 	}
 
-	public void enterLifeBenefitAmount(WebDriver driver,String amountLifeBenefit) throws InterruptedException {
+	public void enterLifeBenefitAmount(WebDriver driver, String amountLifeBenefit) throws InterruptedException {
 
 		driver.findElement(By.xpath("//input[@name='benefitAmount']")).sendKeys(amountLifeBenefit);
 		Thread.sleep(1000);
@@ -3133,9 +3135,11 @@ public class QuotePage {
 				"//form[@name='LifePlanSelectionForm']/table/tbody/tr[13]/td/table/tbody/tr/td[1]/table/tbody/tr/td[2]"));
 		System.out.println("Life Benefit Amount Table size ::" + amountlifeBenefit.size());
 		for (int i = 3; i <= amountlifeBenefit.size(); i++) {
-			element = driver.findElement(By.xpath(
-					"//form[@name='LifePlanSelectionForm']/table/tbody/tr[13]/td/table/tbody/tr/td[1]/table/tbody/tr[" + i + "]/td[2]"));
-			//System.out.println("amountLifeBenefit Value :: " + element.getText());
+			element = driver.findElement(By
+					.xpath("//form[@name='LifePlanSelectionForm']/table/tbody/tr[13]/td/table/tbody/tr/td[1]/table/tbody/tr["
+							+ i + "]/td[2]"));
+			// System.out.println("amountLifeBenefit Value :: " +
+			// element.getText());
 			if (element.getText().trim().contains(amountLifeBenefit)) {
 				System.out.println(element.getText() + " value present in Basic Life Plan Information table");
 				break;
@@ -3503,7 +3507,7 @@ public class QuotePage {
 		QuotePage.verifyPageInfoTable(driver, quoteSetUpInfoTable, "Quote Information");
 
 		QuotePage.verifyFooterLinks(driver);
-		
+
 		String pwindow = driver.getWindowHandle();
 
 		utility.waitForVisibilityOfWebElement(By.xpath("//a[@href='javascript:openAccountExecSearch();']/img"), driver);
@@ -3542,7 +3546,6 @@ public class QuotePage {
 		Thread.sleep(1000);
 		driver.switchTo().frame("content");
 		Thread.sleep(1000);
-
 
 		Select quoteType = new Select(driver.findElement(quoteSetUpquoteType));
 		quoteType.selectByVisibleText("New Business");
@@ -3724,13 +3727,18 @@ public class QuotePage {
 			if (dd.get(j).getText().contains(displayPlan)) {
 				System.out.println(displayPlan + " present in Display Plans drop down");
 				// medicalRatingMethodVal.selectByVisibleText(displayPlan);
-				break;
-				/*
-				 * if ((displayPlan.contains("Most Popular Plans"))) {
-				 * System.out.println("inside if ::" + displayPlan);
-				 * System.out.println(displayPlan + " displayed successfully");
-				 * Thread.sleep(2000); break; }
-				 */
+				// break;
+
+				if ((displayPlan.contains("Show All Plans"))) {
+					System.out.println("inside if ::" + displayPlan);
+					medicalRatingMethodVal.selectByVisibleText(displayPlan);
+					Thread.sleep(2000);
+					utility.waitForVisibilityOfWebElement(By.xpath("//input[@name='submitApplyOptions']"), driver);
+					element = driver.findElement(By.xpath("//input[@name='submitApplyOptions']"));
+					executor = (JavascriptExecutor) driver;
+					executor.executeScript("arguments[0].click();", element);
+					Thread.sleep(10000);
+				}
 			}
 		}
 	}
