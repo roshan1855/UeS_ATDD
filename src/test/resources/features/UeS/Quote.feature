@@ -495,7 +495,7 @@ Feature: Quotes Module
       | FileName    |  | TestCaseID |  | State |  | Zip Code |  | Coverage |
       | Quote_TC_44 |  | TC_44      |  | TX    |  |    73301 |  | Life     |
 
-  @Regression_UeS @Display_STDRates_MostPopularPlan_Coverage_All_On_ShortTermPlanComWindow @Oct_5
+  @Regression_UeS @Display_STDRates_On_ShortTermPlanComWindow
   Scenario Outline: "<TestCaseID>" Display STD Rates for Most popular plans on Short Term Plan Comparison window
     When Flow_Fetch fileName "<FileName>" and testCaseID "<TestCaseID>" are captured
     Given Flow_Fetch Data from excel Sheet for "<TestCaseID>"
@@ -523,7 +523,8 @@ Feature: Quotes Module
 
     Examples: 
       | FileName    |  | TestCaseID |  | State |  | Value              |  | Zip Code |  | Monthly Premium |  | Annual Premium |
-      | Quote_TC_45 |  | TC_45      |  | TX    |  | Most Popular Plans |  |    73301 |  | Not Null        |  | Not Null       |
+      #| Quote_TC_45 |  | TC_45      |  | TX    |  | Most Popular Plans |  |    73301 |  | Not Null        |  | Not Null       |
+      | Quote_TC_46 |  | TC_46      |  | TX    |  | Show All Plans     |  |    73301 |  | Not Null        |  | Not Null       |
 
   @Testing
   Scenario Outline: "<TestCaseID>" Testing
