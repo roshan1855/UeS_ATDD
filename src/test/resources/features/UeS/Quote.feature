@@ -421,7 +421,7 @@ Feature: Quotes Module
       | Quote_TC_29 |  | TC_29      |  | WA    |  | Show My Selected Plans |  |    98001 |  | Vision   |
 
   #Oct18 Iteration
-  @Regression_UeS @Validate_LifePlanPage_Coverage_L_EmpSalWithOutDependent @Oct_1
+  @Regression_UeS @Validate_LifePlanPage_Coverage_L_EmpSalWithOutDependent
   Scenario Outline: "<TestCaseID>" Validate Life Plans Page with only employee and no dependent(with salary)
     When Flow_Fetch fileName "<FileName>" and testCaseID "<TestCaseID>" are captured
     Given Flow_Fetch Data from excel Sheet for "<TestCaseID>"
@@ -439,7 +439,7 @@ Feature: Quotes Module
       | FileName    |  | TestCaseID |  | State |  | Zip Code |  | Coverage |
       | Quote_TC_41 |  | TC_41      |  | TX    |  |    73301 |  | Life     |
 
-  @Regression_UeS @Validate_LifePlanPage_Coverage_L_EmpDepndtSal @Oct_2
+  @Regression_UeS @Validate_LifePlanPage_Coverage_L_EmpDepndtSal
   Scenario Outline: "<TestCaseID>" Validate Life Plans Page with employee and dependent(with salary)
     When Flow_Fetch fileName "<FileName>" and testCaseID "<TestCaseID>" are captured
     Given Flow_Fetch Data from excel Sheet for "<TestCaseID>"
@@ -457,7 +457,7 @@ Feature: Quotes Module
       | FileName    |  | TestCaseID |  | State |  | Zip Code |  | Coverage |
       | Quote_TC_42 |  | TC_42      |  | TX    |  |    73301 |  | Life     |
 
-  @Regression_UeS @Validate_LifePlanPage_Coverage_L_EmpWithoutDepndtandSal @Oct_3
+  @Regression_UeS @Validate_LifePlanPage_Coverage_L_EmpWithoutDepndtandSal
   Scenario Outline: "<TestCaseID>" Validate Life Plans Page with only employee no dependent(without salary)
     When Flow_Fetch fileName "<FileName>" and testCaseID "<TestCaseID>" are captured
     Given Flow_Fetch Data from excel Sheet for "<TestCaseID>"
@@ -477,7 +477,7 @@ Feature: Quotes Module
       | FileName    |  | TestCaseID |  | State |  | Zip Code |  | Coverage |  | Life Benefit |  | Premium |  | Life Benefit Amount |
       | Quote_TC_43 |  | TC_43      |  | TX    |  |    73301 |  | Life     |  | Multiple     |  | N/A     |  |              10,000 |
 
-  @Regression_UeS @Validate_LifePlanPage_Coverage_L_EmpWithDepndtWithoutSal @Oct_4
+  @Regression_UeS @Validate_LifePlanPage_Coverage_L_EmpWithDepndtWithoutSal
   Scenario Outline: "<TestCaseID>" Validate Life Plans Page with employee and dependent(without salary)
     When Flow_Fetch fileName "<FileName>" and testCaseID "<TestCaseID>" are captured
     Given Flow_Fetch Data from excel Sheet for "<TestCaseID>"
@@ -495,7 +495,7 @@ Feature: Quotes Module
       | FileName    |  | TestCaseID |  | State |  | Zip Code |  | Coverage |
       | Quote_TC_44 |  | TC_44      |  | TX    |  |    73301 |  | Life     |
 
-  @Regression_UeS @Display_STDRates_On_ShortTermPlanComWindow
+  @Regression_UeS123 @Display_STDRates_On_ShortTermPlanComWindow
   Scenario Outline: "<TestCaseID>" Display STD Rates for "<Value>" on Short Term Plan Comparison window
     When Flow_Fetch fileName "<FileName>" and testCaseID "<TestCaseID>" are captured
     Given Flow_Fetch Data from excel Sheet for "<TestCaseID>"
@@ -510,7 +510,6 @@ Feature: Quotes Module
     And UeS_User is Select the Plans from Medical Plans Page and click on next button
     And UeS_User is Select the Plans from Optional Medical Riders Page and click on next
     Then UeS_User verify the Display Plan as "<Value>" and select Display Plan as "<Value>" and click on APPLY CHANGES
-    #And UeS_User select plan on Dental PPO/Indemnity Plan Information table then click on NEXT button
     And UeS_User is Select the Plans from Dental Plans Page and click on next
     And UeS_User is Select the Plans from Vision Plans Page and click on next
     And UeS_User is Select the Plans from Life Plans Page and click on next
@@ -522,11 +521,11 @@ Feature: Quotes Module
     Then UeS_User is verify BENEFIT,MONYHLY PREMIUM as "<Monthly Premium>" and ANNUAL PREMIUM as "<Annual Premium>" in Short Term Disability Plan Details table on STD Plan Comparison page
 
     Examples: 
-      | FileName    |  | TestCaseID |  | State |  | Value          |  | Zip Code |  | Monthly Premium |  | Annual Premium |
-      #| Quote_TC_45 |  | TC_45      |  | TX    |  | Most Popular Plans |  |    73301 |  | Not Null        |  | Not Null       |
-      | Quote_TC_46 |  | TC_46      |  | TX    |  | Show All Plans |  |    73301 |  | Not Null        |  | Not Null       |
+      | FileName    |  | TestCaseID |  | State |  | Value              |  | Zip Code |  | Monthly Premium |  | Annual Premium |
+      | Quote_TC_45 |  | TC_45      |  | TX    |  | Most Popular Plans |  |    73301 |  | Not Null        |  | Not Null       |
+      | Quote_TC_46 |  | TC_46      |  | TX    |  | Show All Plans     |  |    73301 |  | Not Null        |  | Not Null       |
 
-  @Regression_UeS123 @Display_STDRates_On_STDRateComparisonWindow 
+  @Regression_UeS123 @Display_STDRates_On_STDRateComparisonWindow
   Scenario Outline: "<TestCaseID>" "<TestCaseID>" Display STD Rates for "<Value>" on Short Term Rate Comparison window
     When Flow_Fetch fileName "<FileName>" and testCaseID "<TestCaseID>" are captured
     Given Flow_Fetch Data from excel Sheet for "<TestCaseID>"
@@ -552,9 +551,9 @@ Feature: Quotes Module
     Then UeS_User is verify PLAN CODE,MONYHLY PREMIUM as "<Monthly Premium>" and ANNUAL PREMIUM as "<Annual Premium>" in STD Premiums table on STD Rate Comparison  page
 
     Examples: 
-      | FileName    |  | TestCaseID |  | State |  | Value          |  | Zip Code |  | Monthly Premium |  | Annual Premium |
+      | FileName    |  | TestCaseID |  | State |  | Value              |  | Zip Code |  | Monthly Premium |  | Annual Premium |
       | Quote_TC_47 |  | TC_47      |  | TX    |  | Most Popular Plans |  |    73301 |  | Not Null        |  | Not Null       |
-      #| Quote_TC_46 |  | TC_46      |  | TX    |  | Show All Plans |  |    73301 |  | Not Null        |  | Not Null       |
+      | Quote_TC_48 |  | TC_48      |  | TX    |  | Show All Plans     |  |    73301 |  | Not Null        |  | Not Null       |
 
   @Testing
   Scenario Outline: "<TestCaseID>" Testing
@@ -564,10 +563,10 @@ Feature: Quotes Module
     When UeS_User Navigate to LogIn Page
     And UeS_User enters UserName and Password
     Then UeS_User displayed Login Successfully
+    When UeS_User is on Home page and click on Quotes and then select New Quote
+    And fill all details
+    Then UeS_User click on GENERATE FINAL PROPOSAL1 button and verify Preview Proposal PDf is displayed successfully
 
-    # When UeS_User is on Home page and click on Quotes and then select New Quote
-    #And fill all details
-    #Then UeS_User click on GENERATE FINAL PROPOSAL1 button and verify Preview Proposal PDf is displayed successfully
     Examples: 
       | FileName   |  | TestCaseID |
       | Test_TC_62 |  | TC_62      |
