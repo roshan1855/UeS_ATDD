@@ -495,8 +495,8 @@ Feature: Quotes Module
       | FileName    |  | TestCaseID |  | State |  | Zip Code |  | Coverage |
       | Quote_TC_44 |  | TC_44      |  | TX    |  |    73301 |  | Life     |
 
-  @Regression_UeS123 @Display_STDRates_On_ShortTermPlanComWindow
-  Scenario Outline: "<TestCaseID>" Display STD Rates for "<Vaue>" on Short Term Plan Comparison window
+  @Regression_UeS @Display_STDRates_On_ShortTermPlanComWindow
+  Scenario Outline: "<TestCaseID>" Display STD Rates for "<Value>" on Short Term Plan Comparison window
     When Flow_Fetch fileName "<FileName>" and testCaseID "<TestCaseID>" are captured
     Given Flow_Fetch Data from excel Sheet for "<TestCaseID>"
     Given UeS_User is on Home Page
@@ -527,7 +527,7 @@ Feature: Quotes Module
       | Quote_TC_46 |  | TC_46      |  | TX    |  | Show All Plans |  |    73301 |  | Not Null        |  | Not Null       |
 
   @Regression_UeS123 @Display_STDRates_On_STDRateComparisonWindow 
-  Scenario Outline: "<TestCaseID>" "<TestCaseID>" Display STD Rates for "<Vaue>" on Short Term Rate Comparison window
+  Scenario Outline: "<TestCaseID>" "<TestCaseID>" Display STD Rates for "<Value>" on Short Term Rate Comparison window
     When Flow_Fetch fileName "<FileName>" and testCaseID "<TestCaseID>" are captured
     Given Flow_Fetch Data from excel Sheet for "<TestCaseID>"
     Given UeS_User is on Home Page
