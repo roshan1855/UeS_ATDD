@@ -137,15 +137,15 @@ public class QuotePage {
 	public void loginUeSApp(WebDriver driver) throws InterruptedException {
 		utility.waitForVisibilityOfWebElement(uesUserName, driver);
 		// driver.findElement(uesUserName).sendKeys("roshanadmin05");
-		//driver.findElement(uesUserName).sendKeys(autoProperties.getProperty("loginUserName_BFX"));
+		driver.findElement(uesUserName).sendKeys(autoProperties.getProperty("loginUserName_BFX"));
 		// driver.findElement(uesUserName).sendKeys("roshankumar");
-		driver.findElement(uesUserName).sendKeys(autoProperties.getProperty("loginUserName_STG"));
+		//driver.findElement(uesUserName).sendKeys(autoProperties.getProperty("loginUserName_STG"));
 
 		utility.waitForVisibilityOfWebElement(uesPwd, driver);
 		// driver.findElement(uesPwd).sendKeys("Computer$4");
 		// driver.findElement(uesPwd).sendKeys("Computer$5");
-		//driver.findElement(uesPwd).sendKeys(autoProperties.getProperty("loginPassword_BFX"));
-		driver.findElement(uesPwd).sendKeys(autoProperties.getProperty("loginPassword_STG"));
+		driver.findElement(uesPwd).sendKeys(autoProperties.getProperty("loginPassword_BFX"));
+		//driver.findElement(uesPwd).sendKeys(autoProperties.getProperty("loginPassword_STG"));
 
 		utility.waitForVisibilityOfWebElement(uesLoginBtn, driver);
 		element = driver.findElement(uesLoginBtn);
@@ -3796,7 +3796,7 @@ public class QuotePage {
 						"//form[@name='ShortTermDisabilityPlanComparisonForm']/table/tbody/tr[8]/td/table/tbody/tr[1]/td[1]"));
 
 				if (element.getText().trim().contains("BENEFIT")) {
-					System.out.println(" BENEFIT displayed successfully on Short Term Disability Plan Details table");
+					System.out.println("BENEFIT text displayed successfully on Short Term Disability Plan Details table");
 
 					element = driver.findElement(By.xpath(
 							"//form[@name='ShortTermDisabilityPlanComparisonForm']/table/tbody/tr[8]/td/table/tbody/tr[1]/td[2]"));
@@ -3808,12 +3808,12 @@ public class QuotePage {
 						System.out.println(" BENEFIT Codes :: " + element.getText() + " and " + element3.getText()
 								+ " displayed successfully");
 					} else {
-						System.out.println(" BENEFIT Codes :: " + element.getText() + " and " + element3.getText()
+						System.out.println("BENEFIT Codes :: " + element.getText() + " and " + element3.getText()
 								+ " not displayed");
 					}
 
 				} else {
-					System.out.println(" BENEFIT not displayed on Short Term Disability Plan Details table");
+					System.out.println("BENEFIT text not displayed on Short Term Disability Plan Details table");
 				}
 
 				element = driver.findElement(By.xpath(
@@ -3821,7 +3821,7 @@ public class QuotePage {
 
 				if (element.getText().trim().contains("MONTHLY PREMIUM")) {
 					System.out.println(
-							" MONTHLY PREMIUM displayed successfully on Short Term Disability Plan Details table");
+							"MONTHLY PREMIUM text displayed successfully on Short Term Disability Plan Details table");
 
 					element = driver.findElement(By.xpath(
 							"//form[@name='ShortTermDisabilityPlanComparisonForm']/table/tbody/tr[8]/td/table/tbody/tr[10]/td[2]"));
@@ -3835,15 +3835,15 @@ public class QuotePage {
 
 					if ((Integer.parseInt(MonthlyPremium1_1[0]) != 0)
 							&& (Integer.parseInt(MonthlyPremium2_2[0]) != 0)) {
-						System.out.println(" MONTHLY PREMIUM Amounts :: " + element.getText() + " and "
+						System.out.println("MONTHLY PREMIUM Amounts :: " + element.getText() + " and "
 								+ element3.getText() + " displayed successfully");
 					} else {
-						System.out.println(" MONTHLY PREMIUM Amounts :: " + element.getText() + " and "
+						System.out.println("MONTHLY PREMIUM Amounts :: " + element.getText() + " and "
 								+ element3.getText() + " not displayed");
 					}
 
 				} else {
-					System.out.println(" MONTHLY PREMIUM not displayed on Short Term Disability Plan Details table");
+					System.out.println("MONTHLY PREMIUM text not displayed on Short Term Disability Plan Details table");
 				}
 
 				element = driver.findElement(By.xpath(
@@ -3851,7 +3851,7 @@ public class QuotePage {
 
 				if (element.getText().trim().contains("ANNUAL PREMIUM")) {
 					System.out.println(
-							" ANNUAL PREMIUM displayed successfully on Short Term Disability Plan Details table");
+							"ANNUAL PREMIUM text displayed successfully on Short Term Disability Plan Details table");
 
 					element = driver.findElement(By.xpath(
 							"//form[@name='ShortTermDisabilityPlanComparisonForm']/table/tbody/tr[8]/td/table/tbody/tr[11]/td[2]"));
@@ -3864,21 +3864,129 @@ public class QuotePage {
 					String[] ANNUALPremium2_2 = ANNUALPremium2.split("\\.");
 
 					if ((Integer.parseInt(ANNUALPremium1_1[0]) != 0) && (Integer.parseInt(ANNUALPremium2_2[0]) != 0)) {
-						System.out.println(" ANNUAL PREMIUM Amounts :: " + element.getText() + " and "
+						System.out.println("ANNUAL PREMIUM Amounts :: " + element.getText() + " and "
 								+ element3.getText() + " displayed successfully");
 						driver.switchTo().window(winHandle).close();
 					} else {
-						System.out.println(" ANNUAL PREMIUM Amounts :: " + element.getText() + " and "
+						System.out.println("ANNUAL PREMIUM Amounts :: " + element.getText() + " and "
 								+ element3.getText() + " not displayed");
 					}
 
 				} else {
-					System.out.println(" ANNUAL PREMIUM not displayed on Short Term Disability Plan Details table");
+					System.out.println("ANNUAL PREMIUM text not displayed on Short Term Disability Plan Details table");
 				}
 				// driver.switchTo().window(handle1).close();
 				// driver.close();
 			}
 		}
-
 	}
+
+	public void verify_PLANCODE_MONTHLYPREMIUM_ANNUALPREMIUM(WebDriver driver) throws InterruptedException {
+		WebElement element = driver.findElement(By.name("disabilityClassPlanInformationForm[0].planId"));
+
+		System.out.println("Plan Code1 ::" + element.getAttribute("value"));
+		String PlanCode1 = element.getText();
+		WebElement element1 = driver.findElement(By.name("disabilityClassPlanInformationForm[1].planId"));
+
+		System.out.println("Plan Code2 ::" + element1.getAttribute("value"));
+		String PlanCode2 = element1.getText();
+
+		utility.waitForVisibilityOfWebElement(By.xpath("//input[@name='submitRateCompare']"), driver);
+		element = driver.findElement(By.xpath("//input[@name='submitRateCompare']"));
+		executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", element);
+
+		utility.waitForNumberOfWindowsToEqual(2);
+		for (String winHandle : driver.getWindowHandles()) {
+			driver.switchTo().window(winHandle);
+			if (driver.switchTo().window(winHandle).getCurrentUrl().contains("shortTermDisabilityPlanSelection")) {
+				System.out.println("Short Term Disability Plan Selection web page displayed successfully");
+				System.out.println("Short Term Disability Plan Selection page URL :: "
+						+ driver.switchTo().window(winHandle).getCurrentUrl());
+
+				Thread.sleep(2000);
+				WebElement element2 = driver.findElement(By.xpath("//td[contains(text(),'STD Rate Comparison')]"));
+				if (element2.getText().contains("STD Rate Comparison")) {
+					System.out.println("STD Rate Comparison page displayed successfully");
+				} else {
+					System.out.println("STD Rate Comparison page not displayed");
+				}
+
+				WebElement plancode1 = driver.findElement(By.xpath(
+						"//form[@name='ShortTermDisabilityRateComparisonForm']/table/tbody/tr[16]/td/table/tbody/tr/td[2]/table/tbody/tr[1]"));
+
+				WebElement plancode2 = driver.findElement(By.xpath(
+						"//form[@name='ShortTermDisabilityRateComparisonForm']/table/tbody/tr[16]/td/table/tbody/tr/td[3]/table/tbody/tr[1]"));
+				if ((plancode1.getText().trim().contains(PlanCode1)
+						&& (plancode2.getText().trim().contains(PlanCode2)))) {
+					System.out.println(" PLAN CODES :: " + plancode1.getText() + " and " + plancode2.getText()
+							+ " displayed successfully");
+				} else {
+					System.out.println(
+							" PLAN CODES :: " + plancode1.getText() + " and " + plancode2.getText() + " not displayed");
+				}
+
+				WebElement monthlypremium = driver.findElement(By.xpath(
+						"//form[@name='ShortTermDisabilityRateComparisonForm']/table/tbody/tr[16]/td/table/tbody/tr/td[1]/table/tbody/tr[2]"));
+
+				if (monthlypremium.getText().trim().contains("Monthly Premium")) {
+					System.out.println(
+							"Estimated Total Monthly Premium text displayed successfully on STD Premiums table");
+
+					WebElement monthlypremium1 = driver.findElement(By.xpath(
+							"//form[@name='ShortTermDisabilityRateComparisonForm']/table/tbody/tr[16]/td/table/tbody/tr/td[2]/table/tbody/tr[2]"));
+					String MonthlyPremium1 = monthlypremium1.getText().substring(1, 4);
+					String[] MonthlyPremium1_1 = MonthlyPremium1.split("\\.");
+
+					WebElement monthlypremium2 = driver.findElement(By.xpath(
+							"//form[@name='ShortTermDisabilityRateComparisonForm']/table/tbody/tr[16]/td/table/tbody/tr/td[3]/table/tbody/tr[2]"));
+					String MonthlyPremium2 = monthlypremium2.getText().substring(1, 4);
+					String[] MonthlyPremium2_2 = MonthlyPremium2.split("\\.");
+
+					if ((Integer.parseInt(MonthlyPremium1_1[0]) != 0)
+							&& (Integer.parseInt(MonthlyPremium2_2[0]) != 0)) {
+						System.out.println("Estimated Total Monthly Premium Amounts :: " + monthlypremium1.getText() + " and "
+								+ monthlypremium2.getText() + " displayed successfully");
+					} else {
+						System.out.println("Estimated Total Monthly Premium Amounts :: " + monthlypremium1.getText() + " and "
+								+ monthlypremium2.getText() + " not displayed");
+					}
+
+				} else {
+					System.out.println("Estimated Total Monthly Premium text not displayed on STD Premiums table");
+				}
+
+				WebElement annualpremium = driver.findElement(By.xpath(
+						"//form[@name='ShortTermDisabilityRateComparisonForm']/table/tbody/tr[16]/td/table/tbody/tr/td[1]/table/tbody/tr[3]"));
+
+				if (annualpremium.getText().trim().contains("Annual Premium")) {
+					System.out.println(
+							"Estimated Total Annual Premium text displayed successfully on STD Premiums table");
+
+					WebElement annualpremium1 = driver.findElement(By.xpath(
+							"//form[@name='ShortTermDisabilityRateComparisonForm']/table/tbody/tr[16]/td/table/tbody/tr/td[2]/table/tbody/tr[3]"));
+					String ANNUALPremium1 = annualpremium1.getText().substring(1, 5);
+					String[] ANNUALPremium1_1 = ANNUALPremium1.split("\\.");
+
+					WebElement annualpremium2 = driver.findElement(By.xpath(
+							"//form[@name='ShortTermDisabilityRateComparisonForm']/table/tbody/tr[16]/td/table/tbody/tr/td[3]/table/tbody/tr[3]"));
+					String ANNUALPremium2 = annualpremium2.getText().substring(1, 5);
+					String[] ANNUALPremium2_2 = ANNUALPremium2.split("\\.");
+
+					if ((Integer.parseInt(ANNUALPremium1_1[0]) != 0) && (Integer.parseInt(ANNUALPremium2_2[0]) != 0)) {
+						System.out.println("Estimated Total Annual Premium Amounts :: " + annualpremium1.getText() + " and "
+								+ annualpremium2.getText() + " displayed successfully");
+						driver.switchTo().window(winHandle).close();
+					} else {
+						System.out.println("Estimated Total Annual Premium Amounts :: " + annualpremium1.getText() + " and "
+								+ annualpremium2.getText() + " not displayed");
+					}
+
+				} else {
+					System.out.println("Estimated Total Annual Premium text not displayed on STD Premiums table");
+				}
+			}
+		}
+	}
+
 }
