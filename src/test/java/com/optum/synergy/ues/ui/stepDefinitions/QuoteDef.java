@@ -87,8 +87,8 @@ public class QuoteDef {
 	@Given("^UeS_User is on Home Page$")
 	public void ues_user_is_on_Home_Page() throws Throwable {
 		// driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-		//driver.get(autoProperties.getProperty("BFX_URL"));
-		driver.get(autoProperties.getProperty("STAGE_URL"));
+		driver.get(autoProperties.getProperty("BFX_URL"));
+		//driver.get(autoProperties.getProperty("STAGE_URL"));
 		utility.takeScreenShot(driver, "Homepage" + testCaseID);
 		utility.GenerateReport("Quote", "", "info", "Execution Started.User is on the login Page",
 				"Homepage" + testCaseID);
@@ -553,5 +553,17 @@ public class QuoteDef {
 		quotepage.verify_BENEFITCODE_MONTHLYPREMIUM_ANNUALPREMIUM(driver);
 		quotepage.tearDown(driver);
 	}
+	
+	@Then("^UeS_User select PLAN CODES and click on COMPARE RATES FOR SELECTED PLANS button in Disability Plan Information table$")
+	public void ues_userSelectPLANCODESAndClickOnCOMPARERATESFORSELECTEDPLANSButtonInDisabilityPlanInformationTable() throws Throwable {
+		System.out.println("User selected plans from Disability Plan Information table");
+	}
+
+	@Then("^UeS_User is verify PLAN CODE,MONYHLY PREMIUM as \"([^\"]*)\" and ANNUAL PREMIUM as \"([^\"]*)\" in STD Premiums table on STD Rate Comparison  page$")
+	public void ues_userIsVerifyPLANCODEMONYHLYPREMIUMAsAndANNUALPREMIUMAsInSTDPremiumsTableOnSTDRateComparisonPage(String arg1, String arg2) throws Throwable {
+		quotepage.verify_PLANCODE_MONTHLYPREMIUM_ANNUALPREMIUM(driver);
+		quotepage.tearDown(driver);  
+	}
+
 
 }
