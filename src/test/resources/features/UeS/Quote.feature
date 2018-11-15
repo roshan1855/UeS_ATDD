@@ -525,7 +525,7 @@ Feature: Quotes Module
       | Quote_TC_45 |  | TC_45      |  | TX    |  | Most Popular Plans |  |    73301 |  | Not Null        |  | Not Null       |
       | Quote_TC_46 |  | TC_46      |  | TX    |  | Show All Plans     |  |    73301 |  | Not Null        |  | Not Null       |
 
-  @Regression_UeS123 @Display_STDRates_On_STDRateComparisonWindow
+  @Display_STDRates_On_STDRateComparisonWindow
   Scenario Outline: "<TestCaseID>" "<TestCaseID>" Display STD Rates for "<Value>" on Short Term Rate Comparison window
     When Flow_Fetch fileName "<FileName>" and testCaseID "<TestCaseID>" are captured
     Given Flow_Fetch Data from excel Sheet for "<TestCaseID>"
