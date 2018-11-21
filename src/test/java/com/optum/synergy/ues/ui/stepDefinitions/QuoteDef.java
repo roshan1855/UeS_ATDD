@@ -87,8 +87,8 @@ public class QuoteDef {
 	@Given("^UeS_User is on Home Page$")
 	public void ues_user_is_on_Home_Page() throws Throwable {
 		// driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-		driver.get(autoProperties.getProperty("BFX_URL"));
-		//driver.get(autoProperties.getProperty("STAGE_URL"));
+		//driver.get(autoProperties.getProperty("BFX_URL"));
+		driver.get(autoProperties.getProperty("STAGE_URL"));
 		utility.takeScreenShot(driver, "Homepage" + testCaseID);
 		utility.GenerateReport("Quote", "", "info", "Execution Started.User is on the login Page",
 				"Homepage" + testCaseID);
@@ -500,6 +500,11 @@ public class QuoteDef {
 	public void ues_userVerifyTheDisplayPlanAsOnShortTermDisabilityPlansPage(String arg1) throws Throwable {
 		quotepage.page_ShortTermDisabilityPlans(driver, arg1);
 	}
+	
+	@Then("^UeS_User verify the Display Plan as \"([^\"]*)\" on Long Term Disability Plans page$")
+	public void ues_userVerifyTheDisplayPlanAsOnLongTermDisabilityPlansPage(String arg1) throws Throwable {
+		quotepage.page_LongTermDisabilityPlans(driver, arg1);
+	}
 
 	@Then("^UeS_User select plans from Disability Plan Information table on Short Term Disability Plans page$")
 	public void ues_userSelectPlansFromDisabilityPlanInformationTableOnShortTermDisabilityPlansPage() throws Throwable {
@@ -563,6 +568,20 @@ public class QuoteDef {
 	public void ues_userIsVerifyPLANCODEMONYHLYPREMIUMAsAndANNUALPREMIUMAsInSTDPremiumsTableOnSTDRateComparisonPage(String arg1, String arg2) throws Throwable {
 		quotepage.verify_PLANCODE_MONTHLYPREMIUM_ANNUALPREMIUM(driver);
 		quotepage.tearDown(driver);  
+	}
+	@Then("^UeS_User select plan codes from Disability Plan Information table and click on NEXT button in Short Term Disability Plans page$")
+	public void ues_userSelectPlanCodesFromDisabilityPlanInformationTableAndClickOnNEXTButtonInShortTermDisabilityPlansPage() throws Throwable {
+		quotepage.selectPlanCode_clickNext_ShortTermDisabilityPlans(driver);
+	}
+
+	@Then("^UeS_User select PLAN CODES and click on COMPARE SELECTED PLANS button in Disability Plan Information table on Long Term Disability Plans page$")
+	public void ues_userSelectPLANCODESAndClickOnCOMPARESELECTEDPLANSButtonInDisabilityPlanInformationTableOnLongTermDisabilityPlansPage() throws Throwable {
+		quotepage.selectPlanCodes_LTDPlanPage(driver);
+	}
+	@Then("^UeS_User is verify BENEFIT,MONYHLY PREMIUM as \"([^\"]*)\" and ANNUAL PREMIUM as \"([^\"]*)\" in Long Term Disability Plan Details table on LTD Plan Comparison page$")
+	public void ues_userIsVerifyBENEFITMONYHLYPREMIUMAsAndANNUALPREMIUMAsInLongTermDisabilityPlanDetailsTableOnLTDPlanComparisonPage(String arg1, String arg2) throws Throwable {
+		quotepage.verify_BENEFITCODE_MONTHLYPREMIUM_ANNUALPREMIUM_On_LTDPlanComparison(driver);
+		quotepage.tearDown(driver);
 	}
 
 
