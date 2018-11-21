@@ -582,8 +582,8 @@ Feature: Quotes Module
 
     Examples: 
       | FileName    |  | TestCaseID |  | State |  | Value              |  | Zip Code |  | Monthly Premium |  | Annual Premium |
-      | Quote_TC_49 |  | TC_49      |  | TX    |  | Most Popular Plans |  |    73301 |  | Not Null        |  | Not Null       |
-      #| Quote_TC_50 |  | TC_50      |  | TX    |  | Show All Plans     |  |    73301 |  | Not Null        |  | Not Null       |
+      #| Quote_TC_49 |  | TC_49      |  | TX    |  | Most Popular Plans |  |    73301 |  | Not Null        |  | Not Null       |
+      | Quote_TC_50 |  | TC_50      |  | TX    |  | Show All Plans     |  |    73301 |  | Not Null        |  | Not Null       |
 
   @Testing
   Scenario Outline: "<TestCaseID>" Testing
