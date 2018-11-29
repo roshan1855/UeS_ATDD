@@ -33,6 +33,13 @@ public class CommonLibrary {
 	public static String testCaseID;
 	public static String testCaseName;
 	public static String customerID;
+	
+	public static String userName;
+	public static String State;
+	public static String TotEligibleEmployees;
+	public static String AvgTotEligibleEmployees;
+	
+	
 	public static String CRID;
 	public static String startDate;
 	public static String endDate;
@@ -54,12 +61,69 @@ public class CommonLibrary {
 	public static String query6;
 
 	/**
-	 * @author hkaur115
+	 * @author dsuribab
 	 * @description : All values in getters coming from DataReader Class
 	 **/
 	public String getCustomerID() {
 		return reader.getCustomerID();
 	}
+	
+	public String getUserName() {
+		return reader.getUserName();
+	}	
+
+	public String getPassword() {
+		return reader.getPassword();
+	}
+	
+	public String getState() {
+		return reader.getState();
+	}	
+
+	public String getTotEligibleEmployess() {
+		return reader.getTotEligibleEmployees();
+	}
+	
+	public String getAvgTotEligibleEmployess() {
+		return reader.getAvgTotEligibleEmployees();
+	}
+	
+	public String getQuoteType() {
+		return reader.getQuoteType();
+	}
+
+	public String getCompanyName() {
+		return reader.getCompanyName();
+	}
+	
+	public String getAddress() {
+		return reader.getAddress();
+	}
+
+	public String getCity() {
+		return reader.getCity();
+	}
+
+	public String getZipCode() {
+		return reader.getZipCode();
+	}
+
+	public String getSICCode() {
+		return reader.getSICCode();
+	}
+
+	public String getNonCOBRAEmployees() {
+		return reader.getNonCOBRAEmployees();
+	}
+
+	public String getCOBRAEmployees() {
+		return reader.getCOBRAEmployees();
+	}
+
+	public String getTotalEmployees() {
+		return reader.getTotalEmployees();
+	}
+
 
 	public String getCRID() {
 		return reader.getCRID();
@@ -135,6 +199,21 @@ public class CommonLibrary {
 		reader.setContractNumber();
 		reader.setIssueState();
 		reader.setChargeLineCode();
+		
+		reader.setuserName();
+		reader.setPassword();
+		reader.setState();
+		reader.setTotEligibleEmployees();
+		reader.setAvgTotEligibleEmployees();
+		reader.setQuoteType();
+		reader.setCompanyName();
+		reader.setAddress();
+		reader.setCity();
+		reader.setZipCode();
+		reader.setSICCode();
+		reader.setNonCOBRAEmployees();
+		reader.setCOBRAEmployees();
+		reader.setTotalEmployees();
 	}
 
 	/**
