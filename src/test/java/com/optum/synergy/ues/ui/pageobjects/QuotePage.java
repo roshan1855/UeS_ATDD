@@ -36,10 +36,10 @@ public class QuotePage {
 	public static WebElement element;
 	public static JavascriptExecutor executor;
 	DesiredCapabilities ieCapabilities;
-	
+
 	public static String userName;
 	public static CommonLibrary common;
-	
+
 	By uesUserName = By.xpath(".//*[@id='U']");
 	By uesPwd = By.xpath(".//*[@id='P']");
 	By uesLoginBtn = By.xpath("//a[contains(text(),'Log In')]");
@@ -145,18 +145,18 @@ public class QuotePage {
 		common = new CommonLibrary();
 		utility.waitForVisibilityOfWebElement(uesUserName, driver);
 		// driver.findElement(uesUserName).sendKeys("roshanadmin05");
-		driver.findElement(uesUserName).sendKeys(autoProperties.getProperty("loginUserName_BFX"));
-		//driver.findElement(uesUserName).sendKeys("roshankumar");
-		//driver.findElement(uesUserName).sendKeys(autoProperties.getProperty("loginUserName_STG"));
+		// driver.findElement(uesUserName).sendKeys(autoProperties.getProperty("loginUserName_BFX"));
+		driver.findElement(uesUserName).sendKeys("roshankumar");
+		// driver.findElement(uesUserName).sendKeys(autoProperties.getProperty("loginUserName_STG"));
 
 		utility.waitForVisibilityOfWebElement(uesPwd, driver);
 		// driver.findElement(uesPwd).sendKeys("Computer$4");
 		// driver.findElement(uesPwd).sendKeys("Computer$5");
-		//driver.findElement(uesPwd).sendKeys(autoProperties.getProperty("loginPassword_BFX"));
+		// driver.findElement(uesPwd).sendKeys(autoProperties.getProperty("loginPassword_BFX"));
 		driver.findElement(uesPwd).sendKeys(autoProperties.getProperty("loginPassword_STG"));
-		
-		//driver.findElement(uesUserName).sendKeys(common.getUserName());
-		//driver.findElement(uesPwd).sendKeys(common.getPassword());
+
+		// driver.findElement(uesUserName).sendKeys(common.getUserName());
+		// driver.findElement(uesPwd).sendKeys(common.getPassword());
 
 		utility.waitForVisibilityOfWebElement(uesLoginBtn, driver);
 		element = driver.findElement(uesLoginBtn);
@@ -308,6 +308,91 @@ public class QuotePage {
 		executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].click();", element);
 		Thread.sleep(7000);
+	}
+
+	public void censusPage_Class1_2_Plans(WebDriver driver) throws InterruptedException, IOException {
+		QuotePage.verifyUeSLogos(driver);
+		Thread.sleep(1000);
+		String cencusPage = ".//*[@id='census-form']/table[1]/tbody/tr[2]/td[1]";
+
+		QuotePage.verifyPageDisplay(driver, cencusPage, "Census");
+		Thread.sleep(1000);
+
+		String cencusInfoTable = "//td[contains(text(),'Census Information')]";
+		QuotePage.verifyPageInfoTable(driver, cencusInfoTable, "Census Information");
+		Thread.sleep(1000);
+
+		QuotePage.verifyFooterLinks(driver);
+		Thread.sleep(1000);
+
+		// driver.findElement(By.xpath(".//*[@id='census-form']/table[8]/tbody/tr[2]/td/table/tbody/tr[5]"));
+		List<WebElement> ele4 = driver
+				.findElements(By.xpath(".//*[@id='census-form']/table[8]/tbody/tr[2]/td/table/tbody/tr"));
+		int count1 = ele4.size();
+		Thread.sleep(1000);
+
+		System.out.println("Row Count :: " + count1 + "Row Count  ::" + (count1 - 7));
+
+		int j = 1000;
+		for (int i = 0; i <= count1 - 7; i++) {
+
+			Random rand = new Random();
+			int Low = 25;
+			int High = 40;
+			int Result = rand.nextInt(High - Low) + Low;
+
+			int WifeAgeLow = 15;
+			int WifeAgeHigh = 30;
+			int WifeAgeResult = rand.nextInt(WifeAgeHigh - WifeAgeLow) + WifeAgeLow;
+
+			int AgeLow = 12;
+			int AgeHigh = 14;
+			int ChildAge = rand.nextInt(AgeHigh - AgeLow) + AgeLow;
+
+			int LowSal = 50000;
+			int HighSal = 100000;
+			int TotSal = rand.nextInt(HighSal - LowSal) + LowSal;
+
+			if (i < 5) {
+				Select ClassType = new Select(
+						driver.findElement(By.name("censusDetailInformationForm[" + i + "].disabilityClassNumber")));
+				ClassType.selectByVisibleText("Class 1 - Class1");
+			} else {
+				Select ClassType = new Select(
+						driver.findElement(By.name("censusDetailInformationForm[" + i + "].disabilityClassNumber")));
+				ClassType.selectByVisibleText("Class 2 - Class2");
+			}
+
+			driver.findElement(By.xpath("//input[@name='censusDetailInformationForm[" + i + "].employeeAge']"))
+					.sendKeys(Integer.toString(Result));
+			Thread.sleep(500);
+			driver.findElement(By.xpath("//input[@name='censusDetailInformationForm[" + i + "].spouseAge']"))
+					.sendKeys(Integer.toString(WifeAgeResult));
+			Thread.sleep(500);
+			driver.findElement(By.xpath("//input[@name='censusDetailInformationForm[" + i + "].childrenToAdd']"))
+					.sendKeys("1");
+			Thread.sleep(1000);
+
+			element = driver.findElement(By.xpath("//input[@id='add" + j + "']"));
+			executor = (JavascriptExecutor) driver;
+			executor.executeScript("arguments[0].click();", element);
+
+			Thread.sleep(1000);
+			driver.findElement(
+					By.xpath("//input[@name='censusDetailInformationForm[" + i + "].dependentChildren[0].age']"))
+					.sendKeys(Integer.toString(ChildAge));
+			Thread.sleep(500);
+
+			driver.findElement(By.xpath("//input[@name='censusDetailInformationForm[" + i + "].annualSalary']"))
+					.sendKeys(Integer.toString(TotSal));
+			Thread.sleep(500);
+			j = j + 1000;
+		}
+
+		element = driver.findElement(censussubmitNext);
+		executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", element);
+		Thread.sleep(5000);
 	}
 
 	public void censusPage_OnlyEE_Salary(WebDriver driver) throws InterruptedException, IOException {
@@ -809,11 +894,11 @@ public class QuotePage {
 
 		Select cominfoState = new Select(driver.findElement(By.name("state")));
 		cominfoState.selectByVisibleText(common.getState());
-		//cominfoState.selectByVisibleText("CA");
+		// cominfoState.selectByVisibleText("CA");
 		Thread.sleep(500);
 
 		driver.findElement(quoteemployeeCount).clear();
-		//driver.findElement(quoteemployeeCount).sendKeys("8");
+		// driver.findElement(quoteemployeeCount).sendKeys("8");
 		driver.findElement(quoteemployeeCount).sendKeys(common.getTotEligibleEmployess());
 		Thread.sleep(500);
 
@@ -821,7 +906,7 @@ public class QuotePage {
 		// Thread.sleep(2000);
 
 		driver.findElement(quoteatneCount1).clear();
-		//driver.findElement(quoteatneCount1).sendKeys("8");
+		// driver.findElement(quoteatneCount1).sendKeys("8");
 		driver.findElement(quoteatneCount1).sendKeys(common.getAvgTotEligibleEmployess());
 		Thread.sleep(500);
 
@@ -839,10 +924,10 @@ public class QuotePage {
 		QuotePage.verifyFooterLinks(driver);
 
 		Select quoteType = new Select(driver.findElement(quoteSetUpquoteType));
-		//quoteType.selectByVisibleText("New Business");
+		// quoteType.selectByVisibleText("New Business");
 		quoteType.selectByVisibleText(common.getQuoteType());
 
-		//driver.findElement(quoteSetUpquoteCompanyName).sendKeys("Optum");
+		// driver.findElement(quoteSetUpquoteCompanyName).sendKeys("Optum");
 		driver.findElement(quoteSetUpquoteCompanyName).sendKeys(common.getCompanyName());
 		Thread.sleep(500);
 
@@ -866,32 +951,32 @@ public class QuotePage {
 		executor.executeScript("arguments[0].click();", element);
 		Thread.sleep(500);
 
-		//driver.findElement(txtBoxstreetAddress).sendKeys("Hyderabad");
+		// driver.findElement(txtBoxstreetAddress).sendKeys("Hyderabad");
 		driver.findElement(txtBoxstreetAddress).sendKeys(common.getAddress());
 		Thread.sleep(500);
 
-		//driver.findElement(txtBoxcityAddress).sendKeys("Site2");
+		// driver.findElement(txtBoxcityAddress).sendKeys("Site2");
 		driver.findElement(txtBoxcityAddress).sendKeys(common.getCity());
 		Thread.sleep(500);
 
 		Select stateSel = new Select(driver.findElement(dropDownState));
-		//stateSel.selectByVisibleText("CA");
+		// stateSel.selectByVisibleText("CA");
 		stateSel.selectByVisibleText(common.getState());
 
-		//driver.findElement(txtBoxzipCode).sendKeys("90701");
+		// driver.findElement(txtBoxzipCode).sendKeys("90701");
 		driver.findElement(txtBoxzipCode).sendKeys(common.getZipCode());
 		Thread.sleep(500);
 
-		//driver.findElement(txtBoxSICCODE).sendKeys("9111");
+		// driver.findElement(txtBoxSICCODE).sendKeys("9111");
 		driver.findElement(txtBoxSICCODE).sendKeys(common.getSICCode());
 		Thread.sleep(500);
 
 		driver.findElement(totNumActiveEmployeesApplying).clear();
-		//driver.findElement(totNumActiveEmployeesApplying).sendKeys("8");
+		// driver.findElement(totNumActiveEmployeesApplying).sendKeys("8");
 		driver.findElement(totNumActiveEmployeesApplying).sendKeys(common.getNonCOBRAEmployees());
 		Thread.sleep(500);
 
-		//driver.findElement(txtBoxquoteTotalNumEmployees).sendKeys("8");
+		// driver.findElement(txtBoxquoteTotalNumEmployees).sendKeys("8");
 		driver.findElement(txtBoxquoteTotalNumEmployees).sendKeys(common.getTotalEmployees());
 		Thread.sleep(500);
 
@@ -944,12 +1029,12 @@ public class QuotePage {
 		Thread.sleep(500);
 
 		Select cominfoState = new Select(driver.findElement(By.name("state")));
-		//cominfoState.selectByVisibleText("CA");
+		// cominfoState.selectByVisibleText("CA");
 		cominfoState.selectByVisibleText(common.getState());
 		Thread.sleep(500);
 
 		driver.findElement(quoteemployeeCount).clear();
-		//driver.findElement(quoteemployeeCount).sendKeys("8");
+		// driver.findElement(quoteemployeeCount).sendKeys("8");
 		driver.findElement(quoteemployeeCount).sendKeys(common.getTotEligibleEmployess());
 		Thread.sleep(500);
 
@@ -957,7 +1042,7 @@ public class QuotePage {
 		// Thread.sleep(2000);
 
 		driver.findElement(quoteatneCount1).clear();
-		//driver.findElement(quoteatneCount1).sendKeys("8");
+		// driver.findElement(quoteatneCount1).sendKeys("8");
 		driver.findElement(quoteatneCount1).sendKeys(common.getAvgTotEligibleEmployess());
 		Thread.sleep(500);
 
@@ -975,10 +1060,10 @@ public class QuotePage {
 		QuotePage.verifyFooterLinks(driver);
 
 		Select quoteType = new Select(driver.findElement(quoteSetUpquoteType));
-		//quoteType.selectByVisibleText("New Business");
+		// quoteType.selectByVisibleText("New Business");
 		quoteType.selectByVisibleText(common.getQuoteType());
 
-		//driver.findElement(quoteSetUpquoteCompanyName).sendKeys("Optum_M_V");
+		// driver.findElement(quoteSetUpquoteCompanyName).sendKeys("Optum_M_V");
 		driver.findElement(quoteSetUpquoteCompanyName).sendKeys(common.getCompanyName());
 		Thread.sleep(500);
 
@@ -1012,19 +1097,19 @@ public class QuotePage {
 		executor.executeScript("arguments[0].click();", element);
 		Thread.sleep(500);
 
-		//driver.findElement(txtBoxstreetAddress).sendKeys("Hyderabad");
+		// driver.findElement(txtBoxstreetAddress).sendKeys("Hyderabad");
 		driver.findElement(txtBoxstreetAddress).sendKeys(common.getAddress());
 		Thread.sleep(500);
 
-		//driver.findElement(txtBoxcityAddress).sendKeys("Site2");
+		// driver.findElement(txtBoxcityAddress).sendKeys("Site2");
 		driver.findElement(txtBoxcityAddress).sendKeys(common.getCity());
 		Thread.sleep(500);
 
 		Select stateSel = new Select(driver.findElement(dropDownState));
-		//stateSel.selectByVisibleText("CA");
+		// stateSel.selectByVisibleText("CA");
 		stateSel.selectByVisibleText(common.getState());
 
-		//driver.findElement(txtBoxzipCode).sendKeys("90701");
+		// driver.findElement(txtBoxzipCode).sendKeys("90701");
 		driver.findElement(txtBoxzipCode).sendKeys(common.getZipCode());
 		Thread.sleep(500);
 
@@ -1033,11 +1118,11 @@ public class QuotePage {
 		Thread.sleep(500);
 
 		driver.findElement(totNumActiveEmployeesApplying).clear();
-		//driver.findElement(totNumActiveEmployeesApplying).sendKeys("8");
+		// driver.findElement(totNumActiveEmployeesApplying).sendKeys("8");
 		driver.findElement(totNumActiveEmployeesApplying).sendKeys(common.getNonCOBRAEmployees());
 		Thread.sleep(500);
 
-		//driver.findElement(txtBoxquoteTotalNumEmployees).sendKeys("8");
+		// driver.findElement(txtBoxquoteTotalNumEmployees).sendKeys("8");
 		driver.findElement(txtBoxquoteTotalNumEmployees).sendKeys(common.getTotalEmployees());
 		Thread.sleep(1000);
 
@@ -1090,12 +1175,12 @@ public class QuotePage {
 		Thread.sleep(500);
 
 		Select cominfoState = new Select(driver.findElement(By.name("state")));
-		//cominfoState.selectByVisibleText("CA");
+		// cominfoState.selectByVisibleText("CA");
 		cominfoState.selectByVisibleText(common.getState());
 		Thread.sleep(500);
 
 		driver.findElement(quoteemployeeCount).clear();
-		//driver.findElement(quoteemployeeCount).sendKeys("8");
+		// driver.findElement(quoteemployeeCount).sendKeys("8");
 		driver.findElement(quoteemployeeCount).sendKeys(common.getTotEligibleEmployess());
 		Thread.sleep(1000);
 
@@ -1103,7 +1188,7 @@ public class QuotePage {
 		// Thread.sleep(2000);
 
 		driver.findElement(quoteatneCount1).clear();
-		//driver.findElement(quoteatneCount1).sendKeys("8");
+		// driver.findElement(quoteatneCount1).sendKeys("8");
 		driver.findElement(quoteatneCount1).sendKeys(common.getAvgTotEligibleEmployess());
 		Thread.sleep(500);
 
@@ -1121,10 +1206,11 @@ public class QuotePage {
 		QuotePage.verifyFooterLinks(driver);
 
 		Select quoteType = new Select(driver.findElement(quoteSetUpquoteType));
-		//quoteType.selectByVisibleText("New Business");
+		// quoteType.selectByVisibleText("New Business");
 		quoteType.selectByVisibleText(common.getQuoteType());
 
-		//driver.findElement(quoteSetUpquoteCompanyName).sendKeys("Optum_" + coverage);
+		// driver.findElement(quoteSetUpquoteCompanyName).sendKeys("Optum_" +
+		// coverage);
 		driver.findElement(quoteSetUpquoteCompanyName).sendKeys(common.getCompanyName());
 		Thread.sleep(500);
 
@@ -1176,32 +1262,32 @@ public class QuotePage {
 		executor.executeScript("arguments[0].click();", element);
 		Thread.sleep(500);
 
-		//driver.findElement(txtBoxstreetAddress).sendKeys("Hyderabad");
+		// driver.findElement(txtBoxstreetAddress).sendKeys("Hyderabad");
 		driver.findElement(txtBoxstreetAddress).sendKeys(common.getAddress());
 		Thread.sleep(500);
 
-		//driver.findElement(txtBoxcityAddress).sendKeys("Site2");
+		// driver.findElement(txtBoxcityAddress).sendKeys("Site2");
 		driver.findElement(txtBoxcityAddress).sendKeys(common.getCity());
 		Thread.sleep(500);
 
 		Select stateSel = new Select(driver.findElement(dropDownState));
-		//stateSel.selectByVisibleText("CA");
+		// stateSel.selectByVisibleText("CA");
 		stateSel.selectByVisibleText(common.getState());
 
-		//driver.findElement(txtBoxzipCode).sendKeys("90701");
+		// driver.findElement(txtBoxzipCode).sendKeys("90701");
 		driver.findElement(txtBoxzipCode).sendKeys(common.getZipCode());
 		Thread.sleep(500);
 
-		//driver.findElement(txtBoxSICCODE).sendKeys("9111");
+		// driver.findElement(txtBoxSICCODE).sendKeys("9111");
 		driver.findElement(txtBoxSICCODE).sendKeys(common.getSICCode());
 		Thread.sleep(500);
 
 		driver.findElement(totNumActiveEmployeesApplying).clear();
-		//driver.findElement(totNumActiveEmployeesApplying).sendKeys("8");
+		// driver.findElement(totNumActiveEmployeesApplying).sendKeys("8");
 		driver.findElement(totNumActiveEmployeesApplying).sendKeys(common.getNonCOBRAEmployees());
 		Thread.sleep(500);
 
-		//driver.findElement(txtBoxquoteTotalNumEmployees).sendKeys("8");
+		// driver.findElement(txtBoxquoteTotalNumEmployees).sendKeys("8");
 		driver.findElement(txtBoxquoteTotalNumEmployees).sendKeys(common.getTotalEmployees());
 		Thread.sleep(1000);
 
@@ -1445,12 +1531,12 @@ public class QuotePage {
 
 		utility.waitForVisibilityOfWebElement(quoteemployeeCount, driver);
 		driver.findElement(quoteemployeeCount).clear();
-		//driver.findElement(quoteemployeeCount).sendKeys("8");
+		// driver.findElement(quoteemployeeCount).sendKeys("8");
 		driver.findElement(quoteemployeeCount).sendKeys(common.getTotEligibleEmployess());
 
 		utility.waitForVisibilityOfWebElement(quoteatneCount1, driver);
 		driver.findElement(quoteatneCount1).clear();
-		//driver.findElement(quoteatneCount1).sendKeys("8");
+		// driver.findElement(quoteatneCount1).sendKeys("8");
 		driver.findElement(quoteatneCount1).sendKeys(common.getAvgTotEligibleEmployess());
 		// Thread.sleep(1000);
 
@@ -1507,13 +1593,13 @@ public class QuotePage {
 
 		utility.waitForVisibilityOfWebElement(quoteemployeeCount, driver);
 		driver.findElement(quoteemployeeCount).clear();
-		//driver.findElement(quoteemployeeCount).sendKeys("10");
+		// driver.findElement(quoteemployeeCount).sendKeys("10");
 		driver.findElement(quoteemployeeCount).sendKeys(common.getTotEligibleEmployess());
 
 		// Thread.sleep(2000);
 		utility.waitForVisibilityOfWebElement(quoteatneCount2, driver);
 		driver.findElement(quoteatneCount2).clear();
-		//driver.findElement(quoteatneCount2).sendKeys("10");
+		// driver.findElement(quoteatneCount2).sendKeys("10");
 		driver.findElement(quoteatneCount2).sendKeys(common.getAvgTotEligibleEmployess());
 		// Thread.sleep(1000);
 
@@ -1538,13 +1624,13 @@ public class QuotePage {
 		// String pwindow = driver.getWindowHandle();
 		utility.waitForVisibilityOfWebElement(quoteSetUpquoteType, driver);
 		Select quoteType = new Select(driver.findElement(quoteSetUpquoteType));
-		//quoteType.selectByVisibleText("New Business");
+		// quoteType.selectByVisibleText("New Business");
 		quoteType.selectByVisibleText(common.getQuoteType());
 
 		utility.waitForVisibilityOfWebElement(quoteSetUpquoteCompanyName, driver);
-		//driver.findElement(quoteSetUpquoteCompanyName).sendKeys("Optum");
+		// driver.findElement(quoteSetUpquoteCompanyName).sendKeys("Optum");
 		driver.findElement(quoteSetUpquoteCompanyName).sendKeys(common.getCompanyName());
-		
+
 		if (coverage.trim().contains("Vision")) {
 			QuotePage.check_CheckBox(driver, ckhBoxProductTypeMedical);
 			QuotePage.check_CheckBox(driver, ckhBoxProductTypeDental);
@@ -1566,34 +1652,34 @@ public class QuotePage {
 		}
 
 		utility.waitForVisibilityOfWebElement(quoteSetUpquoteCompanyName, driver);
-		//driver.findElement(txtBoxstreetAddress).sendKeys("Hyderabad");
+		// driver.findElement(txtBoxstreetAddress).sendKeys("Hyderabad");
 		driver.findElement(txtBoxstreetAddress).sendKeys(common.getAddress());
-		
+
 		utility.waitForVisibilityOfWebElement(txtBoxcityAddress, driver);
-		//driver.findElement(txtBoxcityAddress).sendKeys("Site1");
+		// driver.findElement(txtBoxcityAddress).sendKeys("Site1");
 		driver.findElement(txtBoxcityAddress).sendKeys(common.getCity());
 
 		// Select stateSel=new Select(driver.findElement(dropDownState));
 		// stateSel.selectByVisibleText("CA");
 		utility.waitForVisibilityOfWebElement(txtBoxzipCode, driver);
 		driver.findElement(txtBoxzipCode).sendKeys(zip);
-		//Thread.sleep(1000);
+		// Thread.sleep(1000);
 
 		utility.waitForVisibilityOfWebElement(txtBoxSICCODE, driver);
-		//driver.findElement(txtBoxSICCODE).sendKeys("9111");
+		// driver.findElement(txtBoxSICCODE).sendKeys("9111");
 		driver.findElement(txtBoxSICCODE).sendKeys(common.getSICCode());
-		//Thread.sleep(1000);
+		// Thread.sleep(1000);
 
 		driver.findElement(totNumActiveEmployeesApplying).clear();
 		utility.waitForVisibilityOfWebElement(totNumActiveEmployeesApplying, driver);
-		//driver.findElement(totNumActiveEmployeesApplying).sendKeys("8");
+		// driver.findElement(totNumActiveEmployeesApplying).sendKeys("8");
 		driver.findElement(totNumActiveEmployeesApplying).sendKeys(common.getNonCOBRAEmployees());
-		//Thread.sleep(1000);
-		
+		// Thread.sleep(1000);
+
 		utility.waitForVisibilityOfWebElement(txtBoxquoteTotalNumEmployees, driver);
-		//driver.findElement(txtBoxquoteTotalNumEmployees).sendKeys("8");
+		// driver.findElement(txtBoxquoteTotalNumEmployees).sendKeys("8");
 		driver.findElement(txtBoxquoteTotalNumEmployees).sendKeys(common.getTotalEmployees());
-		//Thread.sleep(1000);
+		// Thread.sleep(1000);
 
 		element = driver.findElement(radioBtnMedicarePriPayer);
 		executor = (JavascriptExecutor) driver;
@@ -1622,11 +1708,11 @@ public class QuotePage {
 		// String pwindow = driver.getWindowHandle();
 		utility.waitForVisibilityOfWebElement(quoteSetUpquoteType, driver);
 		Select quoteType = new Select(driver.findElement(quoteSetUpquoteType));
-		//quoteType.selectByVisibleText("New Business");
+		// quoteType.selectByVisibleText("New Business");
 		quoteType.selectByVisibleText(common.getQuoteType());
 
 		utility.waitForVisibilityOfWebElement(quoteSetUpquoteCompanyName, driver);
-		//driver.findElement(quoteSetUpquoteCompanyName).sendKeys("Optum");
+		// driver.findElement(quoteSetUpquoteCompanyName).sendKeys("Optum");
 		driver.findElement(quoteSetUpquoteCompanyName).sendKeys(common.getCompanyName());
 		// Thread.sleep(1000);
 
@@ -1667,31 +1753,31 @@ public class QuotePage {
 		// Thread.sleep(1000);
 
 		utility.waitForVisibilityOfWebElement(txtBoxstreetAddress, driver);
-		//driver.findElement(txtBoxstreetAddress).sendKeys("Hyderabad");
+		// driver.findElement(txtBoxstreetAddress).sendKeys("Hyderabad");
 		driver.findElement(txtBoxstreetAddress).sendKeys(common.getAddress());
 		// Thread.sleep(1000);
 
 		utility.waitForVisibilityOfWebElement(txtBoxcityAddress, driver);
-		//driver.findElement(txtBoxcityAddress).sendKeys("Site1");
+		// driver.findElement(txtBoxcityAddress).sendKeys("Site1");
 		driver.findElement(txtBoxcityAddress).sendKeys(common.getCity());
 
 		utility.waitForVisibilityOfWebElement(txtBoxzipCode, driver);
 		driver.findElement(txtBoxzipCode).sendKeys(zip);
 		// Thread.sleep(5000);
-		
+
 		utility.waitForVisibilityOfWebElement(txtBoxSICCODE, driver);
-		//driver.findElement(txtBoxSICCODE).sendKeys("9111");
+		// driver.findElement(txtBoxSICCODE).sendKeys("9111");
 		driver.findElement(txtBoxSICCODE).sendKeys(common.getSICCode());
-		//Thread.sleep(1000);
+		// Thread.sleep(1000);
 
 		utility.waitForVisibilityOfWebElement(totNumActiveEmployeesApplying, driver);
 		driver.findElement(totNumActiveEmployeesApplying).clear();
-		//driver.findElement(totNumActiveEmployeesApplying).sendKeys("8");
+		// driver.findElement(totNumActiveEmployeesApplying).sendKeys("8");
 		driver.findElement(totNumActiveEmployeesApplying).sendKeys(common.getNonCOBRAEmployees());
 		// Thread.sleep(1000);
 
 		utility.waitForVisibilityOfWebElement(txtBoxquoteTotalNumEmployees, driver);
-		//driver.findElement(txtBoxquoteTotalNumEmployees).sendKeys("8");
+		// driver.findElement(txtBoxquoteTotalNumEmployees).sendKeys("8");
 		driver.findElement(txtBoxquoteTotalNumEmployees).sendKeys(common.getTotalEmployees());
 		// Thread.sleep(1000);
 
@@ -2203,11 +2289,11 @@ public class QuotePage {
 		// String pwindow = driver.getWindowHandle();
 		utility.waitForVisibilityOfWebElement(quoteSetUpquoteType, driver);
 		Select quoteType = new Select(driver.findElement(quoteSetUpquoteType));
-		//quoteType.selectByVisibleText("New Business");
+		// quoteType.selectByVisibleText("New Business");
 		quoteType.selectByVisibleText(common.getQuoteType());
 
 		utility.waitForVisibilityOfWebElement(quoteSetUpquoteCompanyName, driver);
-		//driver.findElement(quoteSetUpquoteCompanyName).sendKeys("Optum");
+		// driver.findElement(quoteSetUpquoteCompanyName).sendKeys("Optum");
 		driver.findElement(quoteSetUpquoteCompanyName).sendKeys(common.getCompanyName());
 
 		element = driver.findElement(ckhBoxProductTypeMedical);
@@ -2246,23 +2332,22 @@ public class QuotePage {
 
 		utility.waitForVisibilityOfWebElement(txtBoxzipCode, driver);
 		driver.findElement(txtBoxzipCode).sendKeys(zip);
-		//Thread.sleep(1000);
+		// Thread.sleep(1000);
 
 		utility.waitForVisibilityOfWebElement(txtBoxSICCODE, driver);
-		//driver.findElement(txtBoxSICCODE).sendKeys("9111");
+		// driver.findElement(txtBoxSICCODE).sendKeys("9111");
 		driver.findElement(txtBoxSICCODE).sendKeys(common.getSICCode());
 		Thread.sleep(1000);
 
 		utility.waitForVisibilityOfWebElement(totNumActiveEmployeesApplying, driver);
 		driver.findElement(totNumActiveEmployeesApplying).clear();
-		//driver.findElement(totNumActiveEmployeesApplying).sendKeys("8");
+		// driver.findElement(totNumActiveEmployeesApplying).sendKeys("8");
 		driver.findElement(totNumActiveEmployeesApplying).sendKeys(common.getNonCOBRAEmployees());
-		
-		
+
 		utility.waitForVisibilityOfWebElement(txtBoxquoteTotalNumEmployees, driver);
-		//driver.findElement(txtBoxquoteTotalNumEmployees).sendKeys("8");
+		// driver.findElement(txtBoxquoteTotalNumEmployees).sendKeys("8");
 		driver.findElement(txtBoxquoteTotalNumEmployees).sendKeys(common.getTotalEmployees());
-		//Thread.sleep(1000);
+		// Thread.sleep(1000);
 
 		element = driver.findElement(radioBtnMedicarePriPayer);
 		executor = (JavascriptExecutor) driver;
@@ -3637,49 +3722,105 @@ public class QuotePage {
 
 		utility.waitForVisibilityOfWebElement(quoteSetUpquoteType, driver);
 		Select quoteType = new Select(driver.findElement(quoteSetUpquoteType));
-		//quoteType.selectByVisibleText("New Business");
+		// quoteType.selectByVisibleText("New Business");
 		quoteType.selectByVisibleText(common.getQuoteType());
 
 		utility.waitForVisibilityOfWebElement(quoteSetUpquoteCompanyName, driver);
-		//driver.findElement(quoteSetUpquoteCompanyName).sendKeys("Optum");
+		// driver.findElement(quoteSetUpquoteCompanyName).sendKeys("Optum");
 		driver.findElement(quoteSetUpquoteCompanyName).sendKeys(common.getCompanyName());
-		
+
 		utility.waitForVisibilityOfWebElement(txtBoxstreetAddress, driver);
-		//driver.findElement(txtBoxstreetAddress).sendKeys("Hyderabad");
+		// driver.findElement(txtBoxstreetAddress).sendKeys("Hyderabad");
 		driver.findElement(txtBoxstreetAddress).sendKeys(common.getAddress());
-		
+
 		utility.waitForVisibilityOfWebElement(txtBoxcityAddress, driver);
-		//driver.findElement(txtBoxcityAddress).sendKeys("Site1");
+		// driver.findElement(txtBoxcityAddress).sendKeys("Site1");
 		driver.findElement(txtBoxcityAddress).sendKeys(common.getCity());
 
 		// Select stateSel=new Select(driver.findElement(dropDownState));
 		// stateSel.selectByVisibleText("CA");
 
 		utility.waitForVisibilityOfWebElement(txtBoxzipCode, driver);
-		//driver.findElement(txtBoxzipCode).sendKeys("73301");
+		// driver.findElement(txtBoxzipCode).sendKeys("73301");
 		driver.findElement(txtBoxzipCode).sendKeys(common.getZipCode());
-		//Thread.sleep(1000);
+		// Thread.sleep(1000);
 
 		utility.waitForVisibilityOfWebElement(txtBoxSICCODE, driver);
-		//driver.findElement(txtBoxSICCODE).sendKeys("9111");
+		// driver.findElement(txtBoxSICCODE).sendKeys("9111");
 		driver.findElement(txtBoxSICCODE).sendKeys(common.getSICCode());
-		//Thread.sleep(1000);
+		// Thread.sleep(1000);
 
 		utility.waitForVisibilityOfWebElement(totNumActiveEmployeesApplying, driver);
 		driver.findElement(totNumActiveEmployeesApplying).clear();
-		//driver.findElement(totNumActiveEmployeesApplying).sendKeys("10");
+		// driver.findElement(totNumActiveEmployeesApplying).sendKeys("10");
 		driver.findElement(totNumActiveEmployeesApplying).sendKeys(common.getNonCOBRAEmployees());
-		//Thread.sleep(1000);
-		
+		// Thread.sleep(1000);
+
 		utility.waitForVisibilityOfWebElement(txtBoxquoteTotalNumEmployees, driver);
-		//driver.findElement(txtBoxquoteTotalNumEmployees).sendKeys("10");
+		// driver.findElement(txtBoxquoteTotalNumEmployees).sendKeys("10");
 		driver.findElement(txtBoxquoteTotalNumEmployees).sendKeys(common.getTotalEmployees());
-		//Thread.sleep(1000);
+		// Thread.sleep(1000);
 
 		element = driver.findElement(radioBtnMedicarePriPayer);
 		executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].click();", element);
 		driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
+
+		driver.findElement(By.xpath("//input[@name='quoteTotalNumDisabilityClasses']")).clear();
+		driver.findElement(By.xpath("//input[@name='quoteTotalNumDisabilityClasses']")).sendKeys("2");
+		Thread.sleep(2000);
+
+		driver.findElement(By.xpath("//input[@id='disClassButton' and @value='ENTER CLASS DESCRIPTION']")).click();
+		// driver.findElement(By.xpath("//input[@id='disClassButton' and
+		// @value='ENTER CLASS DESCRIPTION']")).sendKeys(Keys.ENTER);
+		element = driver.findElement(By.xpath("//input[@id='disClassButton' and @value='ENTER CLASS DESCRIPTION']"));
+		executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", element);
+
+		utility.waitForNumberOfWindowsToEqual(2);
+		for (String winHandle : driver.getWindowHandles()) {
+			driver.switchTo().window(winHandle);
+			if (driver.switchTo().window(winHandle).getCurrentUrl().contains("disabilityClassDefinitionsSetup")) {
+				System.out.println("Enter Class Descriptions web page displayed successfully");
+				System.out.println(
+						"Enter Class Descriptions page URL :: " + driver.switchTo().window(winHandle).getCurrentUrl());
+
+				element = driver.findElement(By.xpath("//td[contains(text(),'Enter Class Descriptions')]"));
+				if (element.getText().trim().contains("Enter Class Descriptions")) {
+					System.out.println("Enter Class Descriptions text present on Enter Class Descriptions page");
+				} else {
+					System.out.println("Enter Class Descriptions text not present on Enter Class Descriptions page");
+				}
+				Thread.sleep(1000);
+
+				driver.findElement(By.xpath("//input[@name='disabilityClass[0].classDescription']")).sendKeys("Class1");
+				Thread.sleep(1000);
+				driver.findElement(By.xpath("//input[@name='disabilityClass[1].classDescription']")).sendKeys("Class2");
+				Thread.sleep(1000);
+
+				driver.findElement(By.xpath("//input[@name='disabilityClass[0].totalEmployeesApplying']")).clear();
+				driver.findElement(By.xpath("//input[@name='disabilityClass[0].totalEmployeesApplying']"))
+						.sendKeys("5");
+				Thread.sleep(1000);
+				driver.findElement(By.xpath("//input[@name='disabilityClass[1].totalEmployeesApplying']")).clear();
+				driver.findElement(By.xpath("//input[@name='disabilityClass[1].totalEmployeesApplying']"))
+						.sendKeys("6");
+				Thread.sleep(1000);
+
+				By btnClassSubmit = By.xpath("//input[@name='submit' and @value='SUBMIT']");
+				element = driver.findElement(btnClassSubmit);
+				executor = (JavascriptExecutor) driver;
+				executor.executeScript("arguments[0].click();", element);
+				Thread.sleep(1000);
+				// driver.switchTo().window(handle1).close();
+				// driver.close();
+			}
+		}
+
+		driver.switchTo().window(pwindow);
+		Thread.sleep(1000);
+		driver.switchTo().frame("content");
+		Thread.sleep(1000);
 
 		element = driver.findElement(btnquoteSetUpNext);
 		executor = (JavascriptExecutor) driver;
@@ -3746,31 +3887,108 @@ public class QuotePage {
 
 	public void page_SupplementalEmployeeLife(WebDriver driver) throws InterruptedException, IOException {
 
-		/*
-		 * WebElement element = driver .findElement(By.
-		 * xpath("//td[contains(text(),'Supplemental Employee Life/AD&D Plans')]"
-		 * )); if
-		 * (element.getText().contains("Supplemental Employee Life/AD&D Plans"))
-		 * { System.out.
-		 * println("Supplemental Employee Life/AD&D Plans page displayed successfully"
-		 * ); } else { System.out.
-		 * println("Supplemental Employee Life/AD&D Plans page not displayed");
-		 * }
-		 */
-
 		QuotePage.verifyUeSLogos(driver);
 		Thread.sleep(2000);
 		String pageSupplementalEmployeeLife = "//td[contains(text(),'Supplemental Employee Life/AD&D Plans')]";
 		QuotePage.verifyPageDisplay(driver, pageSupplementalEmployeeLife, "Supplemental Employee Life/AD&D Plans");
 
-		/*
-		 * String lifeBasicLifePlanInfoTable =
-		 * "//td[contains(text(),'Basic Life Plan Information')]";
-		 * QuotePage.verifyPageInfoTable(driver, lifeBasicLifePlanInfoTable,
-		 * "Basic Life Plan Information");
-		 */
-
+		
 		QuotePage.verifyFooterLinks(driver);
+		
+		element=driver.findElement(By.name("class one"));
+		
+		if(element.getAttribute("value").trim().contains("Class 1 Plans")){
+			System.out.println("Class 1 Plans tab present on Supplemental Employee Life/AD&D Plans page");
+		}
+		else{
+			System.out.println("Class 1 Plans tab not present on Supplemental Employee Life/AD&D Plans page");
+		}
+		
+		element=driver.findElement(By.name("submitClassTwo"));
+		
+		if(element.getAttribute("value").trim().contains("Class 2 Plans")){
+			System.out.println("Class 2 Plans tab present on Supplemental Employee Life/AD&D Plans page");
+		}
+		else{
+			System.out.println("Class 2 Plans tab not present on Supplemental Employee Life/AD&D Plans page");
+		}
+		
+		
+		WebElement planCode1 = driver.findElement(By.name("supLifeClassPlanInformationForm[0].planId"));
+		System.out.println("Plan Code1 ::" + planCode1.getAttribute("value"));
+				
+		WebElement planCode2 = driver.findElement(By.name("supLifeClassPlanInformationForm[1].planId"));
+		System.out.println("Plan Code2 ::" + planCode2.getAttribute("value"));
+		
+		WebElement planCode3 = driver.findElement(By.name("supLifeClassPlanInformationForm[2].planId"));
+		System.out.println("Plan Code1 ::" + planCode3.getAttribute("value"));
+				
+		WebElement planCode4 = driver.findElement(By.name("supLifeClassPlanInformationForm[3].planId"));
+		System.out.println("Plan Code2 ::" + planCode4.getAttribute("value"));
+		
+		utility.waitForVisibilityOfWebElement(By.xpath("//input[@name='submitRateCompare']"), driver);
+		element = driver.findElement(By.xpath("//input[@name='submitRateCompare']"));
+		executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", element);
+		
+		
+		utility.waitForNumberOfWindowsToEqual(2);
+		for (String winHandle : driver.getWindowHandles()) {
+			driver.switchTo().window(winHandle);
+			if (driver.switchTo().window(winHandle).getCurrentUrl().contains("employeeSupLifePlanSelection")) {
+				System.out.println("Supplemental Employee Life/AD&D Rate Comparison web page displayed successfully");
+				System.out.println("Supplemental Employee Life/AD&D Rate Comparison page URL :: "
+						+ driver.switchTo().window(winHandle).getCurrentUrl());
+
+				Thread.sleep(1000);
+				WebElement element2 = driver.findElement(By.xpath("//td[contains(text(),'Supplemental Employee Life/AD&D Rate Comparison')]"));
+				if (element2.getText().contains("STD Plan Comparison")) {
+					System.out.println("Supplemental Employee Life/AD&D Rate Comparison text displayed successfully");
+				} else {
+					System.out.println("Supplemental Employee Life/AD&D Rate Comparison text not displayed");
+				}
+
+				//element = driver.findElement(By.xpath(
+				//		"//form[@name='EmployeeSupLifeRateComparisonForm']/table/tbody/tr[9]/td/table/tbody/tr/td[2]/table/tbody/tr[1]/td"));
+				
+				element=driver.findElement(By.xpath("//td[contains(text(),'1 - Class1')]"));
+
+				if (element.getText().trim().contains("1 - Class1")) {
+					System.out.println("Class1 text displayed successfully on Plan Information table");
+
+					WebElement PlanCode1 = driver.findElement(By.xpath(
+							"//form[@name='EmployeeSupLifeRateComparisonForm']/table/tbody/tr[9]/td/table/tbody/tr/td[2]/table/tbody/tr[2]/td[1]/table/tbody/tr[1]"));
+
+					WebElement PlanCode2 = driver.findElement(By.xpath(
+							"//form[@name='EmployeeSupLifeRateComparisonForm']/table/tbody/tr[9]/td/table/tbody/tr/td[2]/table/tbody/tr[2]/td[2]/table/tbody/tr[1]"));
+					
+					WebElement PlanCode3 = driver.findElement(By.xpath(
+							"//form[@name='EmployeeSupLifeRateComparisonForm']/table/tbody/tr[9]/td/table/tbody/tr/td[2]/table/tbody/tr[2]/td[3]/table/tbody/tr[1]"));
+					
+					WebElement PlanCode4 = driver.findElement(By.xpath(
+							"//form[@name='EmployeeSupLifeRateComparisonForm']/table/tbody/tr[9]/td/table/tbody/tr/td[2]/table/tbody/tr[2]/td[4]/table/tbody/tr[1]"));
+					
+					String P1=planCode1.getAttribute("value");
+					String P2=planCode2.getAttribute("value");
+					String P3=planCode3.getAttribute("value");
+					String P4=planCode4.getAttribute("value");
+					
+					if ((PlanCode1.getText().trim().contains(P1))
+							&& (PlanCode2.getText().trim().contains(P2)) && (PlanCode3.getText().trim().contains(P3)) && (PlanCode4.getText().trim().contains(P4))){
+						System.out.println("Plan Codes :: " + PlanCode1.getText() + " and " + PlanCode2.getText()
+								+ " displayed successfully");
+						System.out.println("Plan Codes :: " + PlanCode3.getText() + " and " + PlanCode4.getText()
+						+ " displayed successfully");
+					} else {
+						System.out.println("Plan Codes :: " + PlanCode1.getText() + " and " + PlanCode2.getText()+ " not displayed");
+						System.out.println("Plan Codes :: " + PlanCode3.getText() + " and " + PlanCode4.getText()+ " not displayed");
+					}
+
+				} else {
+					System.out.println("Class1 text not displayed on Plan Information table");
+				}	
+			}}
+		
 
 		element = driver.findElement(censussubmitNext);
 		executor = (JavascriptExecutor) driver;
@@ -3780,29 +3998,10 @@ public class QuotePage {
 
 	public void page_SupplementalDependentLife(WebDriver driver) throws InterruptedException, IOException {
 
-		/*
-		 * WebElement element = driver .findElement(By.
-		 * xpath("//td[contains(text(),'Supplemental Dependent Life/AD&D Plans')]"
-		 * )); if
-		 * (element.getText().contains("Supplemental Dependent Life/AD&D Plans"
-		 * )) { System.out.
-		 * println("Supplemental Dependent Life/AD&D Plans  page displayed successfully"
-		 * ); } else { System.out.
-		 * println("Supplemental Dependent Life/AD&D Plans  page not displayed"
-		 * ); }
-		 */
-
 		QuotePage.verifyUeSLogos(driver);
 		Thread.sleep(2000);
 		String pageSupplementalDependentLife = "//td[contains(text(),'Supplemental Dependent Life/AD&D Plans')]";
 		QuotePage.verifyPageDisplay(driver, pageSupplementalDependentLife, "Supplemental Dependent Life/AD&D Plans");
-
-		/*
-		 * String lifeBasicLifePlanInfoTable =
-		 * "//td[contains(text(),'Basic Life Plan Information')]";
-		 * QuotePage.verifyPageInfoTable(driver, lifeBasicLifePlanInfoTable,
-		 * "Basic Life Plan Information");
-		 */
 
 		QuotePage.verifyFooterLinks(driver);
 
@@ -3849,7 +4048,7 @@ public class QuotePage {
 			}
 		}
 	}
-	
+
 	public void page_LongTermDisabilityPlans(WebDriver driver, String displayPlan) throws InterruptedException {
 
 		WebElement element = driver.findElement(By.xpath("//td[contains(text(),'Long Term Disability Plans')]"));
@@ -3888,7 +4087,6 @@ public class QuotePage {
 		}
 	}
 
-
 	public void selectPlanCode_ShortTermDisabilityPlans(WebDriver driver) throws InterruptedException {
 		/*
 		 * driver.findElement(By.name(
@@ -3906,7 +4104,7 @@ public class QuotePage {
 		executor.executeScript("arguments[0].click();", element);
 		Thread.sleep(1000);
 	}
-	
+
 	public void selectPlanCode_clickNext_ShortTermDisabilityPlans(WebDriver driver) throws InterruptedException {
 		/*
 		 * driver.findElement(By.name(
@@ -3923,13 +4121,12 @@ public class QuotePage {
 		executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].click();", element);
 		Thread.sleep(1000);
-		
+
 		element = driver.findElement(censussubmitNext);
 		executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].click();", element);
 		Thread.sleep(6000);
 	}
-
 
 	public void verify_BENEFITCODE_MONTHLYPREMIUM_ANNUALPREMIUM(WebDriver driver) throws InterruptedException {
 		WebElement element = driver.findElement(By.name("disabilityClassPlanInformationForm[0].planId"));
@@ -3966,7 +4163,8 @@ public class QuotePage {
 						"//form[@name='ShortTermDisabilityPlanComparisonForm']/table/tbody/tr[8]/td/table/tbody/tr[1]/td[1]"));
 
 				if (element.getText().trim().contains("BENEFIT")) {
-					System.out.println("BENEFIT text displayed successfully on Short Term Disability Plan Details table");
+					System.out
+							.println("BENEFIT text displayed successfully on Short Term Disability Plan Details table");
 
 					element = driver.findElement(By.xpath(
 							"//form[@name='ShortTermDisabilityPlanComparisonForm']/table/tbody/tr[8]/td/table/tbody/tr[1]/td[2]"));
@@ -4013,7 +4211,8 @@ public class QuotePage {
 					}
 
 				} else {
-					System.out.println("MONTHLY PREMIUM text not displayed on Short Term Disability Plan Details table");
+					System.out
+							.println("MONTHLY PREMIUM text not displayed on Short Term Disability Plan Details table");
 				}
 
 				element = driver.findElement(By.xpath(
@@ -4050,9 +4249,9 @@ public class QuotePage {
 			}
 		}
 	}
-	
-	public void selectPlanCodes_LTDPlanPage(WebDriver driver) throws InterruptedException, IOException{
-	
+
+	public void selectPlanCodes_LTDPlanPage(WebDriver driver) throws InterruptedException, IOException {
+
 		QuotePage.verifyUeSLogos(driver);
 		Thread.sleep(2000);
 		String pageSupplementalDependentLife = "//td[contains(text(),'Long Term Disability Plans')]";
@@ -4063,18 +4262,19 @@ public class QuotePage {
 		element = driver.findElement(By.xpath("//input[@name='disabilityClassPlanInformationForm[0].selectInd']"));
 		executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].click();", element);
-		
+
 		element = driver.findElement(By.xpath("//input[@name='disabilityClassPlanInformationForm[1].selectInd']"));
 		executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].click();", element);
 	}
-	
-	public void verify_BENEFITCODE_MONTHLYPREMIUM_ANNUALPREMIUM_On_LTDPlanComparison(WebDriver driver) throws InterruptedException {
-		
+
+	public void verify_BENEFITCODE_MONTHLYPREMIUM_ANNUALPREMIUM_On_LTDPlanComparison(WebDriver driver)
+			throws InterruptedException {
+
 		WebElement planCode1 = driver.findElement(By.name("disabilityClassPlanInformationForm[0].planId"));
 		System.out.println("Plan Code1 ::" + planCode1.getAttribute("value"));
 		String PlanCode1 = planCode1.getText();
-		
+
 		WebElement planCode2 = driver.findElement(By.name("disabilityClassPlanInformationForm[1].planId"));
 		System.out.println("Plan Code2 ::" + planCode2.getAttribute("value"));
 		String PlanCode2 = planCode2.getText();
@@ -4104,21 +4304,22 @@ public class QuotePage {
 						"//form[@name='LongTermDisabilityPlanComparisonForm']/table/tbody/tr[8]/td/table/tbody/tr[1]/td[1]"));
 
 				if (txtBenefit.getText().trim().contains("BENEFIT")) {
-					System.out.println("BENEFIT text displayed successfully on Long Term Disability Plan Details table");
+					System.out
+							.println("BENEFIT text displayed successfully on Long Term Disability Plan Details table");
 
 					WebElement LTDPlanComparison_planCode1 = driver.findElement(By.xpath(
 							"//form[@name='LongTermDisabilityPlanComparisonForm']/table/tbody/tr[8]/td/table/tbody/tr[1]/td[2]"));
 
-					System.out.println("LTDPlanComparison_planCode1 :: " +LTDPlanComparison_planCode1.getText());
+					System.out.println("LTDPlanComparison_planCode1 :: " + LTDPlanComparison_planCode1.getText());
 					WebElement LTDPlanComparison_planCode2 = driver.findElement(By.xpath(
 							"//form[@name='LongTermDisabilityPlanComparisonForm']/table/tbody/tr[8]/td/table/tbody/tr[1]/td[3]"));
 					if ((LTDPlanComparison_planCode1.getText().trim().trim().contains(PlanCode1)
 							&& (LTDPlanComparison_planCode2.getText().trim().contains(PlanCode2)))) {
-						System.out.println("Plan Codes :: " + LTDPlanComparison_planCode1.getText() + " and " + LTDPlanComparison_planCode2.getText()
-								+ " displayed successfully");
+						System.out.println("Plan Codes :: " + LTDPlanComparison_planCode1.getText() + " and "
+								+ LTDPlanComparison_planCode2.getText() + " displayed successfully");
 					} else {
-						System.out.println("Plan Codes :: " + LTDPlanComparison_planCode1.getText() + " and " + LTDPlanComparison_planCode2.getText()
-								+ " not displayed");
+						System.out.println("Plan Codes :: " + LTDPlanComparison_planCode1.getText() + " and "
+								+ LTDPlanComparison_planCode2.getText() + " not displayed");
 					}
 
 				} else {
@@ -4144,10 +4345,12 @@ public class QuotePage {
 
 					if ((Integer.parseInt(MonthlyPremium1_1[0]) != 0)
 							&& (Integer.parseInt(MonthlyPremium2_2[0]) != 0)) {
-						System.out.println("MONTHLY PREMIUM Amounts :: " + LTDPlanComparison_amountMONTHLYPREMIUM1.getText() + " and "
+						System.out.println("MONTHLY PREMIUM Amounts :: "
+								+ LTDPlanComparison_amountMONTHLYPREMIUM1.getText() + " and "
 								+ LTDPlanComparison_amountMONTHLYPREMIUM2.getText() + " displayed successfully");
 					} else {
-						System.out.println("MONTHLY PREMIUM Amounts :: " + LTDPlanComparison_amountMONTHLYPREMIUM1.getText() + " and "
+						System.out.println("MONTHLY PREMIUM Amounts :: "
+								+ LTDPlanComparison_amountMONTHLYPREMIUM1.getText() + " and "
 								+ LTDPlanComparison_amountMONTHLYPREMIUM2.getText() + " not displayed");
 					}
 
@@ -4173,11 +4376,13 @@ public class QuotePage {
 					String[] ANNUALPremium2_2 = ANNUALPremium2.split("\\.");
 
 					if ((Integer.parseInt(ANNUALPremium1_1[0]) != 0) && (Integer.parseInt(ANNUALPremium2_2[0]) != 0)) {
-						System.out.println("ANNUAL PREMIUM Amounts :: " + LTDPlanComparison_amountANNUALPREMIUM1.getText() + " and "
+						System.out.println("ANNUAL PREMIUM Amounts :: "
+								+ LTDPlanComparison_amountANNUALPREMIUM1.getText() + " and "
 								+ LTDPlanComparison_amountANNUALPREMIUM2.getText() + " displayed successfully");
 						driver.switchTo().window(winHandle).close();
 					} else {
-						System.out.println("ANNUAL PREMIUM Amounts :: " + LTDPlanComparison_amountANNUALPREMIUM1.getText() + " and "
+						System.out.println("ANNUAL PREMIUM Amounts :: "
+								+ LTDPlanComparison_amountANNUALPREMIUM1.getText() + " and "
 								+ LTDPlanComparison_amountANNUALPREMIUM2.getText() + " not displayed");
 					}
 
@@ -4190,6 +4395,119 @@ public class QuotePage {
 		}
 	}
 
+	public void verify_BENEFITCODE_MONTHLYPREMIUM_ANNUALPREMIUM_On_LTDRateComparison(WebDriver driver)
+			throws InterruptedException {
+
+		WebElement planCode1 = driver.findElement(By.name("disabilityClassPlanInformationForm[0].planId"));
+		System.out.println("Plan Code1 ::" + planCode1.getAttribute("value"));
+		String PlanCode1 = planCode1.getText();
+
+		WebElement planCode2 = driver.findElement(By.name("disabilityClassPlanInformationForm[1].planId"));
+		System.out.println("Plan Code2 ::" + planCode2.getAttribute("value"));
+		String PlanCode2 = planCode2.getText();
+
+		utility.waitForVisibilityOfWebElement(By.xpath("//input[@name='submitRateCompare']"), driver);
+		element = driver.findElement(By.xpath("//input[@name='submitRateCompare']"));
+		executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", element);
+
+		utility.waitForNumberOfWindowsToEqual(2);
+		for (String winHandle : driver.getWindowHandles()) {
+			driver.switchTo().window(winHandle);
+			if (driver.switchTo().window(winHandle).getCurrentUrl().contains("longTermDisabilityPlanSelection")) {
+				System.out.println("Long Term Disability Plan Selection web page displayed successfully");
+				System.out.println("Long Term Disability Plan Selection page URL :: "
+						+ driver.switchTo().window(winHandle).getCurrentUrl());
+
+				Thread.sleep(1000);
+				WebElement element2 = driver.findElement(By.xpath("//td[contains(text(),'LTD Rate Comparison')]"));
+				if (element2.getText().trim().contains("LTD Rate Comparison")) {
+					System.out.println("LTD Rate Comparison page displayed successfully");
+				} else {
+					System.out.println("LTD Rate Comparison page not displayed");
+				}
+
+				WebElement LTDPlanComparison_planCode1 = driver.findElement(By.xpath(
+						"//form[@name='LongTermDisabilityRateComparisonForm']/table/tbody/tr[16]/td/table/tbody/tr/td[2]/table/tbody/tr[1]/td"));
+
+				System.out.println("LTDPlanComparison_planCode1 :: " + LTDPlanComparison_planCode1.getText());
+				WebElement LTDPlanComparison_planCode2 = driver.findElement(By.xpath(
+						"//form[@name='LongTermDisabilityRateComparisonForm']/table/tbody/tr[16]/td/table/tbody/tr/td[3]/table/tbody/tr[1]/td"));
+				if ((LTDPlanComparison_planCode1.getText().trim().trim().contains(PlanCode1)
+						&& (LTDPlanComparison_planCode2.getText().trim().contains(PlanCode2)))) {
+					System.out.println("Plan Codes :: " + LTDPlanComparison_planCode1.getText() + " and "
+							+ LTDPlanComparison_planCode2.getText() + " displayed successfully");
+				} else {
+					System.out.println("Plan Codes :: " + LTDPlanComparison_planCode1.getText() + " and "
+							+ LTDPlanComparison_planCode2.getText() + " not displayed");
+				}
+
+				WebElement LTDPlanComparison_txtMONTHLYPREMIUM = driver.findElement(By.xpath(
+						"//form[@name='LongTermDisabilityRateComparisonForm']/table/tbody/tr[16]/td/table/tbody/tr/td[1]/table/tbody/tr[2]/td"));
+
+				if (LTDPlanComparison_txtMONTHLYPREMIUM.getText().trim().contains("Monthly Premium")) {
+					System.out.println("Monthly Premium text displayed successfully on LTD Premiums table");
+
+					WebElement LTDPlanComparison_amountMONTHLYPREMIUM1 = driver.findElement(By.xpath(
+							"//form[@name='LongTermDisabilityRateComparisonForm']/table/tbody/tr[16]/td/table/tbody/tr/td[2]/table/tbody/tr[2]/td"));
+					String MonthlyPremium1 = LTDPlanComparison_amountMONTHLYPREMIUM1.getText().substring(1, 5);
+					String[] MonthlyPremium1_1 = MonthlyPremium1.split("\\.");
+
+					WebElement LTDPlanComparison_amountMONTHLYPREMIUM2 = driver.findElement(By.xpath(
+							"//form[@name='LongTermDisabilityRateComparisonForm']/table/tbody/tr[16]/td/table/tbody/tr/td[3]/table/tbody/tr[2]/td"));
+					String MonthlyPremium2 = LTDPlanComparison_amountMONTHLYPREMIUM2.getText().substring(1, 5);
+					String[] MonthlyPremium2_2 = MonthlyPremium2.split("\\.");
+
+					if ((Integer.parseInt(MonthlyPremium1_1[0]) != 0)
+							&& (Integer.parseInt(MonthlyPremium2_2[0]) != 0)) {
+						System.out.println("Monthly Premium Amounts :: "
+								+ LTDPlanComparison_amountMONTHLYPREMIUM1.getText() + " and "
+								+ LTDPlanComparison_amountMONTHLYPREMIUM2.getText() + " displayed successfully");
+					} else {
+						System.out.println("Monthly Premium Amounts :: "
+								+ LTDPlanComparison_amountMONTHLYPREMIUM1.getText() + " and "
+								+ LTDPlanComparison_amountMONTHLYPREMIUM2.getText() + " not displayed");
+					}
+
+				} else {
+					System.out.println("Monthly Premium text not displayed on LTD Premiums table");
+				}
+
+				WebElement LTDPlanComparison_txtANNUALPREMIUM = driver.findElement(By.xpath(
+						"//form[@name='LongTermDisabilityRateComparisonForm']/table/tbody/tr[16]/td/table/tbody/tr/td[1]/table/tbody/tr[3]/td"));
+
+				if (LTDPlanComparison_txtANNUALPREMIUM.getText().trim().contains("Annual Premium")) {
+					System.out.println("Annual Premium text displayed successfully on LTD Premiums table");
+
+					WebElement LTDPlanComparison_amountANNUALPREMIUM1 = driver.findElement(By.xpath(
+							"//form[@name='LongTermDisabilityRateComparisonForm']/table/tbody/tr[16]/td/table/tbody/tr/td[2]/table/tbody/tr[3]/td"));
+					String ANNUALPremium1 = LTDPlanComparison_amountANNUALPREMIUM1.getText().substring(1, 5);
+					String[] ANNUALPremium1_1 = ANNUALPremium1.split("\\.");
+
+					WebElement LTDPlanComparison_amountANNUALPREMIUM2 = driver.findElement(By.xpath(
+							"//form[@name='LongTermDisabilityRateComparisonForm']/table/tbody/tr[16]/td/table/tbody/tr/td[3]/table/tbody/tr[3]/td"));
+					String ANNUALPremium2 = LTDPlanComparison_amountANNUALPREMIUM2.getText().substring(1, 5);
+					String[] ANNUALPremium2_2 = ANNUALPremium2.split("\\.");
+
+					if ((Integer.parseInt(ANNUALPremium1_1[0]) != 0) && (Integer.parseInt(ANNUALPremium2_2[0]) != 0)) {
+						System.out.println("ANNUAL PREMIUM Amounts :: "
+								+ LTDPlanComparison_amountANNUALPREMIUM1.getText() + " and "
+								+ LTDPlanComparison_amountANNUALPREMIUM2.getText() + " displayed successfully");
+						driver.switchTo().window(winHandle).close();
+					} else {
+						System.out.println("Annual Premium Amounts :: "
+								+ LTDPlanComparison_amountANNUALPREMIUM1.getText() + " and "
+								+ LTDPlanComparison_amountANNUALPREMIUM2.getText() + " not displayed");
+					}
+
+				} else {
+					System.out.println("Annual Premium text not displayed on LTD Premiums table");
+				}
+				// driver.switchTo().window(handle1).close();
+				// driver.close();
+			}
+		}
+	}
 
 	public void verify_PLANCODE_MONTHLYPREMIUM_ANNUALPREMIUM(WebDriver driver) throws InterruptedException {
 		WebElement element = driver.findElement(By.name("disabilityClassPlanInformationForm[0].planId"));
@@ -4255,11 +4573,11 @@ public class QuotePage {
 
 					if ((Integer.parseInt(MonthlyPremium1_1[0]) != 0)
 							&& (Integer.parseInt(MonthlyPremium2_2[0]) != 0)) {
-						System.out.println("Estimated Total Monthly Premium Amounts :: " + monthlypremium1.getText() + " and "
-								+ monthlypremium2.getText() + " displayed successfully");
+						System.out.println("Estimated Total Monthly Premium Amounts :: " + monthlypremium1.getText()
+								+ " and " + monthlypremium2.getText() + " displayed successfully");
 					} else {
-						System.out.println("Estimated Total Monthly Premium Amounts :: " + monthlypremium1.getText() + " and "
-								+ monthlypremium2.getText() + " not displayed");
+						System.out.println("Estimated Total Monthly Premium Amounts :: " + monthlypremium1.getText()
+								+ " and " + monthlypremium2.getText() + " not displayed");
 					}
 
 				} else {
@@ -4284,12 +4602,12 @@ public class QuotePage {
 					String[] ANNUALPremium2_2 = ANNUALPremium2.split("\\.");
 
 					if ((Integer.parseInt(ANNUALPremium1_1[0]) != 0) && (Integer.parseInt(ANNUALPremium2_2[0]) != 0)) {
-						System.out.println("Estimated Total Annual Premium Amounts :: " + annualpremium1.getText() + " and "
-								+ annualpremium2.getText() + " displayed successfully");
+						System.out.println("Estimated Total Annual Premium Amounts :: " + annualpremium1.getText()
+								+ " and " + annualpremium2.getText() + " displayed successfully");
 						driver.switchTo().window(winHandle).close();
 					} else {
-						System.out.println("Estimated Total Annual Premium Amounts :: " + annualpremium1.getText() + " and "
-								+ annualpremium2.getText() + " not displayed");
+						System.out.println("Estimated Total Annual Premium Amounts :: " + annualpremium1.getText()
+								+ " and " + annualpremium2.getText() + " not displayed");
 					}
 
 				} else {
