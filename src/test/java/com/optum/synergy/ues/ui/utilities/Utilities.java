@@ -50,7 +50,7 @@ import com.google.common.base.Function;
 import com.optum.synergy.ues.ui.stepDefinitions.CommonLibrary;
 import com.optum.synergy.ues.ui.stepDefinitions.Hooks;
 
-public class Utilities  {
+public class Utilities {
 	public static ExtentHtmlReporter htmlReporter;
 	public static ExtentReports extent1;
 	public static ExtentTest featureLog;
@@ -58,34 +58,35 @@ public class Utilities  {
 	public static ExtentTest test;
 	public static String resourceName;
 	public static ClassLoader loader;
-	//public static Properties obj;
+	// public static Properties obj;
 	public static Properties autoProperties;
 	public static WebDriver driver;
 	public static String reportPath;
 	public static WebDriverWait wait;
-	
-	 public static final String SAUCE_USERNAME = "a4mesdet";
-	 public static final String SAUCE_ACCESS_KEY = "d0c27b03-24cc-4c20-8228-fc9a196e33a6";
-     
-     public static final String SAUCE_URL = "http://" + SAUCE_USERNAME + ":" + SAUCE_ACCESS_KEY + "@ondemand.saucelabs.com:80/wd/hub";
+
+	public static final String SAUCE_USERNAME = "a4mesdet";
+	public static final String SAUCE_ACCESS_KEY = "d0c27b03-24cc-4c20-8228-fc9a196e33a6";
+
+	public static final String SAUCE_URL = "http://" + SAUCE_USERNAME + ":" + SAUCE_ACCESS_KEY
+			+ "@ondemand.saucelabs.com:80/wd/hub";
+
 	public Utilities() throws IOException {
-		
+
 		resourceName = "UeS.properties";
 		autoProperties = Hooks.autoProperties;
 		loader = Thread.currentThread().getContextClassLoader();
-		/*obj = new Properties();
-		//try (InputStream resourceStream = loader.getResourceAsStream(resourceName)) {
-		try ( InputStream resourceStream  = getClass().getResourceAsStream("/config/UeS.properties")){
-			obj.load(resourceStream);
-		}*/
-		
+		/*
+		 * obj = new Properties(); //try (InputStream resourceStream =
+		 * loader.getResourceAsStream(resourceName)) { try ( InputStream
+		 * resourceStream =
+		 * getClass().getResourceAsStream("/config/UeS.properties")){
+		 * obj.load(resourceStream); }
+		 */
 
 	}
 
-	
-	
 	public WebDriver OpenBrowser(String browserName) throws IOException, InterruptedException {
-		
+
 		resourceName = "UeS.properties";
 		loader = Thread.currentThread().getContextClassLoader();
 		autoProperties = new Properties();
@@ -174,33 +175,34 @@ public class Utilities  {
 		return filename;
 	}
 
-	
-	 public WebElement fluentWait(final By locator, WebDriver driver) { Wait<WebDriver> wait =
-	 new FluentWait<WebDriver>(driver).withTimeout(40, TimeUnit.SECONDS)
-	 .pollingEvery(1,
-	  TimeUnit.SECONDS).ignoring(NoSuchElementException.class);
-	  
-	  WebElement foo = wait.until(new Function<WebDriver, WebElement>() {
-	  public WebElement apply(WebDriver driver) { return
-	  driver.findElement(locator); } });
-	  
-	  return foo; };
-	 
+	public WebElement fluentWait(final By locator, WebDriver driver) {
+		Wait<WebDriver> wait = new FluentWait<WebDriver>(driver).withTimeout(40, TimeUnit.SECONDS)
+				.pollingEvery(1, TimeUnit.SECONDS).ignoring(NoSuchElementException.class);
+
+		WebElement foo = wait.until(new Function<WebDriver, WebElement>() {
+			public WebElement apply(WebDriver driver) {
+				return driver.findElement(locator);
+			}
+		});
+
+		return foo;
+	};
 
 	public void takeScreenShot(WebDriver driver, String fileName) throws IOException {
 		File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-		String screenShotPath = System.getProperty("user.dir")+autoProperties.getProperty("ScreenshotsPath");
-		System.out.println("Debug Point - Inside Screenshot function"+screenShotPath);
-		FileUtils.copyFile(scrFile, new File(screenShotPath+ "/"+fileName + ".png"));
-		//FileUtils.copyFile(scrFile, new File("target/screenshots/"+"actualTest"+".png"));
+		String screenShotPath = System.getProperty("user.dir") + autoProperties.getProperty("ScreenshotsPath");
+		System.out.println("Debug Point - Inside Screenshot function" + screenShotPath);
+		FileUtils.copyFile(scrFile, new File(screenShotPath + "/" + fileName + ".png"));
+		// FileUtils.copyFile(scrFile, new
+		// File("target/screenshots/"+"actualTest"+".png"));
 		// C:\\Users\\hkaur115\\Desktop\\Auto\\
 	}
 
 	public void CreateReport(String reportName, String testName) {
-		reportPath =  System.getProperty("user.dir")+autoProperties.getProperty("ScreenshotsPath");
-		System.out.println("Debug Point - Inside CreateReport function"+reportPath);
+		reportPath = System.getProperty("user.dir") + autoProperties.getProperty("ScreenshotsPath");
+		System.out.println("Debug Point - Inside CreateReport function" + reportPath);
 
-		htmlReporter = new ExtentHtmlReporter(reportPath + "/"+reportName + ".html");// modify
+		htmlReporter = new ExtentHtmlReporter(reportPath + "/" + reportName + ".html");// modify
 		// with
 		// path
 		htmlReporter.setAppendExisting(true);
@@ -219,17 +221,21 @@ public class Utilities  {
 
 	public void GenerateReport(String testName, String scenarioMessage, String status, String statusMessage,
 			String screenshotName) throws IOException {
-		System.out.println( "Logging Test Result: "+ status + "-" + scenarioMessage + "  " + statusMessage     );
+		System.out.println("Logging Test Result: " + status + "-" + scenarioMessage + "  " + statusMessage);
 
 		// scenario = feature.createNode(scenarioMessage);
 		resourceName = "UeS.properties";
 		loader = Thread.currentThread().getContextClassLoader();
-		//Properties obj = new Properties();
-		//try (InputStream resourceStream = loader.getResourceAsStream(resourceName)) {
-		/*try ( InputStream resourceStream  = getClass().getResourceAsStream("/config/UeS.properties")){
-			obj.load(resourceStream);
-		}*/
-		String screenShotPath = System.getProperty("user.dir") + "/" + autoProperties.getProperty("ScreenshotsPath"+"/");
+		// Properties obj = new Properties();
+		// try (InputStream resourceStream =
+		// loader.getResourceAsStream(resourceName)) {
+		/*
+		 * try ( InputStream resourceStream =
+		 * getClass().getResourceAsStream("/config/UeS.properties")){
+		 * obj.load(resourceStream); }
+		 */
+		String screenShotPath = System.getProperty("user.dir") + "/"
+				+ autoProperties.getProperty("ScreenshotsPath" + "/");
 		if (status.contains("pass")) { // featureLog.pass(statusMessage);
 			featureLog.assignCategory(testName);
 			// takeScreenShot(driver,
@@ -260,35 +266,38 @@ public class Utilities  {
 
 	}
 
-	public void GenerateReportWithoutScreenShot(String testName, String scenarioMessage, String status, String statusMessage) throws IOException {
-		System.out.println( "Logging Test Result: "+ status + "-" + scenarioMessage + "  " + statusMessage     );
+	public void GenerateReportWithoutScreenShot(String testName, String scenarioMessage, String status,
+			String statusMessage) throws IOException {
+		System.out.println("Logging Test Result: " + status + "-" + scenarioMessage + "  " + statusMessage);
 
 		// scenario = feature.createNode(scenarioMessage);
 		resourceName = "UeS.properties";
 		loader = Thread.currentThread().getContextClassLoader();
-		//Properties obj = new Properties();
-		//try (InputStream resourceStream = loader.getResourceAsStream(resourceName)) {
-		/*try ( InputStream resourceStream  = getClass().getResourceAsStream("/config/UeS.properties")){
-			obj.load(resourceStream);
-		}*/
-		String screenShotPath = System.getProperty("user.dir") + "/" + autoProperties.getProperty("ScreenshotsPath"+"/");
+		// Properties obj = new Properties();
+		// try (InputStream resourceStream =
+		// loader.getResourceAsStream(resourceName)) {
+		/*
+		 * try ( InputStream resourceStream =
+		 * getClass().getResourceAsStream("/config/UeS.properties")){
+		 * obj.load(resourceStream); }
+		 */
+		String screenShotPath = System.getProperty("user.dir") + "/"
+				+ autoProperties.getProperty("ScreenshotsPath" + "/");
 		if (status.contains("pass")) { // featureLog.pass(statusMessage);
 			featureLog.assignCategory(testName);
 			featureLog.log(Status.PASS, statusMessage);
-		
-		
+
 		}
 		if (status.contains("fail"))
 			// featureLog.fail(statusMessage);
 			// takeScreenShot(driver,
 			// obj.getProperty("ScreenshotsPath")+screenshotName);
 			featureLog.log(Status.FAIL, statusMessage);
-	
+
 		if (status.contains("info"))
 			// takeScreenShot(driver,
 			// obj.getProperty("ScreenshotsPath")+screenshotName);
 			featureLog.log(Status.INFO, statusMessage);
-	
 
 		if (status.contains("warning"))
 			// takeScreenShot(driver,
@@ -301,35 +310,37 @@ public class Utilities  {
 
 	public void GenerateReport(String testName, Exception e, String status, String statusMessage) throws IOException {
 		// scenario = feature.createNode(scenarioMessage);
-		/*Properties obj = new Properties();
-		try (InputStream resourceStream = loader.getResourceAsStream(resourceName)) {
-			obj.load(resourceStream);
-		}*/
+		/*
+		 * Properties obj = new Properties(); try (InputStream resourceStream =
+		 * loader.getResourceAsStream(resourceName)) { obj.load(resourceStream);
+		 * }
+		 */
 		String screenShotPath = System.getProperty("user.dir") + "/" + autoProperties.getProperty("ScreenshotsPath");
 		if (status.contains("exception")) { // featureLog.pass(statusMessage);
 			featureLog.assignCategory(testName);
 			// takeScreenShot(driver,
 			// obj.getProperty("ScreenshotsPath")+screenshotName);
 			System.out.println("Screeshots Path = " + reportPath);
-		featureLog.fail(e);
+			featureLog.fail(e);
 		}
-		
+
 		extent1.flush();
 
 	}
 
 	public boolean isAlertPresent(WebDriver driver) {
 		try {
-			wait=new WebDriverWait(driver, 60);
-			 wait.until(ExpectedConditions.alertIsPresent());
-//			driver.switchTo().alert();
+			wait = new WebDriverWait(driver, 60);
+			wait.until(ExpectedConditions.alertIsPresent());
+			// driver.switchTo().alert();
 			String alrt = driver.switchTo().alert().getText();
-			  System.out.print(alrt);
+			System.out.print(alrt);
 			return true;
 		} catch (Exception Ex) {
 			return false;
 		}
 	}
+
 	public boolean isAlertPresent2(WebDriver driver) {
 		try {
 			driver.switchTo().alert();
@@ -338,17 +349,15 @@ public class Utilities  {
 			return false;
 		}
 	}
-	
-	public int fetchDataFromDB(String query) throws ClassNotFoundException, SQLException, IOException{
+
+	public int fetchDataFromDB(String query) throws ClassNotFoundException, SQLException, IOException {
 		List<String> val1 = new ArrayList<String>();
 		int val = 0;
 
-		/*queries.add(query1);
-		queries.add(query2);
-		queries.add(query3);
-		queries.add(query4);
-		queries.add(query5);
-		queries.add(query6);*/
+		/*
+		 * queries.add(query1); queries.add(query2); queries.add(query3);
+		 * queries.add(query4); queries.add(query5); queries.add(query6);
+		 */
 		CommonLibrary c = new CommonLibrary();
 		Connection con = null;
 		Statement stmt = null;
@@ -360,52 +369,48 @@ public class Utilities  {
 		con = DriverManager.getConnection("jdbc:oracle:thin:@" + hostName + ":1521/" + serviceName, dbUserName, dbPwd);
 		// step3 create the statement object
 		stmt = con.createStatement();
-		
 
-			ResultSet rs = stmt.executeQuery(query);
+		ResultSet rs = stmt.executeQuery(query);
 
-			
-				while (rs.next()) {
-					
-					System.out.println("Entered in while condition");
-					
-					System.out.println("rs : "+rs.getInt("count"));
-					val = rs.getInt("count");
-				}
-					
+		while (rs.next()) {
+
+			System.out.println("Entered in while condition");
+
+			System.out.println("rs : " + rs.getInt("count"));
+			val = rs.getInt("count");
+		}
+
 		return val;
 
 	}
 
 	public final void prepareToPressEnterKey(int seconds, final int tabs) {
-	    ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(1);
-	    ScheduledFuture scheduledFuture = scheduledExecutorService.schedule(new Runnable() {
+		ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(1);
+		ScheduledFuture scheduledFuture = scheduledExecutorService.schedule(new Runnable() {
 
-	        public void run() {
+			public void run() {
 
-	            try { 
-	                Robot robot = new Robot();
+				try {
+					Robot robot = new Robot();
 
-	                for (int i=0; i<tabs; i++)
-	                {
-	                    robot.keyPress(KeyEvent.VK_TAB);
-	                    TimeUnit.SECONDS.sleep(1);
-	                    robot.keyRelease(KeyEvent.VK_TAB);		
-	                    
-	                }
+					for (int i = 0; i < tabs; i++) {
+						robot.keyPress(KeyEvent.VK_TAB);
+						TimeUnit.SECONDS.sleep(1);
+						robot.keyRelease(KeyEvent.VK_TAB);
 
-	                robot.keyPress(KeyEvent.VK_ENTER);
-	                TimeUnit.SECONDS.sleep(1); //press for 1 sec
-	                robot.keyRelease(KeyEvent.VK_ENTER);
-	            } catch (AWTException | InterruptedException e) {
-	                System.out.println("Prepare to Press Enter Exception");
-	            }
-	        }
-	    },
-	            seconds,
-	            TimeUnit.SECONDS);
-	    scheduledExecutorService.shutdown();
+					}
+
+					robot.keyPress(KeyEvent.VK_ENTER);
+					TimeUnit.SECONDS.sleep(1); // press for 1 sec
+					robot.keyRelease(KeyEvent.VK_ENTER);
+				} catch (AWTException | InterruptedException e) {
+					System.out.println("Prepare to Press Enter Exception");
+				}
+			}
+		}, seconds, TimeUnit.SECONDS);
+		scheduledExecutorService.shutdown();
 	}
+
 	public boolean isElementPresent(WebDriver driver, String xpath) {
 		try {
 			driver.findElement(By.xpath(xpath));
@@ -416,43 +421,47 @@ public class Utilities  {
 		return true;
 	}
 
-	/*@AfterClass
-	public void teardown() {
-		driver.quit();
-	}*/
-/*	public void waitForVisibilityOfWebElement(String locator, WebDriver driver){
-		
-		WebElement webElement=driver.findElement(By.xpath(locator));
-		wait=new WebDriverWait(driver, 20);
+	/*
+	 * @AfterClass public void teardown() { driver.quit(); }
+	 */
+	/*
+	 * public void waitForVisibilityOfWebElement(String locator, WebDriver
+	 * driver){
+	 * 
+	 * WebElement webElement=driver.findElement(By.xpath(locator)); wait=new
+	 * WebDriverWait(driver, 20);
+	 * wait.until(ExpectedConditions.visibilityOf(webElement));
+	 * 
+	 * }
+	 */
+
+	public void waitForVisibilityOfWebElement(final By locator, WebDriver driver) {
+
+		WebElement webElement = driver.findElement(locator);
+		wait = new WebDriverWait(driver, 80);
 		wait.until(ExpectedConditions.visibilityOf(webElement));
-
-	}*/
-	
-	public void waitForVisibilityOfWebElement(final By locator, WebDriver driver){
-		
-		WebElement webElement=driver.findElement(locator);
-		wait=new WebDriverWait(driver, 80);
-		wait.until(ExpectedConditions.visibilityOf(webElement));	
+		//wait.until(ExpectedConditions.visibilityOfElementLocated((By) webElement));
+		// visibilityOfElementLocated
 
 	}
-	
-	public void waitforSwitchtoFrame(final By locator, WebDriver driver){
-	//WebDriverWait wait = new WebDriverWait(driver,60);
-	WebElement webElement=driver.findElement(locator);
-	wait=new WebDriverWait(driver, 60);
-	 wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(webElement));
-	}
-	
-	public void waitForNumberOfWindowsToEqual(final int numberOfWindows){
 
-		driver= Hooks.driver;
-		new WebDriverWait(driver,300){
-		}.until(new ExpectedCondition<Boolean>(){
-		@Override
-		public Boolean apply(WebDriver driver){
-		return(driver.getWindowHandles().size() >= numberOfWindows);
-		}
-	});
-}
+	public void waitforSwitchtoFrame(final By locator, WebDriver driver) {
+		// WebDriverWait wait = new WebDriverWait(driver,60);
+		WebElement webElement = driver.findElement(locator);
+		wait = new WebDriverWait(driver, 60);
+		wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(webElement));
+	}
+
+	public void waitForNumberOfWindowsToEqual(final int numberOfWindows) {
+
+		driver = Hooks.driver;
+		new WebDriverWait(driver, 300) {
+		}.until(new ExpectedCondition<Boolean>() {
+			@Override
+			public Boolean apply(WebDriver driver) {
+				return (driver.getWindowHandles().size() >= numberOfWindows);
+			}
+		});
+	}
 
 }
