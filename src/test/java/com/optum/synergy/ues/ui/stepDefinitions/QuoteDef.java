@@ -449,8 +449,8 @@ public class QuoteDef {
 
 	@When("^UeS_User is enter Employee Age and Salary with Dependents in Census page and click on next$")
 	public void ues_userIsEnterEmployeeAgeAndSalaryWithDependentsInCensusPageAndClickOnNext() throws Throwable {
-		//quotepage.censusPage(driver);
-		quotepage.censusPage_Class1_2_Plans(driver);
+		quotepage.censusPage(driver);
+		//quotepage.censusPage_Class1_2_Plans(driver);
 	}
 
 	@When("^UeS_User is enter only Employee Age without Dependents and Salary in Census page and click on next$")
