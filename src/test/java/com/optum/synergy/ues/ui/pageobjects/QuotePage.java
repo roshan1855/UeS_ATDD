@@ -3766,7 +3766,7 @@ public class QuotePage {
 		executor.executeScript("arguments[0].click();", element);
 		driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
 
-		driver.findElement(By.xpath("//input[@name='quoteTotalNumDisabilityClasses']")).clear();
+		/*driver.findElement(By.xpath("//input[@name='quoteTotalNumDisabilityClasses']")).clear();
 		driver.findElement(By.xpath("//input[@name='quoteTotalNumDisabilityClasses']")).sendKeys("2");
 		Thread.sleep(2000);
 
@@ -3821,7 +3821,7 @@ public class QuotePage {
 		Thread.sleep(1000);
 		driver.switchTo().frame("content");
 		Thread.sleep(1000);
-
+*/
 		element = driver.findElement(btnquoteSetUpNext);
 		executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].click();", element);
@@ -3895,7 +3895,7 @@ public class QuotePage {
 		
 		QuotePage.verifyFooterLinks(driver);
 		
-		element=driver.findElement(By.name("class one"));
+		/*element=driver.findElement(By.name("class one"));
 		
 		if(element.getAttribute("value").trim().contains("Class 1 Plans")){
 			System.out.println("Class 1 Plans tab present on Supplemental Employee Life/AD&D Plans page");
@@ -3989,7 +3989,7 @@ public class QuotePage {
 				}	
 			}}
 		
-
+*/
 		element = driver.findElement(censussubmitNext);
 		executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].click();", element);
