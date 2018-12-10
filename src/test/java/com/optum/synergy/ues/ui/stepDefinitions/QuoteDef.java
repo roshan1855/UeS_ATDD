@@ -87,8 +87,8 @@ public class QuoteDef {
 	@Given("^UeS_User is on Home Page$")
 	public void ues_user_is_on_Home_Page() throws Throwable {
 		// driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-		driver.get(autoProperties.getProperty("BFX_URL"));
-		//driver.get(autoProperties.getProperty("STAGE_URL"));
+		//driver.get(autoProperties.getProperty("BFX_URL"));
+		driver.get(autoProperties.getProperty("STAGE_URL"));
 		utility.takeScreenShot(driver, "Homepage" + testCaseID);
 		utility.GenerateReport("Quote", "", "info", "Execution Started.User is on the login Page",
 				"Homepage" + testCaseID);
@@ -449,7 +449,8 @@ public class QuoteDef {
 
 	@When("^UeS_User is enter Employee Age and Salary with Dependents in Census page and click on next$")
 	public void ues_userIsEnterEmployeeAgeAndSalaryWithDependentsInCensusPageAndClickOnNext() throws Throwable {
-		quotepage.censusPage(driver);
+		//quotepage.censusPage(driver);
+		quotepage.censusPage_Class1_2_Plans(driver);
 	}
 
 	@When("^UeS_User is enter only Employee Age without Dependents and Salary in Census page and click on next$")
@@ -581,6 +582,13 @@ public class QuoteDef {
 	@Then("^UeS_User is verify BENEFIT,MONYHLY PREMIUM as \"([^\"]*)\" and ANNUAL PREMIUM as \"([^\"]*)\" in Long Term Disability Plan Details table on LTD Plan Comparison page$")
 	public void ues_userIsVerifyBENEFITMONYHLYPREMIUMAsAndANNUALPREMIUMAsInLongTermDisabilityPlanDetailsTableOnLTDPlanComparisonPage(String arg1, String arg2) throws Throwable {
 		quotepage.verify_BENEFITCODE_MONTHLYPREMIUM_ANNUALPREMIUM_On_LTDPlanComparison(driver);
+		quotepage.verify_BENEFITCODE_MONTHLYPREMIUM_ANNUALPREMIUM_On_LTDRateComparison(driver);
+		quotepage.tearDown(driver);
+	}
+	
+	@Then("^UeS_User is verify EMPLT,MONYHLY PREMIUM as \"([^\"]*)\" and ANNUAL PREMIUM as \"([^\"]*)\" in Long Term Disability Plan Details table on LTD Rate Comparison page$")
+	public void ues_userIsVerifyEMPLTMONYHLYPREMIUMAsAndANNUALPREMIUMAsInLongTermDisabilityPlanDetailsTableOnLTDRateComparisonPage(String arg1, String arg2) throws Throwable {
+		quotepage.verify_BENEFITCODE_MONTHLYPREMIUM_ANNUALPREMIUM_On_LTDRateComparison(driver);
 		quotepage.tearDown(driver);
 	}
 
