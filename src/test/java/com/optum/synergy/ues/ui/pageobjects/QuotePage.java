@@ -70,10 +70,8 @@ public class QuotePage {
 	By quoteNextBtn = By.xpath("//input[@name='submitATNE']");
 	By quotepolicyEffDateDay = By.name("policyEffDateDay");
 	By quotepolicyEffDateYear = By.name("policyEffDateYear");
-	By quoteatneCount1 = By
-			.xpath(".//*[@id='popupForm']/table/tbody/tr[3]/td/table/tbody/tr/td/table/tbody/tr[10]/td[2]/input");
-	By quoteatneCount2 = By.xpath(
-			"//form[@name='QuoteInformationForm']/table/tbody/tr[3]/td/table/tbody/tr/td/table/tbody/tr[11]/td[2]/input");
+	By quoteatneCount1 = By.xpath("//input[@name='atneCount' and @tabindex='6']");  // BFX
+	By quoteatneCount2 = By.xpath("//input[@name='atneCount' and @tabindex='7']");  // STG
 	// Quote SetUp
 	By quoteSetUpquoteType = By.xpath("//select[@name='quoteType']");
 	By quoteSetUpquoteCompanyName = By.xpath("//input[@name='quoteCompanyName']");
@@ -146,8 +144,8 @@ public class QuotePage {
 		utility.waitForVisibilityOfWebElement(uesUserName, driver);
 		// driver.findElement(uesUserName).sendKeys("roshanadmin05");
 		// driver.findElement(uesUserName).sendKeys(autoProperties.getProperty("loginUserName_BFX"));
-		driver.findElement(uesUserName).sendKeys("roshankumar");
-		// driver.findElement(uesUserName).sendKeys(autoProperties.getProperty("loginUserName_STG"));
+		//driver.findElement(uesUserName).sendKeys("roshankumar");
+		driver.findElement(uesUserName).sendKeys(autoProperties.getProperty("loginUserName_STG"));
 
 		utility.waitForVisibilityOfWebElement(uesPwd, driver);
 		// driver.findElement(uesPwd).sendKeys("Computer$4");
