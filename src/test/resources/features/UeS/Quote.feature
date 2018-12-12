@@ -616,7 +616,7 @@ Feature: Quotes Module
       | Quote_TC_52 |  | TC_52      |  | TX    |  | Show All Plans     |  |    73301 |  | Not Null        |  | Not Null       |
 
   @Display_Class1_Class2_Plans
-  Scenario Outline: "<TestCaseID>" Display Class Plan Type as "<Class Type>" With Salary With Dependents on Supplemental Employee Life/AD&D Plans page
+  Scenario Outline: "<TestCaseID>" Display Class Plan Type as "<Class Plan Type>" With Salary With Dependents on Supplemental Employee Life/AD&D Plans page
     When Flow_Fetch fileName "<FileName>" and testCaseID "<TestCaseID>" are captured
     Given Flow_Fetch Data from excel Sheet for "<TestCaseID>"
     Given UeS_User is on Home Page
