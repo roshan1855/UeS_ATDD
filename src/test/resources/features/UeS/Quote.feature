@@ -616,7 +616,7 @@ Feature: Quotes Module
       | Quote_TC_52 |  | TC_52      |  | TX    |  | Show All Plans     |  |    73301 |  | Not Null        |  | Not Null       |
 
   @Display_Class1_Class2_Plans
-  Scenario Outline: "<TestCaseID>" Display Class1 and Class2 Plans
+  Scenario Outline: "<TestCaseID>" Display Class Plan Type as "<Class Type>" With Salary With Dependents on Supplemental Employee Life/AD&D Plans page
     When Flow_Fetch fileName "<FileName>" and testCaseID "<TestCaseID>" are captured
     Given Flow_Fetch Data from excel Sheet for "<TestCaseID>"
     Given UeS_User is on Home Page
@@ -625,25 +625,24 @@ Feature: Quotes Module
     Then UeS_User displayed Login Successfully
     When UeS_User is on Home page and click on Quotes and then select New Quote
     And UeS_User is select the state as "<State>" and Fill all the details of the Quote Setup window and click on NEXT
-    And UeS_User is select all coverages and select the state as "<State>" then Fill all the details on Quote Setup page and click on next
-    And UeS_User is enter Employee Age and Salary with Dependents in Census page and click on next
+    And UeS_User is select all coverages,Fill all details and also enter No Of Classes as "<No Of Classes>" on Quote Setup page
+    And UeS_User is click on ENTER CLASS DESCRIPTION button and enter Class Description then click on Submit button
+    And Ues_User navigate back to Quote Setup page and click on NEXT button
+    And UeS_User is select Class Type,enter Employee Age and Salary with Dependents in Census page and click on next
     And UeS_User is Select the Plans from Medical Plans Page and click on next button
     And UeS_User is Select the Plans from Optional Medical Riders Page and click on next
     Then UeS_User verify the Display Plan as "<Value>" and select Display Plan as "<Value>" and click on APPLY CHANGES
     And UeS_User is Select the Plans from Dental Plans Page and click on next
     And UeS_User is Select the Plans from Vision Plans Page and click on next
     And UeS_User is Select the Plans from Life Plans Page and click on next
-    And UeS_User is Select the Plans Supplemental Employee Life/AD&D Plans Page and click on NEXT button
-    #And UeS_User is Select the Plans Supplemental Dependent Life/AD&D Plans Page and click on NEXT button
-    #Then UeS_User select plan codes from Disability Plan Information table and click on NEXT button in Short Term Disability Plans page
-    #Then UeS_User verify the Display Plan as "<Value>" on Long Term Disability Plans page
-    #And UeS_User select PLAN CODES and click on COMPARE SELECTED PLANS button in Disability Plan Information table on Long Term Disability Plans page
-    #Then UeS_User is verify EMPLT,MONYHLY PREMIUM as "<Monthly Premium>" and ANNUAL PREMIUM as "<Annual Premium>" in Long Term Disability Plan Details table on LTD Rate Comparison page
+    Then UeS_User verify Class Plan tab as "<Class Plan Type>" and also Class Plan tab value as "<Class Plan Value>" on Supplemental Employee Life/AD&D Plans page
+    And UeS_User select PLAN CODES and click on COMPARE RATES FOR SELECTED PLANS button on Supplemental Employee Life/AD&D Plans Page
+    Then UeS_User verify Class Plan name as "<Class Plan Name>" and Supplemental Life Class Plan codes on Supplemental Employee Life/AD&D Rate Comparison page
 
     Examples: 
-      | FileName    |  | TestCaseID |  | State |  | Value              |  | Zip Code |  | Monthly Premium |  | Annual Premium |
-      | Quote_TC_53 |  | TC_53      |  | TX    |  | Most Popular Plans |  |    73301 |  | Not Null        |  | Not Null       |
-      #| Quote_TC_54 |  | TC_54      |  | TX    |  | Show All Plans     |  |    73301 |  | Not Null        |  | Not Null       |
+      | FileName    |  | TestCaseID |  | State |  | Value              |  | No Of Classes |  | Class Plan Type |  | Class Plan Value |  | Class Plan Name |
+      | Quote_TC_53 |  | TC_53      |  | TX    |  | Most Popular Plans |  |             2 |  | Class 1 Plans   |  | Class 1 Plans    |  | 1 - Class1      |
+      | Quote_TC_54 |  | TC_54      |  | TX    |  | Most Popular Plans |  |             2 |  | Class 2 Plans   |  | Class 2 Plans    |  | 2 - Class2      |
 
   @Testing
   Scenario Outline: "<TestCaseID>" Testing
