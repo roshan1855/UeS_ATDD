@@ -87,8 +87,8 @@ public class QuoteDef {
 	@Given("^UeS_User is on Home Page$")
 	public void ues_user_is_on_Home_Page() throws Throwable {
 		// driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-		driver.get(autoProperties.getProperty("BFX_URL"));
-		//driver.get(autoProperties.getProperty("STAGE_URL"));
+		//driver.get(autoProperties.getProperty("BFX_URL"));
+		driver.get(autoProperties.getProperty("STAGE_URL"));
 		utility.takeScreenShot(driver, "Homepage" + testCaseID);
 		utility.GenerateReport("Quote", "", "info", "Execution Started.User is on the login Page",
 				"Homepage" + testCaseID);
@@ -450,7 +450,6 @@ public class QuoteDef {
 	@When("^UeS_User is enter Employee Age and Salary with Dependents in Census page and click on next$")
 	public void ues_userIsEnterEmployeeAgeAndSalaryWithDependentsInCensusPageAndClickOnNext() throws Throwable {
 		quotepage.censusPage(driver);
-		//quotepage.censusPage_Class1_2_Plans(driver);
 	}
 
 	@When("^UeS_User is enter only Employee Age without Dependents and Salary in Census page and click on next$")
@@ -481,10 +480,10 @@ public class QuoteDef {
 			String arg1) throws Throwable {
 		quotepage.quoteSetUpPage_SelectAllCoverages(driver, arg1);
 	}
-
+	
 	@Then("^UeS_User select plan on Dental PPO/Indemnity Plan Information table then click on NEXT button$")
 	public void ues_userSelectPlanOnDentalPPOIndemnityPlanInformationTableThenClickOnNEXTButton() throws Throwable {
-
+		
 	}
 
 	@Then("^UeS_User is Select the Plans Supplemental Employee Life/AD&D Plans Page and click on NEXT button$")
@@ -591,6 +590,40 @@ public class QuoteDef {
 		quotepage.verify_BENEFITCODE_MONTHLYPREMIUM_ANNUALPREMIUM_On_LTDRateComparison(driver);
 		quotepage.tearDown(driver);
 	}
+	
+	@When("^UeS_User is select all coverages,Fill all details and also enter No Of Classes as \"([^\"]*)\" on Quote Setup page$")
+	public void ues_userIsSelectAllCoveragesFillAllDetailsAndAlsoEnterNoOfClassesAsOnQuoteSetupPage(String arg1) throws Throwable {
+		quotepage.quoteSetUpPage_Class1_2_Plans(driver, arg1);
+	}
 
+	@When("^UeS_User is click on ENTER CLASS DESCRIPTION button and enter Class Description then click on Submit button$")
+	public void ues_userIsClickOnENTERCLASSDESCRIPTIONButtonAndEnterClassDescriptionThenClickOnSubmitButton() throws Throwable {
+		quotepage.btnENTERCLASSDESCRIPTION_enterClassDescrition(driver);
+	}
 
+	@When("^Ues_User navigate back to Quote Setup page and click on NEXT button$")
+	public void ues_userNavigateBackToQuoteSetupPageAndClickOnNEXTButton() throws Throwable {
+		quotepage.btnquoteSetUpNext(driver);
+	}
+
+	@When("^UeS_User is select Class Type,enter Employee Age and Salary with Dependents in Census page and click on next$")
+	public void ues_userIsSelectClassTypeEnterEmployeeAgeAndSalaryWithDependentsInCensusPageAndClickOnNext() throws Throwable {
+		quotepage.censusPage_Class1_2_Plans(driver);
+	}
+
+	@Then("^UeS_User verify Class Plan tab as \"([^\"]*)\" and also Class Plan tab value as \"([^\"]*)\" on Supplemental Employee Life/AD&D Plans page$")
+	public void ues_userVerifyClassPlanTabAsAndAlsoClassPlanTabValueAsOnSupplementalEmployeeLifeADDPlansPage(String arg1, String arg2) throws Throwable {
+		quotepage.tabClassPlanType(driver, arg1, arg2);
+	}
+
+	@Then("^UeS_User select PLAN CODES and click on COMPARE RATES FOR SELECTED PLANS button on Supplemental Employee Life/AD&D Plans Page$")
+	public void ues_userSelectPLANCODESAndClickOnCOMPARERATESFORSELECTEDPLANSButtonOnSupplementalEmployeeLifeADDPlansPage() throws Throwable {
+		System.out.println("User selected Plan Codes and click COMPARE RATES FOR SELECTED PLANS button on Supplemental Employee Life/AD&D Plans Page ");
+	}
+
+	@Then("^UeS_User verify Class Plan name as \"([^\"]*)\" and Supplemental Life Class Plan codes on Supplemental Employee Life/AD&D Rate Comparison page$")
+	public void ues_userVerifyClassPlanNameAsAndSupplementalLifeClassPlanCodesOnSupplementalEmployeeLifeADDRateComparisonPage(String arg1) throws Throwable {
+		quotepage.verifyClassPlanName_PlanCodes(driver, arg1);
+		quotepage.tearDown(driver);
+	}
 }
