@@ -143,9 +143,9 @@ public class QuotePage {
 		common = new CommonLibrary();
 		utility.waitForVisibilityOfWebElement(uesUserName, driver);
 		// driver.findElement(uesUserName).sendKeys("roshanadmin05");
-		driver.findElement(uesUserName).sendKeys(autoProperties.getProperty("loginUserName_BFX"));
+		//driver.findElement(uesUserName).sendKeys(autoProperties.getProperty("loginUserName_BFX"));
 		//driver.findElement(uesUserName).sendKeys("roshankumar");
-		//driver.findElement(uesUserName).sendKeys(autoProperties.getProperty("loginUserName_STG"));
+		driver.findElement(uesUserName).sendKeys(autoProperties.getProperty("loginUserName_STG"));
 
 		utility.waitForVisibilityOfWebElement(uesPwd, driver);
 		// driver.findElement(uesPwd).sendKeys("Computer$4");
@@ -4614,5 +4614,288 @@ public class QuotePage {
 			}
 		}
 	}
+	
+	public void quoteSetUpPage_Class1_2_Plans(WebDriver driver, String noofCoverages) throws InterruptedException {
+		Thread.sleep(2000);
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		String quoteSetUpPage = ".//*[@id='quoteForm']/table[1]/tbody/tr[2]/td/table/tbody/tr[1]/td[1]";
+		QuotePage.verifyPageDisplay(driver, quoteSetUpPage, "Quote Setup");
+
+		String quoteSetUpInfoTable = ".//*[@id='quoteForm']/table[3]/tbody/tr/td";
+		QuotePage.verifyPageInfoTable(driver, quoteSetUpInfoTable, "Quote Information");
+
+		QuotePage.verifyFooterLinks(driver);
+
+		String pwindow = driver.getWindowHandle();
+
+		utility.waitForVisibilityOfWebElement(By.xpath("//a[@href='javascript:openAccountExecSearch();']/img"), driver);
+
+		element = driver.findElement(By.xpath("//a[@href='javascript:openAccountExecSearch();']/img"));
+		executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", element);
+
+		utility.waitForNumberOfWindowsToEqual(2);
+		for (String winHandle : driver.getWindowHandles()) {
+			driver.switchTo().window(winHandle);
+			if (driver.switchTo().window(winHandle).getCurrentUrl().contains("accountExecutiveSearch")) {
+				System.out.println("Account Executive Search web page displayed successfully");
+				System.out.println(
+						"Account Executive Search page URL :: " + driver.switchTo().window(winHandle).getCurrentUrl());
+
+				driver.findElement(By.xpath("//input[@name='lastName']")).sendKeys("Smith");
+				Thread.sleep(1000);
+
+				By btnSicInputSubmit = By.xpath("//input[@name='submitSearch' or @value='SEARCH']");
+				element = driver.findElement(btnSicInputSubmit);
+				executor = (JavascriptExecutor) driver;
+				executor.executeScript("arguments[0].click();", element);
+				Thread.sleep(1000);
+
+				element = driver.findElement(By.linkText("Select"));
+				executor = (JavascriptExecutor) driver;
+				executor.executeScript("arguments[0].click();", element);
+				Thread.sleep(1000);
+				// driver.switchTo().window(handle1).close();
+				// driver.close();
+			}
+		}
+
+		driver.switchTo().window(pwindow);
+		Thread.sleep(1000);
+		driver.switchTo().frame("content");
+		Thread.sleep(1000);
+
+		utility.waitForVisibilityOfWebElement(quoteSetUpquoteType, driver);
+		Select quoteType = new Select(driver.findElement(quoteSetUpquoteType));
+		// quoteType.selectByVisibleText("New Business");
+		quoteType.selectByVisibleText(common.getQuoteType());
+
+		utility.waitForVisibilityOfWebElement(quoteSetUpquoteCompanyName, driver);
+		// driver.findElement(quoteSetUpquoteCompanyName).sendKeys("Optum");
+		driver.findElement(quoteSetUpquoteCompanyName).sendKeys(common.getCompanyName());
+
+		utility.waitForVisibilityOfWebElement(txtBoxstreetAddress, driver);
+		// driver.findElement(txtBoxstreetAddress).sendKeys("Hyderabad");
+		driver.findElement(txtBoxstreetAddress).sendKeys(common.getAddress());
+
+		utility.waitForVisibilityOfWebElement(txtBoxcityAddress, driver);
+		// driver.findElement(txtBoxcityAddress).sendKeys("Site1");
+		driver.findElement(txtBoxcityAddress).sendKeys(common.getCity());
+
+		// Select stateSel=new Select(driver.findElement(dropDownState));
+		// stateSel.selectByVisibleText("CA");
+
+		utility.waitForVisibilityOfWebElement(txtBoxzipCode, driver);
+		// driver.findElement(txtBoxzipCode).sendKeys("73301");
+		driver.findElement(txtBoxzipCode).sendKeys(common.getZipCode());
+		// Thread.sleep(1000);
+
+		utility.waitForVisibilityOfWebElement(txtBoxSICCODE, driver);
+		// driver.findElement(txtBoxSICCODE).sendKeys("9111");
+		driver.findElement(txtBoxSICCODE).sendKeys(common.getSICCode());
+		// Thread.sleep(1000);
+
+		utility.waitForVisibilityOfWebElement(totNumActiveEmployeesApplying, driver);
+		driver.findElement(totNumActiveEmployeesApplying).clear();
+		// driver.findElement(totNumActiveEmployeesApplying).sendKeys("10");
+		driver.findElement(totNumActiveEmployeesApplying).sendKeys(common.getNonCOBRAEmployees());
+		// Thread.sleep(1000);
+
+		utility.waitForVisibilityOfWebElement(txtBoxquoteTotalNumEmployees, driver);
+		// driver.findElement(txtBoxquoteTotalNumEmployees).sendKeys("10");
+		driver.findElement(txtBoxquoteTotalNumEmployees).sendKeys(common.getTotalEmployees());
+		// Thread.sleep(1000);
+
+		element = driver.findElement(radioBtnMedicarePriPayer);
+		executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", element);
+		driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
+
+		driver.findElement(By.xpath("//input[@name='quoteTotalNumDisabilityClasses']")).clear();
+		driver.findElement(By.xpath("//input[@name='quoteTotalNumDisabilityClasses']")).sendKeys(noofCoverages);
+		Thread.sleep(2000);
+	}
+	
+	public void btnENTERCLASSDESCRIPTION_enterClassDescrition(WebDriver driver) throws InterruptedException{
+		String pwindow = driver.getWindowHandle();
+		driver.findElement(By.xpath("//input[@id='disClassButton' and @value='ENTER CLASS DESCRIPTION']")).click();
+		// driver.findElement(By.xpath("//input[@id='disClassButton' and
+		// @value='ENTER CLASS DESCRIPTION']")).sendKeys(Keys.ENTER);
+		element = driver.findElement(By.xpath("//input[@id='disClassButton' and @value='ENTER CLASS DESCRIPTION']"));
+		executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", element);
+
+		utility.waitForNumberOfWindowsToEqual(2);
+		for (String winHandle : driver.getWindowHandles()) {
+			driver.switchTo().window(winHandle);
+			if (driver.switchTo().window(winHandle).getCurrentUrl().contains("disabilityClassDefinitionsSetup")) {
+				System.out.println("Enter Class Descriptions web page displayed successfully");
+				System.out.println(
+						"Enter Class Descriptions page URL :: " + driver.switchTo().window(winHandle).getCurrentUrl());
+
+				element = driver.findElement(By.xpath("//td[contains(text(),'Enter Class Descriptions')]"));
+				if (element.getText().trim().contains("Enter Class Descriptions")) {
+					System.out.println("Enter Class Descriptions text present on Enter Class Descriptions page");
+				} else {
+					System.out.println("Enter Class Descriptions text not present on Enter Class Descriptions page");
+				}
+				Thread.sleep(1000);
+
+				driver.findElement(By.xpath("//input[@name='disabilityClass[0].classDescription']")).sendKeys("Class1");
+				Thread.sleep(1000);
+				driver.findElement(By.xpath("//input[@name='disabilityClass[1].classDescription']")).sendKeys("Class2");
+				Thread.sleep(1000);
+
+				driver.findElement(By.xpath("//input[@name='disabilityClass[0].totalEmployeesApplying']")).clear();
+				driver.findElement(By.xpath("//input[@name='disabilityClass[0].totalEmployeesApplying']"))
+						.sendKeys("5");
+				Thread.sleep(1000);
+				driver.findElement(By.xpath("//input[@name='disabilityClass[1].totalEmployeesApplying']")).clear();
+				driver.findElement(By.xpath("//input[@name='disabilityClass[1].totalEmployeesApplying']"))
+						.sendKeys("6");
+				Thread.sleep(1000);
+
+				By btnClassSubmit = By.xpath("//input[@name='submit' and @value='SUBMIT']");
+				element = driver.findElement(btnClassSubmit);
+				executor = (JavascriptExecutor) driver;
+				executor.executeScript("arguments[0].click();", element);
+				Thread.sleep(1000);
+				// driver.switchTo().window(handle1).close();
+				// driver.close();
+			}
+		}
+
+		driver.switchTo().window(pwindow);
+		Thread.sleep(1000);
+		driver.switchTo().frame("content");
+		Thread.sleep(1000);
+	}
+	
+	public void btnquoteSetUpNext(WebDriver driver) throws InterruptedException{
+		element = driver.findElement(btnquoteSetUpNext);
+		executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", element);
+		Thread.sleep(5000);	
+	}
+	
+	public void tabClassPlanType(WebDriver driver,String classPlanType,String classPlanValue) throws InterruptedException, IOException{
+		QuotePage.verifyUeSLogos(driver);
+		Thread.sleep(2000);
+		String pageSupplementalEmployeeLife = "//td[contains(text(),'Supplemental Employee Life/AD&D Plans')]";
+		QuotePage.verifyPageDisplay(driver, pageSupplementalEmployeeLife, "Supplemental Employee Life/AD&D Plans");
+
+		
+		QuotePage.verifyFooterLinks(driver);
+		
+		if(classPlanType.equals("Class 1 Plans")){
+		element=driver.findElement(By.name("class one"));
+		
+		if(element.getAttribute("value").trim().contains(classPlanType)){
+			System.out.println(classPlanType + " tab present on Supplemental Employee Life/AD&D Plans page");
+		}
+		else{
+			System.out.println(classPlanType + " tab not present on Supplemental Employee Life/AD&D Plans page");
+		}
+		}
+		
+		if(classPlanType.equals("Class 2 Plans")){
+		element=driver.findElement(By.name("submitClassTwo"));
+		
+		if(element.getAttribute("value").trim().contains("Class 2 Plans")){
+			System.out.println(classPlanType + " tab present on Supplemental Employee Life/AD&D Plans page");
+			executor = (JavascriptExecutor) driver;
+			executor.executeScript("arguments[0].click();", element);
+			Thread.sleep(3000);	
+		}
+		else{
+			System.out.println(classPlanType + " tab not present on Supplemental Employee Life/AD&D Plans page");
+		}
+		}
+	}
+public void verifyClassPlanName_PlanCodes(WebDriver driver,String classPlanName) throws InterruptedException{
+	WebElement planCode1 = driver.findElement(By.name("supLifeClassPlanInformationForm[0].planId"));
+	System.out.println("Plan Code1 ::" + planCode1.getAttribute("value"));
+			
+	WebElement planCode2 = driver.findElement(By.name("supLifeClassPlanInformationForm[1].planId"));
+	System.out.println("Plan Code2 ::" + planCode2.getAttribute("value"));
+	
+	WebElement planCode3 = driver.findElement(By.name("supLifeClassPlanInformationForm[2].planId"));
+	System.out.println("Plan Code1 ::" + planCode3.getAttribute("value"));
+			
+	WebElement planCode4 = driver.findElement(By.name("supLifeClassPlanInformationForm[3].planId"));
+	System.out.println("Plan Code2 ::" + planCode4.getAttribute("value"));
+	
+	String P1=planCode1.getAttribute("value");
+	String P2=planCode2.getAttribute("value");
+	String P3=planCode3.getAttribute("value");
+	String P4=planCode4.getAttribute("value");
+	
+	utility.waitForVisibilityOfWebElement(By.xpath("//input[@name='submitRateCompare']"), driver);
+	element = driver.findElement(By.xpath("//input[@name='submitRateCompare']"));
+	executor = (JavascriptExecutor) driver;
+	executor.executeScript("arguments[0].click();", element);
+	
+	
+	utility.waitForNumberOfWindowsToEqual(2);
+	for (String winHandle : driver.getWindowHandles()) {
+		driver.switchTo().window(winHandle);
+		if (driver.switchTo().window(winHandle).getCurrentUrl().contains("employeeSupLifePlanSelection")) {
+			System.out.println("Supplemental Employee Life/AD&D Rate Comparison web page displayed successfully");
+			System.out.println("Supplemental Employee Life/AD&D Rate Comparison page URL :: "
+					+ driver.switchTo().window(winHandle).getCurrentUrl());
+
+			Thread.sleep(1000);
+			WebElement element2 = driver.findElement(By.xpath("//td[contains(text(),'Supplemental Employee Life/AD&D Rate Comparison')]"));
+			if (element2.getText().contains("Supplemental Employee Life/AD&D Rate Comparison")) {
+				System.out.println("Supplemental Employee Life/AD&D Rate Comparison text displayed successfully");
+			} else {
+				System.out.println("Supplemental Employee Life/AD&D Rate Comparison text not displayed");
+			}
+
+			//element = driver.findElement(By.xpath(
+			//		"//form[@name='EmployeeSupLifeRateComparisonForm']/table/tbody/tr[9]/td/table/tbody/tr/td[2]/table/tbody/tr[1]/td"));
+			if(classPlanName.equals("1 - Class1")){
+			element=driver.findElement(By.xpath("//td[contains(text(),'1 - Class1')]"));
+			}
+			else if(classPlanName.equals("2 - Class2")){
+				element=driver.findElement(By.xpath("//td[contains(text(),'2 - Class2')]"));
+			}
+
+			if (element.getText().trim().contains(classPlanName)) {
+				System.out.println(classPlanName + " text displayed successfully on Plan Information table");
+
+				WebElement PlanCode1 = driver.findElement(By.xpath(
+						"//form[@name='EmployeeSupLifeRateComparisonForm']/table/tbody/tr[9]/td/table/tbody/tr/td[2]/table/tbody/tr[2]/td[1]/table/tbody/tr[1]"));
+
+				WebElement PlanCode2 = driver.findElement(By.xpath(
+						"//form[@name='EmployeeSupLifeRateComparisonForm']/table/tbody/tr[9]/td/table/tbody/tr/td[2]/table/tbody/tr[2]/td[2]/table/tbody/tr[1]"));
+				
+				WebElement PlanCode3 = driver.findElement(By.xpath(
+						"//form[@name='EmployeeSupLifeRateComparisonForm']/table/tbody/tr[9]/td/table/tbody/tr/td[2]/table/tbody/tr[2]/td[3]/table/tbody/tr[1]"));
+				
+				WebElement PlanCode4 = driver.findElement(By.xpath(
+						"//form[@name='EmployeeSupLifeRateComparisonForm']/table/tbody/tr[9]/td/table/tbody/tr/td[2]/table/tbody/tr[2]/td[4]/table/tbody/tr[1]"));
+				
+							
+				if ((PlanCode1.getText().trim().contains(P1))
+						&& (PlanCode2.getText().trim().contains(P2)) && (PlanCode3.getText().trim().contains(P3)) && (PlanCode4.getText().trim().contains(P4))){
+					System.out.println("Plan Codes :: " + PlanCode1.getText() + " and " + PlanCode2.getText()
+							+ " displayed successfully");
+					System.out.println("Plan Codes :: " + PlanCode3.getText() + " and " + PlanCode4.getText()
+					+ " displayed successfully");
+					driver.switchTo().window(winHandle).close();
+				} else {
+					System.out.println("Plan Codes :: " + PlanCode1.getText() + " and " + PlanCode2.getText()+ " not displayed");
+					System.out.println("Plan Codes :: " + PlanCode3.getText() + " and " + PlanCode4.getText()+ " not displayed");
+					driver.switchTo().window(winHandle).close();
+				}
+
+			} else {
+				System.out.println(classPlanName + " text not displayed on Plan Information table");
+			}	
+		}
+	}
+	
+}
 
 }
