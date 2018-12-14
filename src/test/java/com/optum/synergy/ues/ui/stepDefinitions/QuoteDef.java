@@ -610,6 +610,11 @@ public class QuoteDef {
 	public void ues_userIsSelectClassTypeEnterEmployeeAgeAndSalaryWithDependentsInCensusPageAndClickOnNext() throws Throwable {
 		quotepage.censusPage_Class1_2_Plans(driver);
 	}
+	
+	@When("^UeS_User is select Class Type,enter Employee Age and Salary without Dependents in Census page and click on next$")
+	public void ues_userIsSelectClassTypeEnterEmployeeAgeAndSalaryWithoutDependentsInCensusPageAndClickOnNext() throws Throwable {
+		quotepage.censusPage_Class1_2_Plans_WithoutSal(driver);
+	}
 
 	@Then("^UeS_User verify Class Plan tab as \"([^\"]*)\" and also Class Plan tab value as \"([^\"]*)\" on Supplemental Employee Life/AD&D Plans page$")
 	public void ues_userVerifyClassPlanTabAsAndAlsoClassPlanTabValueAsOnSupplementalEmployeeLifeADDPlansPage(String arg1, String arg2) throws Throwable {
