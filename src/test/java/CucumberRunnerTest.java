@@ -14,7 +14,7 @@ import cucumber.api.junit.Cucumber;
 		// features = {"src/main/resources/features" },
 		format = { "json:target/cucumber.json" },
 
-		tags = { "@Display_Class1_Class2_Plans_WithSalWithoutDep"
+		tags = { "@Display_Class1_Class2_Plans_WithOutSalAndDep"
 		// + ",@Regression"
 		// + ",@July_Regression"
 
