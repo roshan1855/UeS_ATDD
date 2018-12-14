@@ -670,7 +670,7 @@ Feature: Quotes Module
 
     Examples: 
       | FileName    |  | TestCaseID |  | State |  | Value              |  | No Of Classes |  | Class Plan Type |  | Class Plan Value |  | Class Plan Name |
-      | Quote_TC_54 |  | TC_55      |  | TX    |  | Most Popular Plans |  |             2 |  | Class 1 Plans   |  | Class 1 Plans    |  | 1 - Class1      |
+      | Quote_TC_54 |  | TC_54      |  | TX    |  | Most Popular Plans |  |             2 |  | Class 1 Plans   |  | Class 1 Plans    |  | 1 - Class1      |
       | Quote_TC_56 |  | TC_56      |  | TX    |  | Most Popular Plans |  |             2 |  | Class 2 Plans   |  | Class 2 Plans    |  | 2 - Class2      |
 
   @Testing
