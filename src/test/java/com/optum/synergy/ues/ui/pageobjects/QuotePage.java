@@ -392,6 +392,67 @@ public class QuotePage {
 		executor.executeScript("arguments[0].click();", element);
 		Thread.sleep(5000);
 	}
+	
+	public void censusPage_Class1_2_Plans_WithoutSal(WebDriver driver) throws InterruptedException, IOException {
+		QuotePage.verifyUeSLogos(driver);
+		Thread.sleep(1000);
+		String cencusPage = ".//*[@id='census-form']/table[1]/tbody/tr[2]/td[1]";
+
+		QuotePage.verifyPageDisplay(driver, cencusPage, "Census");
+		Thread.sleep(1000);
+
+		String cencusInfoTable = "//td[contains(text(),'Census Information')]";
+		QuotePage.verifyPageInfoTable(driver, cencusInfoTable, "Census Information");
+		Thread.sleep(1000);
+
+		QuotePage.verifyFooterLinks(driver);
+		Thread.sleep(1000);
+
+		// driver.findElement(By.xpath(".//*[@id='census-form']/table[8]/tbody/tr[2]/td/table/tbody/tr[5]"));
+		List<WebElement> ele4 = driver
+				.findElements(By.xpath(".//*[@id='census-form']/table[8]/tbody/tr[2]/td/table/tbody/tr"));
+		int count1 = ele4.size();
+		Thread.sleep(1000);
+
+		System.out.println("Row Count :: " + count1 + "Row Count  ::" + (count1 - 7));
+
+		int j = 1000;
+		for (int i = 0; i <= count1 - 7; i++) {
+
+			Random rand = new Random();
+			int Low = 25;
+			int High = 40;
+			int Result = rand.nextInt(High - Low) + Low;
+
+			int LowSal = 50000;
+			int HighSal = 100000;
+			int TotSal = rand.nextInt(HighSal - LowSal) + LowSal;
+
+			if (i < 5) {
+				Select ClassType = new Select(
+						driver.findElement(By.name("censusDetailInformationForm[" + i + "].disabilityClassNumber")));
+				ClassType.selectByVisibleText("Class 1 - Class1");
+			} else {
+				Select ClassType = new Select(
+						driver.findElement(By.name("censusDetailInformationForm[" + i + "].disabilityClassNumber")));
+				ClassType.selectByVisibleText("Class 2 - Class2");
+			}
+
+			driver.findElement(By.xpath("//input[@name='censusDetailInformationForm[" + i + "].employeeAge']"))
+					.sendKeys(Integer.toString(Result));
+			Thread.sleep(500);
+			driver.findElement(By.xpath("//input[@name='censusDetailInformationForm[" + i + "].annualSalary']"))
+					.sendKeys(Integer.toString(TotSal));
+			Thread.sleep(500);
+			j = j + 1000;
+		}
+
+		element = driver.findElement(censussubmitNext);
+		executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", element);
+		Thread.sleep(5000);
+	}
+
 
 	public void censusPage_OnlyEE_Salary(WebDriver driver) throws InterruptedException, IOException {
 		QuotePage.verifyUeSLogos(driver);
