@@ -87,8 +87,8 @@ public class QuoteDef {
 	@Given("^UeS_User is on Home Page$")
 	public void ues_user_is_on_Home_Page() throws Throwable {
 		// driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-		//driver.get(autoProperties.getProperty("BFX_URL"));
-		driver.get(autoProperties.getProperty("STAGE_URL"));
+		driver.get(autoProperties.getProperty("BFX_URL"));
+		//driver.get(autoProperties.getProperty("STAGE_URL"));
 		utility.takeScreenShot(driver, "Homepage" + testCaseID);
 		utility.GenerateReport("Quote", "", "info", "Execution Started.User is on the login Page",
 				"Homepage" + testCaseID);
@@ -614,6 +614,11 @@ public class QuoteDef {
 	@When("^UeS_User is select Class Type,enter Employee Age and Salary without Dependents in Census page and click on next$")
 	public void ues_userIsSelectClassTypeEnterEmployeeAgeAndSalaryWithoutDependentsInCensusPageAndClickOnNext() throws Throwable {
 		quotepage.censusPage_Class1_2_Plans_WithoutSal(driver);
+	}
+	
+	@When("^UeS_User is select Class Type,enter Employee Age without Salary and Dependents in Census page and click on next$")
+	public void ues_userIsSelectClassTypeEnterEmployeeAgeWithoutSalaryAndDependentsInCensusPageAndClickOnNext() throws Throwable {
+		quotepage.censusPage_Class1_2_Plans_WithoutSalAndDep(driver);
 	}
 
 	@Then("^UeS_User verify Class Plan tab as \"([^\"]*)\" and also Class Plan tab value as \"([^\"]*)\" on Supplemental Employee Life/AD&D Plans page$")
