@@ -70,7 +70,7 @@ public class QuotePage {
 	By quoteNextBtn = By.xpath("//input[@name='submitATNE']");
 	By quotepolicyEffDateDay = By.name("policyEffDateDay");
 	By quotepolicyEffDateYear = By.name("policyEffDateYear");
-	By quoteatneCount1 = By.xpath("//input[@name='atneCount' and @tabindex='6']");  // BFX
+	By quoteatneCount1 = By.xpath("//input[@name='atneCount' and @tabindex='7']");  // BFX
 	By quoteatneCount2 = By.xpath("//input[@name='atneCount' and @tabindex='7']");  // STG
 	// Quote SetUp
 	By quoteSetUpquoteType = By.xpath("//select[@name='quoteType']");
