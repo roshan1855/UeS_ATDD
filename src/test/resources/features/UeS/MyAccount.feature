@@ -23,7 +23,7 @@ Feature: MyAccount Module
 
     Examples: 
       | FileName        |  | TestCaseID |  | UserName |  | PWD         |
-      | MyAccount_TC_38 |  | TC_38      |  | CommTest |  | TestComm@99 |
+      | MyAccount_TC_38 |  | TC_38      |  | CommTest |  | Password$4 |
 
   @Regression_UeS @MyAccount_Admin
   Scenario Outline: "<TestCaseID>" Display all links(all page) on My Account page when user logging as Administrator
