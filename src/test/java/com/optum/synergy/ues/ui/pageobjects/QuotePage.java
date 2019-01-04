@@ -1006,7 +1006,7 @@ public class QuotePage {
 			Thread.sleep(500);
 		}
 
-		driver.findElement(quotepolicyEffDateYear).sendKeys("18");
+		driver.findElement(quotepolicyEffDateYear).sendKeys("19");
 		Thread.sleep(500);
 
 		Select cominfoState = new Select(driver.findElement(By.name("state")));
@@ -1142,7 +1142,7 @@ public class QuotePage {
 			Thread.sleep(500);
 		}
 
-		driver.findElement(quotepolicyEffDateYear).sendKeys("18");
+		driver.findElement(quotepolicyEffDateYear).sendKeys("19");
 		Thread.sleep(500);
 
 		Select cominfoState = new Select(driver.findElement(By.name("state")));
@@ -1288,7 +1288,7 @@ public class QuotePage {
 			driver.findElement(quotepolicyEffDateDay).sendKeys("01");
 			Thread.sleep(500);
 		}
-		driver.findElement(quotepolicyEffDateYear).sendKeys("18");
+		driver.findElement(quotepolicyEffDateYear).sendKeys("19");
 		Thread.sleep(500);
 
 		Select cominfoState = new Select(driver.findElement(By.name("state")));
@@ -1638,7 +1638,7 @@ public class QuotePage {
 			// Thread.sleep(1000);
 		}
 		utility.waitForVisibilityOfWebElement(quotepolicyEffDateYear, driver);
-		driver.findElement(quotepolicyEffDateYear).sendKeys("18");
+		driver.findElement(quotepolicyEffDateYear).sendKeys("19");
 		// Thread.sleep(1000);
 
 		utility.waitForVisibilityOfWebElement(By.name("state"), driver);
@@ -1700,7 +1700,7 @@ public class QuotePage {
 			// Thread.sleep(1000);
 		}
 		utility.waitForVisibilityOfWebElement(quotepolicyEffDateYear, driver);
-		driver.findElement(quotepolicyEffDateYear).sendKeys("18");
+		driver.findElement(quotepolicyEffDateYear).sendKeys("19");
 		// Thread.sleep(1000);
 
 		utility.waitForVisibilityOfWebElement(By.name("state"), driver);
@@ -2109,7 +2109,7 @@ public class QuotePage {
 			Thread.sleep(1000);
 		}
 
-		driver.findElement(quotepolicyEffDateYear).sendKeys("18");
+		driver.findElement(quotepolicyEffDateYear).sendKeys("19");
 		Thread.sleep(1000);
 
 		Select cominfoState = new Select(driver.findElement(By.name("state")));
