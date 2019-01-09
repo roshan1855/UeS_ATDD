@@ -87,8 +87,8 @@ public class QuoteDef {
 	@Given("^UeS_User is on Home Page$")
 	public void ues_user_is_on_Home_Page() throws Throwable {
 		// driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-		driver.get(autoProperties.getProperty("BFX_URL"));
-		//driver.get(autoProperties.getProperty("STAGE_URL"));
+		//driver.get(autoProperties.getProperty("BFX_URL"));
+		driver.get(autoProperties.getProperty("STAGE_URL"));
 		utility.takeScreenShot(driver, "Homepage" + testCaseID);
 		utility.GenerateReport("Quote", "", "info", "Execution Started.User is on the login Page",
 				"Homepage" + testCaseID);
@@ -573,6 +573,11 @@ public class QuoteDef {
 	public void ues_userSelectPlanCodesFromDisabilityPlanInformationTableAndClickOnNEXTButtonInShortTermDisabilityPlansPage() throws Throwable {
 		quotepage.selectPlanCode_clickNext_ShortTermDisabilityPlans(driver);
 	}
+	
+	@Then("^UeS_User select plan codes from Disability Plan Information table and click on NEXT button in Long Term Disability Plans page$")
+	public void ues_userSelectPlanCodesFromDisabilityPlanInformationTableAndClickOnNEXTButtonInLongTermDisabilityPlansPage() throws Throwable {
+		quotepage.selectPlanCode_clickNext_LongTermDisabilityPlans(driver);
+	}
 
 	@Then("^UeS_User select PLAN CODES and click on COMPARE SELECTED PLANS button in Disability Plan Information table on Long Term Disability Plans page$")
 	public void ues_userSelectPLANCODESAndClickOnCOMPARESELECTEDPLANSButtonInDisabilityPlanInformationTableOnLongTermDisabilityPlansPage() throws Throwable {
@@ -593,7 +598,7 @@ public class QuoteDef {
 	
 	@When("^UeS_User is select all coverages,Fill all details and also enter No Of Classes as \"([^\"]*)\" on Quote Setup page$")
 	public void ues_userIsSelectAllCoveragesFillAllDetailsAndAlsoEnterNoOfClassesAsOnQuoteSetupPage(String arg1) throws Throwable {
-		quotepage.quoteSetUpPage_Class1_2_Plans(driver, arg1);
+		quotepage.quoteSetUpPage_Class1_2_Plans(driver, arg1,"All");
 	}
 
 	@When("^UeS_User is click on ENTER CLASS DESCRIPTION button and enter Class Description then click on Submit button$")
@@ -625,6 +630,7 @@ public class QuoteDef {
 	public void ues_userVerifyClassPlanTabAsAndAlsoClassPlanTabValueAsOnSupplementalEmployeeLifeADDPlansPage(String arg1, String arg2) throws Throwable {
 		quotepage.tabClassPlanType(driver, arg1, arg2);
 	}
+	
 
 	@Then("^UeS_User select PLAN CODES and click on COMPARE RATES FOR SELECTED PLANS button on Supplemental Employee Life/AD&D Plans Page$")
 	public void ues_userSelectPLANCODESAndClickOnCOMPARERATESFORSELECTEDPLANSButtonOnSupplementalEmployeeLifeADDPlansPage() throws Throwable {
@@ -636,4 +642,26 @@ public class QuoteDef {
 		quotepage.verifyClassPlanName_PlanCodes(driver, arg1);
 		quotepage.tearDown(driver);
 	}
+	
+	// Jan2019
+	@When("^UeS_User is select all coverages except coverage as \"([^\"]*)\",Fill all details and also enter No Of Classes as \"([^\"]*)\" on Quote Setup page$")
+	public void ues_userIsSelectAllCoveragesExceptCoverageAsFillAllDetailsAndAlsoEnterNoOfClassesAsOnQuoteSetupPage(String arg1, String arg2) throws Throwable {
+		quotepage.quoteSetUpPage_Class1_2_Plans(driver, arg2,arg1);
+		//quotepage.tearDown(driver);
+	}
+	@When("^UeS_User is select all coverages and enter the COBRA employees as \"([^\"]*)\" then Fill all the details on Quote Setup page and click on next$")
+	public void ues_userIsSelectAllCoveragesAndEnterTheCOBRAEmployeesAsThenFillAllTheDetailsOnQuoteSetupPageAndClickOnNext(String arg1) throws Throwable {
+		quotepage.quoteSetUpPage_SelectAllCoverages_ClassType_COBRA(driver, arg1);
+	}
+
+	@When("^UeS_User is Fill all the details of the Census page and also select Class Type as \"([^\"]*)\" click on next$")
+	public void ues_userIsFillAllTheDetailsOfTheCensusPageAndAlsoSelectClassTypeAsClickOnNext(String arg1) throws Throwable {
+
+	}
+	
+	@When("^UeS_User is select Class Type as \"([^\"]*)\",enter Employee Age and Salary with Dependents in Census page and click on next$")
+	public void ues_userIsSelectClassTypeAsEnterEmployeeAgeAndSalaryWithDependentsInCensusPageAndClickOnNext(String arg1) throws Throwable {
+		quotepage.censusPage_COBRA(driver,arg1);
+	}
+	
 }
