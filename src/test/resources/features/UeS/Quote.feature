@@ -673,6 +673,59 @@ Feature: Quotes Module
       | Quote_TC_54 |  | TC_54      |  | TX    |  | Most Popular Plans |  |             2 |  | Class 1 Plans   |  | Class 1 Plans    |  | 1 - Class1      |
       | Quote_TC_56 |  | TC_56      |  | TX    |  | Most Popular Plans |  |             2 |  | Class 2 Plans   |  | Class 2 Plans    |  | 2 - Class2      |
 
+  @Display_Class1_Plans_WithOutSalAndDep
+  Scenario Outline: "<TestCaseID>" Display Class Plan Type as "<Class Plan Type>" Without Salary and Dependents on Supplemental Employee Life/AD&D Plans page
+    When Flow_Fetch fileName "<FileName>" and testCaseID "<TestCaseID>" are captured
+    Given Flow_Fetch Data from excel Sheet for "<TestCaseID>"
+    Given UeS_User is on Home Page
+    When UeS_User Navigate to LogIn Page
+    And UeS_User enters UserName and Password
+    Then UeS_User displayed Login Successfully
+    When UeS_User is on Home page and click on Quotes and then select New Quote
+    And UeS_User is select the state as "<State>" and Fill all the details of the Quote Setup window and click on NEXT
+    And UeS_User is select all coverages except coverage as "<Coverage>",Fill all details and also enter No Of Classes as "<No Of Classes>" on Quote Setup page
+    And UeS_User is click on ENTER CLASS DESCRIPTION button and enter Class Description then click on Submit button
+    And Ues_User navigate back to Quote Setup page and click on NEXT button
+    And UeS_User is select Class Type,enter Employee Age without Salary and Dependents in Census page and click on next
+    And UeS_User is Select the Plans from Medical Plans Page and click on next button
+    And UeS_User is Select the Plans from Optional Medical Riders Page and click on next
+    #Then UeS_User verify the Display Plan as "<Value>" and select Display Plan as "<Value>" and click on APPLY CHANGES
+    And UeS_User is Select the Plans from Dental Plans Page and click on next
+    And UeS_User is Select the Plans from Vision Plans Page and click on next
+    And UeS_User is Select the Plans from Life Plans Page and click on next
+    Then UeS_User verify Class Plan tab as "<Class Plan Type>" and also Class Plan tab value as "<Class Plan Value>" on Supplemental Employee Life/AD&D Plans page
+    And UeS_User select PLAN CODES and click on COMPARE RATES FOR SELECTED PLANS button on Supplemental Employee Life/AD&D Plans Page
+    Then UeS_User verify Class Plan name as "<Class Plan Name>" and Supplemental Life Class Plan codes on Supplemental Employee Life/AD&D Rate Comparison page
+
+    Examples: 
+      | FileName    |  | TestCaseID |  | State |  | Value              |  | No Of Classes |  | Class Plan Type |  | Class Plan Value |  | Class Plan Name |  | Coverage |
+      | Quote_TC_57 |  | TC_57      |  | TX    |  | Most Popular Plans |  |             2 |  | Class 1 Plans   |  | Class 1 Plans    |  | 1 - Class1      |  | LTD      |
+
+  @COBRA
+  Scenario Outline: "<TestCaseID>" Validate Quote Generation for ALL Coverages(with employees having COBRA coverage)
+    When Flow_Fetch fileName "<FileName>" and testCaseID "<TestCaseID>" are captured
+    Given Flow_Fetch Data from excel Sheet for "<TestCaseID>"
+    Given UeS_User is on Home Page
+    When UeS_User Navigate to LogIn Page
+    And UeS_User enters UserName and Password
+    Then UeS_User displayed Login Successfully
+    When UeS_User is on Home page and click on Quotes and then select New Quote
+    And UeS_User is select the state as "<State>" and Fill all the details of the Quote Setup window and click on NEXT
+    And UeS_User is select all coverages and enter the COBRA employees as "<COBRA>" then Fill all the details on Quote Setup page and click on next
+    And UeS_User is select Class Type as "<Class Type>",enter Employee Age and Salary with Dependents in Census page and click on next
+		And UeS_User is Select the Plans from Medical Plans Page and click on next
+    And UeS_User is Select the Plans from Dental Plans Page and click on next
+    And UeS_User is Select the Plans from Vision Plans Page and click on next
+    And UeS_User is Select the Plans from Life Plans Page and click on next
+    And UeS_User is Select the Plans Supplemental Employee Life/AD&D Plans Page and click on NEXT button
+    And UeS_User is Select the Plans Supplemental Dependent Life/AD&D Plans Page and click on NEXT button
+    Then UeS_User select plan codes from Disability Plan Information table and click on NEXT button in Short Term Disability Plans page
+    And UeS_User select plan codes from Disability Plan Information table and click on NEXT button in Long Term Disability Plans page
+    Then UeS_User click on Preview Proposal button and verify Preview Proposal PDf is displayed successfully
+    Examples: 
+      | FileName    |  | TestCaseID |  | State |  | COBRA |  | Class Type |
+      | Quote_TC_58 |  | TC_58      |  | TX    |  |     2 |  | COBRA      |
+
   @Testing
   Scenario Outline: "<TestCaseID>" Testing
     When Flow_Fetch fileName "<FileName>" and testCaseID "<TestCaseID>" are captured
