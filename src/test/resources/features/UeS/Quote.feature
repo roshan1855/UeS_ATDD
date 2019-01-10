@@ -701,7 +701,7 @@ Feature: Quotes Module
       | FileName    |  | TestCaseID |  | State |  | Value              |  | No Of Classes |  | Class Plan Type |  | Class Plan Value |  | Class Plan Name |  | Coverage |
       | Quote_TC_57 |  | TC_57      |  | TX    |  | Most Popular Plans |  |             2 |  | Class 1 Plans   |  | Class 1 Plans    |  | 1 - Class1      |  | LTD      |
 
-  @COBRA
+  @GenerateProposal_AllCoverages_COBRA_Employees
   Scenario Outline: "<TestCaseID>" Validate Quote Generation for ALL Coverages(with employees having COBRA coverage)
     When Flow_Fetch fileName "<FileName>" and testCaseID "<TestCaseID>" are captured
     Given Flow_Fetch Data from excel Sheet for "<TestCaseID>"
@@ -713,7 +713,7 @@ Feature: Quotes Module
     And UeS_User is select the state as "<State>" and Fill all the details of the Quote Setup window and click on NEXT
     And UeS_User is select all coverages and enter the COBRA employees as "<COBRA>" then Fill all the details on Quote Setup page and click on next
     And UeS_User is select Class Type as "<Class Type>",enter Employee Age and Salary with Dependents in Census page and click on next
-		And UeS_User is Select the Plans from Medical Plans Page and click on next
+    And UeS_User is Select the Plans from Medical Plans Page and click on next
     And UeS_User is Select the Plans from Dental Plans Page and click on next
     And UeS_User is Select the Plans from Vision Plans Page and click on next
     And UeS_User is Select the Plans from Life Plans Page and click on next
@@ -722,6 +722,7 @@ Feature: Quotes Module
     Then UeS_User select plan codes from Disability Plan Information table and click on NEXT button in Short Term Disability Plans page
     And UeS_User select plan codes from Disability Plan Information table and click on NEXT button in Long Term Disability Plans page
     Then UeS_User click on Preview Proposal button and verify Preview Proposal PDf is displayed successfully
+
     Examples: 
       | FileName    |  | TestCaseID |  | State |  | COBRA |  | Class Type |
       | Quote_TC_58 |  | TC_58      |  | TX    |  |     2 |  | COBRA      |
