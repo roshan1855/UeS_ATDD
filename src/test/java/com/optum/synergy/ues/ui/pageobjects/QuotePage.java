@@ -143,9 +143,9 @@ public class QuotePage {
 		common = new CommonLibrary();
 		utility.waitForVisibilityOfWebElement(uesUserName, driver);
 		// driver.findElement(uesUserName).sendKeys("roshanadmin05");
-		driver.findElement(uesUserName).sendKeys(autoProperties.getProperty("loginUserName_BFX"));
+		//driver.findElement(uesUserName).sendKeys(autoProperties.getProperty("loginUserName_BFX"));
 		// driver.findElement(uesUserName).sendKeys("roshankumar");
-		//driver.findElement(uesUserName).sendKeys(autoProperties.getProperty("loginUserName_STG"));
+		driver.findElement(uesUserName).sendKeys(autoProperties.getProperty("loginUserName_STG"));
 
 		utility.waitForVisibilityOfWebElement(uesPwd, driver);
 		// driver.findElement(uesPwd).sendKeys("Computer$4");
@@ -772,10 +772,10 @@ public class QuotePage {
 		element = driver.findElement(btnPreviewProposal);
 		executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].click();", element);
-		//Thread.sleep(15000);
+		Thread.sleep(15000);
 		
 		//String pwindow = driver.getWindowHandle();
-		utility.waitForNumberOfWindowsToEqual(2);
+		/*utility.waitForNumberOfWindowsToEqual(2);
 		for (String winHandle : driver.getWindowHandles()) {
 			driver.switchTo().window(winHandle);
 			if (driver.switchTo().window(winHandle).getCurrentUrl().contains("proposalDocumentSetup")) {
@@ -785,7 +785,7 @@ public class QuotePage {
 				driver.switchTo().window(winHandle).close();
 				// driver.close();
 			}
-		}
+		}*/
 
 		/*driver.switchTo().window(pwindow);
 		Thread.sleep(1000);
