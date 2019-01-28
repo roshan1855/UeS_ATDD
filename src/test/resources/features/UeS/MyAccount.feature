@@ -22,7 +22,7 @@ Feature: MyAccount Module
     Then UeS_User click on above links and verify pages Quote Generation Options,Custom Logo Selection and Define Sales Material & Benefit Searches
 
     Examples: 
-      | FileName        |  | TestCaseID |  | UserName |  | PWD         |
+      | FileName        |  | TestCaseID |  | UserName |  | PWD        |
       | MyAccount_TC_38 |  | TC_38      |  | CommTest |  | Password$4 |
 
   @Regression_UeS @MyAccount_Admin
