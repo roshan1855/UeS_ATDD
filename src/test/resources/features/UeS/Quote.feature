@@ -727,6 +727,62 @@ Feature: Quotes Module
       | FileName    |  | TestCaseID |  | State |  | COBRA |  | Class Type |
       | Quote_TC_58 |  | TC_58      |  | TX    |  |     2 |  | COBRA      |
 
+  @Generate_FinalProposal_AllCoverages_PDF
+  Scenario Outline: "<TestCaseID>" Generate final proposal and verify PDF successfully displayed with census includng EEs with salary info/with dependents
+    When Flow_Fetch fileName "<FileName>" and testCaseID "<TestCaseID>" are captured
+    Given Flow_Fetch Data from excel Sheet for "<TestCaseID>"
+    Given UeS_User is on Home Page
+    When UeS_User Navigate to LogIn Page
+    And UeS_User enters UserName and Password
+    Then UeS_User displayed Login Successfully
+    When UeS_User is on Home page and click on Quotes and then select New Quote
+    And UeS_User is select the state as "<State>" and Fill all the details of the Quote Setup window and click on NEXT
+    And UeS_User is select all coverages and enter the COBRA employees as "<COBRA>" then Fill all the details on Quote Setup page and click on next
+    And UeS_User is select Class Type as "<Class Type>",enter Employee Age and Salary with Dependents in Census page and click on next
+    And UeS_User is Select the Plans from Medical Plans Page and click on next
+    And UeS_User is Select the Plans from Dental Plans Page and click on next
+    And UeS_User is Select the Plans from Vision Plans Page and click on next
+    And UeS_User is Select the Plans from Life Plans Page and click on next
+    And UeS_User is Select the Plans Supplemental Employee Life/AD&D Plans Page and click on NEXT button
+    And UeS_User is Select the Plans Supplemental Dependent Life/AD&D Plans Page and click on NEXT button
+    Then UeS_User select plan codes from Disability Plan Information table and click on NEXT button in Short Term Disability Plans page
+    And UeS_User select plan codes from Disability Plan Information table and click on NEXT button in Long Term Disability Plans page
+    And UeS_User Add OUTPUT OPTIONS as consolidateFootnotes and includePremiumSummary then click GENERATE FINAL PROPOSAL button on Proposal Information page
+    And Ues_User is click on OK button from Are you sure you want to generate the final proposal popup window
+    Then UeS_User is verify GENERATE FINAL PROPOSAL PDf is displayed successfully
+
+    Examples: 
+      | FileName    |  | TestCaseID |  | State |  | COBRA |  | Class Type |
+      | Quote_TC_59 |  | TC_59      |  | TX    |  |     2 |  | COBRA      |
+
+  @Generate_FinalProposal_AllCoverages_PDF_EXCEL
+  Scenario Outline: "<TestCaseID>" Generate final proposal and verify PDF,EXCEL successfully displayed with census includng EEs with salary info/with dependents
+    When Flow_Fetch fileName "<FileName>" and testCaseID "<TestCaseID>" are captured
+    Given Flow_Fetch Data from excel Sheet for "<TestCaseID>"
+    Given UeS_User is on Home Page
+    When UeS_User Navigate to LogIn Page
+    And UeS_User enters UserName and Password
+    Then UeS_User displayed Login Successfully
+    When UeS_User is on Home page and click on Quotes and then select New Quote
+    And UeS_User is select the state as "<State>" and Fill all the details of the Quote Setup window and click on NEXT
+    And UeS_User is select all coverages and enter the COBRA employees as "<COBRA>" then Fill all the details on Quote Setup page and click on next
+    And UeS_User is select Class Type as "<Class Type>",enter Employee Age and Salary with Dependents in Census page and click on next
+    And UeS_User is Select the Plans from Medical Plans Page and click on next
+    And UeS_User is Select the Plans from Dental Plans Page and click on next
+    And UeS_User is Select the Plans from Vision Plans Page and click on next
+    And UeS_User is Select the Plans from Life Plans Page and click on next
+    And UeS_User is Select the Plans Supplemental Employee Life/AD&D Plans Page and click on NEXT button
+    And UeS_User is Select the Plans Supplemental Dependent Life/AD&D Plans Page and click on NEXT button
+    Then UeS_User select plan codes from Disability Plan Information table and click on NEXT button in Short Term Disability Plans page
+    And UeS_User select plan codes from Disability Plan Information table and click on NEXT button in Long Term Disability Plans page
+    And UeS_User Add OUTPUT OPTIONS as consolidateFootnotes and includePremiumSummary then click GENERATE FINAL PROPOSAL button on Proposal Information page
+    And Ues_User is click on OK button from Are you sure you want to generate the final proposal popup window
+    Then UeS_User is verify GENERATE FINAL PROPOSAL PDF and also EXCEL is displayed successfully
+
+    Examples: 
+      | FileName    |  | TestCaseID |  | State |  | COBRA |  | Class Type |
+      | Quote_TC_60 |  | TC_60      |  | TX    |  |     2 |  | COBRA      |
+
   @Testing
   Scenario Outline: "<TestCaseID>" Testing
     When Flow_Fetch fileName "<FileName>" and testCaseID "<TestCaseID>" are captured
