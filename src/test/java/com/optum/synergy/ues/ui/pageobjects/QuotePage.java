@@ -1,6 +1,8 @@
 package com.optum.synergy.ues.ui.pageobjects;
 
 import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -143,9 +145,9 @@ public class QuotePage {
 		common = new CommonLibrary();
 		utility.waitForVisibilityOfWebElement(uesUserName, driver);
 		// driver.findElement(uesUserName).sendKeys("roshanadmin05");
-		driver.findElement(uesUserName).sendKeys(autoProperties.getProperty("loginUserName_BFX"));
+		//driver.findElement(uesUserName).sendKeys(autoProperties.getProperty("loginUserName_BFX"));
 		// driver.findElement(uesUserName).sendKeys("roshankumar");
-		//driver.findElement(uesUserName).sendKeys(autoProperties.getProperty("loginUserName_STG"));
+		driver.findElement(uesUserName).sendKeys(autoProperties.getProperty("loginUserName_STG"));
 
 		utility.waitForVisibilityOfWebElement(uesPwd, driver);
 		// driver.findElement(uesPwd).sendKeys("Computer$4");
@@ -774,24 +776,9 @@ public class QuotePage {
 		executor.executeScript("arguments[0].click();", element);
 		Thread.sleep(15000);
 		
-		//String pwindow = driver.getWindowHandle();
-		/*utility.waitForNumberOfWindowsToEqual(2);
-		for (String winHandle : driver.getWindowHandles()) {
-			driver.switchTo().window(winHandle);
-			if (driver.switchTo().window(winHandle).getCurrentUrl().contains("proposalDocumentSetup")) {
-				System.out.println("proposalDocumentSetup PDF displayed successfully");
-				System.out.println("PDF URL :: " + driver.switchTo().window(winHandle).getCurrentUrl());
-				Thread.sleep(5000);
-				driver.switchTo().window(winHandle).close();
-				// driver.close();
-			}
-		}*/
-
-		/*driver.switchTo().window(pwindow);
-		Thread.sleep(1000);
-		driver.switchTo().frame("content");
-		Thread.sleep(1000);*/
-
+		
+		
+		
 	}
 
 	public void loginUeS(String usrname, String pwd) throws InterruptedException {
@@ -5136,7 +5123,8 @@ public class QuotePage {
 		executor.executeScript("arguments[0].click();", element);
 		Thread.sleep(5000);
 	}
-	public void censusPage_COBRA(WebDriver driver,String empCOBRA) throws InterruptedException, IOException {
+
+	public void censusPage_COBRA(WebDriver driver, String empCOBRA) throws InterruptedException, IOException {
 		QuotePage.verifyUeSLogos(driver);
 		Thread.sleep(1000);
 		String cencusPage = ".//*[@id='census-form']/table[1]/tbody/tr[2]/td[1]";
@@ -5209,13 +5197,19 @@ public class QuotePage {
 					By.xpath("//input[@name='censusDetailInformationForm[" + i + "].dependentChildren[0].age']"))
 					.sendKeys(Integer.toString(ChildAge));
 			Thread.sleep(500);
-			
+
 			if (i < 11) {
-				driver.findElement(By.xpath("//input[@name='censusDetailInformationForm[" + i + "].transEmploymentStatus']")).sendKeys("A");
+				driver.findElement(
+						By.xpath("//input[@name='censusDetailInformationForm[" + i + "].transEmploymentStatus']"))
+						.sendKeys("A");
 			} else {
-				driver.findElement(By.xpath("//input[@name='censusDetailInformationForm[" + i + "].transEmploymentStatus']")).clear();
+				driver.findElement(
+						By.xpath("//input[@name='censusDetailInformationForm[" + i + "].transEmploymentStatus']"))
+						.clear();
 				Thread.sleep(500);
-				driver.findElement(By.xpath("//input[@name='censusDetailInformationForm[" + i + "].transEmploymentStatus']")).sendKeys("C");				
+				driver.findElement(
+						By.xpath("//input[@name='censusDetailInformationForm[" + i + "].transEmploymentStatus']"))
+						.sendKeys("C");
 			}
 
 			driver.findElement(By.xpath("//input[@name='censusDetailInformationForm[" + i + "].annualSalary']"))
@@ -5223,11 +5217,102 @@ public class QuotePage {
 			Thread.sleep(500);
 			j = j + 1000;
 		}
-		
+
 		element = driver.findElement(censussubmitNext);
 		executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].click();", element);
 		Thread.sleep(7000);
+	}
+	
+	public void click_CheckBoxes_Footnotes_PremiumSummary_btn_GENERATEFINALPROPOSAL(WebDriver driver)
+			throws InterruptedException {
+		element = driver.findElement(By.name("consolidateFootnotes"));
+		executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", element);
+		Thread.sleep(1000);
+
+		element = driver.findElement(By.name("includePremiumSummary"));
+		executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", element);
+		Thread.sleep(2000);
+
+		driver.findElement(By.xpath("//input[@name='submitGenerateProposal' and @value='GENERATE FINAL PROPOSAL >']"))
+				.sendKeys(Keys.ENTER);
+		Thread.sleep(2000);
+	}
+
+	public void accept_Alert_OK(WebDriver driver) {
+		Boolean popupStatus = utility.isAlertPresent(driver);
+		if (popupStatus == true) {
+			Alert alert = driver.switchTo().alert();
+			System.out.println("ALert..." + alert.getText());
+			System.out.println("Goes to Accept");
+			alert.accept();
+		}
+	}
+	
+	public void verify_PDF(WebDriver driver) throws InterruptedException{
+		Thread.sleep(15000);
+		//String pwindow = driver.getWindowHandle();
+		utility.waitForNumberOfWindowsToEqual(2);
+		for (String winHandle : driver.getWindowHandles()) {
+			driver.switchTo().window(winHandle);
+			if (driver.switchTo().window(winHandle).getCurrentUrl().contains("proposalDocumentSetup")) {
+				System.out.println("proposalDocumentSetup PDF displayed successfully");
+				System.out.println("PDF URL :: " + driver.switchTo().window(winHandle).getCurrentUrl());
+				Thread.sleep(5000);
+				driver.switchTo().window(winHandle).close();
+				// driver.close();
+			}
+		}
+
+		/*driver.switchTo().window(pwindow);
+		Thread.sleep(1000);
+		driver.switchTo().frame("content");
+		Thread.sleep(1000);*/
+	}
+
+	public void verify_PDF_EXCEL(WebDriver driver) throws InterruptedException, AWTException{
+		Thread.sleep(15000);
+		String pwindow = driver.getWindowHandle();
+		utility.waitForNumberOfWindowsToEqual(2);
+		for (String winHandle : driver.getWindowHandles()) {
+			driver.switchTo().window(winHandle);
+			if (driver.switchTo().window(winHandle).getCurrentUrl().contains("proposalDocumentSetup")) {
+				System.out.println("proposalDocumentSetup PDF displayed successfully");
+				System.out.println("PDF URL :: " + driver.switchTo().window(winHandle).getCurrentUrl());
+				Thread.sleep(5000);
+				driver.switchTo().window(winHandle).close();
+				// driver.close();
+			}
+		}
+
+		driver.switchTo().window(pwindow);
+		Thread.sleep(1000);
+		driver.switchTo().frame("content");
+		Thread.sleep(1000);
+		
+		
+		element = driver.findElement(By.xpath("//input[@value='EXPORT RATES AND PLANS' and @alt='View Export']"));
+		executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", element);
+		Thread.sleep(2000);
+		
+		Robot robot = new Robot();  // Robot class throws AWT Exception	
+        Thread.sleep(2000); // Thread.sleep throws InterruptedException	
+       // robot.keyPress(KeyEvent.VK_DOWN);  // press arrow down key of keyboard to navigate and select Save radio button	
+        
+        Thread.sleep(2000);  // sleep has only been used to showcase each event separately	
+        robot.keyRelease(KeyEvent.VK_ENTER);
+       // robot.keyPress(KeyEvent.VK_TAB);	
+       // Thread.sleep(2000);	
+        //robot.keyPress(KeyEvent.VK_TAB);	
+        //Thread.sleep(2000);	
+       // robot.keyPress(KeyEvent.VK_TAB);	
+      //  Thread.sleep(2000);	
+      //  robot.keyPress(KeyEvent.VK_ENTER);	
+      //  Thread.sleep(2000);
+       // robot.keyRelease(KeyEvent.VK_ENTER);
 	}
 
 
