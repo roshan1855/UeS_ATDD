@@ -87,8 +87,8 @@ public class QuoteDef {
 	@Given("^UeS_User is on Home Page$")
 	public void ues_user_is_on_Home_Page() throws Throwable {
 		// driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-		driver.get(autoProperties.getProperty("BFX_URL"));
-		//driver.get(autoProperties.getProperty("STAGE_URL"));
+		//driver.get(autoProperties.getProperty("BFX_URL"));
+		driver.get(autoProperties.getProperty("STAGE_URL"));
 		utility.takeScreenShot(driver, "Homepage" + testCaseID);
 		utility.GenerateReport("Quote", "", "info", "Execution Started.User is on the login Page",
 				"Homepage" + testCaseID);
@@ -662,6 +662,28 @@ public class QuoteDef {
 	@When("^UeS_User is select Class Type as \"([^\"]*)\",enter Employee Age and Salary with Dependents in Census page and click on next$")
 	public void ues_userIsSelectClassTypeAsEnterEmployeeAgeAndSalaryWithDependentsInCensusPageAndClickOnNext(String arg1) throws Throwable {
 		quotepage.censusPage_COBRA(driver,arg1);
+	}
+	
+	@Then("^UeS_User Add OUTPUT OPTIONS as consolidateFootnotes and includePremiumSummary then click GENERATE FINAL PROPOSAL button on Proposal Information page$")
+	public void ues_userAddOUTPUTOPTIONSAsConsolidateFootnotesAndIncludePremiumSummaryThenClickGENERATEFINALPROPOSALButtonOnProposalInformationPage() throws Throwable {
+		quotepage.click_CheckBoxes_Footnotes_PremiumSummary_btn_GENERATEFINALPROPOSAL(driver);
+	}
+
+	@Then("^Ues_User is click on OK button from Are you sure you want to generate the final proposal popup window$")
+	public void ues_userIsClickOnOKButtonFromAreYouSureYouWantToGenerateTheFinalProposalPopupWindow() throws Throwable {
+		quotepage.accept_Alert_OK(driver);
+	}
+
+	@Then("^UeS_User is verify Preview Proposal PDf is displayed successfully$")
+	public void ues_userIsVerifyPreviewProposalPDfIsDisplayedSuccessfully() throws Throwable {
+		quotepage.verify_PDF(driver);
+		quotepage.tearDown(driver);
+	}
+	
+	@Then("^UeS_User is verify Preview Proposal PDF and also EXCEL is displayed successfully$")
+	public void ues_userIsPreviewProposalPDFAndAlsoEXCELIsDisplayedSuccessfully() throws Throwable {
+		quotepage.verify_PDF_EXCEL(driver);
+		quotepage.tearDown(driver);
 	}
 	
 }
