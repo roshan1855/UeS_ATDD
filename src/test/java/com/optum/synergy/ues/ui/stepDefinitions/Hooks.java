@@ -128,11 +128,16 @@ public class Hooks {
 
 			DesiredCapabilities capabilities = null;
 			capabilities = DesiredCapabilities.internetExplorer();
-			capabilities.setCapability("platform", "Windows 7");
+			capabilities.setCapability("platform", "Windows 10");
 			capabilities.setCapability("version", "11.0");
-			capabilities.setCapability("parent-tunnel", "sauce_admin");
-			capabilities.setCapability("tunnelIdentifier", "OptumSharedTunnel-Stg");
-			capabilities.setCapability("tunnelIdentifier", "OptumSharedTunnel-Prd");
+			//capabilities.setCapability("parent-tunnel", "sauce_admin");
+			//capabilities.setCapability("tunnelIdentifier", "OptumSharedTunnel-Stg");
+			//capabilities.setCapability("tunnelIdentifier", "OptumSharedTunnel-Prd");
+					
+			capabilities.setCapability("parent-tunnel", "optumtest");
+			capabilities.setCapability("tunnelIdentifier", "Optum-Stage");
+			//capabilities.setCapability("tunnelIdentifier", "Optum-Prd");
+			
 			//capabilities.setCapability("prerun", prerunParams);
 
 			// capabilities.setCapability("name", scenarioName);
