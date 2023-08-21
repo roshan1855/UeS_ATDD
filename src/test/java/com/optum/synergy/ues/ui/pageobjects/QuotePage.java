@@ -1,7 +1,9 @@
 package com.optum.synergy.ues.ui.pageobjects;
 
 import java.awt.AWTException;
+import java.awt.HeadlessException;
 import java.awt.Robot;
+import java.awt.datatransfer.UnsupportedFlavorException;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -1050,6 +1052,50 @@ public class QuotePage {
 		QuotePage.verifyPageInfoTable(driver, quoteSetUpInfoTable, "Quote Information");
 
 		QuotePage.verifyFooterLinks(driver);
+		
+		String pwindow = driver.getWindowHandle();
+
+        utility.waitForVisibilityOfWebElement(By.xpath("//a[@href='javascript:openAccountExecSearch();']/img"), driver);
+
+       element = driver.findElement(By.xpath("//a[@href='javascript:openAccountExecSearch();']/img"));
+       executor = (JavascriptExecutor) driver;
+       executor.executeScript("arguments[0].click();", element);
+       Thread.sleep(10000);
+       //utility.waitForNumberOfWindowsToEqual(2);
+       System.out.println("Outside for ::" + driver.getWindowHandles().size());
+       for (String winHandle : driver.getWindowHandles()) {
+              System.out.println("Inside for ::" + driver.getWindowHandles().size());
+              driver.switchTo().window(winHandle);
+              if (driver.switchTo().window(winHandle).getCurrentUrl().contains("accountExecutiveSearch")) {
+                     System.out.println("Account Executive Search web page displayed successfully");
+                     System.out.println(
+                                  "Account Executive Search page URL :: " + driver.switchTo().window(winHandle).getCurrentUrl());
+
+                     driver.findElement(By.xpath("//input[@name='lastName']")).sendKeys("Smith");
+                     Thread.sleep(1000);
+
+                     By btnSicInputSubmit = By.xpath("//input[@name='submitSearch' or @value='SEARCH']");
+                     element = driver.findElement(btnSicInputSubmit);
+                     executor = (JavascriptExecutor) driver;
+                     executor.executeScript("arguments[0].click();", element);
+                     Thread.sleep(2000);
+
+                     element = driver.findElement(By.linkText("Select"));
+                     executor = (JavascriptExecutor) driver;
+                     executor.executeScript("arguments[0].click();", element);
+                     Thread.sleep(2000);
+                     // driver.switchTo().window(handle1).close();
+                     // driver.close();
+              }
+       }
+
+       driver.switchTo().window(pwindow);
+       Thread.sleep(1000);
+       driver.switchTo().frame("content");
+       Thread.sleep(1000);
+
+		
+		
 
 		Select quoteType = new Select(driver.findElement(quoteSetUpquoteType));
 		// quoteType.selectByVisibleText("New Business");
@@ -5314,6 +5360,862 @@ public class QuotePage {
       //  Thread.sleep(2000);
        // robot.keyRelease(KeyEvent.VK_ENTER);
 	}
+	
+	public void btnPreviewProposal(WebDriver driver) throws InterruptedException, AWTException{
+		// Quote Window
+				Thread.sleep(2000);
+				driver.switchTo().defaultContent();
+				Thread.sleep(1000);
+				driver.switchTo().frame("content");
+				Thread.sleep(2000);
+
+				SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+				Date date = new Date();
+				// System.out.println(formatter.format(date));
+
+				String str = formatter.format(date);
+				String[] arrOfStr = str.split("/");
+
+				driver.findElement(quotepolicyEffDateMonth).sendKeys(arrOfStr[1]);
+				Thread.sleep(500);
+
+				if (arrOfStr[0].compareTo("16") > 0) {
+					driver.findElement(quotepolicyEffDateDay).sendKeys("15");
+					Thread.sleep(500);
+				} else {
+					driver.findElement(quotepolicyEffDateDay).sendKeys("01");
+					Thread.sleep(500);
+				}
+
+				driver.findElement(quotepolicyEffDateYear).sendKeys("19");
+				Thread.sleep(500);
+
+				Select cominfoState = new Select(driver.findElement(By.name("state")));
+				cominfoState.selectByVisibleText("CA");
+				Thread.sleep(500);
+
+				driver.findElement(quoteemployeeCount).clear();
+				driver.findElement(quoteemployeeCount).sendKeys("8");
+				Thread.sleep(500);
+
+				driver.findElement(quoteatneCount1).clear();
+				driver.findElement(quoteatneCount1).sendKeys("8");
+				Thread.sleep(1000);
+
+				element = driver.findElement(quoteNextBtn);
+				executor = (JavascriptExecutor) driver;
+				executor.executeScript("arguments[0].click();", element);
+				Thread.sleep(8000);
+				
+				String pwindow = driver.getWindowHandle();
+
+				utility.waitForVisibilityOfWebElement(By.xpath("//a[@href='javascript:openAccountExecSearch();']/img"), driver);
+
+				element = driver.findElement(By.xpath("//a[@href='javascript:openAccountExecSearch();']/img"));
+				executor = (JavascriptExecutor) driver;
+				executor.executeScript("arguments[0].click();", element);
+				Thread.sleep(10000);
+				//utility.waitForNumberOfWindowsToEqual(2);
+				System.out.println("Outside for ::" + driver.getWindowHandles().size());
+				for (String winHandle : driver.getWindowHandles()) {
+					System.out.println("Inside for ::" + driver.getWindowHandles().size());
+					driver.switchTo().window(winHandle);
+					if (driver.switchTo().window(winHandle).getCurrentUrl().contains("accountExecutiveSearch")) {
+						System.out.println("Account Executive Search web page displayed successfully");
+						System.out.println(
+								"Account Executive Search page URL :: " + driver.switchTo().window(winHandle).getCurrentUrl());
+
+						driver.findElement(By.xpath("//input[@name='lastName']")).sendKeys("Smith");
+						Thread.sleep(1000);
+
+						By btnSicInputSubmit = By.xpath("//input[@name='submitSearch' or @value='SEARCH']");
+						element = driver.findElement(btnSicInputSubmit);
+						executor = (JavascriptExecutor) driver;
+						executor.executeScript("arguments[0].click();", element);
+						Thread.sleep(5000);
+
+						element = driver.findElement(By.linkText("Select"));
+						executor = (JavascriptExecutor) driver;
+						executor.executeScript("arguments[0].click();", element);
+						Thread.sleep(2000);
+						// driver.switchTo().window(handle1).close();
+						// driver.close();
+					}
+				}
+
+				driver.switchTo().window(pwindow);
+				Thread.sleep(1000);
+				driver.switchTo().frame("content");
+				Thread.sleep(1000);
+
+
+				// Quote SetUp page
+				// String pwindow = driver.getWindowHandle();
+				Select quoteType = new Select(driver.findElement(quoteSetUpquoteType));
+				quoteType.selectByVisibleText("New Business");
+				Thread.sleep(500);
+				
+				element = driver.findElement(ckhBoxProductTypeDental);
+				executor = (JavascriptExecutor) driver;
+				executor.executeScript("arguments[0].click();", element);
+				Thread.sleep(500);
+
+				element = driver.findElement(ckhBoxProductTypeLife);
+				executor = (JavascriptExecutor) driver;
+				executor.executeScript("arguments[0].click();", element);
+				Thread.sleep(500);
+
+				element = driver.findElement(ckhBoxProductTypeStd);
+				executor = (JavascriptExecutor) driver;
+				executor.executeScript("arguments[0].click();", element);
+				Thread.sleep(500);
+
+				element = driver.findElement(ckhBoxProductTypeLtd);
+				executor = (JavascriptExecutor) driver;
+				executor.executeScript("arguments[0].click();", element);
+				Thread.sleep(500);
+
+				element = driver.findElement(ckhBoxProductTypeEmpSupLife);
+				executor = (JavascriptExecutor) driver;
+				executor.executeScript("arguments[0].click();", element);
+				Thread.sleep(500);
+
+				element = driver.findElement(ckhBoxProductTypeDepSupLife);
+				executor = (JavascriptExecutor) driver;
+				executor.executeScript("arguments[0].click();", element);
+				Thread.sleep(500);
+				
+				driver.findElement(quoteSetUpquoteCompanyName).sendKeys("Optum");
+				Thread.sleep(500);
+
+				driver.findElement(txtBoxstreetAddress).sendKeys("Hyderabad");
+				Thread.sleep(500);
+
+				driver.findElement(txtBoxcityAddress).sendKeys("Site1");
+				Thread.sleep(500);
+
+				// Select stateSel=new Select(driver.findElement(dropDownState));
+				// stateSel.selectByVisibleText("CA");
+
+				driver.findElement(txtBoxzipCode).sendKeys("90001");
+				Thread.sleep(500);
+
+				driver.findElement(txtBoxSICCODE).sendKeys("9111");
+				Thread.sleep(500);
+
+				driver.findElement(totNumActiveEmployeesApplying).clear();
+				driver.findElement(totNumActiveEmployeesApplying).sendKeys("8");
+				Thread.sleep(500);
+
+				driver.findElement(txtBoxquoteTotalNumEmployees).sendKeys("8");
+				Thread.sleep(500);
+
+				element = driver.findElement(radioBtnMedicarePriPayer);
+				executor = (JavascriptExecutor) driver;
+				executor.executeScript("arguments[0].click();", element);
+				Thread.sleep(1000);
+
+				utility.waitForVisibilityOfWebElement(btnquoteSetUpNext, driver);
+				element = driver.findElement(btnquoteSetUpNext);
+				executor = (JavascriptExecutor) driver;
+				executor.executeScript("arguments[0].click();", element);
+				Thread.sleep(8000);
+
+				// driver.findElement(By.xpath(".//*[@id='census-form']/table[8]/tbody/tr[2]/td/table/tbody/tr[5]"));
+				List<WebElement> ele4 = driver
+						.findElements(By.xpath(".//*[@id='census-form']/table[8]/tbody/tr[2]/td/table/tbody/tr"));
+				int count1 = ele4.size();
+				Thread.sleep(1000);
+
+				System.out.println("Row Count :: " + count1 + " Row Count  ::" + (count1 - 7));
+
+				for (int i = 0; i <= count1 - 7; i++) {
+					driver.findElement(By.xpath("//input[@name='censusDetailInformationForm[" + i + "].employeeAge']"))
+							.sendKeys("23");
+					Thread.sleep(1000);
+				}
+
+				Thread.sleep(5000);
+				//utility.waitForVisibilityOfWebElement(censussubmitNext, driver);
+				element = driver.findElement(censussubmitNext);
+				executor = (JavascriptExecutor) driver;
+				executor.executeScript("arguments[0].click();", element);
+				Thread.sleep(18000);
+
+				//utility.waitForVisibilityOfWebElement(chkBoxmedicalInPackageForm, driver);
+				//element = driver.findElement(chkBoxmedicalInPackageForm);
+				element=driver.findElement(By.name("medicalInPackageForm[0].packageSelected"));
+				executor = (JavascriptExecutor) driver;
+				executor.executeScript("arguments[0].click();", element);
+				Thread.sleep(1000);
+				
+				utility.waitForVisibilityOfWebElement(btnMedicalPlansubmitNext, driver);
+				element = driver.findElement(btnMedicalPlansubmitNext);
+				executor = (JavascriptExecutor) driver;
+				executor.executeScript("arguments[0].click();", element);
+				Thread.sleep(7000);
+
+				//utility.waitForVisibilityOfWebElement(btnOptionalMedicalPlansubmitNext, driver);
+				element = driver.findElement(btnOptionalMedicalPlansubmitNext);
+				executor = (JavascriptExecutor) driver;
+				executor.executeScript("arguments[0].click();", element);
+				Thread.sleep(10000);
+
+				//utility.waitForVisibilityOfWebElement(btnVisionPlansubmitNext, driver);
+				element = driver.findElement(btnVisionPlansubmitNext);
+				executor = (JavascriptExecutor) driver;
+				executor.executeScript("arguments[0].click();", element);
+				Thread.sleep(18000);
+
+				//utility.waitForVisibilityOfWebElement(btnPreviewProposal, driver);
+				element = driver.findElement(btnPreviewProposal);
+				System.out.println("PDF Value :" + element.getAttribute("value"));
+				// System.out.println("PDF Value :"+element.getText());
+
+				if (element.getAttribute("value").trim().contains("PREVIEW PROPOSAL")) {
+					System.out.println("Proposal Preview PDF displayed successfully");
+					Thread.sleep(1000);
+					// driver.switchTo().window(handle1).close();
+				}
+
+				// driver.findElement(btnPreviewProposal).sendKeys(Keys.ENTER,Keys.CONTROL+"t");
+				if (driver.getPageSource().contains("proposalDocumentSetup")){
+					System.out.println("proposalDocumentSetup displayed successfully on Proposal Information page");
+				}
+				else{
+					System.out.println("proposalDocumentSetup not displayed on Proposal Information page");
+				}
+				
+				element = driver.findElement(btnPreviewProposal);
+				executor = (JavascriptExecutor) driver;
+				executor.executeScript("arguments[0].click();", element);
+				Thread.sleep(15000);
+				//driver.findElement(btnPreviewProposal).sendKeys(Keys.CONTROL,Keys.ADD);
+				//Thread.sleep(5000);
+				
+				if (driver.getPageSource().contains("proposalDocumentSetup")){
+					System.out.println("proposalDocumentSetup displayed successfully on Proposal Information page");
+				}
+				else{
+					System.out.println("proposalDocumentSetup not displayed on Proposal Information page");
+				}
+	
+				
+				String pwindow1 = driver.getWindowHandle();
+				//utility.waitForNumberOfWindowsToEqual(2);
+				System.out.println("Outside for ::" + driver.getWindowHandles().size());
+				for (String winHandle : driver.getWindowHandles()) {
+					System.out.println("Inside for ::" + driver.getWindowHandles().size());
+					driver.switchTo().window(winHandle);
+					if (driver.switchTo().window(winHandle).getCurrentUrl().contains("proposalDocumentSetup")) {
+						System.out.println("proposalDocumentSetup PDF displayed successfully");
+						System.out.println("PDF URL :: " + driver.switchTo().window(winHandle).getCurrentUrl());
+						Thread.sleep(5000);
+						driver.switchTo().window(winHandle).close();
+						// driver.close();
+					}
+					else{
+						System.out.println("URL :: " + driver.switchTo().window(winHandle).getCurrentUrl());
+					}
+				}
+
+				Thread.sleep(5000);
+				driver.switchTo().window(pwindow1);
+				Thread.sleep(1000);
+				driver.switchTo().frame("content");
+				Thread.sleep(1000);
+	}
+	
+	public void btnGenerateFinalProsal(WebDriver driver) throws InterruptedException, AWTException {
+		// Quote Window
+		Thread.sleep(2000);
+		driver.switchTo().defaultContent();
+		Thread.sleep(1000);
+		driver.switchTo().frame("content");
+		Thread.sleep(2000);
+
+		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+		Date date = new Date();
+		// System.out.println(formatter.format(date));
+
+		String str = formatter.format(date);
+		String[] arrOfStr = str.split("/");
+
+		driver.findElement(quotepolicyEffDateMonth).sendKeys(arrOfStr[1]);
+		Thread.sleep(500);
+
+		if (arrOfStr[0].compareTo("16") > 0) {
+			driver.findElement(quotepolicyEffDateDay).sendKeys("15");
+			Thread.sleep(500);
+		} else {
+			driver.findElement(quotepolicyEffDateDay).sendKeys("01");
+			Thread.sleep(500);
+		}
+
+		driver.findElement(quotepolicyEffDateYear).sendKeys("19");
+		Thread.sleep(500);
+
+		Select cominfoState = new Select(driver.findElement(By.name("state")));
+		cominfoState.selectByVisibleText("CA");
+		Thread.sleep(500);
+
+		driver.findElement(quoteemployeeCount).clear();
+		driver.findElement(quoteemployeeCount).sendKeys("8");
+		Thread.sleep(500);
+
+		driver.findElement(quoteatneCount1).clear();
+		driver.findElement(quoteatneCount1).sendKeys("8");
+		Thread.sleep(1000);
+
+		element = driver.findElement(quoteNextBtn);
+		executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", element);
+		Thread.sleep(5000);
+
+		String pwindow = driver.getWindowHandle();
+
+		utility.waitForVisibilityOfWebElement(By.xpath("//a[@href='javascript:openAccountExecSearch();']/img"), driver);
+
+		element = driver.findElement(By.xpath("//a[@href='javascript:openAccountExecSearch();']/img"));
+		executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", element);
+		Thread.sleep(10000);
+		// utility.waitForNumberOfWindowsToEqual(2);
+		System.out.println("Outside for ::" + driver.getWindowHandles().size());
+		for (String winHandle : driver.getWindowHandles()) {
+			System.out.println("Inside for ::" + driver.getWindowHandles().size());
+			driver.switchTo().window(winHandle);
+			if (driver.switchTo().window(winHandle).getCurrentUrl().contains("accountExecutiveSearch")) {
+				System.out.println("Account Executive Search web page displayed successfully");
+				System.out.println(
+						"Account Executive Search page URL :: " + driver.switchTo().window(winHandle).getCurrentUrl());
+
+				driver.findElement(By.xpath("//input[@name='lastName']")).sendKeys("Smith");
+				Thread.sleep(1000);
+
+				By btnSicInputSubmit = By.xpath("//input[@name='submitSearch' or @value='SEARCH']");
+				element = driver.findElement(btnSicInputSubmit);
+				executor = (JavascriptExecutor) driver;
+				executor.executeScript("arguments[0].click();", element);
+				Thread.sleep(5000);
+
+				element = driver.findElement(By.linkText("Select"));
+				executor = (JavascriptExecutor) driver;
+				executor.executeScript("arguments[0].click();", element);
+				Thread.sleep(2000);
+				// driver.switchTo().window(handle1).close();
+				// driver.close();
+			}
+		}
+
+		driver.switchTo().window(pwindow);
+		Thread.sleep(1000);
+		driver.switchTo().frame("content");
+		Thread.sleep(1000);
+
+		// Quote SetUp page
+		// String pwindow = driver.getWindowHandle();
+		Select quoteType = new Select(driver.findElement(quoteSetUpquoteType));
+		quoteType.selectByVisibleText("New Business");
+		Thread.sleep(500);
+
+		element = driver.findElement(ckhBoxProductTypeDental);
+		executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", element);
+		Thread.sleep(500);
+
+		element = driver.findElement(ckhBoxProductTypeLife);
+		executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", element);
+		Thread.sleep(500);
+
+		element = driver.findElement(ckhBoxProductTypeStd);
+		executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", element);
+		Thread.sleep(500);
+
+		element = driver.findElement(ckhBoxProductTypeLtd);
+		executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", element);
+		Thread.sleep(500);
+
+		element = driver.findElement(ckhBoxProductTypeEmpSupLife);
+		executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", element);
+		Thread.sleep(500);
+
+		element = driver.findElement(ckhBoxProductTypeDepSupLife);
+		executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", element);
+		Thread.sleep(500);
+
+		driver.findElement(quoteSetUpquoteCompanyName).sendKeys("Optum");
+		Thread.sleep(500);
+
+		driver.findElement(txtBoxstreetAddress).sendKeys("Hyderabad");
+		Thread.sleep(500);
+
+		driver.findElement(txtBoxcityAddress).sendKeys("Site1");
+		Thread.sleep(500);
+
+		// Select stateSel=new Select(driver.findElement(dropDownState));
+		// stateSel.selectByVisibleText("CA");
+
+		driver.findElement(txtBoxzipCode).sendKeys("90001");
+		Thread.sleep(500);
+
+		driver.findElement(txtBoxSICCODE).sendKeys("9111");
+		Thread.sleep(500);
+
+		driver.findElement(totNumActiveEmployeesApplying).clear();
+		driver.findElement(totNumActiveEmployeesApplying).sendKeys("8");
+		Thread.sleep(500);
+
+		driver.findElement(txtBoxquoteTotalNumEmployees).sendKeys("8");
+		Thread.sleep(500);
+
+		element = driver.findElement(radioBtnMedicarePriPayer);
+		executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", element);
+		Thread.sleep(1000);
+
+		utility.waitForVisibilityOfWebElement(btnquoteSetUpNext, driver);
+		element = driver.findElement(btnquoteSetUpNext);
+		executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", element);
+		Thread.sleep(8000);
+
+		// driver.findElement(By.xpath(".//*[@id='census-form']/table[8]/tbody/tr[2]/td/table/tbody/tr[5]"));
+		List<WebElement> ele4 = driver
+				.findElements(By.xpath(".//*[@id='census-form']/table[8]/tbody/tr[2]/td/table/tbody/tr"));
+		int count1 = ele4.size();
+		Thread.sleep(1000);
+
+		System.out.println("Row Count :: " + count1 + " Row Count  ::" + (count1 - 7));
+
+		for (int i = 0; i <= count1 - 7; i++) {
+			driver.findElement(By.xpath("//input[@name='censusDetailInformationForm[" + i + "].employeeAge']"))
+					.sendKeys("23");
+			Thread.sleep(1000);
+		}
+
+		Thread.sleep(1000);
+		utility.waitForVisibilityOfWebElement(censussubmitNext, driver);
+		element = driver.findElement(censussubmitNext);
+		executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", element);
+		Thread.sleep(18000);
+
+		// utility.waitForVisibilityOfWebElement(chkBoxmedicalInPackageForm,
+		// driver);
+		// element = driver.findElement(chkBoxmedicalInPackageForm);
+		element = driver.findElement(By.name("medicalInPackageForm[0].packageSelected"));
+		executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", element);
+		Thread.sleep(1000);
+
+		utility.waitForVisibilityOfWebElement(btnMedicalPlansubmitNext, driver);
+		element = driver.findElement(btnMedicalPlansubmitNext);
+		executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", element);
+		Thread.sleep(7000);
+
+		utility.waitForVisibilityOfWebElement(btnOptionalMedicalPlansubmitNext, driver);
+		element = driver.findElement(btnOptionalMedicalPlansubmitNext);
+		executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", element);
+		Thread.sleep(10000);
+
+		utility.waitForVisibilityOfWebElement(btnVisionPlansubmitNext, driver);
+		element = driver.findElement(btnVisionPlansubmitNext);
+		executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", element);
+		Thread.sleep(18000);
+
+		// utility.waitForVisibilityOfWebElement(btnPreviewProposal, driver);
+		element = driver.findElement(btnPreviewProposal);
+		System.out.println("PDF Value :" + element.getAttribute("value"));
+		// System.out.println("PDF Value :"+element.getText());
+
+		if (element.getAttribute("value").trim().contains("PREVIEW PROPOSAL")) {
+			System.out.println("Proposal Preview PDF displayed successfully");
+			Thread.sleep(1000);
+			// driver.switchTo().window(handle1).close();
+		}
+
+		// driver.findElement(btnPreviewProposal).sendKeys(Keys.ENTER,Keys.CONTROL+"t");
+		if (driver.getPageSource().contains("proposalDocumentSetup")) {
+			System.out.println("proposalDocumentSetup displayed successfully on Proposal Information page");
+		} else {
+			System.out.println("proposalDocumentSetup not displayed on Proposal Information page");
+		}
+
+		element = driver.findElement(By.name("consolidateFootnotes"));
+		executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", element);
+		Thread.sleep(1000);
+
+		element = driver.findElement(By.name("includePremiumSummary"));
+		executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", element);
+		Thread.sleep(2000);
+		
+		element=driver.findElement(By.name("quoteTrackingNumber"));
+		String quoteTrackingNumber=element.getAttribute("value");
+		System.out.println("Quote Tracking Number ::" +quoteTrackingNumber);
+
+		String pwindow1 = driver.getWindowHandle();
+		driver.findElement(By.xpath("//input[@name='submitGenerateProposal' and @value='GENERATE FINAL PROPOSAL >']"))
+				.sendKeys(Keys.ENTER);
+		Thread.sleep(5000);
+
+		Boolean popupStatus = utility.isAlertPresent(driver);
+		if (popupStatus == true) {
+			Alert alert = driver.switchTo().alert();
+			System.out.println("ALert..." + alert.getText());
+			if(alert.getText().contains(quoteTrackingNumber)){
+				System.out.println("Quote Tracking Number present in PDF generation confirmation window");
+			}
+			else{
+				System.out.println("Quote Tracking Number not present in PDF generation confirmation window");
+			}
+			System.out.println("Goes to Accept");
+			alert.accept();
+		}
+		Thread.sleep(15000);
+
+		 String pwindow11 = driver.getWindowHandle();
+	utility.waitForNumberOfWindowsToEqual(2);
+
+	 for (String winHandle : driver.getWindowHandles()) {
+		 driver.switchTo().window(winHandle); 
+		 if (driver.switchTo().window(winHandle).getCurrentUrl().contains(
+		 "proposalDocumentSetup")) {
+		 System.out.println("proposalDocumentSetup PDF displayed successfully"); 
+		 System.out.println("PDF URL :: " +
+		 driver.switchTo().window(winHandle).getCurrentUrl());
+		 Thread.sleep(5000); 
+		 driver.switchTo().window(winHandle).close(); 
+	
+		 }
+	}
+		 
+
+		/*Thread.sleep(5000);
+		driver.switchTo().window(pwindow11);
+		Thread.sleep(1000);
+		driver.switchTo().frame("content");
+		Thread.sleep(1000);*/
+
+		//driver.findElement(submitGenerateProposal).sendKeys(Keys.CONTROL , Keys.SUBTRACT);
+		}
+	
+	public void btnGenerateFinalProsal_ExportExcel(WebDriver driver) throws InterruptedException, AWTException, HeadlessException, UnsupportedFlavorException, IOException {
+		// Quote Window
+		Thread.sleep(2000);
+		driver.switchTo().defaultContent();
+		Thread.sleep(1000);
+		driver.switchTo().frame("content");
+		Thread.sleep(2000);
+
+		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+		Date date = new Date();
+		// System.out.println(formatter.format(date));
+
+		String str = formatter.format(date);
+		String[] arrOfStr = str.split("/");
+
+		driver.findElement(quotepolicyEffDateMonth).sendKeys(arrOfStr[1]);
+		Thread.sleep(500);
+
+		if (arrOfStr[0].compareTo("16") > 0) {
+			driver.findElement(quotepolicyEffDateDay).sendKeys("15");
+			Thread.sleep(500);
+		} else {
+			driver.findElement(quotepolicyEffDateDay).sendKeys("01");
+			Thread.sleep(500);
+		}
+
+		driver.findElement(quotepolicyEffDateYear).sendKeys("19");
+		Thread.sleep(500);
+
+		Select cominfoState = new Select(driver.findElement(By.name("state")));
+		cominfoState.selectByVisibleText("CA");
+		Thread.sleep(500);
+
+		driver.findElement(quoteemployeeCount).clear();
+		driver.findElement(quoteemployeeCount).sendKeys("8");
+		Thread.sleep(500);
+
+		driver.findElement(quoteatneCount1).clear();
+		driver.findElement(quoteatneCount1).sendKeys("8");
+		Thread.sleep(1000);
+
+		element = driver.findElement(quoteNextBtn);
+		executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", element);
+		Thread.sleep(5000);
+
+		String pwindow = driver.getWindowHandle();
+
+		utility.waitForVisibilityOfWebElement(By.xpath("//a[@href='javascript:openAccountExecSearch();']/img"), driver);
+
+		element = driver.findElement(By.xpath("//a[@href='javascript:openAccountExecSearch();']/img"));
+		executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", element);
+		Thread.sleep(10000);
+		// utility.waitForNumberOfWindowsToEqual(2);
+		System.out.println("Outside for ::" + driver.getWindowHandles().size());
+		for (String winHandle : driver.getWindowHandles()) {
+			System.out.println("Inside for ::" + driver.getWindowHandles().size());
+			driver.switchTo().window(winHandle);
+			if (driver.switchTo().window(winHandle).getCurrentUrl().contains("accountExecutiveSearch")) {
+				System.out.println("Account Executive Search web page displayed successfully");
+				System.out.println(
+						"Account Executive Search page URL :: " + driver.switchTo().window(winHandle).getCurrentUrl());
+
+				driver.findElement(By.xpath("//input[@name='lastName']")).sendKeys("Smith");
+				Thread.sleep(1000);
+
+				By btnSicInputSubmit = By.xpath("//input[@name='submitSearch' or @value='SEARCH']");
+				element = driver.findElement(btnSicInputSubmit);
+				executor = (JavascriptExecutor) driver;
+				executor.executeScript("arguments[0].click();", element);
+				Thread.sleep(5000);
+
+				element = driver.findElement(By.linkText("Select"));
+				executor = (JavascriptExecutor) driver;
+				executor.executeScript("arguments[0].click();", element);
+				Thread.sleep(2000);
+				// driver.switchTo().window(handle1).close();
+				// driver.close();
+			}
+		}
+
+		driver.switchTo().window(pwindow);
+		Thread.sleep(1000);
+		driver.switchTo().frame("content");
+		Thread.sleep(1000);
+
+		// Quote SetUp page
+		// String pwindow = driver.getWindowHandle();
+		Select quoteType = new Select(driver.findElement(quoteSetUpquoteType));
+		quoteType.selectByVisibleText("New Business");
+		Thread.sleep(500);
+
+		element = driver.findElement(ckhBoxProductTypeDental);
+		executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", element);
+		Thread.sleep(500);
+
+		element = driver.findElement(ckhBoxProductTypeLife);
+		executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", element);
+		Thread.sleep(500);
+
+		element = driver.findElement(ckhBoxProductTypeStd);
+		executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", element);
+		Thread.sleep(500);
+
+		element = driver.findElement(ckhBoxProductTypeLtd);
+		executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", element);
+		Thread.sleep(500);
+
+		element = driver.findElement(ckhBoxProductTypeEmpSupLife);
+		executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", element);
+		Thread.sleep(500);
+
+		element = driver.findElement(ckhBoxProductTypeDepSupLife);
+		executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", element);
+		Thread.sleep(500);
+
+		driver.findElement(quoteSetUpquoteCompanyName).sendKeys("Optum");
+		Thread.sleep(500);
+
+		driver.findElement(txtBoxstreetAddress).sendKeys("Hyderabad");
+		Thread.sleep(500);
+
+		driver.findElement(txtBoxcityAddress).sendKeys("Site1");
+		Thread.sleep(500);
+
+		// Select stateSel=new Select(driver.findElement(dropDownState));
+		// stateSel.selectByVisibleText("CA");
+
+		driver.findElement(txtBoxzipCode).sendKeys("90001");
+		Thread.sleep(500);
+
+		driver.findElement(txtBoxSICCODE).sendKeys("9111");
+		Thread.sleep(500);
+
+		driver.findElement(totNumActiveEmployeesApplying).clear();
+		driver.findElement(totNumActiveEmployeesApplying).sendKeys("8");
+		Thread.sleep(500);
+
+		driver.findElement(txtBoxquoteTotalNumEmployees).sendKeys("8");
+		Thread.sleep(500);
+
+		element = driver.findElement(radioBtnMedicarePriPayer);
+		executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", element);
+		Thread.sleep(1000);
+
+		utility.waitForVisibilityOfWebElement(btnquoteSetUpNext, driver);
+		element = driver.findElement(btnquoteSetUpNext);
+		executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", element);
+		Thread.sleep(8000);
+
+		// driver.findElement(By.xpath(".//*[@id='census-form']/table[8]/tbody/tr[2]/td/table/tbody/tr[5]"));
+		List<WebElement> ele4 = driver
+				.findElements(By.xpath(".//*[@id='census-form']/table[8]/tbody/tr[2]/td/table/tbody/tr"));
+		int count1 = ele4.size();
+		Thread.sleep(1000);
+
+		System.out.println("Row Count :: " + count1 + " Row Count  ::" + (count1 - 7));
+
+		for (int i = 0; i <= count1 - 7; i++) {
+			driver.findElement(By.xpath("//input[@name='censusDetailInformationForm[" + i + "].employeeAge']"))
+					.sendKeys("23");
+			Thread.sleep(1000);
+		}
+
+		Thread.sleep(1000);
+		utility.waitForVisibilityOfWebElement(censussubmitNext, driver);
+		element = driver.findElement(censussubmitNext);
+		executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", element);
+		Thread.sleep(18000);
+
+		// utility.waitForVisibilityOfWebElement(chkBoxmedicalInPackageForm,
+		// driver);
+		// element = driver.findElement(chkBoxmedicalInPackageForm);
+		element = driver.findElement(By.name("medicalInPackageForm[0].packageSelected"));
+		executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", element);
+		Thread.sleep(1000);
+
+		utility.waitForVisibilityOfWebElement(btnMedicalPlansubmitNext, driver);
+		element = driver.findElement(btnMedicalPlansubmitNext);
+		executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", element);
+		Thread.sleep(10000);
+
+		utility.waitForVisibilityOfWebElement(btnOptionalMedicalPlansubmitNext, driver);
+		element = driver.findElement(btnOptionalMedicalPlansubmitNext);
+		executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", element);
+		Thread.sleep(10000);
+
+		utility.waitForVisibilityOfWebElement(btnVisionPlansubmitNext, driver);
+		element = driver.findElement(btnVisionPlansubmitNext);
+		executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", element);
+		Thread.sleep(18000);
+
+		// utility.waitForVisibilityOfWebElement(btnPreviewProposal, driver);
+		element = driver.findElement(btnPreviewProposal);
+		System.out.println("PDF Value :" + element.getAttribute("value"));
+		// System.out.println("PDF Value :"+element.getText());
+
+		if (element.getAttribute("value").trim().contains("PREVIEW PROPOSAL")) {
+			System.out.println("Proposal Preview PDF displayed successfully");
+			Thread.sleep(1000);
+			// driver.switchTo().window(handle1).close();
+		}
+
+		// driver.findElement(btnPreviewProposal).sendKeys(Keys.ENTER,Keys.CONTROL+"t");
+		if (driver.getPageSource().contains("proposalDocumentSetup")) {
+			System.out.println("proposalDocumentSetup displayed successfully on Proposal Information page");
+		} else {
+			System.out.println("proposalDocumentSetup not displayed on Proposal Information page");
+		}
+
+		element = driver.findElement(By.name("consolidateFootnotes"));
+		executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", element);
+		Thread.sleep(1000);
+
+		element = driver.findElement(By.name("includePremiumSummary"));
+		executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", element);
+		Thread.sleep(2000);
+		
+		element=driver.findElement(By.name("quoteTrackingNumber"));
+		String quoteTrackingNumber=element.getAttribute("value");
+		System.out.println("Quote Tracking Number ::" +quoteTrackingNumber);
+
+		String pwindow1 = driver.getWindowHandle();
+		driver.findElement(By.xpath("//input[@name='submitGenerateProposal' and @value='GENERATE FINAL PROPOSAL >']"))
+				.sendKeys(Keys.ENTER);
+		Thread.sleep(5000);
+
+		Boolean popupStatus = utility.isAlertPresent(driver);
+		if (popupStatus == true) {
+			Alert alert = driver.switchTo().alert();
+			System.out.println("ALert..." + alert.getText());
+			if(alert.getText().contains(quoteTrackingNumber)){
+				System.out.println("Quote Tracking Number present in PDF generation confirmation window");
+			}
+			else{
+				System.out.println("Quote Tracking Number not present in PDF generation confirmation window");
+			}
+			System.out.println("Goes to Accept");
+			alert.accept();
+		}
+		Thread.sleep(15000);
+
+
+	   String pwindow11 = driver.getWindowHandle();
+	   utility.waitForNumberOfWindowsToEqual(2);
+
+	     for (String winHandle : driver.getWindowHandles()) {
+		 driver.switchTo().window(winHandle); 
+		 if (driver.switchTo().window(winHandle).getCurrentUrl().contains(
+		 "proposalDocumentSetup")) {
+		 System.out.println("proposalDocumentSetup PDF displayed successfully"); 
+		 System.out.println("PDF URL :: " +
+		 driver.switchTo().window(winHandle).getCurrentUrl());
+		 Thread.sleep(5000); 
+		 driver.switchTo().window(winHandle).close(); 
+	
+		 }
+	}
+		
+
+		Thread.sleep(5000);
+		driver.switchTo().window(pwindow1);
+		Thread.sleep(1000);
+		driver.switchTo().frame("content");
+		Thread.sleep(1000);
+
+		element = driver.findElement(By.xpath("//input[@value='EXPORT RATES AND PLANS' and @alt='View Export']"));
+		executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", element);
+		Thread.sleep(2000);
+		
+
+		 String pwindow111 = driver.getWindowHandle();
+	      //utility.waitForNumberOfWindowsToEqual(2);
+
+	 for (String winHandle : driver.getWindowHandles()) {
+		 driver.switchTo().window(winHandle); 
+		 System.out.println("PDF URL :: " +driver.switchTo().window(winHandle).getCurrentUrl());
+		 if (driver.switchTo().window(winHandle).getCurrentUrl().contains( "exportRatesPlans")) 
+		 {
+		 System.out.println("proposalDocumentSetup PDF displayed successfully"); 
+		 System.out.println("PDF URL :: " +driver.switchTo().window(winHandle).getCurrentUrl());
+		 Thread.sleep(5000); 
+		 driver.switchTo().window(winHandle).close(); 
+	
+		 }
+	}
+		
+	}
+
 
 
 }

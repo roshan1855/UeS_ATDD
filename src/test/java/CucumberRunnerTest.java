@@ -14,7 +14,7 @@ import cucumber.api.junit.Cucumber;
 		// features = {"src/main/resources/features" },
 		format = { "json:target/cucumber.json" },
 
-		tags = { "@COBRA"
+		tags = { "@Testing"
 		// + ",@Regression"
 		// + ",@July_Regression"
 

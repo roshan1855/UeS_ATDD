@@ -326,7 +326,10 @@ public class QuoteDef {
 
 	@When("^fill all details$")
 	public void fillAllDetails() throws Throwable {
-		quotepage.testingUeS(driver);
+		//quotepage.testingUeS(driver);
+		//quotepage.btnPreviewProposal(driver);
+		//quotepage.btnGenerateFinalProsal(driver);
+		quotepage.btnGenerateFinalProsal_ExportExcel(driver);
 	}
 
 	@Then("^UeS_User click on GENERATE FINAL PROPOSAL(\\d+) button and verify Preview Proposal PDf is displayed successfully$")
